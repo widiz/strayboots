@@ -16,10 +16,8 @@ class OrderHuntMailBase
 	public function __construct(OrderHunts $oh)
 	{
 		global $config;
-		$this->isHeb = false;
 		$lang = $oh->Hunt->multilang && isset($config->altLang->{$oh->Hunt->multilang - 1}) ? $config->altLang->{$oh->Hunt->multilang - 1} : 'en';
-		if ($lang === 'he')
-			$this->isHeb = true;
+		$this->isHeb = $lang === 'he';
 		$this->translate = new \Phalcon\Translate\Adapter\NativeArray([
 			'content' => require __DIR__ . '/translations/' . $lang . '.php'
 		]);
