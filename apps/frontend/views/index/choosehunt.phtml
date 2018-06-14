@@ -1,0 +1,25 @@
+		<div class="content-wrapper section-wrapper">
+			<div class="container">
+<? if (empty($orderHunts)): ?>
+				<h1><?= $t->_('This hunt has ended!') ?></h1>
+				<div class="col-sm-12">
+					<div id="faq" style="font-size:20px"><? $this->partial('partials/multihunt_end') ?></div>
+				</div>
+<? else: ?>
+				<h1><?= $t->_('Choose Your Starting Point') ?></h1>
+				<div class="col-sm-12">
+					<?= $this->tag->form(["index/chooseHunt"]) ?>
+
+						<select class="form-control" id="chooseHunt" name="ohid">
+							<? foreach ($orderHunts as $oh): ?>
+								<option value="<?= $oh['id'] . ($oh['id'] == $id ? ' selected' : '') ?>"><?= $this->escaper->escapeHtml($oh['name']) ?></option>
+							<? endforeach ?>
+						</select>
+						<br>
+						<?= $this->tag->submitButton([$t->_('Submit'), 'class' => 'submit subxbtn']) ?>
+
+					<?= $this->tag->endForm() ?>
+				</div>
+<? endif ?>
+			</div>
+		</div>

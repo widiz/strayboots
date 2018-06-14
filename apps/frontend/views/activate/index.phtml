@@ -1,0 +1,36 @@
+		<div class="content-wrapper section-wrapper" id="playground">
+			<div class="container">
+<? if (isset($startTimer)): ?>
+				<div class="question" style="text-align:center">
+					<?= $t->_('Welcome to your scavenger hunt adventure!') ?><br>
+					<?= $t->_('Your hunt will begin in:') ?>
+					<div id="start-timer" data-seconds="<?= $startTimer ?>"></div>
+					<a href="<?= $this->url->get('play') ?>" class="btn btn-success"><?= $t->_('Try again') ?></a>
+<? if (!(isset($ncr) && $ncr)): ?>
+					<h2 style="font-size:20px;margin:35px 0"><?= $t->_('While you are waiting for your adventure, feel free to check some of our cool posts') ?></h2>
+					<a class="btn btn-primary" href="https://www.facebook.com/Strayboots/" target="_blank"><?= $t->_('Check it out!') ?></a>
+<? endif ?>
+				</div>
+<? else: ?>
+				<div class="question" style="text-align:center"><?= $t->_($start_msg) ?></div>
+<? if ($isLeader): ?>
+<? if (isset($teamNameField)): $tname = isset($teamStatus) ? $this->escaper->escapeHtmlAttr($teamStatus['name']) : ''; ?>
+				<?= $this->tag->form([
+					'activate',
+					'autocomplete' => "off",
+					'id' => "name-form"
+				]); ?>
+					<h2><?= $t->_('Name Your Team') ?></h2>
+					<div>
+						<input type="text" id="fieldName" name="name" class="form-control" value="" placeholder="<?= $tname ?>" data-default="<?= $tname ?>" data-focusclear="1">
+					</div>
+				<?= $this->tag->endForm() ?>
+<? endif ?>
+				<div class="options">
+					<a href="javascript:;" class="btn continue btn-success nameteam" disabled><?= $t->_('Start') ?></a>
+				</div>
+<? endif ?>
+<? endif ?>
+			</div>
+		</div>
+		<div id="loading-indicator"></div>

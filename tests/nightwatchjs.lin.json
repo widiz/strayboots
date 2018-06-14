@@ -1,0 +1,44 @@
+{
+	"test_settings" : {
+		"staging" : {
+			"launch_url" : "http://staging.strayboots.com",
+			"screenshots" : {
+				"enabled" : true,
+				"path" : "screenshots/"
+			},
+			"selenium" : {
+				"start_process" : true,
+				"server_path": "./bin/selenium-server-standalone-3.3.1.jar",
+				"log_path" : "",
+				"port": 4444,
+				"cli_args" : {
+					"webdriver.chrome.driver" : "./bin/chromedriver",
+					"webdriver.gecko.driver" : "./bin/geckodriver"
+				}
+			},
+			"desiredCapabilities" : {
+				"browserName" : "chrome"
+			}
+		},
+		"production" : {
+			"launch_url" : "http://go.strayboots.com",
+			"screenshots" : {
+				"enabled" : true,
+				"path" : "screenshots/"
+			},
+			"selenium" : {
+				"start_process" : true,
+				"server_path": "./bin/selenium-server-standalone-3.3.1.jar",
+				"log_path" : "",
+				"port": 4444,
+				"cli_args" : {
+					"webdriver.chrome.driver" : "./bin/chromedriver",
+					"webdriver.gecko.driver" : "./bin/geckodriver"
+				}
+			},
+			"desiredCapabilities" : {
+				"browserName" : "chrome"
+			}
+		}
+	}
+}

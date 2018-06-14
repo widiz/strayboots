@@ -1,0 +1,35 @@
+{
+    "autoload": {
+        "psr-4": {
+        	"Shay12tg\\Phalcon\\": "vendor/shay12tg/phalcon"
+        }
+    },
+	"config": {
+		"secure-http": false
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "git://github.com/Shay12tg/firebase-php.git"
+		},
+        {
+            "type": "git",
+            "url": "git://github.com/alexbusu/phalcon-debugbar"
+        }
+	],
+	"require": {
+		"m1ome/phalcon-datatables": "^1.1",
+		"ezyang/htmlpurifier": "dev-master",
+		"mk-j/php_xlsxwriter": "dev-master",
+		"Cerdic/CSS-Tidy": "dev-master",
+		"mailgun/mailgun-php": "dev-master",
+		"guzzlehttp/guzzle": "~6.0",
+		"php-http/guzzle6-adapter": "^1.0",
+        "ktamas77/firebase-php": "dev-master",
+		"tecnickcom/tcpdf": "^6.2",
+		"mistic100/randomcolor": "^1.0",
+		"snowair/phalcon-debugbar": "dev-phalcon-3",
+        "paypal/merchant-sdk-php": "^3.11",
+        "dompdf/dompdf": "^0.8.0"
+	}
+}

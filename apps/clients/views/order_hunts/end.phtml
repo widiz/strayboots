@@ -1,0 +1,434 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+
+$hunt = $orderHunt->Hunt;
+$hasEvents = !empty($customEvents);
+?>
+
+<?= $this->getContent() ?>
+
+<div style="background:url('<?= $NCR ? '/img/ncr/register.jpg' : 'https://www.strayboots.com/media/static/img/aboutus/s2.jpg' ?>') no-repeat <?= $NCR ? '0 75%' : '50% 50%' ?>;background-size:cover">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div>
+					<a href="http://www.strayboots.com/">
+<? if ($NCR): ?>
+						<img src="/img/end/ncr.png"	style="margin-top:10px;height:100px;width:100px">
+<? else: ?>
+						<img src="/img/end/logo.png">
+<? endif ?>
+					</a>
+					<div class="header-content">
+						<h1><?= htmlspecialchars($orderHunt->Order->name) ?></h1>
+						<div><?= $orderHunt->isMultiHunt() ? 'Multi Hunt' : htmlspecialchars($hunt->name) ?> | <?= $hunt->City->name ?> | <?= date('m.d.Y', strtotime($orderHunt->start)) ?></div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="data-header visible-lg">
+		<span>Start:</span> <?= date('m.d.Y | h:i A \E\S\T', strtotime($orderHunt->start)) ?>  <span>Finish:</span> <?= date('m.d.Y | h:i A \E\S\T', strtotime($orderHunt->finish)) ?>
+	</div>
+</div>
+<? if (!$NCR): ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+<? if ($orderHunt->id != 1850):  // loyalty ?>
+			<div class="table-page">
+				<h2>Leaderboard</h2>
+				<div style="overflow:auto;width:100%;max-height:900vh;-webkit-overflow-scrolling:touch">
+				<table class="table table-striped" id="leaderboard" >
+					<thead>
+						<tr>
+							<th>Position</th>
+							<th>Team</th>
+<? if ($hasEvents): ?>
+							<th class="hidden-xs hidden-sm">Hunt Score</th>
+<? endif ?>
+							<th>Total Score</th>
+							<th class="hidden-xs hidden-sm">Correct Answers (+Hints)<?= $NCR ? '*' : '' ?></th>
+							<th>Total Time</th>
+						</tr>
+					</thead>
+					<tbody>
+<? foreach ($leaderboard as $team): ?>
+						<tr>
+							<td><?= ($team['position'] < 10 ? "&nbsp;{$team['position']}&nbsp;" : $team['position']) ?></td>
+							<td><?= $team['name'] ?></td>
+<? if ($hasEvents): ?>
+							<td class="hidden-xs hidden-sm"><?= $team['huntscore'] ?></td>
+<? endif ?>
+							<td><?= $team['score'] ?></td>
+							<td class="hidden-xs hidden-sm"><?= $team['question'] ?>/<?= $max ?> (Hints used - <?= $team['hints'] ?>)</td>
+							<td><?= /*$team['times'][1] ? (new DateTime($team['times'][1]))->diff(new DateTime($team['times'][0]))->format('%H:%I:%S') : ''*/$team['lastAnswer'] ? (new DateTime($team['lastAnswer']))->diff(new DateTime($team['activation']))->format('%H:%I:%S') : '' ?></td>
+						</tr>
+<? endforeach ?>
+					</tbody>
+				</table>
+				</div>
+<? if ($NCR): ?>
+*NOTE: There are 31 questions with points, and 3 trivia questions for additional prizes. The total score is calculated based on the 31 hunt questions, with a maximum score of 490 points.
+<? endif ?>
+			</div>
+<? endif // loyalty ?>
+<? if ($hasEvents): ?>
+			<div class="table-page hidden-xs">
+				<h2>Custom Events</h2>
+				<div style="overflow:auto;width:100%;max-height:900vh;-webkit-overflow-scrolling:touch">
+				<table class="table table-striped" id="custom-events">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Team</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>
+<? foreach ($customEvents as $e): ?>
+						<tr<?/*= isset($teamNames[$e['team_id']]) ? " style=\"background-color:{$teamNames[$e['team_id']][1]}\"" : '' */?>>
+							<td><?= htmlspecialchars($e['title']) ?></td>
+							<td><?= $teamNames[$e['team_id']][0] ?></td>
+							<td><?= $e['score'] ?></td>
+						</tr>
+<? endforeach ?>
+					</tbody>
+				</table>
+				</div>
+			</div>
+<? endif ?>
+<? if (!empty($bonusQuestions)): ?>
+			<div class="table-page hidden-xs">
+				<h2>Bonus Questions</h2>
+				<div style="overflow:auto;width:100%;max-height:900vh;-webkit-overflow-scrolling:touch">
+				<table class="table table-striped" id="bonus-questions">
+					<thead>
+						<tr>
+							<!--th>#</th-->
+							<th>Question</th>
+							<th>Team</th>
+							<th>Player</th>
+							<th>Answer</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>
+<? foreach ($bonusQuestions as $bq): ?>
+						<tr<?/*= isset($teamNames[$bq['team_id']]) ? " style=\"background-color:{$teamNames[$bq['team_id']][1]}\"" : '' */?>>
+							<!--td><?= $bq['id'] ?></td!-->
+							<td><?= $bq['question'] ?></td>
+							<td><?= $teamNames[$bq['team_id']][0] ?></td>
+							<td><?= (is_null($bq['first_name']) ? '' :  (htmlspecialchars(trim($bq['first_name'] . ' ' . $bq['last_name'])))) ?></td>
+							<td><?= htmlspecialchars(array_map('Answers::filterAnswer', explode("\n", $bq['answers']))[0]) ?></td>
+							<td><?= $bq['type'] == BonusQuestions::TypeTeam ? $bq['score'] : '' ?></td>
+						</tr>
+<? endforeach ?>
+					</tbody>
+				</table>
+				</div>
+			</div>
+<? endif ?>
+<? if (!empty($customQuestions)): ?>
+			<div class="table-page hidden-xs">
+				<h2>Custom Questions</h2>
+				<div style="overflow:auto;width:100%;max-height:90vh;-webkit-overflow-scrolling:touch">
+				<table class="table table-striped" id="custom-questions" style="color:#373737;min-width:580px">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Question</th>
+							<th>Team</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>
+<? foreach ($customQuestions as $cq): ?>
+						<tr>
+							<td><?= $cq['id'] ?></td>
+							<td><?= $cq['question'] ?></td>
+							<td><?= isset($teamNames[$cq['team_id']]) ? $teamNames[$cq['team_id']][0] : '' ?></td>
+							<td><?= $cq['action'] == Answers::AnsweredWithHint ? floor($cq['score'] / 2) : $cq['score'] ?></td>
+						</tr>
+<? endforeach ?>
+					</tbody>
+				</table>
+				</div>
+			</div>
+<? endif ?>
+<? if (!empty($surveyResults)): ?>
+			<div class="table-page">
+				<h2>Players Reviews</h2>
+				<div style="overflow:auto;width:100%;max-height:90vh;-webkit-overflow-scrolling:touch">
+				<table class="table table-striped" id="survey-results" style="color:#373737;min-width:580px;display:none">
+					<thead>
+						<tr>
+							<th>Player</th>
+							<th>How are you enjoying your hunt?</th>
+							<th>How much did this help you engage with your team?</th>
+							<th>Please give us a quick feedback. Thanks!</th>
+							<th>How much do you think your teamwork improved?</th>
+							<th width="180">Timestamp</th>
+						</tr>
+					</thead>
+					<tbody>
+<? $rating = [];
+$ratingQuestions = [
+	'How are you enjoying your hunt?',
+	'How much did this help you engage with your team?',
+	'How much do you think your teamwork improved?'
+];
+$textReviews = [];
+foreach ($ratingQuestions as $rq)
+	$rating[$rq] = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+foreach ($surveyResults as $sr):
+	foreach ($rating as $q => $rq) {
+		if (isset($sr['questions'][$q]) && isset($rating[$q][(int)$sr['questions'][$q]]))
+			$rating[$q][(int)$sr['questions'][$q]]++;
+	}
+	if (isset($sr['questions']['Please give us a quick feedback. Thanks!']))
+		$textReviews[] = trim($sr['questions']['Please give us a quick feedback. Thanks!']);
+?>
+						<tr>
+							<td><?= htmlspecialchars(empty($sr['last_name']) && (empty($sr['first_name']) || $sr['first_name'] === 'Anonymous') ? $sr['email'] : trim($sr['first_name'] . ' ' . $sr['last_name'])) ?></td>
+							<td><?= isset($sr['questions']['How are you enjoying your hunt?']) ? htmlspecialchars($sr['questions']['How are you enjoying your hunt?']) : '' ?></td>
+							<td><?= isset($sr['questions']['How much did this help you engage with your team?']) ? htmlspecialchars($sr['questions']['How much did this help you engage with your team?']) : '' ?></td>
+							<td><?= isset($sr['questions']['Please give us a quick feedback. Thanks!']) ? htmlspecialchars($sr['questions']['Please give us a quick feedback. Thanks!']) : '' ?></td>
+							<td><?= isset($sr['questions']['How much do you think your teamwork improved?']) ? htmlspecialchars($sr['questions']['How much do you think your teamwork improved?']) : '' ?></td>
+							<td><?= $sr['created_at'] ?></td>
+						</tr>
+<? endforeach ?>
+					</tbody>
+				</table>
+				</div>
+				<div class="charts text-center">
+					<div class="row">
+<? foreach ($rating as $q => $rq): $total = array_sum($rq); ?>
+						<div class="col-md-6">
+							<h3><b><?= htmlspecialchars($q) ?></b></h3>
+							<img src="http://chart.apis.google.com/chart?cht=p3&chs=500x170&chdl=Rate+1+%28<?= number_format($rq[1]) ?>%29%7CRate+2+%28<?= number_format($rq[2]) ?>%29%7CRate+3+%28<?= number_format($rq[3]) ?>%29%7CRate+4+%28<?= number_format($rq[4]) ?>%29%7CRate+5+%28<?= number_format($rq[5]) ?>%29&chl=Rate+1+%28<?= round($rq[1] * 100 / $total) ?>%25%29%7CRate+2+%28<?= round($rq[2] * 100 / $total) ?>%25%29%7CRate+3+%28<?= round($rq[3] * 100 / $total) ?>%25%29%7CRate+4+%28<?= round($rq[4] * 100 / $total) ?>%25%29%7CRate+5+%28<?= round($rq[5] * 100 / $total) ?>%25%29&chco=EDC240|AFD8F8|9440ED|8CACC6|CB4B4B&chts=000000,18&chf=bg,s,FFFFFF00&chd=t:<?= implode($rq, ',') ?>" style="display:block;margin:10px auto;max-width:95%">
+						</div>
+<? endforeach ?>
+						<div class="col-md-6">
+							<h3><b>Please give us a quick feedback. Thanks!</b></h3>
+							<div style="overflow:auto;width:95%;max-width:500px;max-height:170px;margin:0 auto;-webkit-overflow-scrolling:touch">
+								<table class="table" id="survey-results-txt" style="color:#373737">
+									<tr>
+										<td style="background:transparent;border:0"><?= htmlspecialchars(implode($textReviews, ', ')) ?></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<? endif ?>
+		</div>
+	</div>
+</div>
+<? endif ?>
+<? if (!empty($orderHunt->video)): ?>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-page">
+				<h2>Video</h2>
+				<div style="max-width:800px;margin:0 auto 20px">
+					<div style="position:relative;padding-bottom:56.25%;padding-top:25px">
+						<iframe src="http://www.youtube.com/embed/<?= $orderHunt->video ?>" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<? endif ?>
+
+<? $hasFiles = false;
+foreach ($files as $f) {
+	if (!empty($f)) {
+		$hasFiles = true;
+		break;
+	}
+}
+if ($hasFiles): ?>
+<div class="lightBoxGallery">
+<div class="gallerySection wrapper">
+<?	$first = true;
+	$hasChat = false;
+	$basePath = $this->config->application->frontUploadsDir->uri;
+	foreach ($files as $ohid => $ff):
+	foreach ($ff as $k => $f):
+		if ($f[1] != "chat") {
+			unset($files[$ohid][$k]);
+			if($first){ ?>
+	<div class="filter-section"<?= $NCR ? ' style="margin-top:0"' : '' ?>>
+		<div class="clearfix" style="position:relative">
+			<div class="pull-right">
+				<?= $this->tag->linkTo(['order_hunts/zip/' . $orderHunt->id . '/0?mh=1&h=' . $h, 'Download', 'class' => 'btn btn-warning']) ?>
+			</div>
+			<div id="team-filter">
+				<select>
+						<option value="" selected>Find your team's pictures</option>
+		<? foreach ($teamNames as $id => $name): ?>
+						<option value="<?= $id ?>"><?= $name[0] ?></option>
+		<? endforeach ?>
+				</select>
+					<a href="javascript:;" class="play btn btn-success"><i class="fa fa-play visible-xs"></i><span class="hidden-xs">Start Slideshow</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="padding:0">
+		<div class="row">
+
+<?				$first = false;
+			}
+		} else {
+			$hasChat = true;
+			continue;
+		}
+		$url = $basePath . $ohid . '/' . $f[0];
+		$thumbnail = preg_replace('/\.(jpg|png|gif)$/', '.thumbnail.' . $f[1] . '.$1', $url);
+		$watermark = str_replace('thumbnail', 'wm', $thumbnail);
+?>
+			<div class="imgbox col-md-2 col-xs-6" data-team="<?= $f[1] ?>">
+				<div class="img-gallery">
+					<a href="<?= $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
+						<div class="team-name">
+							<span><?= isset($teamNames[$f[1]]) ? $teamNames[$f[1]][0] : '' ?></span>
+							<small><?= date($timeFormat, $f[2]) ?></small>
+						</div>
+						<div class="img" style="background-image:url(<?= $thumbnail ?>)">
+							<div class="black-cover"></div>
+						</div>
+						<img src="<?= $thumbnail ?>">
+<? if (!$NCR): ?>
+						<i class="share fa fa-facebook"></i>
+<? endif ?>
+					</a>
+				</div>
+			</div>
+<? endforeach; endforeach; if ($hasChat): ?>
+		</div>
+	</div>
+</div>
+<div class="gallerySection wrapper">
+	<div class="filter-section"<?= $first ? '' : ' style="margin:0"' ?>>
+		<div class="clearfix" style="position:relative">
+			<div class="pull-right">
+				<?= $this->tag->linkTo(["order_hunts/zip/" . $orderHunt->id . '/1?mh=1&h=' . $h, 'Download', 'class' => "btn btn-warning"]) ?>
+			</div>
+			<div style="font-size:20px;color:#FFF">Chat</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="padding:0">
+		<div class="row">
+<? foreach ($files as $ohid => $ff): foreach ($ff as $k => $f):
+$url = $basePath . $ohid . '/' . $f[0];
+$thumbnail = preg_replace('/\.(jpg|png|gif)$/', '.thumbnail.$1', $url);
+$watermark = str_replace('thumbnail', 'wm', $thumbnail);
+$hasTeam = isset($f[3]) && isset($playersInfo[$f[3]]);
+?>
+			<div class="imgbox col-md-2 col-xs-4" data-team="<?= $hasTeam ? $playersInfo[$f[3]][0] : 0 ?>">
+				<div class="img-gallery">
+					<a href="<?= $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
+						<div class="team-name">
+<? if ($hasTeam): ?>
+							<span><?= (isset($teamNames[$playersInfo[$f[3]][0]]) ? $teamNames[$playersInfo[$f[3]][0]][0] . '<br>' : '') . $playersInfo[$f[3]][1] ?></span>
+<? endif ?>
+							<small><?= date($timeFormat, $f[2]) ?></small>
+						</div>
+						<div class="img" style="background-image:url(<?= $thumbnail ?>)">
+							<div class="black-cover"></div>
+						</div>
+						<img src="<?= $thumbnail ?>">
+<? if (!$NCR): ?>
+						<i class="share fa fa-facebook"></i>
+<? endif ?>
+					</a>
+				</div>
+			</div>
+<? endforeach; endforeach; endif ?>
+		</div>
+	</div>
+</div>
+<div id="blueimp-gallery" class="blueimp-gallery" data-filter=":visible">
+	<div class="slides"></div>
+	<h3 class="title"></h3>
+	<a class="prev">‹</a>
+	<a class="next">›</a>
+	<a class="close">×</a>
+	<a class="play-pause"></a>
+	<ol class="indicator"></ol>
+</div>
+</div>
+<? endif ?>
+<? if (!$NCR): ?>
+<div class="share-section">
+	<div class="share-content">
+		<h3>Share with a friend</h3>
+		<div>and help us spread the word about Strayboots</div>
+		<a href="#" class="button">Share</a>
+	</div>
+</div>
+
+<footer class="newfooter">
+	<div class="container widerpage">
+		<div class="row">
+			<div class="col-md-5 col-sm-12 col-xs-12">
+				<img src="/img/end/logo2.png" alt="Stray Boots Urban Games" class="img-responsive">
+				<p>Strayboots' mobile scavenger hunts and team building activities provide corporations, students, and individuals with interactive team building experiences that are easy, fun, and unforgettable.</p>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 ulinks">
+				<a href="https://www.strayboots.com/press">Press</a>
+				<a href="https://www.strayboots.com/partners">Partners</a>
+				<!--a href="http://support.strayboots.com/">FAQ</a -->
+				<a href="https://www.strayboots.com/careers">Jobs</a>
+				<a href="https://www.strayboots.com/redeem">Redeem Vouchers</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 ulinks">
+				<a href="https://www.strayboots.com/">Home</a>
+				<a href="http://blog.strayboots.com/">Blog</a>
+				<a href="https://www.strayboots.com/about-us">About Us</a>
+				<a href="https://www.strayboots.com/contact-us">Contact Us</a>
+				<a href="https://www.strayboots.com/testimonials">What People Are Saying</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 ulinks social visible-lg">
+				<a href="https://www.linkedin.com/company/stray-boots-inc-">Linkedin</a>
+				<a href="http://www.twitter.com/strayboots">Twitter</a>
+				<a href="http://www.facebook.com/strayboots">Facebook</a>
+				<a href="https://plus.google.com/111903789914815443048">Google+</a>
+				<a href="https://www.instagram.com/strayboots/">Instagram</a>
+				<a href="https://www.pinterest.com/straybootshunt/">Pinterest</a>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-6 ulinks social hidden-lg">
+				<a href="https://www.linkedin.com/company/stray-boots-inc-">Linkedin</a>
+				<a href="http://www.twitter.com/strayboots">Twitter</a>
+				<a href="http://www.facebook.com/strayboots">Facebook</a>
+			</div>
+
+			<div class="col-md-2 col-sm-4 col-xs-6 ulinks social hidden-lg">
+				<a href="https://plus.google.com/111903789914815443048">Google+</a>
+				<a href="https://www.instagram.com/strayboots/">Instagram</a>
+				<a href="https://www.pinterest.com/straybootshunt/">Pinterest</a>
+			</div>
+		</div>
+	</div>
+	<div class="bottom">
+		<div class="container widerpage">
+			<div class="row">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<a href="https://www.strayboots.com/terms-of-service">Terms and conditions</a> / <a href="https://www.strayboots.com/privacy-policy">Privacy policy</a>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12 cr">
+					© 2015 Strayboots All rights reserved
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<? endif ?>

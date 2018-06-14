@@ -1,0 +1,15 @@
+
+<div id="themap">
+	<div class="app_loading"></div>
+</div>
+<div id="map-legend">
+	<span>S</span> - Start<br>
+	<span>F</span> - Finish
+	<div style="margin-top:6px">
+		Click on point for more details
+	</div>
+</div>
+
+<? if (isset($data)): ?>
+<script type="text/javascript">window.data=<?= $data ?></script>
+<? endif ?>

@@ -1,0 +1,10 @@
+*/5 * * * * /var/www/newplay/crons/postevent.sh
+0 0 * * * /var/www/newplay/crons/preevent.sh
+10 0 * * * /var/www/newplay/crons/preevent.sh
+*/10 * * * * /var/www/newplay/crons/watchdog.sh
+0 3 * * 7 /var/www/newplay/full.backup.sh
+0 1 * * * /var/www/newplay/crons/removeOld.sh
+0 10 * * * /var/www/newplay/crons/danielle.sh
+0 10 * * * /var/www/newplay/crons/nikki.sh
+0 10 * * * /var/www/newplay/crons/shauna.sh
+*/15 * * * * /var/www/newplay/crons/posteventplayers.sh

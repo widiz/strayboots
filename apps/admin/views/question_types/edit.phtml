@@ -1,0 +1,85 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="row">
+	<nav>
+		<ul class="pager">
+			<li class="previous"><?= $this->tag->linkTo(["question_types", "Back"]) ?></li>
+		</ul>
+	</nav>
+</div>
+
+<div class="page-header">
+	<h1>
+		Edit question type
+	</h1>
+</div>
+
+<?= $this->getContent() ?>
+
+<?php
+	echo $this->tag->form([
+		"question_types/save",
+		"autocomplete" => "off",
+		"class" => "form-horizontal"
+	]);
+?>
+
+<div class="form-group">
+	<label for="fieldName" class="col-sm-2 control-label">Name</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldScore" class="col-sm-2 control-label">Score</label>
+	<div class="col-sm-10">
+		<?= $this->tag->numericField(["score", "type" => "number", 'min' => 0, "class" => "form-control", "id" => "fieldScore"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldStatus" class="col-sm-2 control-label">Type</label>
+	<div class="col-sm-10">
+		<?= $this->tag->selectStatic([
+			"type", [
+				QuestionTypes::Text			=> "Text",
+				QuestionTypes::Photo		=> "Photo",
+				QuestionTypes::Completion	=> "Completion",
+				QuestionTypes::Other		=> "Other",
+				QuestionTypes::Timer		=> "Timer",
+				QuestionTypes::Choose		=> "Choose"
+			],
+			'id' => 'fieldStatus',
+			'class' => 'form-control'
+		]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldApproved" class="col-sm-2 control-label">Custom Questions</label>
+	<div class="col-sm-10 checkbox-inline">
+		<?= $this->tag->checkField(["custom", "value" => 1, "id" => "fieldCustom"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldApproved" class="col-sm-2 control-label">Limit Answers</label>
+	<div class="col-sm-10 checkbox-inline">
+		<?= $this->tag->checkField(["limitAnswers", "value" => 1, "id" => "fieldLimitAnswers"]) ?>
+	</div>
+</div>
+
+<?= $this->tag->hiddenField('id') ?>
+
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<?= $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+	</div>
+</div>
+
+<?= $this->tag->endForm() ?>

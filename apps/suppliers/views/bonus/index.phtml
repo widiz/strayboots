@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<div class="container">
+<? $orderName = htmlspecialchars($orderHunt->Order->name);
+	$huntName = htmlspecialchars($orderHunt->Hunt->name); ?>
+		<h1><?= $orderName . ' // ' . $huntName . ' (' . date($dateFormat, strtotime($orderHunt->start)) ?>)</h1>
+		<ol class="breadcrumb">
+			<li>
+				<?= $this->tag->linkTo(['', "Home"]) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['orders', "My Orders"]) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['order_hunts/' . $orderHunt->order_id, $orderName . ' Hunts']) ?>
+			</li>
+			<li class="active">
+				<?= $this->tag->linkTo(['bonus/' . $orderHunt->id, "<b>Bonus</b>"]) ?>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<? $this->partial('partials/orderhuntsmenu') ?>
+
+<div class="container">
+
+	<?= $this->getContent() ?>
+
+	<div class="note">
+		<p>
+			Bonus questions are the THING!<br>
+			It’s a unique feature for Strayboots. They will appear randomly, at the same time on all devices, Leaders and Players, and the first to answer them right gives the points to their team!<br>
+			<br>
+			You can add up to 5 Bonus Questions to your event.<br>
+			You can use it for any type of question that you want, whether it’s company related, or just a funny/tricky one.<br>
+			Please note that the points for our questions range between 5-20, so don’t go too far with the points for them… <i class="fa fa-smile-o"></i><br>
+			<br>
+			Feel free to contact us at if you need any help or any examples.
+		</p>
+	</div>
+
+	<?php if ($removable && !$tooMany) echo $this->tag->linkTo(["bonus/new/" . $orderHunt->id, 'Add a new bonus question', 'class' => 'btn btn-primary']) . '<br><br>' ?>
+
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-custom table-options" id="bonus-list">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>Type</th>
+				<th>Question</th>
+				<th>Score</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">window.orderHuntId=<?= $orderHunt->id ?>;window.removable=<?= $removable ? 'true' : 'false' ?></script>

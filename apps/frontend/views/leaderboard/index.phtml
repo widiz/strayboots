@@ -1,0 +1,19 @@
+		<div class="content-wrapper section-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<h1><?= $t->_('Leaderboard') ?></h1>
+						<div id="leaderboard">
+<? foreach ($leaderboard as $team): $you = isset($teamStatus) && $team['id'] == $teamStatus['id']; ?>
+							<div class="lb-row pos-<?= $team['position'] ?> clearfix<?= $you ? ' you' : '' ?>">
+								<div class="num"><?= ($team['position'] < 10 ? "&nbsp;{$team['position']}&nbsp;" : $team['position']) ?></div>
+								<div class="score"><?= $team['score'] ?></div>
+								<div class="question"><?= $team['question'] ?>/<?= $max ?></div>
+								<div class="name"><?= ($you ? '<s>' . $t->_('You') . '&nbsp;</s> ' : '') . $team['name'] ?></div>
+							</div>
+<? endforeach; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

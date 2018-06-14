@@ -1,0 +1,104 @@
+
+		<div class="content-wrapper section-wrapper pmessagebox" id="playground">
+			<div class="container">
+<? if (isset($end_msg) && !isset($response_msg)): ?>
+<? if ($multiHunt && $lastMulti): ?>
+				<h1><?= $t->_('This hunt has ended!') ?></h1>
+				<div class="question" style="text-align:center">
+					<? $this->partial('partials/multihunt_end') ?>
+<? else: ?>
+				<div class="question" style="text-align:center">
+					<?= $end_msg; ?>
+<? endif ?>
+<? if (isset($surveyInfo)): ?>
+				<br><br><b class="second_color"><?= $t->_('Please help us by answering this quick survey:') ?></b><br>
+<div id="widizSurvey"></div>
+<script src="https://app.widiz.com/plugins2/survey/survey.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+document.addEventListener("DOMContentLoaded", function(){
+	widizSurvey("RtSsk8zmv2XC6rmB1BTl6r1XhYdfpC9M", function(){
+		setSurveyConfig("<?= $this->escaper->escapeHtmlAttr($surveyInfo[0]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[1]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[2]) ?>", <?= $surveyInfo[3] ?>, '/play/survey?completed=y');
+	});
+});
+</script>
+<? endif ?>
+				</div>
+<? if ($strategy): ?>
+				<?= isset($questions) ? $this->partial('play/strategy_list') : '' ?>
+<? else: ?>
+				<div class="options">
+					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) /*$this->url->get('leaderboard')*/ ?>" class="btn btn-success"><?= $t->_('Leaderboard') ?></a>&nbsp;
+<? if ($multiHunt && $isLeader && !$lastMulti): ?>
+					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-warning"><?= $t->_('Choose another hunt') ?></a>
+<? endif ?>
+					<script type="text/javascript">window.shareInfoEnd={title:'<?= $t->_('We just successfully finished our Strayboots scavenger hunt!') ?>',image:'<? if (isset($image)) echo $image; ?>',description:'<?= $t->_('That was so much fun!!! #teambuilding #scavengerhunt @strayboots') ?>',url:'https://www.strayboots.com/',caption:'Strayboots Scavenger Hunt'}</script>
+<? if (isset($question) || isset($end_msg)): ?>
+					<div id="shareblock">
+						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+					</div>
+<? endif ?>
+				</div>
+<? endif ?>
+<? else: ?>
+
+<? if (isset($response_msg_title)): ?>
+				<h2><?= $t->_(isset($customNCR) ? 'Great Job!' : $response_msg_title) ?></h2>
+<? endif ?>
+				<div class="question">
+<? if (isset($answerAction)): ?>
+<? if ($answerAction != Answers::Skipped): ?>
+<? if (isset($image)): ?>
+					<script type="text/javascript">window.shareInfo={title:'<?= $t->_('We just scored %points% points on our Strayboots scavenger hunt!', ['points' => $points > 0 ? $points : '']) ?>',image:'<?= $image ?>',description:'<?= $t->_('Check this out!!! #teambuilding #scavengerhunt @strayboots') ?>',url:'https://www.strayboots.com',caption:'Strayboots Scavenger Hunt'}</script>
+<? endif ?>
+<? if (isset($customNCR)): ?>
+					<b class="wyg">You got it correct.</b><br>
+<? else: ?>
+<? if ($answerAction == Answers::AnsweredWithHint): ?>
+					<b class="wyg"><?= $t->_('You got %points% points, nice work', ['points' => $points]) ?></b><br>
+<? else: ?>
+					<b class="wyg"><?= $t->_('You got %points% points, keep it going!', ['points' => $points]) ?></b><br>		
+<? endif ?>
+<? endif ?>
+<? endif ?>
+<? endif ?>
+<? if (isset($attachment) && is_array($attachment) && isset($attachment['type'])):
+if ($attachment['type'] == Questions::ATTACHMENT_PHOTO && isset($attachment['photo']) && !empty($attachment['photo'])) {
+?><div class="a-img"><img src="<?= $attachment['photo'] ?>" alt=""></div><?
+} else if ($attachment['type'] == Questions::ATTACHMENT_YOUTUBE && isset($attachment['video']) && !empty($attachment['video'])) {
+?><div class="vimeo"><iframe src="https://www.youtube.com/embed/<?= $attachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><?
+} else if ($attachment['type'] == Questions::ATTACHMENT_VIMEO && isset($attachment['video']) && !empty($attachment['video'])) {
+?><div class="vimeo"><iframe src="//player.vimeo.com/video/<?= $attachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><?
+}
+endif ?>
+<? if (isset($correct_answer)): ?>
+					<div style="text-align:center"><?= $correct_answer ?></div>
+<? endif ?>
+				<?= $response_msg ?>
+				</div>
+				<div class="options">
+<? if ($isLeader): ?>
+<? if (isset($responseLink)): ?>
+					<a href="<?= $responseLink[1] ?>" class="btn btn-success"><?= $responseLink[0] ?></a>
+<? elseif (isset($end_msg) && $multiHunt && $lastMulti): ?>
+					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-success"><?= $t->_('Continue') ?></a>
+<? else: ?>
+					<a href="javascript:;" class="btn continue btn-success" disabled><?= $t->_('Continue') ?></a>
+					<?= $this->tag->form([
+						'play',
+						'autocomplete' => "off",
+						'id' => "ack-form"
+					]); ?>
+					<input type="hidden" name="action" value="funfact">
+					<?= $this->tag->endForm() ?>
+<? endif ?>
+<? endif ?>
+<? if (isset($answerAction) && (isset($question) || (isset($end_msg) && !isset($response_msg)))): ?>
+					<div id="shareblock">
+						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+					</div>
+<? endif ?>
+				</div>
+<? endif ?>
+			</div>
+		</div>
+		<div id="loading-indicator"></div>

@@ -1,0 +1,261 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<?= $this->getContent() ?>
+<?php
+	echo $this->tag->form([
+		'order',
+		'autocomplete' => 'off',
+		'class' => 'container-fluid'
+ 	]);
+?>
+<script type="text/javascript">window.cityHunts=<?= json_encode($hunts, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;window.pricePerPlayer=<?= json_encode($pricePerPlayer) ?></script>
+
+<input type="hidden" name="<?= $this->security->getTokenKey() ?>" value="<?= $this->security->getToken() ?>" />
+
+<div class="clients-order-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<a href="/clients/"><img src="/img/logo.png"></a>
+				<h1>Book Your Strayboots Scavenger Hunt</h1>
+				<h2>Add your details, select your hunt, pay online and get <b>20% OFF</b>!</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container description-order-section">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>The Easiest and Most Affordable Way to Book a Scavenger Hunt</h3>
+			<p>
+				Thanks to our technology and team of experts, booking your <b>Strayboots Scavenger Hunt</b> has been always a <b>simple</b> process. And now, it's just becoming <b>cheaper</b> for you!
+				<br>Simply select your scavenger hunt, your group size and the date for your event, and <u>we'll take care of the rest</u>.
+				<br><br>And remember - all of our scavenger hunts are played on your <b>OWN</b> mobile devices, come with <b>FREE</b> customizations, and are the most <b>FUN</b> team activity you can find!
+				<br><br>Need some more information before booking?
+				<br><b>Take your time, we are here for you!</b> Check out <a href="https://youtu.be/SRsYztfCNow" target="blank">this video</a>, or download our <a href="https://dropbox.com/s/ugcheswfvbfut3a/Strayboots%20Scavenger%20Hunts.pdf?dl=0" target="blank">one pager</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="header-order-strip">
+	<h2>Trust us, your team is going to LOVE it!</h2>
+</div>
+
+<div class="container-f">
+	<div class="row">
+		<div class="col-md-6 col-sm-12 clearfix">
+			<div class="box-padding-order">
+<? if (!$isLoggedIn): ?>
+				<div class="row">
+					<div class="col-md-12">
+						<a href="/clients/login">Already have a Strayboots accounot? Click here to login</a>
+					</div>
+					<div class="col-md-12">
+						<h3>Company/Group Details</h3>
+					</div>
+				</div>
+				<div class="row mr10">
+					<div class="col-sm-6 col-md-12">
+						<label for="fieldFirstName" class="control-label">First Name</label>
+						<?= $this->tag->textField(['first_name', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldFirstName']) ?>
+					</div>
+					<div class="col-sm-6 col-md-12">
+						<label for="fieldLastName" class="control-label">Last Name</label>
+						<?= $this->tag->textField(['last_name', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldLastName']) ?>
+					</div>
+					<div class="col-sm-6 col-md-12">
+						<label for="fieldCompany" class="control-label">Company</label>
+						<?= $this->tag->textField(['company', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldCompany']) ?>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<label for="fieldEmail" class="control-label">Email</label>
+						<?= $this->tag->textField(['email', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldEmail']) ?>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<label for="fieldPhone" class="control-label">Phone</label>
+						<?= $this->tag->textField(['phone', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldPhone']) ?>
+					</div>
+					<? /*<div class="col-sm-6 col-md-4">
+						<label for="fieldPassword" class="control-label">Password</label>
+						<?= $this->tag->textField(['password', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldPassword']) ?>
+					</div> */ ?>
+				</div>
+<? endif ?>
+				<div class="row mr10">
+					<div class="col-md-12">
+						<h3>Scavenger Hunt Details</h3>
+					</div>
+					<div class="col-md-12">
+						<label for="fieldCityId" class="control-label">City</label>
+						<?= $this->tag->selectStatic([
+							'city_id',
+							$countrycities,
+							'id'			=> 'fieldCityId',
+							'class'			=> 'form-control select2-auto',
+							'required'		=> 'required',
+							'useEmpty'		=> true,
+							'emptyText'		=> '',
+							'emptyValue'	=> ''
+						]); ?>
+					</div>
+					<div class="col-md-12">
+						<label for="fieldHuntId" class="control-label">Hunt</label>
+						<?= $this->tag->selectStatic([
+							'hunt_id',
+							$huntsSelect,
+							'id'			=> 'fieldHuntId',
+							'class'			=> 'form-control',
+							'using'			=> ['id', 'name'],
+							'required'		=> 'required',
+							'useEmpty'		=> true,
+							'emptyText'		=> '',
+							'emptyValue'	=> ''
+						]); ?>
+					</div>
+					<div class="col-md-12">
+						<label for="fieldStart" class="control-label">Start</label>
+						<?= $this->tag->textField(['start', 'size' => 30, 'class' => 'form-control datetimepicker', 'required' => 'required', 'id' => 'fieldStart']) ?>
+					</div>
+					<? /* <div class="col-md-6">
+						<label for="fieldFinish" class="control-label">Finish</label>
+						<?= $this->tag->textField(['finish', 'size' => 30, 'class' => 'form-control datetimepicker', 'id' => 'fieldFinish']) ?>
+					</div> */ ?>
+					<div class="col-md-6">
+						<label for="fieldMaxPlayers" class="control-label">Max Players</label>
+						<?= $this->tag->numericField(['max_players', 'type' => 'number', 'min' => 1, 'max' => 65000, 'required' => 'required', 'class' => 'form-control', 'id' => 'fieldMaxPlayers']) ?>
+					</div>
+					<div class="col-md-6">
+						<label for="fieldMaxTeams" class="control-label">Max Teams</label>
+						<?= $this->tag->numericField(['max_teams', 'type' => 'number', 'min' => 1, 'max' => 65000, 'required' => 'required', 'class' => 'form-control', 'id' => 'fieldMaxTeams']) ?>
+						<div id="uptotext" class="hidden">* Up to <b></b> teams in this hunt</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12 image-right-box-wrapper">
+			<div class="image-right-box">
+				<p class="h-1">BOOK NOW and receive</p>
+				<p class="h-2">20% discount!</p>
+				<ul>
+					<li>No Booking Fees</li>
+					<li>No Hidden Charges</li>
+					<li>Best Price Guarantee</li>
+				</ul>
+			</div>
+			<div class="paypalblock">
+				<h3>Special <b>Online Order</b> Price:</h3>
+				<div class="row">
+					<div class="col-sm-6">
+						<span class="afterp">$150</span>
+					</div>
+					<div class="col-sm-6">
+						<s class="beforep">$200</s>
+					</div>
+					<div class="col-sm-12">
+						<b>20% online order discount</b>
+					</div>
+				</div>
+				<br><br>
+				<?= $this->tag->selectStatic([
+					'pay', [
+						'Pay online with your Credit Card',
+						'Request a quote'
+					],
+					'id' => 'fieldPay',
+					'class' => 'form-control'
+				]) ?>
+				<div class="text-center">
+					<a href="javascript:;" id="paypalbtn"><img src="/img/paynow.png"><br><span style="color:#FFF">*Note - PayPal account is NOT mandatory, you can pay with any Credit Card</span></a><br>
+					<?= $this->tag->submitButton(['Create Order', 'id' => 'savebtn', 'class' => 'btn btn-lg btn-default hidden']) ?>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer-order-strip">
+	<h2>Our events team will contact you shortly to finalize all the details for your event!</h2>
+</div>
+<?= $this->tag->endForm() ?>
+
+<div class="order-container">
+
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<h2>Frequently Asked Questions</h2>
+			<ul class="faq">
+				<li>
+					<i>1</i><span>HOW DOES IT WORK?</span>
+					<p>We provide fun scavenger hunts that show you the best parts of an area, all from your cell phone. Teams will explore together, solve clever challenges and send in creative team photos. After each challenge, they'll earn points and learn fun facts about the city. In brief, we provide for you the 2-3 hour competitive scavenger hunt for as many teams as you'd like, custom maps and instruction sheets, and at the very end we provide a copy of your scores and team photos to share with the group.
+					</p>
+				</li>
+				<li>
+					<i>2</i><span>WHAT'S THE DIFFERENCE BETWEEN GROUP EVENTS AND INDIVIDUAL TOURS?</span>
+					<p>Our Group Events offer you a competitive scavenger hunt, for multiple teams playing against each other.<br>Our Individual Tours are mainly targeted for smaller groups and offer Do-It-Yourself scavenger hunt-like tours.</p>
+				</li>
+				<li>
+					<i>3</i><span>HOW MANY TEAMS/HOW MANY PEOPLE ON A TEAM IS RECOMMENDED?</span>
+					<p>You can have as many people on your team as you’d like, but we recommend having 5-8 people on each team, for a better experience.</p>
+				</li>
+				<li>
+					<i>4</i><span>WHAT IF I NEED TO RESCHEDULE OR CANCEL?</span>
+					<p>Rescheduling is no fun, but we'll make it easy anyway! If you let us know one business day before your event, you can reschedule to any date within a year.<br>If you need to cancel your event entirely, some fees may apply based on the amount of notice you give.</p>
+				</li>
+				<li>
+					<i>5</i><span>WHAT IS THE CONTENT OF THE HUNT?</span>
+					<p>Our challenges are a mix of a few super fun themes! In some cases, teams will be solving clever puns in order to earn points, in others they'll be searching for nearly hidden objects. There will be silly photo ops that ask players to snap a selfie mimicking a monument, posing with a police officer, and acting out wacky scenarios.<br><br>At each stop, players will also get the lowdown on their current location. Hooray for learning new things!</p>
+				</li>
+				<li class="h">
+					<i>6</i><span>IS IT COMPLETELY WALKING-BASED?</span>
+					<p>Yes, the hunt is completely walking-based so cars or public transportation are not needed once you arrive at the starting location.<br>The hunt covers roughly a 1.5-2 miles radius.</p>
+				</li>
+				<li class="h">
+					<i>7</i><span>HOW LONG DOES IT TAKE TO PLAY?</span>
+					<p>We recommend blocking off 2-3 hours to play through our scavenger hunts.</p>
+				</li>
+				<li class="h">
+					<i>8</i><span>CAN I CUSTOMIZE THE HUNT?</span>
+					<p>Our hunt masters are doing everything they can to give you the best experience. Our hunts are fully customized, with an additional cost, so if you do want to change something. Please call us and we'll be happy to discuss it with you.</p>
+				</li>
+				<li class="h">
+					<i>9</i><span>IS THERE A SPECIFIC TIME OF DAY OR DAY OF THE WEEK I HAVE TO PLAY?</span>
+					<p>Most of our hunts can be played at any time, on any day, but we have recommended playing hours for each hunt, so let us know which one interests you and we'll let you know the best windows of time to play.</p>
+				</li>
+				<li class="h">
+					<i>10</i><span>HOW DO POINTS WORK?</span>
+					<p>
+						<b>Full</b> points! – Answer correctly on the very first try.<br>
+						<b>Half</b> points! – Ask for a hint, or answer incorrectly on your first try.<br>
+						<b>No</b> points! – Answer incorrectly twice or skip the question.
+					</p>
+				</li>
+				<li class="h">
+					<i>11</i><span>HOW WILL TEAMS RECEIVE THEIR SCORES/PHOTOS?</span>
+					<p>Once you are finished, all of your team's scores and photos are being sent automatically in an email to your group leader</p>
+				</li>
+				<li class="h">
+					<i>12</i><span>WHAT IF I HAVE TROUBLE WITH MY PHONE OR IT RUNS OUT OF BATTERIES DURING A HUNT?</span>
+					<p>Simply switch phones with someone else on your team, re-enter your team-specific activation code and the hunt will pick up where you left off.</p>
+				</li>
+				<li class="h">
+					<i>13</i><span>IS THERE A STRAYBOOTS REP ON SITE?</span>
+					<p>Getting started is so simple, there's no need! We provide you with detailed instruction sheets and offer instant phone support so anyone can reach a real person, no matter where they are on the hunt.<br>VIP options available for Custom Packages.</p>
+				</li>
+				<li class="h">
+					<i>14</i><span>DO YOU HAVE RESTAURANT RECOMMENDATIONS?</span>
+					<p>Absolutely! Let us know which area interests you and we we'll shoot you a map or recommended restaurants that are affordably priced and can accommodate large groups.</p>
+				</li>
+				<li class="loadmore">Load More</li>
+			</ul>
+		</div>
+	</div>
+
+</div>

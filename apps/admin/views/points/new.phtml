@@ -1,0 +1,147 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="row">
+	<nav>
+		<ul class="pager">
+			<li class="previous"><?= $this->tag->linkTo(["points", "Go Back"]) ?></li>
+		</ul>
+	</nav>
+</div>
+
+<div class="page-header">
+	<h1>
+		Add a new point
+	</h1>
+</div>
+
+<?= $this->getContent() ?>
+
+<?php
+	echo $this->tag->form([
+		"points/create",
+		"autocomplete" => "off",
+		"class" => "form-horizontal"
+	]);
+?>
+
+<div class="form-group">
+	<label for="fieldCityId" class="col-sm-2 control-label">City</label>
+	<div class="col-sm-10">
+		<?= $this->tag->selectStatic([
+			'city_id',
+			$countrycities,
+			'id'			=> 'fieldCityId',
+			'class'			=> 'form-control select2-auto',
+			'useEmpty'		=> true,
+			'emptyText'		=> '',
+			'emptyValue'	=> ''
+		]); ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldTypeId" class="col-sm-2 control-label">Type</label>
+	<div class="col-sm-10">
+		<?= $this->tag->select([
+			'type_id',
+			PointTypes::find(),
+			'id'			=> 'fieldTypeId',
+			'class'			=> 'form-control select2-auto',
+			'using'			=> ['id', "name"],
+			'useEmpty'		=> true,
+			'emptyText'		=> '',
+			'emptyValue'	=> ''
+		]); ?>
+	</div>
+</div>
+
+<div class="form-group" style="display:none">
+	<label for="fieldInternalName" class="col-sm-2 control-label">Internal name</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["internal_name", "size" => 30, "class" => "form-control", "id" => "fieldInternalName"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldName" class="col-sm-2 control-label">Name</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+	</div>
+</div>
+
+<div class="form-group" style="display:none">
+	<label for="fieldSubtitle" class="col-sm-2 control-label">Subtitle</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["subtitle", "size" => 30, "class" => "form-control", "id" => "fieldSubtitle"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldAddress" class="col-sm-2 control-label">Address</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["address", "size" => 30, "class" => "form-control", "id" => "fieldAddress"]) ?>
+	</div>
+	<div class="col-sm-offset-2 col-sm-10">
+		<div id="points-map"></div>
+	</div>
+	<label class="col-sm-offset-2 col-sm-10 map">
+		Latitude: <?= $this->tag->numericField(["latitude", "step" => "any", "size" => 30, "readonly" => "readonly", "id" => "fieldLatitude"]) ?>&nbsp; 
+		Longitude: <?= $this->tag->numericField(["longitude", "step" => "any", "size" => 30, "readonly" => "readonly", "id" => "fieldLongitude"]) ?>
+	</label>
+</div>
+
+<div class="form-group">
+	<label for="fieldPhone" class="col-sm-2 control-label">Phone</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["phone", "size" => 30, "class" => "form-control", "id" => "fieldPhone"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldHours" class="col-sm-2 control-label">Open Hours</label>
+	<div class="col-sm-10">
+		<? $hours = $this->tag->getValue("hours"); $hours = empty($hours) ? ['', ''] : explode('-', $hours); ?>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="input-group clockpicker cp0" data-autoclose="true">
+					<input type="text" class="form-control" value="<?= $hours[0] ?>">
+					<span class="input-group-addon">
+						<span class="fa fa-clock-o"></span>
+					</span>
+				</div>
+			</div>
+			<div class="col-md-1" style="text-align:center">
+				-
+			</div>
+			<div class="col-md-3">
+				<div class="input-group clockpicker cp1" data-autoclose="true">
+					<input type="text" class="form-control" value="<?= $hours[1] ?>">
+					<span class="input-group-addon">
+						<span class="fa fa-clock-o"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<?= $this->tag->hiddenField(["hours", "id" => "fieldHours"]) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldNotes" class="col-sm-2 control-label">Notes</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textArea(["notes", "cols" => 30, "rows" => 4, "class" => "form-control", "id" => "fieldNotes"]) ?>
+	</div>
+</div>
+
+
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<?= $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+	</div>
+</div>
+
+<?= $this->tag->endForm() ?>

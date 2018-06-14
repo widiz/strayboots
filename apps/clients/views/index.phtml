@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Strayboots | Clients</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script>
+			(function(vp,de){
+				var setVP=function(){
+					var ww=window.outerWidth||de.clientWidth,
+						w='device-width, initial-scale=1.0, maximum-scale=1.0';
+						if(ww<360)
+							w=360;
+					vp.setAttribute('content','width='+w+', user-scalable=no');
+				};
+				setVP();
+				window.addEventListener('orientationchange',setVP,false);
+				window.addEventListener('resize',setVP,false);
+			})(document.querySelector('meta[name="viewport"]'),document.documentElement);
+		</script>
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:400,300,500,700" />
+		<? if (isset($assetsCache)) echo '<link rel="stylesheet" type="text/css" href="/' . $assetsCache . '.css" />'; else $this->assets->outputCss('style') ?>
+	</head>
+	<body class="top-navigation<? if (isset($bodyClass)) echo ' ' . $bodyClass; ?>">
+<?php
+if (isset($hiddenWrapper) && $hiddenWrapper):
+echo $this->getContent();
+else: ?>
+		<div id="wrapper">
+			<div id="page-wrapper" class="gray-bg">
+<?= $this->partial('partials/header') ?>
+<?= $this->getContent() ?>
+<?= $this->partial('partials/footer') ?>
+			</div>
+		</div>
+<? endif ?>
+
+<? if (isset($firebase)): /*<script type="text/javascript" src="//www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>*/ ?>
+	
+<script src="//www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script type="text/javascript"><? if (isset($order_hunt_id)) echo "window.order_hunt_id={$order_hunt_id};"; ?>window.appLoc=<?= json_encode($firebase['appLoc'], JSON_UNESCAPED_SLASHES| JSON_UNESCAPED_UNICODE) ?>;window.FB_PREFIX='<?= FB_PREFIX ?>';firebase.initializeApp(<?= json_encode($firebase['config'], JSON_UNESCAPED_SLASHES| JSON_UNESCAPED_UNICODE) ?>);</script>
+<? endif ?>
+<? if (isset($facebookSDK)): ?>
+	<script type="text/javascript">
+	(function(){
+		var fbFuncs=[],fbLoaded=!1;
+		window.fbFunc=function(f){if(typeof f=='function')fbFuncs.push(f);
+		if(fbLoaded)for(var i=0;i<fbFuncs.length;i++)try{fbFuncs[i]()}catch(E){}};
+		window.fbAsyncInit=function(){
+			FB.init({
+				appId: '302564933413297',
+				status: true,
+				xfbml: true,
+				version: 'v2.7'
+			});
+			fbLoaded = true;
+			window.fbFunc();
+		};
+	})();
+	</script>
+	<script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js" id="facebook-jssdk"></script>
+<? endif ?>
+<?
+	if (isset($assetsCache))
+		echo '<script type="text/javascript" src="/' . $assetsCache . '.js"></script>';
+	else
+		$this->assets->outputJs('script');
+?>
+
+<? if (!empty($msgs = $this->flash->getMessages())): ?>
+		<script>
+			$(function(){
+				<? $x = 0; foreach ($msgs as $type => $msg):
+					foreach ($msg as $m): ?>
+					setTimeout(function(){
+						toastr.<?= $type ?>('Strayboots', "<?= $this->escaper->escapeHtmlAttr($m) ?>");
+					}, <?= 500 + $x++ * 1000 ?>);
+				<? endforeach; endforeach ?>
+			});
+		</script>
+<? endif ?>
+<? if (isset($googleMaps)): ?>
+	<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?= $googleMaps ?>&callback=gmapInit"></script>
+<? endif ?>
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-7559873-20','auto');ga('send','pageview');
+</script>
+<script type="text/javascript">var google_conversion_id=1027606727,google_conversion_label="8We6CKOB8GoQx5GA6gM",google_custom_params=window.google_tag_params,google_remarketing_only=true;</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+	</body>
+</html>

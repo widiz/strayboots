@@ -1,0 +1,17 @@
+						<div id="leaderboard" class="strategy">
+<? foreach ($questions as $q => $_q):
+	if ($answered = !is_null($_q['answer_action']))
+		$skipped = $_q['answer_action'] == Answers::Skipped;
+	else
+		$skipped = false;
+	$link = $isLeader && !$answered;//(!$answered || $skipped);
+?>
+							<a href="<?= $link ? $this->url->get('play') . '?q=' . $_q['id'] : 'javascript:;' ?>">
+								<div class="lb-row clearfix<?= $answered ? ' answered' : '' ?><?= $skipped ? ' skipped' : '' ?>">
+									<div class="num"><?= $q < 9 ? '&nbsp;' . ($q + 1) . '&nbsp;' : ($q + 1) ?></div>
+									<div class="score"><?= $_q['answer_action'] == Answers::AnsweredWithHint ? floor($_q['cscore'] / 2) : $_q['cscore'] ?></div>
+									<div class="name"><?= $_q['name'] ?? $t->_('Team Challenge') ?></div>
+								</div>
+							</a>
+<? endforeach; ?>
+						</div>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<h1>
+		Hunt types
+	</h1>
+	<p>
+		<a href="<?= $this->url->get('hunt_types/new') ?>" class="btn btn-success">Add a new hunt type</a>
+	</p>
+</div>
+
+<?= $this->getContent() ?>
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-custom table-options" id="hunttypes-list">
+		<thead>
+		<tr>
+			<th>#</th>
+			<th>Type</th>
+			<th>Hunts</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+	</table>
+</div>

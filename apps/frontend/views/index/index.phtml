@@ -1,0 +1,55 @@
+		<div class="content-wrapper section-wrapper activate-ticket">
+			<div class="container">
+				<h1><?= $t->_(defined('OVERRIDE_WELCOME_TITLE') ? OVERRIDE_WELCOME_TITLE : 'Welcome to Your Team Building Scavenger Hunt!') ?></h1>
+				<h2><?= $t->_('Activate Your Hunt') ?></h2>
+				<div class="col-sm-12">
+					<div id="activation-wrapper" class="clearfix">
+						<div id="activation-fb">
+							<button class="subxbtn facebook"><?= $t->_('Login With Facebook') ?></button>
+							<button class="subxbtn email"><?= $t->_('Login With Email') ?></button>
+							<div class="atos" style="margin-top:40px">
+								<?= $t->_('By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>') ?>
+							</div>
+							<div class="atos help" style="margin-top:20px">
+								<?= $t->_('For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>') ?>
+							</div>
+						</div>
+						<div id="activation-email">
+							<?= $this->tag->form([/*"/", */"id" => "activation-form"]) ?>
+
+								<?= $this->tag->hiddenField(['first_name', 'id' => "firstNameField"]) ?>
+								<?= $this->tag->hiddenField(['last_name', 'id' => "lastNameField"]) ?>
+								<?= $this->tag->hiddenField(['network', 'id' => "networkField"]) ?>
+								<?= $this->tag->hiddenField(['network_id', 'id' => "networkIdField"]) ?>
+
+								<?= $this->tag->emailField(['email', 'required' => 'required', 'class' => 'answer', 'id' => 'emailField', 'placeholder' => $t->_('Email')]) ?>
+<? if (defined('ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE')): ?>
+								<?= $this->tag->hiddenField(['id', 'value' => ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE]) ?>
+<? else: ?>
+								<?= $this->tag->textField(['activation', 'required' => 'required', 'class' => 'answer', 'id' => 'activationField', 'placeholder' => $t->_('Activation Code')]) ?>
+<? endif ?>
+
+								<?= $this->tag->submitButton([$t->_('Submit'), 'class' => 'submit subxbtn']) ?>
+
+								<div class="atos" style="margin-top:25px">
+									<?= $t->_('By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>') ?>
+								</div>
+
+								<div class="atos help" style="margin-top:20px">
+									<?= $t->_('For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>') ?>
+								</div>
+
+							<?= $this->tag->endForm() ?>
+
+						</div>
+					</div>
+				</div>
+				<? /*<div class="col-sm-12">
+					<h3>Visit us at</h3>
+					<a href="http://www.strayboots.com" target="_blank"><h4>www.strayboots.com</h4></a>
+				</div> */ ?>
+			</div>
+		</div>
+<? if (isset($overrideModal)): ?>
+<script type="text/javascript">window.overrideModal=<?= json_encode($overrideModal, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<? endif ?>

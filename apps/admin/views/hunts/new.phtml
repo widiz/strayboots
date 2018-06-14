@@ -1,0 +1,198 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="row">
+	<nav>
+		<ul class="pager">
+			<li class="previous"><?= $this->tag->linkTo(["hunts", "Go Back"]) ?></li>
+		</ul>
+	</nav>
+</div>
+
+<div class="page-header">
+	<h1>
+		Create a new hunt
+	</h1>
+</div>
+
+<?= $this->getContent() ?>
+
+<?php
+	echo $this->tag->form([
+		"hunts/create",
+		"autocomplete" => "off",
+		"class" => "form-horizontal"
+	]);
+?>
+<fieldset>
+	<legend>Hunt details:</legend>
+	<div class="form-group">
+		<label for="fieldCityId" class="col-sm-2 control-label">City</label>
+		<div class="col-sm-10">
+			<?= $this->tag->selectStatic([
+				'city_id',
+				$countrycities,
+				'id'			=> 'fieldCityId',
+				'class'			=> 'form-control select2-auto',
+				'useEmpty'		=> true,
+				'emptyText'		=> '',
+				'emptyValue'	=> ''
+			]); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldTypeId" class="col-sm-2 control-label">Type</label>
+		<div class="col-sm-10">
+			<?= $this->tag->select([
+				'type_id',
+				HuntTypes::find(),
+				'class'			=> 'form-control select2-auto',
+				'id'			=> 'fieldTypeId',
+				'using'			=> ['id', "name"],
+				'useEmpty'		=> true,
+				'emptyText'		=> '',
+				'emptyValue'	=> ''
+			]); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldName" class="col-sm-2 control-label">Name</label>
+		<div class="col-sm-10">
+			<?= $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldSlug" class="col-sm-2 control-label">Slug</label>
+		<div class="col-sm-10">
+			<?= $this->tag->textField(["slug", "size" => 30, "class" => "form-control", "id" => "fieldSlug"]) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldTime" class="col-sm-2 control-label">Hunt duration</label>
+		<div class="col-sm-10">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="input-group clockpicker cp0" data-autoclose="true">
+						<?= $this->tag->textField(["time", "size" => 30, "class" => "form-control", "id" => "fieldTime"]) ?>
+						<span class="input-group-addon">
+							<span class="fa fa-clock-o"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldTypeId" class="col-sm-2 control-label">Breakpoints</label>
+		<div class="col-sm-10">
+			<?= $this->tag->hiddenField(["breakpoints", 'id' => 'fieldBreakpointsVal']) ?>
+			<?= $this->tag->selectStatic([
+				'bpid',
+				[],
+				'class'			=> 'form-control select2-auto',
+				'id'			=> 'fieldBreakpoints',
+				'multiple'		=> true,
+				'useEmpty'		=> true,
+				'emptyText'		=> '',
+				'emptyValue'	=> ''
+			]); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldMultiLang" class="col-sm-2 control-label">Language</label>
+		<div class="col-sm-10">
+			<?= $this->tag->selectStatic([
+				'multilang',
+				[
+					1 => 'Hebrew',
+					2 => 'Portuguese'
+				],
+				'id'			=> 'fieldMultiLang',
+				'class'			=> 'form-control select2-auto',
+				'useEmpty'		=> true,
+				'emptyText'		=> 'Default (' . ($this->config->defLang > 0 ? $this->config->altLang[$this->config->defLang - 1] : 'en') . ')',
+				'emptyValue'	=> 0
+			]); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldApproved" class="col-sm-2 control-label">Approved</label>
+		<div class="col-sm-10 checkbox-inline">
+			<?= $this->tag->checkField(["approved", "value" => 1, "id" => "fieldApproved"]) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldStrategyHunt" class="col-sm-2 control-label">Strategy Hunt</label>
+		<div class="col-sm-10 checkbox-inline">
+			<?= $this->tag->checkField(['strategy_hunt', 'value' => 1, 'id' => 'fieldStrategyHunt']) ?>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Add point/question:</legend>
+	<div class="form-group">
+		<div class="col-sm-12 margin-bottom-10">
+			<select id="addPoint" class="form-control select2-auto" disabled="disabled">
+				<option value='0'>Select a city first</option>
+			</select>
+		</div>
+		<div class="col-sm-12 margin-bottom-10">
+			<?= $this->tag->selectStatic([
+				'',
+				Tags::find(),
+				'class'			=> 'form-control',
+				'id'			=> 'filterTags',
+				'using'			=> ['id', 'tag'],
+				'multiple'		=> true
+			]); ?>
+		</div>
+		<div class="col-sm-12 margin-bottom-10">
+			<select id="addQuestion" class="form-control select2-auto" disabled="disabled">
+				<option value='0'>Select a point first</option>
+			</select>
+		</div>
+		<div class="col-sm-12 checkbox-inline margin-bottom-10">
+			<label for="addIsStart">Suitable for a starting point</label>
+			<input type="checkbox" id="addIsStart" checked readonly disabled>
+		</div>
+		<div class="col-sm-12">
+			<a href="#" class="btn btn-success" id="addPQ">Add</a>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset class="buttonable">
+	<legend>Order points:</legend>
+	<div class="right-float">
+		<a class="btn btn-primary map-preview" href="javascript:;">Map Preview</a>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-12">
+			<div class="dd" id="nestable">
+				<ol class="dd-list"></ol>
+			</div>
+		</div>
+	</div>
+</fieldset>
+
+<?= $this->tag->hiddenField(["pq", 'id' => 'pqField']) ?>
+
+<div class="form-group">
+	<div class="col-sm-12">
+		<?= $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+	</div>
+</div>
+
+<?= $this->tag->endForm() ?>

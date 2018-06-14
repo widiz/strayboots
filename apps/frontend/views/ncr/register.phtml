@@ -1,0 +1,103 @@
+		<div class="content-wrapper steps-wrapper">
+			<div class="container step step1">
+				<h1><b>All Routes<br class="visible-sm visible-xs"> Lead to Midtown</b><br><br>Scavenger Hunt <br class="visible-sm visible-xs">Registration</h1>
+<? if (time() > strtotime(SB_PRODUCTION ? '10/23/2017 10pm' : '09/23/2017 10pm')): ?>
+				<h2 style="line-height:1.4;color:#ED9A22">Registration is now closed. To activate your hunt, go to <a style="color:#93c3ff" href="<?= $this->url->get('ncr') ?>"><?= $ncrurl ?></a></h2>
+<? else: ?>
+				<br><br>
+				<div>
+					<div id="activation-wrapper" class="clearfix">
+						<div class="clearfix">
+							<a class="submit subxbtn pull-left" href="javascript:;" data-val="player">INDIVIDUAL REGISTRATION</a>
+							<a class="submit subxbtn pull-right" href="javascript:;" data-val="team" style="background:#2ea9e0">TEAM REGISTRATION</a>
+						</div>
+					</div>
+				</div>
+<? endif ?>
+			</div>
+			<div class="container step step2">
+				<h1>Choose your hunt time:</h1>
+				<div>
+					<select id="event" class="form-control">
+						<option disabled selected></option>
+<? foreach ($events as $e): ?>
+						<option value="<?= $e['id'] ?>" data-soldout="<?= (int)$e['players'] >= $playersLimit ? 'true' : 'false' ?>"><?= date($timeFormat, strtotime($e['start'])) ?></option>
+<? endforeach ?>
+					</select>
+					<div class="soldout hidden">
+						This time slot is AT CAPACITY! Please select a different time for your scavenger hunt.
+					</div>
+					<a class="submit subxbtn email disabled" id="choose-event" href="javascript:;">Next</a>
+					<a class="submit subxbtn email" id="choose-back" style="background:#808080" href="javascript:;">Back</a><div style="height:20px"></div>
+				</div>
+			</div>
+			<div class="container step step3-player">
+				<h1>Individual Registration</h1>
+				<div>
+					<form id="player-reg" method="post">
+						<label>Your Details:</label>
+						<?= $this->tag->textField(['name', 'class' => "answer", 'id' => "playerNameField", 'placeholder' => "Name"]) ?>
+						<?= $this->tag->emailField(['email', 'required' => "required", 'class' => "answer", 'id' => "playerEmailField", 'placeholder' => "Email"]) ?>
+						<input type="submit" class="submit subxbtn email" id="register-player" href="javascript:;" value="Register">
+					</form>
+				</div>
+			</div>
+			<div class="container step step3-team">
+				<h1>Team Registration</h1>
+				<div>
+					<form id="team-reg" method="post">
+						<label>Team Leader Details:</label>
+						<?= $this->tag->textField(['name', 'class' => "answer", 'id' => "leaderNameField", 'placeholder' => "Team Leader Name"]) ?>
+						<?= $this->tag->emailField(['email', 'required' => "required", 'class' => "answer", 'id' => "leaderEmailField", 'placeholder' => "Team Leader Email"]) ?>
+
+						<fieldset id="players-list" class="buttonable">
+							<legend>Team Member Details:</legend>
+							<div class="row player">
+								<div class="col-sm-12">
+									<input type="text" name="name1" class="answer" placeholder="Team Member Name">
+									<input type="email" name="email1" class="answer" required="required" placeholder="Team Member Email">
+									<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>
+								</div>
+							</div>
+							<div class="row player">
+								<div class="col-sm-12">
+									<input type="text" name="name2" class="answer" placeholder="Team Member Name">
+									<input type="email" name="email2" class="answer" required="required" placeholder="Team Member Email">
+									<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>
+								</div>
+							</div>
+							<div class="row player">
+								<div class="col-sm-12">
+									<input type="text" name="name3" class="answer" placeholder="Team Member Name">
+									<input type="email" name="email3" class="answer" required="required" placeholder="Team Member Email">
+									<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>
+								</div>
+							</div>
+						</fieldset>
+						<div class="right-float text-right" style="padding-right:23px">
+							<a class="btn btn-primary" id="add-player" href="javascript:;"><i class="fa fa-plus"></i></a>
+						</div>
+
+						<input type="submit" class="submit subxbtn email" id="register-player" href="javascript:;" value="Register">
+					</form>
+				</div>
+			</div>
+			<div class="container step step4">
+				<h1>Thank You!</h1>
+				<p>
+					Please check your email for further instructions and details.
+				</p>
+				<!--div class="activation-block">
+					Your activation code is: <span class="code"></span>
+				</div>
+				<div>
+					<a class="submit subxbtn email" href="<?= $this->url->get('ncr') ?>">Home</a>
+				</div-->
+			</div>
+		</div>
+		<div class="container text-center">
+			<div class="atos help" style="margin-top:30px">
+				For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>
+			</div>
+		</div>
+		<div id="loading-indicator"></div>

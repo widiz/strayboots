@@ -1,0 +1,22 @@
+		<div class="content-wrapper section-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 ">
+						<h1><?= $t->_('BREAKPOINT') ?></h1>
+						<h2 class="waitingscreen<?= empty($lateTeams) ? ' hidden' : '' ?>" style="font-size:34px;line-height:40px"><?= $t->_('Wait for everyone to reach question %question%', ['question' => '#' . ($breakPoint + 1)]) ?> </h2>
+						<h2 class="countdownscreen<?= empty($lateTeams) ? '' : ' hidden' ?>" style="font-size:34px;line-height:40px"><?= $t->_('Next round will start in') ?> <span id="cdown"><?= $timeCounter ?></span></h2>
+						<div id="leaderboard">
+<? if (count($teamsStatus)): $first = new DateTime($teamsStatus[0]['lastAnswer']); $i = 0;
+	foreach ($teamsStatus as $t => $team): $i++; $isLate = in_array($team['id'], $lateTeams); ?>
+							<div data-team="<?= $team['id'] ?>" class="lb-row clearfix<?= $isLate ? '' : ' green' ?>">
+								<div class="num"><?= (++$team['count'] < 10 ? "&nbsp;{$team['count']}&nbsp;" : $team['count']) ?></div>
+								<div class="question"><?= $i > 1 && isset($team['lastAnswer']) && !$isLate ? $first->diff(new DateTime($team['lastAnswer']))->format('%H:%I:%S') : '' ?></div>
+								<div class="name"><?= ($teamStatus['id'] == $team['id'] ? "<s>You&nbsp;</s> " : '') . $team['name'] ?></div>
+							</div>
+<? endforeach; ?>
+<? endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

@@ -1,0 +1,94 @@
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+<? if (isset($timeToEnd)): ?>
+					<div class="pull-right visible-xs" style="margin:12px 10px 0 0">
+						<a class="endtimer-link" style="font-size:18px;"></a>
+					</div>
+<? endif ?>
+					<a class="navbar-brand logo" href="<?= $this->url->get(isset($ncr) ? '/ncr' : '/') ?>">
+<? if (isset($customLogo)): ?>
+						<img src="<?= $customLogo ?>" alt="" class="customlogo">
+<? else: ?>
+						<img src="/img/logo.png" alt="Strayboots">
+<? endif ?>
+					</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+<? if (isset($timeToEnd)): ?>
+						<li id="end-timer" data-seconds="<?= $timeToEnd ?>" class="hidden-xs"><a class="endtimer-link"></a></li>
+<? endif ?>
+<? if (isset($teamStatus) && isset($user_info)): ?>
+						<li class="visible-xs teaminfo">
+							<?= $t->_('Email: %email%', ['email' => $user_info['email']]) ?><br>
+							<?= $t->_('Team: %team%', ['team' => $teamStatus['name']]) ?><br>
+							<?= $t->_('Activation code: %code%', ['code' => $user_info['activation']]) ?>
+						</li>
+<? endif ?>
+<? /*if (isset($ncr)): ?>
+						<li style="display:block"><a href="<?= $this->url->get('ncr') ?>"><?= $t->_('Login') ?></a></li>
+						<li style="display:block"><a href="<?= $this->url->get('ncr/register') ?>"><?= $t->_('Register') ?></a></li>
+<? else:*/ ?>
+						<li><a href="<?= $this->url->get('/') ?>"><?= $t->_('Home') ?></a></li>
+<? //endif ?>
+						<li><a href="<?= $this->url->get('faq') ?>"><?= $t->_('FAQ') ?></a></li>
+<? if ($loggedIn): ?>
+						<li><a href="<?= $this->url->get('map') ?>"><?= $t->_('Map') ?></a></li>
+						<li><a href="<?= $this->url->get('chat') ?>"><?= $t->_('Chat') ?></a></li>
+<? if (isset($firebase['appLoc']['orderHunt']) && $firebase['appLoc']['orderHunt'] != 1850): //loyalty ?>
+						<li><a href="<?= $this->url->get('leaderboard') ?>"><?= $t->_('Leaderboard') ?></a></li>
+<? endif // loyalty ?>
+<? if ($isLeader): ?>
+						<li class="visible-xs"><a href="<?= $this->url->get('index/rename') ?>"><?= $t->_('Rename Team') ?></a></li>
+<? if ($isMultiHunt): ?>
+						<li><a href="<?= $this->url->get('index/chooseHunt') ?>"><?= $t->_('Choose Hunt') ?></a></li>
+<? endif ?>
+<? endif ?>
+						<li><a href="<?= $this->url->get('index/logout') ?>" id="logout-btn"><?= $t->_('Log Out') ?></a></li>
+<? endif ?>
+						<li class="visible-xs">
+							<select onchange="document.location.href='?lang='+this.value" class="form-control">
+								<? $def = (int)$this->config->defLang; $langs = array_merge(['en'], array_values((array)$this->config->altLang)); if (!isset($langs[$def])) $def = 0; ?>
+								<? foreach ($langs as $i => $l): ?>
+									<option value="<?= $i ?>"<?= $i === $multiLang ? ' selected' : '' ?>><?= $t->_('lang.' . $l) ?></option>
+								<? endforeach ?>
+							</select>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+<? if (isset($teamStatus) && !isset($hideHeaderStatus)): ?>
+<? if ($controllerName != 'map'): ?>
+		<div style="height:90px"></div>
+<? endif ?>
+		<div id="header-score">
+			<!--i class="fa fa-trophy"></i-->
+			<div>
+				<div><?= $t->_('Place') ?></div>
+				<span><?= $teamStatus['position'] ?></span>
+			</div>
+			<div>
+				<div><?= $t->_('Team Score') ?></div>
+				<span><?= $teamStatus['score'] ?></span>
+			</div>
+<? if (isset($question)): ?>
+			<div>
+				<div><?= $t->_('Progress') ?></div>
+				<span style="padding:0 15px"><?= $question['currentPos'] ?> / <?= $question['numQuestions'] ?></span>
+			</div>
+<? endif ?>
+<? if (isset($qtimeout)): ?>
+			<div class="timeout-progress hidden">
+				<div></div>
+				<time></time>
+			</div>
+<? endif ?>
+		</div>
+<? endif ?>

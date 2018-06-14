@@ -1,0 +1,121 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+//$jscolor = 'colorpicker';
+$jscolor = 'jscolor {refine:false, hash:true}';
+?>
+
+<div class="page-header">
+	<div class="container">
+		<h1>Customize order <small>#<?= $order->id . ' ' . htmlspecialchars($order->name) ?></small></h1>
+		<ol class="breadcrumb">
+			<li>
+				<?= $this->tag->linkTo(['', 'Home']) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['orders', 'Orders']) ?>
+			</li>
+			<li class="active">
+				<?= $this->tag->linkTo(['orders/customize/' . $order->id, '<strong>Customize order</strong>']) ?>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<div class="container">
+
+	<?= $this->getContent() ?>
+
+	<?php
+		echo $this->tag->form([
+			'orders/save',
+			'autocomplete' => 'off',
+			'enctype' => 'multipart/form-data',
+			'class' => 'form-horizontal customize-form'
+		]);
+		$clientsUri = $this->config->application->clientsUploadsDir->uri;
+	?>
+
+	<div class="row" style="margin:0 -10px">
+		<div class="col-sm-8">
+			<div class="form-group">
+				<div class="col-sm-4">
+					<h4>Upload Logo</h4>
+					<input type="file" class="form-control upload" accept=".jpg,.jpeg,png,gif, image/jpg,image/jpeg,image/png,image/gif" name="logo">
+					<p>Logo image recommended dimentions are 128x39px</p>
+				</div>
+				<div class="col-sm-4">
+					<h4>Header Color</h4>
+					<input type="file" class="form-control upload" accept=".jpg,.jpeg,png,gif, image/jpg,image/jpeg,image/png,image/gif" name="header">
+					<?= $this->tag->textField(["header_color", "size" => 30, "class" => "form-control " . $jscolor, "id" => "fieldHeaderColor"]) ?>
+					<p>
+						Choose an image or one of the colors below for the header background.<br>
+						Recommended image dimensions are between 1x50px and 100x50.
+					</p>
+				</div>
+				<div class="col-sm-4">
+					<h4>Main Background <small>(image &amp; color)</small></h4>
+					<input type="file" class="form-control upload" accept=".jpg,.jpeg,png,gif, image/jpg,image/jpeg,image/png,image/gif" name="background">
+					<?= $this->tag->textField(['background_color', 'size' => 30, 'class' => 'form-control ' . $jscolor, 'id' => 'fieldBackgroundColor']) ?>
+					<p>
+						Choose an image or one of the colors below for the header background.<br>
+						Recommended image dimensions are between 1000x1000px and 2000x1200.
+					</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<h5>Preview</h5>
+					<div class="img-preview" data-image="<?= $clientsUri ?>cb<?= mt_rand(1, 1e7) ?>.order.<?= $order->id ?>.logo.png"><a href="#"><i class="fa fa-times"></i></a></div>
+				</div>
+				<div class="col-sm-4">
+					<h5>Preview</h5>
+					<div class="img-preview" data-image="<?= $clientsUri ?>cb<?= mt_rand(1, 1e7) ?>.order.<?= $order->id ?>.header.png"><a href="#"><i class="fa fa-times"></i></a></div>
+				</div>
+				<div class="col-sm-4">
+					<h5>Preview</h5>
+					<div class="img-preview" data-image="<?= $clientsUri ?>cb<?= mt_rand(1, 1e7) ?>.order.<?= $order->id ?>.background.png"><a href="#"><i class="fa fa-times"></i></a></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<h4>Main font color</h4>
+					<?= $this->tag->textField(['main_color', 'size' => 30, 'class' => 'form-control ' . $jscolor, 'id' => 'fieldMainColor']) ?>
+					<p>(question texts, points, menu texts)</p>
+				</div>
+				<div class="col-sm-4">
+					<h4>Second font color</h4>
+					<?= $this->tag->textField(['second_color', 'size' => 30, 'class' => 'form-control ' . $jscolor, 'id' => 'fieldSecondColor']) ?>
+					<p>(hints, progress, score)</p>
+				</div>
+			</div>
+			<p>Colors should oppose the background colors</p>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<h4>Custom CSS</h4>
+					<?= $this->tag->textArea(['custom_css', 'size' => 30, 'class' => 'form-control custom-css', 'id' => 'fieldCustomCSS']) ?>
+				</div>
+			</div>
+
+			<input type="hidden" name="removed_images" value="" id="fieldRemovedImages">
+			<?= $this->tag->hiddenField("id") ?>
+
+			<div class="form-group">
+				<div class="col-sm-12">
+					<?= $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+					&nbsp;<button id="reset-all" class="btn btn-danger">Reset</button>
+					&nbsp;<button id="preview" class="btn btn-success">Preview Image</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="iframe-wrapper">
+				<iframe id="pframe" name="pframe" seamless="seamless" border="0"></iframe>
+			</div>
+		</div>
+	</div>
+
+	<?= $this->tag->endForm() ?>
+
+</div>

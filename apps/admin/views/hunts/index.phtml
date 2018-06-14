@@ -1,0 +1,52 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<h1>
+		Hunts
+	</h1>
+	<p>
+		<a href="<?= $this->url->get('hunts/new') ?>" class="btn btn-success">Create a new hunt</a>
+	</p>
+</div>
+
+<?= $this->getContent() ?>
+
+<script type="text/javascript">
+window.huntTypes=<?= json_encode($huntTypes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
+window.countries=<?= json_encode($countries, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
+window.cities=<?= json_encode($cities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
+</script>
+
+<div class="form-group ">
+	<label for="hunttype">Hunt Type: &nbsp;</label>
+	<?= $this->tag->select([
+		'hunttype',
+		HuntTypes::find(),
+		'id'			=> 'hunttype',
+		'using'			=> ['id', "name"],
+		'useEmpty'		=> false
+	]); ?>
+</div>
+<br>
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-custom table-options" id="hunts-list">
+		<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>City / Country</th>
+			<th>Approved</th>
+			<th>Orders</th>
+			<th>Questions</th>
+			<th>Routes</th>
+			<th>Last Play</th>
+			<th>Last Edit</th>
+			<th>Actions</th>
+		</tr>
+		</thead>
+	</table>
+</div>

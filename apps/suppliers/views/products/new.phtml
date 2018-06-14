@@ -1,0 +1,165 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<div class="container">
+		<h1>
+			Add a new product
+		</h1>
+		<ol class="breadcrumb">
+			<li>
+				<?= $this->tag->linkTo(['', 'Home']) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['products', 'Products']) ?>
+			</li>
+			<li class="active">
+				<?= $this->tag->linkTo(['products/new/', '<b>New</b>']) ?>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<div class="container">
+
+	<?= $this->getContent() ?>
+
+	<?php
+		echo $this->tag->form([
+			'products/create',
+			'autocomplete' => 'off',
+			'enctype' => 'multipart/form-data',
+			'class' => 'form-horizontal'
+		]);
+	?>
+
+	<div class="form-group">
+		<label for="fieldName" class="col-sm-2 control-label">Name</label>
+		<div class="col-sm-10">
+			<?= $this->tag->textField(['name', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldName']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldDescription" class="col-sm-2 control-label">Description</label>
+		<div class="col-sm-10">
+			<?= $this->tag->textArea(['description', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldDescription']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldPrice" class="col-sm-2 control-label">Price <small>per player</small></label>
+		<div class="col-sm-10">
+			<?= $this->tag->numericField(['price', 'size' => 30, 'step' => '0.01', 'min' => 0, 'max' => 9999, 'class' => 'form-control', 'id' => 'fieldPrice']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldCities" class="col-sm-2 control-label">City</label>
+		<div class="col-sm-10">
+			<?= $this->tag->select([
+				'cities[]',
+				$countrycities,
+				'id'			=> 'fieldCities',
+				'class'			=> 'form-control select2-auto',
+				'useEmpty'		=> true,
+				'multiple'		=> true,
+				'emptyText'		=> '',
+				'emptyValue'	=> ''
+			]); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldAddress" class="col-sm-2 control-label">Address</label>
+		<div class="col-sm-10">
+			<?= $this->tag->textField(["address", "size" => 30, "class" => "form-control", "id" => "fieldAddress"]) ?>
+		</div>
+		<div class="col-sm-offset-2 col-sm-10">
+			<div id="products-map"></div>
+		</div>
+		<label class="col-sm-offset-2 col-sm-10 map">
+			Latitude: <?= $this->tag->numericField(['latitude', 'step' => 'any', 'size' => 30, 'readonly' => 'readonly', 'id' => 'fieldLatitude']) ?>&nbsp; 
+			Longitude: <?= $this->tag->numericField(['longitude', 'step' => 'any', 'size' => 30, 'readonly' => 'readonly', 'id' => 'fieldLongitude']) ?>
+		</label>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldMinPlayers" class="col-sm-2 control-label">Min Players</label>
+		<div class="col-sm-10">
+			<?= $this->tag->numericField(['min_players', 'type' => 'number', 'min' => 1, 'max' => 65000, 'class' => 'form-control', 'id' => 'fieldMinPlayers']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldMaxPlayers" class="col-sm-2 control-label">Max Players</label>
+		<div class="col-sm-10">
+			<?= $this->tag->numericField(['max_players', 'type' => 'number', 'min' => 1, 'max' => 65000, 'class' => 'form-control', 'id' => 'fieldMaxPlayers']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldHours" class="col-sm-2 control-label">Open Hours</label>
+		<div class="col-sm-10">
+			<? $hours = $this->tag->getValue('hours'); $hours = empty($hours) ? ['', ''] : explode('-', $hours); ?>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="input-group clockpicker cp0" data-autoclose="true">
+						<input type="text" class="form-control" value="<?= $hours[0] ?>">
+						<span class="input-group-addon">
+							<span class="fa fa-clock-o"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-1" style="text-align:center">
+					-
+				</div>
+				<div class="col-md-3">
+					<div class="input-group clockpicker cp1" data-autoclose="true">
+						<input type="text" class="form-control" value="<?= $hours[1] ?>">
+						<span class="input-group-addon">
+							<span class="fa fa-clock-o"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<?= $this->tag->hiddenField(['hours', 'id' => 'fieldHours']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldImages" class="col-sm-2 control-label">Images</label>
+		<div class="col-sm-10">
+			<div class="row" id="images">
+				<? if (isset($this->view->images) && !empty($this->view->images)):
+					foreach ($this->view->images as $i): ?>
+				<div class="col-sm-3">
+					<div class="img-preview" style="background-image:url(<?= $this->config->application->suppliersUploadsDir->uri ?><?= $i ?>)" data-img="<?= $i ?>"><a href="#" style="display:block"><i class="fa fa-times"></i></a></div>
+				</div>
+				<? endforeach; endif ?>
+				<div class="col-sm-3">
+					<a href="javascript:;" class="btn btn-lg btn-success"><i style="font-size:40px" class="fa fa-plus"></i></a>
+				</div>
+			</div>
+			<?= $this->tag->hiddenField(['images', 'id' => 'fieldImages']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldActive" class="col-sm-2 control-label">Active</label>
+		<div class="col-sm-10 checkbox-inline">
+			<?= $this->tag->checkField(['active', 'value' => 1, 'id' => 'fieldActive']) ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<?= $this->tag->submitButton(['Save', 'class' => 'btn btn-default']) ?>
+		</div>
+	</div>
+
+	<?= $this->tag->endForm() ?>
+</div>

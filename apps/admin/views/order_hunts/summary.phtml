@@ -1,0 +1,465 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+$hunt = $orderHunt->Hunt;
+$tzFinish = $tzStart = '';
+if ($timezone = $hunt->City->timezone) {
+	if ($timezone != 'America/New_York') {
+		$tzStart = DateTime::createFromFormat('Y-m-d H:i:s', $orderHunt->start, new DateTimeZone('America/New_York'));
+		$tzStart->setTimezone(new DateTimeZone($timezone));
+		$tzStart = $tzStart->format(preg_replace('/\\\\E\\\\S\\\\T$/', 'T', $timeFormat));
+		$tzFinish = DateTime::createFromFormat('Y-m-d H:i:s', $orderHunt->finish, new DateTimeZone('America/New_York'));
+		$tzFinish->setTimezone(new DateTimeZone($timezone));
+		$tzFinish = $tzFinish->format(preg_replace('/\\\\E\\\\S\\\\T$/', 'T', $timeFormat));
+	}
+}
+$hasEvents = !empty($customEvents);
+?>
+
+<? if (!$hideHeader): ?>
+<script type="text/javascript">window.routes=<?= json_encode($routes) ?></script>
+<div class="row">
+	<nav>
+		<ul class="pager">
+			<li class="previous"><?= $this->tag->linkTo(['orders', 'Orders']) ?></li>
+		</ul>
+	</nav>
+</div>
+
+<div class="page-header">
+	<h1>
+		Summary / <span style="font-size:80%"><?= $this->tag->linkTo(['order_hunts/' . $orderHunt->order_id, htmlspecialchars($orderHunt->Order->name . ' / ' . ($orderHunt->isMultiHunt() ? 'Multi Hunt' : $hunt->name)) . ' <small>' . htmlspecialchars($client->first_name . ' ' . $client->last_name) . '</small>']) ?></span>
+	</h1>
+</div>
+
+<?= $this->getContent() ?>
+
+<? endif ?>
+
+<div id="datapage<?= $orderHunt->id ?>">
+
+<div class="row">
+	<div class="col-sm-12">
+<? if ($hideHeader): ?>
+		<a href="javascript:;" data-url="<?= $this->router->getRewriteUri() ?>" data-elid="datapage<?= $orderHunt->id ?>" class="btn btn-warning refreshdata">Refresh</a>
+		<h1><a href="<?= $this->url->get('order_hunts/summary/' . $orderHunt->id) ?>" target="_blank">Info <i class="fa fa-external-link"></i></a></h1>
+		<a href="/index/customPreview/<?= $orderHunt->order_id ?>" target="_blank" class="design-preview">Design Preview <i class="fa fa-external-link"></i></a>
+<? else: ?>
+		<h1>Info</h1>
+<? endif ?>
+		<div>Start:		<?= $start = date($timeFormat, strtotime($orderHunt->start)) . (!empty($tzStart) ? ' <small>Local: ' . $tzStart . '</small>' : '') ?></div>
+		<div>Finish:	<?= date($timeFormat, strtotime($orderHunt->finish)) . (!empty($tzFinish) ? ' <small>Local: ' . $tzFinish . '</small>' : '') ?></div>
+		<div>Public URL:	<a href="<?= $eurl; ?>" target="_blank"><?= $eurl; ?></a></div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<br>
+
+		<a href="javascript:;" data-start="<?= $start ?>" data-client="<?= $this->escaper->escapeHtmlAttr($client->first_name . ' ' . $client->last_name . ' (' . $client->company . ')') ?>" data-order="<?= $this->escaper->escapeHtmlAttr($order->name) ?>" data-title="<?= $this->escaper->escapeHtmlAttr($huntName) ?>" data-id="<?= $orderHunt->id ?>" class="btn btn-success sendpe">Post event mail</a>
+	</div>
+</div>
+<? if ($breakpoint !== false): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<br>
+<? if (count($breakpoint) === 1): ?>
+		<h2>Breakpoint (after q#<?= $breakpoint[0] ?>) is being released...</h2>
+<? else: ?>
+		<h2><?= count($breakpoint[1]) ?> Teams away from current breakpoint (after q#<?= $breakpoint[0] ?>)</h2>
+		<div style="overflow:auto;width:100%;max-height:90vh;-webkit-overflow-scrolling:touch">
+		<table class="table table-striped" id="breakpoint" style="color:#373737">
+			<thead>
+				<tr>
+					<th>Team</th>
+					<th>Current Question</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($breakpoint[1] as $teamId): $lb = $leaderboard[$teamMap[$teamId]]; ?>
+				<tr<?= isset($teamNames[$teamId]) ? " style=\"background-color:{$teamNames[$teamId][1]}\"" : '' ?>>
+					<td><?= $teamNames[$teamId][0] ?></td>
+					<td><?= $lb['question'] + $lb['skips'] ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+		</div>
+		<a href="javascript:;" data-id="<?= $orderHunt->id ?>" data-bp="<?= $breakpoint[0] ?>" class="btn btn-success forcebreak">Force breakpoint release</a>
+<? endif ?>
+	</div>
+</div>
+<? endif ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Leaderboard</h1>
+		<div style="overflow:auto;width:100%;max-height:90vh;-webkit-overflow-scrolling:touch">
+		<table class="table table-striped" id="leaderboard" style="color:#373737">
+			<thead>
+				<tr>
+					<th>Position</th>
+					<th>Team</th>
+					<th>Route</th>
+<? if ($hasEvents): ?>
+					<th class="hidden-xs hidden-sm">Hunt Score</th>
+<? endif ?>
+					<th>Total Score</th>
+<? if (!$hideHeader): ?>
+					<th>Players</th>
+<? endif ?>
+					<th class="hidden-xs hidden-sm">Correct Answers (+Hints)</th>
+					<th>Activation</th>
+					<th>First answer</th>
+					<th>Last answer</th>
+					<th>Total Time</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($leaderboard as $team): $teamMaxTime = $team['times'][empty($team['times'][1]) ? 0 : 1]; ?>
+				<tr<?= isset($teamNames[$team['id']]) ? " style=\"background-color:{$teamNames[$team['id']][1]}\"" : '' ?>>
+					<td><?= ($team['position'] < 10 ? "&nbsp;{$team['position']}&nbsp;" : $team['position']) ?></td>
+					<td><?= $team['name'] ?></td>
+<? if ($hideHeader): ?>
+					<td><?= $team['route'] ?></td>
+<? else: ?>
+					<td><a href="javascript:;" class="actionchange" data-id="<?= $team['id'] ?>" data-route="<?= $team['route_id'] ?>"><?= $team['route'] ?> <small><i class="fa fa-edit"></i></small></a></td>
+<? endif ?>
+<? if ($hasEvents): ?>
+					<td class="hidden-xs hidden-sm"><?= $team['huntscore'] ?></td>
+<? endif ?>
+					<td><?= $team['score'] ?></td>
+<? if (!$hideHeader): ?>
+					<td><?= $team['players'] ?></td>
+<? endif ?>
+					<td class="hidden-xs hidden-sm"><?= $team['question'] ?>/<?= $max ?> (Hints used - <?= $team['hints'] ?>; Skipped - <?= $team['skips'] ?>)</td>
+					<td><?= $team['activation'] ? date($timeFormat, strtotime($team['activation'])) : '' ?></td>
+					<td><?= $team['times'][0] ? date($timeFormat, strtotime($team['times'][0])) : '' ?></td>
+					<td><?= $team['times'][1] ? date($timeFormat, strtotime($team['times'][1])) : '' ?></td>
+					<td><?= /*$team['times'][1] ? (new DateTime($team['times'][1]))->diff(new DateTime($team['times'][0]))->format('%H:%I:%S') : ''*/$teamMaxTime ? (new DateTime($teamMaxTime))->diff(new DateTime($team['activation']))->format('%H:%I:%S') : '' ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+		</div>
+	</div>
+</div>
+<? if (!empty($logs)): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Logs</h1>
+		<table class="table table-striped" id="logs" style="color:#373737;">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Team</th>
+					<th>Question</th>
+					<th>Action</th>
+					<th>Answer</th>
+					<th>Score</th>
+					<th>Timestamp</th>
+				</tr>
+			</thead>
+			<tbody>
+<? $numLogs = count($logs); for ($l = count($logs); $l > 0; $l--):  $log = $logs[$l - 1]; ?>
+				<tr<?= isset($teamNames[$log['team_id']]) ? " style=\"background-color:{$teamNames[$log['team_id']][1]}\"" : '' ?>>
+					<td><?= $l ?></td>
+					<td><?= isset($teamNames[$log['team_id']]) ? $teamNames[$log['team_id']][0] : '' ?></td>
+					<td><a href="<?= $this->url->get('questions/edit/' . $log['question'][0]) ?>" target="_blank"><?= mb_strimwidth($log['question'][1], 0, 110, '...') ?></a></td>
+					<td><a href="javascript:;" class="actionchange" data-id="<?= $log['id'] ?>" data-action="<?= $log['action'] ?>"><?= $log['action'] == Answers::Answered ? 'Answered' : ($log['action'] == Answers::Skipped ? "Skipped" : "Answered with hint") ?></td>
+					<td><?= htmlspecialchars($log['answer']) ?></td>
+					<td><?= $log['scored'] . '/' . $log['question'][2] ?></td>
+					<td><?= date($timeFormat, strtotime($log['created'])) ?></td>
+				</tr>
+<? endfor ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<? endif ?>
+<? if ($hasEvents): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Custom Events</h1>
+		<table class="table table-striped" id="custom-events" style="color:#373737">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Team</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($customEvents as $e): ?>
+				<tr<?= isset($teamNames[$e['team_id']]) ? " style=\"background-color:{$teamNames[$e['team_id']][1]}\"" : '' ?>>
+					<td><?= htmlspecialchars($e['title']) ?></td>
+					<td><?= isset($teamNames[$e['team_id']]) ? $teamNames[$e['team_id']][0] : '' ?></td>
+					<td><?= $e['score'] ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<? endif ?>
+<? if (!empty($bonusQuestions)): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Bonus Questions</h1>
+		<table class="table table-striped" id="bonus-questions" style="color:#373737">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Question</th>
+					<th>Team</th>
+					<th>Player</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($bonusQuestions as $bq): ?>
+				<tr<?= isset($teamNames[$bq['team_id']]) ? " style=\"background-color:{$teamNames[$bq['team_id']][1]}\"" : '' ?>>
+					<td><?= $bq['id'] ?></td>
+					<td><?= $bq['question'] ?></td>
+					<td><?= isset($teamNames[$bq['team_id']]) ? $teamNames[$bq['team_id']][0] : '' ?></td>
+					<td><?= $bq['email'] . (is_null($bq['first_name']) ? '' :  (' ' . htmlspecialchars(trim($bq['first_name'] . ' ' . $bq['last_name'])))) ?></td>
+					<td><?= $bq['score'] ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<? endif ?>
+<? if (!empty($customQuestions)): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Custom Questions</h1>
+		<table class="table table-striped" id="custom-questions" style="color:#373737">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Question</th>
+					<th>Team</th>
+					<th>Score</th>
+					<th>Answer</th>
+					<th>Timestamp</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($customQuestions as $cq): ?>
+				<tr<?= isset($teamNames[$cq['team_id']]) ? " style=\"background-color:{$teamNames[$cq['team_id']][1]}\"" : '' ?>>
+					<td><?= $cq['id'] ?></td>
+					<td><?= $cq['question'] ?></td>
+					<td><?= isset($teamNames[$cq['team_id']]) ? $teamNames[$cq['team_id']][0] : '' ?></td>
+					<td><?= $cq['action'] == Answers::AnsweredWithHint ? floor($cq['score'] / 2) : $cq['score'] ?></td>
+					<td><?= htmlspecialchars($cq['answer']) ?></td>
+					<td><?= date($timeFormat, strtotime($cq['created'])) ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<? endif ?>
+<? if (!empty($surveyResults)): ?>
+			<div class="table-page">
+				<h2>Players Reviews</h2>
+				<div style="overflow:auto;width:100%;max-height:90vh;-webkit-overflow-scrolling:touch">
+				<table class="table table-striped" id="survey-results" style="color:#373737;min-width:580px">
+					<thead>
+						<tr>
+							<th>Player</th>
+							<th>How are you enjoying your hunt?</th>
+							<th>How much did this help you engage with your team?</th>
+							<th>Please give us a quick feedback. Thanks!</th>
+							<th>How much do you think your teamwork improved?</th>
+							<th width="180">Timestamp</th>
+						</tr>
+					</thead>
+					<tbody>
+<? $rating = [];
+$ratingQuestions = [
+	'How are you enjoying your hunt?',
+	'How much did this help you engage with your team?',
+	'How much do you think your teamwork improved?'
+];
+$textReviews = [];
+foreach ($ratingQuestions as $rq)
+	$rating[$rq] = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
+foreach ($surveyResults as $sr):
+	foreach ($rating as $q => $rq) {
+		if (isset($sr['questions'][$q]) && isset($rating[$q][(int)$sr['questions'][$q]]))
+			$rating[$q][(int)$sr['questions'][$q]]++;
+	}
+	if (isset($sr['questions']['Please give us a quick feedback. Thanks!']))
+		$textReviews[] = trim($sr['questions']['Please give us a quick feedback. Thanks!']);
+?>
+						<tr>
+							<td><?= htmlspecialchars(empty($sr['last_name']) && (empty($sr['first_name']) || $sr['first_name'] === 'Anonymous') ? $sr['email'] : trim($sr['first_name'] . ' ' . $sr['last_name'])) ?></td>
+							<td><?= isset($sr['questions']['How are you enjoying your hunt?']) ? htmlspecialchars($sr['questions']['How are you enjoying your hunt?']) : '' ?></td>
+							<td><?= isset($sr['questions']['How much did this help you engage with your team?']) ? htmlspecialchars($sr['questions']['How much did this help you engage with your team?']) : '' ?></td>
+							<td><?= isset($sr['questions']['Please give us a quick feedback. Thanks!']) ? htmlspecialchars($sr['questions']['Please give us a quick feedback. Thanks!']) : '' ?></td>
+							<td><?= isset($sr['questions']['How much do you think your teamwork improved?']) ? htmlspecialchars($sr['questions']['How much do you think your teamwork improved?']) : '' ?></td>
+							<td><?= $sr['created_at'] ?></td>
+						</tr>
+<? endforeach ?>
+					</tbody>
+				</table>
+				</div>
+				<div class="charts text-center">
+					<div class="row">
+<? foreach ($rating as $q => $rq): $total = array_sum($rq); ?>
+						<div class="col-md-6">
+							<h3><b><?= htmlspecialchars($q) ?></b></h3>
+							<img src="http://chart.apis.google.com/chart?cht=p3&chs=500x170&chdl=Rate+1+%28<?= number_format($rq[1]) ?>%29%7CRate+2+%28<?= number_format($rq[2]) ?>%29%7CRate+3+%28<?= number_format($rq[3]) ?>%29%7CRate+4+%28<?= number_format($rq[4]) ?>%29%7CRate+5+%28<?= number_format($rq[5]) ?>%29&chl=Rate+1+%28<?= round($rq[1] * 100 / $total) ?>%25%29%7CRate+2+%28<?= round($rq[2] * 100 / $total) ?>%25%29%7CRate+3+%28<?= round($rq[3] * 100 / $total) ?>%25%29%7CRate+4+%28<?= round($rq[4] * 100 / $total) ?>%25%29%7CRate+5+%28<?= round($rq[5] * 100 / $total) ?>%25%29&chco=EDC240|AFD8F8|9440ED|8CACC6|CB4B4B&chts=000000,18&chf=bg,s,FFFFFF00&chd=t:<?= implode($rq, ',') ?>" style="display:block;margin:10px auto;max-width:95%">
+						</div>
+<? endforeach ?>
+						<div class="col-md-6">
+							<h3><b>Please give us a quick feedback. Thanks!</b></h3>
+							<div style="overflow:auto;width:95%;max-width:500px;max-height:170px;margin:0 auto;-webkit-overflow-scrolling:touch">
+								<table class="table" id="survey-results-txt" style="color:#373737">
+									<tr>
+										<td style="background:transparent;border:0"><?= htmlspecialchars(implode($textReviews, ', ')) ?></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<? endif ?>
+<? $hasFiles = false;
+foreach ($files as $f) {
+	if (!empty($f)) {
+		$hasFiles = true;
+		break;
+	}
+}
+if ($hasFiles): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Photos</h1>
+		<div class="lightBoxGallery">
+<?
+	$first = true;
+	$hasChat = false;
+	$basePath = $this->config->application->frontUploadsDir->uri;
+	foreach ($files as $ohid => $ff):
+	foreach ($ff as $k => $f):
+		if ($f[1] != "chat") {
+			unset($files[$ohid][$k]);
+			if($first){ ?>
+			<div class="clearfix" style="position:relative">
+				<div class="pull-right">
+					<a href="/clients/order_hunts/zip/<?= $orderHunt->id ?>/0?mh=1&wm=0" class="btn btn-warning">Download</a>
+				</div>
+				<h3 style="text-align:left;padding:10px 0 10px 10px">Answers</h3>
+			</div>
+<?				$first = false;
+			}
+		} else {
+			$hasChat = true;
+			continue;
+		}
+		$url = $basePath . $ohid . '/' . $f[0];
+?>
+			<a href="<?= $url ?>" data-gallery=""><img src="<?= preg_replace('/\.(jpg|png|gif)$/', '.thumbnail.$1', $url) ?>"><br><?= isset($teamNames[$f[1]]) ? $teamNames[$f[1]][0] : '' ?><br><small><?= date($timeFormat, $f[2]) ?></small></a>
+<? endforeach; endforeach; if ($hasChat): ?>
+			<div class="clearfix" style="position:relative<?= $first ? '' : ';margin-top:25px' ?>">
+				<div class="pull-right">
+					<a href="/clients/order_hunts/zip/<?= $orderHunt->id ?>/1?mh=1&wm=0" class="btn btn-warning">Download</a>
+				</div>
+				<h3 style="text-align:left;padding:10px 0 10px 10px">Chat</h3>
+			</div>
+<? foreach ($files as $ohid => $ff): foreach ($ff as $k => $f): $url = $basePath . $ohid . '/' . $f[0]; ?>
+			<a href="<?= $url ?>" data-gallery=""><img src="<?= preg_replace('/\.(jpg|png|gif)$/', '.thumbnail.$1', $url) ?>"><br><small><?= date($timeFormat, $f[2]) ?></small></a>
+<? endforeach; endforeach; endif ?>
+			<div id="blueimp-gallery" class="blueimp-gallery">
+				<div class="slides"></div>
+				<h3 class="title"></h3>
+				<a class="prev">‹</a>
+				<a class="next">›</a>
+				<a class="close">×</a>
+				<a class="play-pause"></a>
+				<ol class="indicator"></ol>
+			</div>
+		</div>
+	</div>
+</div>
+<? endif ?>
+<? if (!empty($map)): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Map</h1>
+		<div id="map<?= $orderHunt->id ?>" class="leaders-map" data-map="<?= $this->escaper->escapeHtmlAttr(json_encode($map, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) ?>"></div>
+		<br>
+	</div>
+</div>
+<? endif ?>
+
+<? if (!$hideHeader): ?>
+
+<? if (count($players)): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Players</h1>
+		<table class="table table-striped" id="players-list" style="color:#373737;">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Team</th>
+					<th>Email</th>
+					<th>First name</th>
+					<th>Last name</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($players as $player): ?>
+				<tr>
+					<td><?= $player->id ?></td>
+					<td><?= isset($teamNames[$player->team_id]) ? $teamNames[$player->team_id][0] : '' ?></td>
+					<td><?= $player->email ?></td>
+					<td><?= is_null($player->first_name) ? '' : htmlspecialchars($player->first_name) ?></td>
+					<td><?= is_null($player->last_name) ? '' : htmlspecialchars($player->last_name) ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<? endif ?>
+<? if (!empty($wrongAnswers)): ?>
+<div class="row">
+	<div class="col-sm-12">
+		<h1>Wrong Answers</h1>
+		<table class="table table-striped" id="players-list" style="color:#373737;">
+			<thead>
+				<tr>
+					<th>Player</th>
+					<th>Team</th>
+					<th>Question</th>
+					<th>Answer</th>
+					<th>Hint</th>
+					<th>Timestamp</th>
+				</tr>
+			</thead>
+			<tbody>
+<? foreach ($wrongAnswers as $wa): ?>
+				<tr>
+					<td><?= $wa['player_id'] . ' (' . $wa['email'] . ')' ?></td>
+					<td><?= isset($teamNames[$wa['team_id']]) ? $teamNames[$wa['team_id']][0] : '' ?></td>
+					<td><a href="<?= $this->url->get('questions/edit/' . $wa['question_id']) ?>" target="_blank"><?= mb_strimwidth($wa['question'], 0, 110, '...') ?></a></td>
+					<td><?= htmlspecialchars($wa['answer']) ?></td>
+					<td><?= $wa['hint'] ? 'Yes' : 'No' ?></td>
+					<td><?= date($timeFormat, strtotime($wa['created'])) ?></td>
+				</tr>
+<? endforeach ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<? endif ?>
+
+<? endif ?>
+</div>

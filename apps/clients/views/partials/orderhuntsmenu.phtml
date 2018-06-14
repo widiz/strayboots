@@ -1,0 +1,24 @@
+
+<div class="container orderhunt-menu">
+	<div>
+		<?= $this->tag->linkTo(['teams/' . $orderHunt->id, '<i class="fa fa-users"></i><br>Teams', 'class' => $controllerName == 'teams' ? 'active' : '']) ?>
+	</div>
+	<div>
+		<?= $this->tag->linkTo(['order_hunts/customize/' . $orderHunt->id, '<i class="fa fa-file-text-o"></i><br>Customize', 'class' => $controllerName == 'order_hunts' && $actionName == 'customize' ? 'active' : '']) ?>
+	</div>
+	<div>
+		<?= $this->tag->linkTo(['chat/' . $orderHunt->id, '<i class="fa fa-comments-o"></i><br>Chat', 'class' => $controllerName == 'chat' ? 'active' : '']) ?>
+	</div>
+	<div class="r2">
+		<?= $this->tag->linkTo(['bonus/' . $orderHunt->id, '<i class="fa fa-lightbulb-o"></i><br>Bonus', 'class' => $controllerName == 'bonus' ? 'active' : '']) ?>
+	</div>
+	<div class="r2">
+		<?= $this->tag->linkTo(['custom/' . $orderHunt->id, '<i class="fa fa-cubes"></i><br>Custom', 'class' => $controllerName == 'custom' ? 'active' : '']) ?>
+	</div>
+	<div class="r2">
+		<?= $this->tag->linkTo(['order_hunts/downloadPDF/' . $orderHunt->id, '<i class="fa fa-file-pdf-o"></i><br>Instructions']) ?>
+	</div>
+	<div class="r2">
+		<?= $this->tag->linkTo(['order_hunts/summary/' . $orderHunt->id, '<i class="fa fa-bar-chart"></i><br>Summary', 'class' => $controllerName == 'order_hunts' && $actionName == 'summary' ? 'active' : '']) ?>
+	</div>
+</div>

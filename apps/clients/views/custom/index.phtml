@@ -1,0 +1,63 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<div class="container">
+<? $orderName = htmlspecialchars($orderHunt->Order->name);
+	$huntName = htmlspecialchars($orderHunt->Hunt->name); ?>
+		<h1><?= $orderName . ' // ' . $huntName . ' (' . date($dateFormat, strtotime($orderHunt->start)) ?>)</h1>
+		<ol class="breadcrumb">
+			<li>
+				<?= $this->tag->linkTo(['', "Home"]) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['orders', "My Orders"]) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['order_hunts/' . $orderHunt->order_id, $orderName . ' Hunts']) ?>
+			</li>
+			<li class="active">
+				<?= $this->tag->linkTo(['custom/' . $orderHunt->id, "<b>Custom</b>"]) ?>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<? $this->partial('partials/orderhuntsmenu') ?>
+
+<div class="container">
+
+	<?= $this->getContent() ?>
+
+	<div class="note">
+		<p>
+			Custom questions give you the opportunity to add your own touch to your team’s event!<br>
+			<br>
+			Questions that you add here will be added to every route at the same order and allows you to incorporate any challenges, missions, or questions that are non-location based, to all of your teams.<br>
+			This is the place to add themed questions, funny challenges, or any personal touch that you want to give to your event.<br>
+			You can add up to 5 Custom Questions to your event.<br>
+			<br>
+			Feel free to contact us at if you need any help or any examples.
+		</p>
+	</div>
+
+	<?php if ($removable && !$tooMany) echo $this->tag->linkTo(["custom/new/" . $orderHunt->id, 'Add a new custom question', 'class' => 'btn btn-primary']) . '<br><br>' ?>
+
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-custom table-options" id="custom-list">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>Question</th>
+				<th>Score</th>
+				<th>Actions</th>
+			</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">window.orderHuntId=<?= $orderHunt->id ?>;window.removable=<?= $removable ? 'true' : 'false' ?></script>

@@ -1,0 +1,77 @@
+<? if ($completed): ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var d = new Date();
+    d.setTime(d.getTime() + (3 * 864e5));
+    document.cookie = 'survey<?= $surveyInfo[4] ?>p<?= $playerId ?>=1;expires=' + d.toUTCString() + ';path=/';
+    setTimeout(function(){
+    	document.location.href = '/play';
+    }, 200);
+</script>
+</body>
+</html>
+<? else: ?>
+		<div class="content-wrapper section-wrapper pmessagebox" id="playground">
+			<div class="container">
+				<h1 style="font-size:30px;line-height:36px;margin-bottom:20px"><?= $t->_('How\'s it going so far?') ?></h1>
+				<div class="question" style="text-align:center">
+					<?= $t->_('Take a breather and fill out this quick form') ?>
+					<br><br>
+<div id="widizSurvey"></div>
+<br><br><a class="btn btn-lg btn-success" href="?completed=y&skip=y" id="scountdown" style="display:none">45</a>
+<script src="https://app.widiz.com/plugins2/survey/survey.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+document.addEventListener("DOMContentLoaded", function(){
+	widizSurvey("RtSsk8zmv2XC6rmB1BTl6r1XhYdfpC9M", function(){
+		setSurveyConfig("<?= $this->escaper->escapeHtmlAttr($surveyInfo[0]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[1]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[2]) ?>", <?= $surveyInfo[3] ?>, '/play/survey?completed=y');
+	});
+});
+setTimeout(function(){
+	var scountdown = document.getElementById('scountdown');
+	try {
+		scountdown.innerText = ' ' + 'Skip'._() + ' ';
+	} catch(E) {
+		scountdown.innerText = ' Skip ';
+	}
+	try {
+		$(scountdown).fadeIn();
+	} catch(E) {
+		scountdown.style.display = 'inline-block';
+	}
+}, 6e4);
+<? /*(function(scountdown, seconds){
+	var i;
+	if (document.addEventListener) {
+		scountdown.addEventListener('click', function(e){
+			if (scountdown.getAttribute('disabled')) {
+				e.preventDefault();
+				return false;
+			}
+		}, false);
+	}
+	i = setInterval(function(){
+		if (--seconds > 0) {
+			scountdown.setAttribute('disabled', 'disabled');
+			scountdown.innerText = seconds;
+		} else {
+			scountdown.removeAttribute('disabled');
+			scountdown.setAttribute('href', '?completed=y');
+			try {
+				scountdown.innerText = ' ' + 'Skip'._() + ' ';
+			} catch(E) {
+				scountdown.innerText = ' Skip ';
+			}
+			clearInterval(i);
+		}
+	}, 1e3);
+})(document.getElementById('scountdown'), 45); */ ?>
+</script>
+				</div>
+			</div>
+		</div>
+<? endif ?>

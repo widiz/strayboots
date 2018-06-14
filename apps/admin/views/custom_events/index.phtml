@@ -1,0 +1,44 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<h1>
+		Custom Events / <span style="font-size:80%"><?= $this->tag->linkTo(["order_hunts/" . $orderHunt->order_id, 'order hunt #' . $orderHunt->id]) ?></span>
+	</h1>
+	<p>
+		<a href="<?= $this->url->get("custom_events/new/" . $orderHunt->id) ?>" class="btn btn-success">Add a new custom event</a>
+	</p>
+</div>
+
+<?= $this->getContent() ?>
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-custom table-options" id="custom-events-list">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Title</th>
+				<th>Team</th>
+				<th>Score</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<? foreach ($data as $d): ?>
+			<tr>
+				<td><?= $d['id'] ?></td>
+				<td><?= htmlspecialchars($d['title']) ?></td>
+				<td><?= is_null($d['team_id']) ? '' : ($d['team_id'] . ' (' . $d['teamname'] . ')') ?></td>
+				<td><?= $d['score'] ?></td>
+				<td>
+					<a href="/admin/custom_events/edit/<?= $d['id'] ?>" class="btn btn-warning">Edit</a> 
+					<a href="/admin/custom_events/delete/<?= $d['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+				</td>
+			</tr>
+			<? endforeach ?>
+		</tbody>
+	</table>
+</div>

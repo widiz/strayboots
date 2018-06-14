@@ -1,0 +1,1 @@
+./node_modules/.bin/nightwatch -e staging --config nightwatchjs.win.json test.js

@@ -1,0 +1,86 @@
+
+<? if ($loggedIn): ?>
+<? if (isset($teamStatus)): ?>
+		<div class="content-wrapper" id="welcome-screen">
+			<h1><?= $t->_('Welcome') ?></h1>
+			<div style="padding:0 15px;text-align:center">
+				<p><?= $t->_('Check out the buttons below and click here when ready to roll') ?></p>
+			</div>
+			<a href="javascript:;" class="subxbtn"><?= $t->_('Let\'s Start!') ?></a>
+			<div class="container clearfix">
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-2">
+						<div>
+							<b class="second_color"><?= $t->_('Home') ?></b>
+							<p><?= $t->_('Follow your clues') ?></p>
+							<div class="line">
+								<div></div>
+							</div>
+							<i class="arrow"></i>
+						</div>
+					</div>
+<? if (isset($firebase['appLoc']['orderHunt']) && $firebase['appLoc']['orderHunt'] != 1850): //loyalty ?>
+					<div class="col-sm-2">
+						<div>
+							<b class="second_color" style="position:absolute;left:50%;margin-left:-59px"><?= $t->_('Leaderboard') ?></b>
+							<b>&nbsp; &nbsp;</b>
+							<p><?= $t->_('Scope out the competition') ?></p>
+							<div class="line h">
+								<div></div>
+							</div>
+							<i class="arrow"></i>
+						</div>
+					</div>
+<? endif //loyalty ?>
+					<div class="col-sm-2">
+						<div>
+							<b class="second_color"><?= $t->_('Map') ?></b>
+							<p><?= $t->_('Chart your adventure') ?></p>
+							<div class="line">
+								<div></div>
+							</div>
+							<i class="arrow"></i>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div>
+							<b class="second_color"><?= $t->_('Chat') ?></b>
+							<p><?= $t->_('Chat with other teams, see what\'s going on') ?></p>
+							<div class="line h">
+								<div></div>
+							</div>
+							<i class="arrow"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<? endif ?>
+		<footer class="navbar navbar-fixed-bottom">
+			<div class="container">
+				<div class="row">
+<? if (isset($teamStatus)): $colSize = 2; ?>
+					<div class="col-sm-4">
+						<a id="team-name"><?= $teamStatus['name'] ?></a>
+					</div>
+<? else: $colSize = 3; endif; ?>
+					<div class="col-sm-<?= $colSize ?>">
+						<a href="<?= $this->url->get('/') ?>"<?= $controllerName == 'index' || $controllerName == 'play' ? ' class="active"' : '' ?>><i class="icn home"></i></a>
+					</div>
+<? if (isset($firebase['appLoc']['orderHunt']) && $firebase['appLoc']['orderHunt'] != 1850): //loyalty ?>
+					<div class="col-sm-<?= $colSize ?>">
+						<a href="<?= $this->url->get('leaderboard') ?>"<?= $controllerName == 'leaderboard' ? ' class="active"' : '' ?>><i class="icn leaderboard"></i></a>
+					</div>
+<? endif //loyalty ?>
+					<div class="col-sm-<?= $colSize ?>">
+						<a href="<?= $this->url->get('map') ?>"<?= $controllerName == 'map' ? ' class="active"' : '' ?>><i class="icn map"></i></a>
+					</div>
+					<div  class="col-sm-<?= $colSize ?>">
+						<a href="<?= $this->url->get('chat') ?>"<?= $controllerName == 'chat' ? ' class="active"' : '' ?>><i class="icn chat"><div class="beeper"></div></i></a>
+					</div>
+					<? /*<a href="<?= $this->url->get('index/logout') ?>"><i class="fa fa-times"></i></a> */ ?>
+				</div>
+			</div>
+		</footer>
+<? endif; ?>

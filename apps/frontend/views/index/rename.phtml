@@ -1,0 +1,16 @@
+		<div class="content-wrapper section-wrapper">
+			<div class="container">
+				<h1><?= $t->_('Rename Team') ?></h1>
+				<div class="col-sm-12">
+					<div id="leaderboard">
+						<?= $this->tag->form(['index/rename']) ?>
+
+							<?= $this->tag->textField(['name', 'size' => 30, 'class' => 'form-control', 'id' => 'nameFinish']) ?>
+							<br>
+							<?= $this->tag->submitButton([$t->_('Save'), 'class' => 'submit subxbtn btn-sx']) ?>
+
+						<?= $this->tag->endForm() ?>
+					</div>
+				</div>
+			</div>
+		</div>

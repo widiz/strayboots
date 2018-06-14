@@ -1,0 +1,28 @@
+
+<div class="page-header">
+	<div class="container">
+		<h1 style="margin-bottom:0">Welcome To Strayboots</h1>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h3 style="margin:25px 0">My Products</h3>
+			<?= $this->tag->linkTo(['products/new', 'Add a new product', 'class' => 'btn btn-primary']) ?><br><br>
+			<div class="table-responsive my-products">
+				<table class="table table-striped table-hover table-custom table-options" id="products-list">
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Price</th>
+						<th>Created</th>
+						<th>Actions</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

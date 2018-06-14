@@ -1,0 +1,59 @@
+
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav metismenu" id="side-menu">
+					<li class="nav-header">
+						<div class="logo-element">
+							<a href="<?= $this->url->get('') ?>">Strayboots</a>
+						</div>
+					</li>
+					<li<? if ($controllerName == 'index')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('index') ?>"><i class="fa fa-globe"></i> <span class="nav-label">Home</span></a>
+					</li>
+					<li<? if (in_array($controllerName, ['clients', 'orders', 'order_hunts']))echo ' class="active"' ?>>
+						<a href="#"><i class="fa fa-users"></i> <span class="nav-label">Clients</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li<? if ($controllerName == 'clients')echo ' class="active"' ?>><a href="<?= $this->url->get('clients') ?>">Clients</a></li>
+							<li<? if ($controllerName == 'orders' || $controllerName == 'order_hunts')echo ' class="active"' ?>><a href="<?= $this->url->get('orders') ?>">Orders</a></li>
+						</ul>
+					</li>
+					<li<? if ($controllerName == 'suppliers')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('suppliers') ?>"><i class="fa fa-shopping-bag"></i> <span class="nav-label">Suppliers</span></a>
+					</li>
+					<li<? if ($controllerName == 'tags')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('tags') ?>"><i class="fa fa-tags"></i> <span class="nav-label">Tags</span></a>
+					</li>
+					<li<? if ($controllerName == 'login_pages')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('login_pages') ?>"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Login Pages</span></a>
+					</li>
+					<li<? if (in_array($controllerName, ['countries', 'cities']))echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('countries') ?>"><i class="fa fa-globe"></i> <span class="nav-label">Countries/Cities</span></a>
+					</li>
+					<li<? if (in_array($controllerName, ['point_types', 'points']))echo ' class="active"' ?>>
+						<a href="#"><i class="fa fa-map-marker"></i> <span class="nav-label">Points</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li<? if ($controllerName == 'point_types')echo ' class="active"' ?>><a href="<?= $this->url->get('point_types') ?>">Point types</a></li>
+							<li<? if ($controllerName == 'points')echo ' class="active"' ?>><a href="<?= $this->url->get('points') ?>">Points</a></li>
+						</ul>
+					</li>
+					<li<? if (in_array($controllerName, ['question_types', 'questions']))echo ' class="active"' ?>>
+						<a href="#"><i class="fa fa-question"></i> <span class="nav-label">Questions</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li<? if ($controllerName == 'question_types')echo ' class="active"' ?>><a href="<?= $this->url->get('question_types') ?>">Question types</a></li>
+							<li<? if ($controllerName == 'questions')echo ' class="active"' ?>><a href="<?= $this->url->get('questions') ?>">Questions</a></li>
+						</ul>
+					</li>
+					<li<? if (in_array($controllerName, ['hunt_types', 'hunts']))echo ' class="active"' ?>>
+						<a href="#"><i class="fa fa-gamepad"></i> <span class="nav-label">Hunts</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li<? if ($controllerName == 'hunt_types')echo ' class="active"' ?>><a href="<?= $this->url->get('hunt_types') ?>">Hunt types</a></li>
+							<li<? if ($controllerName == 'hunts')echo ' class="active"' ?>><a href="<?= $this->url->get('hunts') ?>">Hunts</a></li>
+						</ul>
+					</li>
+					<li<? if ($controllerName == 'support')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('support') ?>"><i class="fa fa-life-ring"></i> <span class="nav-label">Support</span></a>
+					</li>
+				</ul>
+
+			</div>
+		</nav>

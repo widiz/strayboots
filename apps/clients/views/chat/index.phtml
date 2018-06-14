@@ -1,0 +1,38 @@
+<div id="chatpage">
+	<div class="page-header">
+		<div class="container">
+<? $orderName = htmlspecialchars($orderHunt->Order->name);
+	$huntName = htmlspecialchars($orderHunt->Hunt->name); ?>
+			<h1 style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden"><?= $orderName . ' // ' . $huntName . ' (' . date($dateFormat, strtotime($orderHunt->start)) ?>)</h1>
+			<ol class="breadcrumb">
+				<li>
+					<?= $this->tag->linkTo(['', "Home"]) ?>
+				</li>
+				<li>
+					<?= $this->tag->linkTo(['orders', "My Orders"]) ?>
+				</li>
+				<li>
+					<?= $this->tag->linkTo(['order_hunts/' . $orderHunt->order_id, $orderName . ' Hunts']) ?>
+				</li>
+				<li class="active">
+					<?= $this->tag->linkTo(['chat/' . $orderHunt->id, "<b>Chat</b>"]) ?>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<? $this->partial('partials/orderhuntsmenu') ?>
+
+	<div id="chat">
+		<div id="chat-textbox" class="clearfix">
+			<div class="upload-progress"></div>
+			<textarea></textarea>
+			<button type="button" class="chat-button">Post</button>
+			<div class="upload-container">
+				<i></i>
+				<input id="chat-files" type="file" name="files[]" multiple="multiple" accept="image/*">
+			</div>
+		</div>
+		<div class="app_loading"></div>
+	</div>
+</div>

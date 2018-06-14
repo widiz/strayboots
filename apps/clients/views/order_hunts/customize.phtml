@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<div class="container">
+<? $orderName = htmlspecialchars($orderHunt->Order->name);
+	$huntName = htmlspecialchars($orderHunt->Hunt->name); ?>
+		<h1><?= $orderName . ' // ' . $huntName . ' (' . date($dateFormat, strtotime($orderHunt->start)) ?>)</h1>
+		<ol class="breadcrumb">
+			<li>
+				<?= $this->tag->linkTo(['', "Home"]) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['orders', "My Orders"]) ?>
+			</li>
+			<li>
+				<?= $this->tag->linkTo(['order_hunts/' . $orderHunt->order_id, $orderName . ' Hunts']) ?>
+			</li>
+			<li class="active">
+				<?= $this->tag->linkTo(['order_hunts/customize/' . $orderHunt->id, "<b>Customize</b>"]) ?>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<? $this->partial('partials/orderhuntsmenu') ?>
+
+<div class="container">
+
+	<?= $this->getContent() ?>
+
+	<?php
+		echo $this->tag->form([
+			"order_hunts/save",
+			"autocomplete" => "off",
+			"class" => "form-horizontal customize-form"
+		]);
+	?>
+
+	<div class="form-group">
+		<div class="col-sm-6">
+			<h4>Start message</h4>
+			<?= $this->tag->textArea(["start_msg", "size" => 30, "class" => "form-control", "id" => "fieldStartMsg"]) ?>
+			<p>Welcome screen message will show when the hunt starts.<br>
+			Default Message: "Welcome to your scavenger hunt adventure. We hope you brought your wit and a sharp eye. Best of luck!"</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<h4>End message</h4>
+			<?= $this->tag->textArea(["end_msg", "size" => 30, "class" => "form-control", "id" => "fieldEndMsg"]) ?>
+			<p>End screen message will show when the team finishes the hunt.<br>
+			Default Message: "You've completed your scavenger hunt! Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots"</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-6">
+			<h4>Timeout message</h4>
+			<?= $this->tag->textArea(["timeout_msg", "size" => 30, "class" => "form-control", "id" => "fieldTimeoutMsg"]) ?>
+			<p>Timeout message will show to teams that didn't finish when the the hunt is over.<br>
+			Default Message: "Meet your group at your end location to hear the official results! Hope you had fun - be sure to spread the word about Strayboots!"</p>
+		</div>
+	</div>
+
+	<?= $this->tag->hiddenField("id") ?>
+
+	<div class="form-group">
+		<div class="col-sm-12">
+			<?= $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+		</div>
+	</div>
+
+	<?= $this->tag->endForm() ?>
+
+</div>
+

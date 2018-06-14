@@ -1,0 +1,2 @@
+cd /var/www/staging/;
+tar --exclude='*/public/template/*' --exclude='*/backup.sh' --exclude='*/clilogs/*' --exclude='*/logs/*' --exclude='*/cache/*' --exclude='*/tmp/*' --exclude='*.tar.gz' -czvf /var/www/STG$(date +%F).tar.gz newplay
