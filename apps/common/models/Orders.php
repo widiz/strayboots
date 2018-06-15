@@ -121,9 +121,9 @@ class Orders extends \Phalcon\Mvc\Model
 		if (isset($customize['background_color']))
 			$huntCss .= 'body{background-color:' . $customize['background_color'] . ' !important;background-image:none}';
 		if (isset($customize['main_color']))#header-score>div>div,
-			$huntCss .= '#faq,.navbar-default .navbar-nav>li>a.endtimer-link:hover,.navbar-default .navbar-nav>li>a,#navbar .visible-xs,#header-score>i,footer a,footer a:hover,#playground .question,.content-wrapper h1,.content-wrapper h3,.content-wrapper h4{color:' . $customize['main_color'] . '}';
-		if (isset($customize['second_color']))
-			$huntCss .= '#playground h2,#header-score>div>span,b.second_color,#bq-timer h2,#bq-timer .sec,#playground .hint-title,#playground .hint{color:' . $customize['second_color'] . '}';
+			$huntCss .= '#faq,.navbar-default .navbar-nav>li>a.endtimer-link:hover,.navbar-default .navbar-nav>li>a,#navbar .visible-xs,#header-score>i,footer a,footer a:hover,#bonusground .question,#playground .question,.content-wrapper h1,.content-wrapper h2,.content-wrapper h3,.content-wrapper h4{color:' . $customize['main_color'] . '}';
+		if (isset($customize['second_color']))//,#bq-timer h2,#bq-timer .sec
+			$huntCss .= '#playground h2,#header-score>div>span,b.second_color,#playground .hint-title,#playground .hint{color:' . $customize['second_color'] . '}';
 		if (file_exists($uploadBase . 'header.png') && !isset($removedImages['header']))
 			$huntCss .= '.navbar-default{background-image:url(' . $paths->uri . 'order.' . $this->id . '.header.png)}';
 		if (isset($customize['custom_css']))
