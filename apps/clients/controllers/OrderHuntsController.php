@@ -258,7 +258,7 @@ class OrderHuntsController extends \ControllerBase
 
 		$teamsStatus = $orderHunt->getTeamsStatus();
 
-		$logs = $teamHints = $teamNames = $teamAns = $teamPos = $tids = [];
+		$logs = $teamSkips = $teamHints = $teamNames = $teamAns = $teamPos = $tids = [];
 		$colors = \Colors\RandomColor::many(count($teamsStatus), ['luminosity' => 'light']);
 		$orderHunts = [$orderHunt->id => 0];
 
@@ -309,6 +309,10 @@ class OrderHuntsController extends \ControllerBase
 					$scored = floor($a['score'] / 2);
 				} else if ($a['action'] == Answers::Skipped) {
 					$scored = 0;
+					if (isset($teamSkips[$a['team_id']]))
+						$teamSkips[$a['team_id']]++;
+					else
+						$teamSkips[$a['team_id']] = 1;
 				} else {
 					$scored = $a['score'];
 				}
@@ -334,7 +338,11 @@ class OrderHuntsController extends \ControllerBase
 					else
 						$teamHints[$cq['team_id']] = 1;
 				} else if ($cq['action'] == Answers::Skipped) {
-					unset($customQuestions[$i]);
+					unset($customQuestions[$i]);			
+					if (isset($teamSkips[$cq['team_id']]))
+						$teamSkips[$cq['team_id']]++;
+					else
+						$teamSkips[$cq['team_id']] = 1;
 				}
 			}
 			$this->view->customQuestions = $customQuestions;
@@ -357,6 +365,7 @@ class OrderHuntsController extends \ControllerBase
 			$teamsStatus[$t]['lastAnswer'] = isset($teamAns[$team['id']]) ? $teamAns[$team['id']] : '';
 			//$teamsStatus[$t]['times'] = isset($teamAns[$team['id']]) ? $teamAns[$team['id']] : ['', ''];
 			$teamsStatus[$t]['hints'] = isset($teamHints[$team['id']]) ? $teamHints[$team['id']] : 0;
+			$teamsStatus[$t]['skips'] = isset($teamSkips[$team['id']]) ? $teamSkips[$team['id']] : 0;
 		}
 		$this->view->max = $max;
 		$this->view->leaderboard = $teamsStatus;

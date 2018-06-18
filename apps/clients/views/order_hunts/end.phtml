@@ -63,7 +63,7 @@ $hasEvents = !empty($customEvents);
 							<td class="hidden-xs hidden-sm"><?= $team['huntscore'] ?></td>
 <? endif ?>
 							<td><?= $team['score'] ?></td>
-							<td class="hidden-xs hidden-sm"><?= $team['question'] ?>/<?= $max ?> (Hints used - <?= $team['hints'] ?>)</td>
+							<td class="hidden-xs hidden-sm"><?= $team['question'] ?>/<?= $max ?> (Hints used - <?= $team['hints'] ?>; Skipped - <?= $team['skips'] ?>)</td>
 							<td><?= /*$team['times'][1] ? (new DateTime($team['times'][1]))->diff(new DateTime($team['times'][0]))->format('%H:%I:%S') : ''*/$team['lastAnswer'] ? (new DateTime($team['lastAnswer']))->diff(new DateTime($team['activation']))->format('%H:%I:%S') : '' ?></td>
 						</tr>
 <? endforeach ?>
