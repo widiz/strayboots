@@ -26,12 +26,13 @@ class OrderHuntMailBase
 	public function send(callable $sendMail, $email = null)
 	{
 		if (!is_callable($sendMail))
-			throw new Exception("SendMail isn't callable", 792);
-		$mail = call_user_func($sendMail, is_null($email) ? $this->client->email : $email, $this->title, $this->text, $this->html, [], !is_null($email) ? [] : [
-			'bcc' => 'ariel@safronov.co.il,karen@strayboots.com,madison@strayboots.com,support@strayboots.com,077cca161d@invite.trustpilot.com' .
-			($email ? '' : (count($this->cc) ? ',' . implode(',', $this->cc) : ''))
+			throw new Exception('SendMail isn\'t callable', 792);
+		$mail1 = call_user_func($sendMail, is_null($email) ? $this->client->email : $email, $this->title, $this->text, $this->html, [], !is_null($email) ? [] : [
+			'cc' => '077cca161d@invite.trustpilot.com',
+			'bcc' => implode(',', $this->cc)
 		]);
-		return is_object($mail) && isset($mail->http_response_code) && $mail->http_response_code == 200 ? true : $mail;
+		$mail2 = is_null($email) ? call_user_func($sendMail, 'ariel@safronov.co.il,karen@strayboots.com,madison@strayboots.com,support@strayboots.com', $this->title, $this->text, $this->html) : true;
+		return $mail1 && $mail2;
 	}
 
 	/**

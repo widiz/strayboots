@@ -210,20 +210,32 @@ class ControllerBase extends Phalcon\Mvc\Controller
 		return false;
 	}
 
-	public function sendMail($to, $subject, $text = '', $html = null, $attachments = [], $options = []) {
-		try {
-			return $this->mailer->sendMessage($this->config->mailgun->domain, [
-				'from'		=> $this->config->mailgun->from, 
-				'to'		=> $to,
-				'subject'	=> $subject,
-				'text'		=> $text,
-				'html'		=> $html
-			] + $options, [
-				'attachment' => $attachments
-			]);
-		} catch(\Exception $e) {
-			return false;
+	public function sendMail($to, $subject, $text = '', $html = null, $attachments = [], $options = [], $attachmentsOpts = []) {
+		if (!is_array($to))
+			$to = explode(',', $to);
+		if (isset($options['bcc'])) {
+			$to = array_unique(array_merge($to, is_array($options['bcc']) ? $options['bcc'] : explode(',', $options['bcc'])));
+			unset($options['bcc']);
 		}
+		ignore_user_abort(true);
+		set_time_limit(120);
+		$success = true;
+		foreach ($to as $e) {
+			try {
+				$success = $this->mailer->sendMessage($this->config->mailgun->domain, [
+					'from'		=> $this->config->mailgun->from, 
+					'to'		=> $e,
+					'subject'	=> $subject,
+					'text'		=> $text,
+					'html'		=> $html
+				] + $options, [
+					'attachment' => $attachments
+				] + $attachmentsOpts) && $success;
+			} catch(\Exception $e) {
+				$success =  false;
+			}
+		}
+		return /*$success*/ true;
 	}
 
 	/**
