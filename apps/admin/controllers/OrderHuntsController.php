@@ -718,6 +718,23 @@ class OrderHuntsController extends \ControllerBase
 		$pdf->downloadPDF();
 	}
 
+	public function viewPDFAction($id = 0)
+	{
+		if ($this->requireUser())
+			return true;
+
+		$orderHunt = OrderHunts::findFirstByid((int)$id);
+		if (!$orderHunt) {
+			$this->flash->error('Order was not found');
+			$this->response->redirect('orders');
+
+			return;
+		}
+
+		$pdf = new OrderHuntPDF($orderHunt, $this->view->timeFormat);
+		$pdf->displayPDF();
+	}
+
 	public function mailAction($id = 0)
 	{
 		if ($this->requireUser())

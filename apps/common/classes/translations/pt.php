@@ -44,8 +44,7 @@ We hope you had an amazing time on your Hunt yesterday! We loved your creative p
 
 Give a shout out to your winners and recap your Hunt here (%url%), and give the winning teams a shoutout on Facebook! (https://www.facebook.com/Strayboots/?fref=ts) We would love to see any photos from your adventures, and if you happen to post them on Instagram, don’t forget to use the hashtags #strayboots and #strayonthego.
 
-Let us know what you thought! Here's our quick survey to help us improve your experience for next time.
-https://www.surveymonkey.com/r/posthunt
+Let us know what you thought! We sent you a quick survey from TrustPilot to help us improve your experience for next time. In case you missed it, here's the link - https://www.trustpilot.com/evaluate/strayboots.com
 
 We hope you enjoyed your Hunt and look forward to working with you in the future.
 
@@ -54,7 +53,7 @@ Until next time!
 EOF
 ,
 	'DanielleOrderHuntPostEventPlayersHTML' => <<<EOF
-<table cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:100%;margin:0 auto">
+<table cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:100%;margin:0 auto;font-size:16px">
 <tr>
 <td>
 <div style="text-align:center">
@@ -66,9 +65,9 @@ Hi!<br>
 <br>
 We hope you had an amazing time on your Hunt yesterday! We loved your creative photos and competitive spirit.<br>
 <br>
-Give a shout out to your winners and recap your Hunt <a href="%url%">here</a>, and give the winning teams a shoutout on <a href="https://www.facebook.com/Strayboots/?fref=ts">Facebook</a>! We would love to see any photos from your adventures, and if you happen to post them on Instagram, don’t forget to use the hashtags #strayboots and #strayonthego.<br>
+Give a shout out to your winners and recap your Hunt <a href="%url%" style="font-weight: bold;">here</a>, and give the winning teams a shoutout on <a href="https://www.facebook.com/Strayboots/?fref=ts">Facebook</a>! We would love to see any photos from your adventures, and if you happen to post them on Instagram, don’t forget to use the hashtags #strayboots and #strayonthego.<br>
 <br>
-Let us know what you thought! <a href="https://www.surveymonkey.com/r/posthunt">Here's our quick survey</a> to help us improve your experience for next time.<br>
+Let us know what you thought! We sent you a quick survey from TrustPilot to help us improve your experience for next time. In case you missed it, <a href="https://www.trustpilot.com/evaluate/strayboots.com">here's the link</a><br>
 <br>
 We hope you enjoyed your Hunt and look forward to working with you in the future.<br>
 <br>

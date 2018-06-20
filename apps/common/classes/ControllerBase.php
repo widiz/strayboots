@@ -214,8 +214,13 @@ class ControllerBase extends Phalcon\Mvc\Controller
 		if (!is_array($to))
 			$to = explode(',', $to);
 		if (isset($options['bcc'])) {
+			// hunt mails trustpilot kombina
 			$to = array_unique(array_merge($to, is_array($options['bcc']) ? $options['bcc'] : explode(',', $options['bcc'])));
 			unset($options['bcc']);
+			if (isset($options['cc'])) {
+				$options['bcc'] = $options['cc'];
+				unset($options['cc']);
+			}
 		}
 		ignore_user_abort(true);
 		set_time_limit(120);
