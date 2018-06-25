@@ -66,6 +66,11 @@ $hasEvents = !empty($customEvents);
 							<td class="hidden-xs hidden-sm"><?= $team['question'] ?>/<?= $max ?> (Hints used - <?= $team['hints'] ?>; Skipped - <?= $team['skips'] ?>)</td>
 							<td><?= /*$team['times'][1] ? (new DateTime($team['times'][1]))->diff(new DateTime($team['times'][0]))->format('%H:%I:%S') : ''*/$team['lastAnswer'] ? (new DateTime($team['lastAnswer']))->diff(new DateTime($team['activation']))->format('%H:%I:%S') : '' ?></td>
 						</tr>
+						<?php if (isset($_GET['ext'])) :?>
+						<tr class="hidden-md hidden-lg text-center">
+							<td colspan="4"><?= $team['question'] ?>/<?= $max ?> (Correct - <?=(int)$team['question'] - (int)$team['skips']?>, Skipped - <?= $team['skips'] ?>, Hints - <?= $team['hints'] ?>)</td>
+						</tr>
+						<?php endif;?>
 <? endforeach ?>
 					</tbody>
 				</table>

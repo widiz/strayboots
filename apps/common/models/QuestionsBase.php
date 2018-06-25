@@ -137,7 +137,7 @@ class QuestionsBase extends \Phalcon\Mvc\Model
 					return !empty($o) || $o === '0';
 				});
 				$c = count($options);
-				if ($c > 2 && $c < 6) {
+				if ($c > 1 && $c < 6) {
 					if ($numCorrect == 1) {
 						$this->answers = implode("\n", $options);
 					} else {
@@ -150,7 +150,7 @@ class QuestionsBase extends \Phalcon\Mvc\Model
 					}
 				} else {
 					$this->appendMessage(new Message(
-						'Enter 3-5 options. one option per line',
+						'Enter 2-5 options. one option per line',
 						'answers',
 						'error'
 					));
