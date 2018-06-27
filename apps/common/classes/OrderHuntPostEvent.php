@@ -71,7 +71,9 @@ class OrderHuntPostEvent extends OrderHuntMailBase {
 		} else {
 			$max = HuntPoints::count('hunt_id=' . $orderHunt->hunt_id) + $orderHunt->countCustomQuestions();
 		}
-
+		$maxAnswers = (int)$this->db->fetchColumn('SELECT MAX(ss.`s`) FROM (SELECT team_id, SUM(t.c) as `s` FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') GROUP BY team_id) t GROUP BY team_id) ss');
+		$max = max($max, $maxAnswers);
+		
 		$bonusQuestions = $db->fetchAll('SELECT bq.*, p.team_id, p.email, p.first_name, p.last_name FROM bonus_questions bq LEFT JOIN players p ON (p.id = bq.winner_id) WHERE bq.order_hunt_id' . ($multihunt ? ' IN (' . $ohids . ')' : ('=' . $ohids)) . ' AND bq.winner_id IS NOT NULL', Db::FETCH_ASSOC);
 
 		$bonusQuestionsTXT = implode("\n", array_map(function($bq) use ($teamNames){
