@@ -67,6 +67,9 @@ EOF
 		} else {
 			$max = \HuntPoints::count('hunt_id=' . $this->orderHunt->hunt_id) + $this->orderHunt->countCustomQuestions();
 		}
+		$maxAnswers = (int)$this->db->fetchColumn('SELECT MAX(ss.`s`) FROM (SELECT team_id, SUM(t.c) as `s` FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') GROUP BY team_id) t GROUP BY team_id) ss');
+		$max = max($max, $maxAnswers);
+		
 		foreach ($teamsStatus as $t => $team)
 			$teamsStatus[$t]['question'] = min($team['count'] + 1, $max);
 		$this->view->max = $max;
