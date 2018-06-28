@@ -503,7 +503,7 @@ EOF
 
 				if (empty($responseMsg) && $thisOrderHunt->id != 1623/* && !$thisOrderHunt->isMultiHunt()*/) {
 					if ($this->config->hunt->surveyAfterQuestion === true && $thisOrderHunt->order_id != 112) {
-						$surveyAfterQuestion = $thisOrderHunt->order_id == NcrController::ORDER_ID ? 25 : ($question['numQuestions'] - 5);
+						$surveyAfterQuestion = $thisOrderHunt->order_id == NcrController::ORDER_ID ? 25 : ($question['numQuestions'] /*- 5*/);
 						if ($surveyAfterQuestion > 0 && $question['currentPos'] > $surveyAfterQuestion && !$this->isSurveyAnswered())
 							return $this->response->redirect('play/survey');
 					}
