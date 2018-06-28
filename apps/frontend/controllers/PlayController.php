@@ -448,7 +448,7 @@ EOF
 				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . nl2br(htmlspecialchars($thisOrderHunt->end_msg));
 
 
-			if (empty($responseMsg) && $thisOrderHunt->id == 1623 && !$this->isSurveyAnswered())
+			if (empty($responseMsg) && !$this->isSurveyAnswered())
 				return $this->response->redirect('play/survey');
 
 			$this->view->facebookSDK = true;
@@ -501,13 +501,13 @@ EOF
 					}
 				}
 
-				if (empty($responseMsg) && $thisOrderHunt->id != 1623/* && !$thisOrderHunt->isMultiHunt()*/) {
-					if ($this->config->hunt->surveyAfterQuestion === true && $thisOrderHunt->order_id != 112) {
-						$surveyAfterQuestion = $thisOrderHunt->order_id == NcrController::ORDER_ID ? 25 : ($question['numQuestions'] - 1);
-						if ($surveyAfterQuestion > 0 && $question['currentPos'] > $surveyAfterQuestion && !$this->isSurveyAnswered())
-							return $this->response->redirect('play/survey');
-					}
-				}
+				//if (empty($responseMsg) && $thisOrderHunt->id != 1623/* && !$thisOrderHunt->isMultiHunt()*/) {
+				//	if ($this->config->hunt->surveyAfterQuestion === true && $thisOrderHunt->order_id != 112) {
+				//		$surveyAfterQuestion = $thisOrderHunt->order_id == NcrController::ORDER_ID ? 25 : ($question['numQuestions'] - 1);
+				//		if ($surveyAfterQuestion > 0 && $question['currentPos'] > $surveyAfterQuestion && !$this->isSurveyAnswered())
+				//			return $this->response->redirect('play/survey');
+				//	}
+				//}
 
 				if ($question['question_type'] == QuestionTypes::Timer) {
 					$tkey = SB_PREFIX . 'qtimer:' . $thisTeam->id . ':' . $thisOrderHunt->id . ':' . $question['id'];
