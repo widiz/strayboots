@@ -64,7 +64,8 @@ class ActivateController extends ControllerBase
 		$this->view->teamNameField = is_null($this->team->name);
 
 		if (is_null($this->orderHunt->start_msg))
-			$this->view->start_msg = 'Welcome to your scavenger hunt adventure. We hope you brought your wit and a sharp eye.<br>Best of luck!';
+			$this->view->start_msg = "Welcome to your Strayboots Scavenger hunt! We hope you brought your wit and a sharp eye. <br>Please be considerate of others, respect restaurants or public spaces, look both ways before crossing any street, don't run and most of all, have fun.";
+			// $this->view->start_msg = 'Welcome to your scavenger hunt adventure. We hope you brought your wit and a sharp eye.<br>Best of luck!';
 		else
 			$this->view->start_msg =  nl2br(htmlspecialchars($this->orderHunt->start_msg));
 

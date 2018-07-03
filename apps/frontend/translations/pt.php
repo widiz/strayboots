@@ -99,5 +99,6 @@
 	'How are points calculated?' => 'Como são calculados os pontos?',
 	'Correct answer - Full points<br>Correct answer with a hint - Half points<br>Skip - No points' => 'Resposta correcta: Totalidade dos pontos<br>Resposta correcta com utilização da ajuda: Metade dos pontos<br>Passar ou resposta errada: 0 (zero) pontos',
 	'A challenge or location wasn’t there or had changed and I was unable to get the answer. Will I be docked points?' => 'Um desafio/pergunta ou local não estava correcto ou mudou e não consegui obter a resposta. Posso acumular os pontos?',
-	'Nope! We can manually add your points to your team if you shoot us a call.' => 'Não automaticamente! Nós podemos carregar os pontos manualmente mas para tal terá de nos contactar.'
+	'Nope! We can manually add your points to your team if you shoot us a call.' => 'Não automaticamente! Nós podemos carregar os pontos manualmente mas para tal terá de nos contactar.',
+	'Take a quick survay' => 'Fazer uma pesquisa rápida'
 ];

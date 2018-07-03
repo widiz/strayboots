@@ -447,9 +447,10 @@ EOF
 			else
 				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . nl2br(htmlspecialchars($thisOrderHunt->end_msg));
 
-
+			$this->view->isSurveyAnswered = true;
 			if (empty($responseMsg) && !$this->isSurveyAnswered())
-				return $this->response->redirect('play/survey');
+				$this->view->isSurveyAnswered = false;
+				// return $this->response->redirect('play/survey');
 
 			$this->view->facebookSDK = true;
 			//if ($isLeader) {

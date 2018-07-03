@@ -28,10 +28,14 @@ document.addEventListener("DOMContentLoaded", function(){
 <? else: ?>
 				<div class="options">
 					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) /*$this->url->get('leaderboard')*/ ?>" class="btn btn-success"><?= $t->_('Leaderboard') ?></a>&nbsp;
+					<? if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
+						<a href="/play/survey" class="btn btn-success"><?= $t->_('Take a quick survay') ?></a>&nbsp;
+					<? endif ?>
 <? if ($multiHunt && $isLeader && !$lastMulti): ?>
 					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-warning"><?= $t->_('Choose another hunt') ?></a>
 <? endif ?>
 					<script type="text/javascript">window.shareInfoEnd={title:'<?= $t->_('We just successfully finished our Strayboots scavenger hunt!') ?>',image:'<? if (isset($image)) echo $image; ?>',description:'<?= $t->_('That was so much fun!!! #teambuilding #scavengerhunt @strayboots') ?>',url:'https://www.strayboots.com/',caption:'Strayboots Scavenger Hunt'}</script>
+
 <? if (isset($question) || isset($end_msg)): ?>
 					<div id="shareblock">
 						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>

@@ -103,5 +103,6 @@
 	'How are points calculated?' => 'כיצד הניקוד משוקלל?',
 	'Correct answer - Full points<br>Correct answer with a hint - Half points<br>Skip - No points' => 'תשובה נכונה - ניקוד מלא<br>תשובה נכונה עם רמז - חצי מהניקוד<br>דילוג - אין ניקוד',
 	'A challenge or location wasn’t there or had changed and I was unable to get the answer. Will I be docked points?' => 'אתגר או מיקום היה חסר או השתנה ולא היה ניתן לגלות את התשובה. האם אפסיד נקודות?',
-	'Nope! We can manually add your points to your team if you shoot us a call.' => 'לא! נוכל להוסיף את הנקודות לקבוצה שלך אם תיצור איתנו קשר.'
+	'Nope! We can manually add your points to your team if you shoot us a call.' => 'לא! נוכל להוסיף את הנקודות לקבוצה שלך אם תיצור איתנו קשר.',
+	'Take a quick survay' => 'ענה על סקר קצר'
 ];

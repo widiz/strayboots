@@ -273,8 +273,8 @@ class OrderHuntsController extends \ControllerBase
 			$orderHunts += $oh;
 		}
 		$ohids = implode(',', array_keys($orderHunts));
+		$tids = implode(',', $tids);
 		if (!empty($tids)) {
-			$tids = implode(',', $tids);
 			$group = $this->db->fetchAll('SELECT team_id, SUM(c) as rowcount FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') AND action != ' . Answers::Skipped . ' GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') AND action != ' . Answers::Skipped . ' GROUP BY team_id) t GROUP BY team_id', Db::FETCH_ASSOC);
 			foreach ($group as $g)
 				$teamPos[$g['team_id']] = (int)$g['rowcount'];
@@ -354,7 +354,7 @@ class OrderHuntsController extends \ControllerBase
 		} else {
 			$max = HuntPoints::count('hunt_id=' . $orderHunt->hunt_id) + $orderHunt->countCustomQuestions();
 		}
-		$maxAnswers = (int)$this->db->fetchColumn('SELECT MAX(ss.`s`) FROM (SELECT team_id, SUM(t.c) as `s` FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') GROUP BY team_id) t GROUP BY team_id) ss');
+		$maxAnswers = empty($tids) ? 0 : (int)$this->db->fetchColumn('SELECT MAX(ss.`s`) FROM (SELECT team_id, SUM(t.c) as `s` FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') GROUP BY team_id) t GROUP BY team_id) ss');
 		$max = max($max, $maxAnswers);
 		foreach ($teamsStatus as $t => $team) {
 			if (isset($teamPos[$team['id']])) {
@@ -503,8 +503,8 @@ class OrderHuntsController extends \ControllerBase
 			$orderHunts += $oh;
 		}
 		$ohids = implode(',', array_keys($orderHunts));
+		$tids = implode(',', $tids);
 		if (!empty($tids)) {
-			$tids = implode(',', $tids);
 			$group = $this->db->fetchAll('SELECT team_id, SUM(c) as rowcount FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') AND action != ' . Answers::Skipped . ' GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') AND action != ' . Answers::Skipped . ' GROUP BY team_id) t GROUP BY team_id');
 			foreach ($group as $g)
 				$teamPos[$g['team_id']] = (int)$g['rowcount'];
@@ -582,7 +582,7 @@ class OrderHuntsController extends \ControllerBase
 		} else {
 			$max = HuntPoints::count('hunt_id=' . $orderHunt->hunt_id) + $orderHunt->countCustomQuestions();
 		}
-		$maxAnswers = (int)$this->db->fetchColumn('SELECT MAX(ss.`s`) FROM (SELECT team_id, SUM(t.c) as `s` FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') GROUP BY team_id) t GROUP BY team_id) ss');
+		$maxAnswers = empty($tids) ? 0 : (int)$this->db->fetchColumn('SELECT MAX(ss.`s`) FROM (SELECT team_id, SUM(t.c) as `s` FROM (SELECT team_id, COUNT(1) as c FROM answers WHERE team_id IN (' . $tids . ') GROUP BY team_id UNION ALL SELECT team_id, COUNT(1) as c FROM custom_answers WHERE team_id IN (' . $tids . ') GROUP BY team_id) t GROUP BY team_id) ss');
 		$max = max($max, $maxAnswers);
 		
 		$this->view->max = $max;
