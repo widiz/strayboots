@@ -18,18 +18,22 @@
 <? else: ?>
 		<div class="content-wrapper section-wrapper pmessagebox" id="playground">
 			<div class="container">
-				<h1 style="font-size:30px;line-height:36px;margin-bottom:20px"><?= $t->_('How\'s it going so far?') ?></h1>
+				<h1 style="font-size:30px;line-height:36px;margin-bottom:20px"><?= $t->_('That\'s all folks!') ?></h1>
 				<div class="question" style="text-align:center">
-					<?= $t->_('Take a breather and fill out this quick form') ?>
+					<?= $t->_('Tell us what you thought') ?>
 					<br><br>
 <div id="widizSurvey"></div>
 <br><br><a class="btn btn-lg btn-success" href="?completed=y&skip=y" id="scountdown" style="display:none">45</a>
 <script src="https://app.widiz.com/plugins2/survey/survey.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
 document.addEventListener("DOMContentLoaded", function(){
+	var color = '';
+	try {
+		color = $('.content-wrapper h1').css('color');
+	} catch(E) {}
 	widizSurvey("RtSsk8zmv2XC6rmB1BTl6r1XhYdfpC9M", function(){
 		setSurveyConfig("<?= $this->escaper->escapeHtmlAttr($surveyInfo[0]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[1]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[2]) ?>", <?= $surveyInfo[3] ?>, '/play/survey?completed=y');
-	});
+	}, { text_color: color });
 });
 setTimeout(function(){
 	var scountdown = document.getElementById('scountdown');

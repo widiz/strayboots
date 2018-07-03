@@ -38,8 +38,8 @@
 	'Upload your photo or skip to continue.<br>If you\'re having issues, try switching phones or instead send your photo to pics@strayboots.com.<br>Thanks!' => 'Faça o upload da foto ou passe para continuar<br>Se estiver com problemas, mude de telefone ou envie sua foto para pics@strayboots.com.<br>Obrigado!',
 	'Answer' => 'Resposta',
 	'Submit' => 'Enviar',
-	'How\'s it going so far?' => 'Como está a correr até agora?',
-	'Take a breather and fill out this quick form' => 'Faça uma pausa e preencha o seguinte formulário',
+	'That\'s all folks!' => 'Como está a correr até agora?',
+	'Tell us what you thought' => 'Faça uma pausa e preencha o seguinte formulário',
 	'BREAKPOINT' => 'BREAKPOINT',
 	'Wait for everyone to reach question %question%' => 'Espere até todos chegármos à pergunta %question%',
 	'Next round will start in' => 'A próxima pergunta começará em',
@@ -100,5 +100,5 @@
 	'Correct answer - Full points<br>Correct answer with a hint - Half points<br>Skip - No points' => 'Resposta correcta: Totalidade dos pontos<br>Resposta correcta com utilização da ajuda: Metade dos pontos<br>Passar ou resposta errada: 0 (zero) pontos',
 	'A challenge or location wasn’t there or had changed and I was unable to get the answer. Will I be docked points?' => 'Um desafio/pergunta ou local não estava correcto ou mudou e não consegui obter a resposta. Posso acumular os pontos?',
 	'Nope! We can manually add your points to your team if you shoot us a call.' => 'Não automaticamente! Nós podemos carregar os pontos manualmente mas para tal terá de nos contactar.',
-	'Take a quick survay' => 'Fazer uma pesquisa rápida'
+	'Take a quick survey' => 'Fazer uma pesquisa rápida'
 ];

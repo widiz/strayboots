@@ -40,8 +40,8 @@
 	'Upload your photo or skip to continue.<br>If you\'re having issues, try switching phones or instead send your photo to pics@strayboots.com.<br>Thanks!' => 'העלה תמונה או דלג בכדי להמשיך.<br>אם ישנה בעיה, אנא נסו במכשיר אחר או שלחו את התמונה ל pics@strayboots.com.<br>תודה!',
 	'Answer' => 'תשובה',
 	'Submit' => 'שלח',
-	'How\'s it going so far?' => 'איך הולך?',
-	'Take a breather and fill out this quick form' => 'קחו רגע לנוח ומלאו את השאלון הקצר',
+	'That\'s all folks!' => 'זהו חברים!',
+	'Tell us what you thought' => 'ספרו לנו איך היה',
 	'BREAKPOINT' => 'עצור',
 	'Wait for everyone to reach question %question%' => 'יש להמתין עד שכל הקבוצות יגיעו לשאלה %question%',
 	'Next round will start in' => 'הסיבוב הבא יתחיל בעוד',
@@ -104,5 +104,5 @@
 	'Correct answer - Full points<br>Correct answer with a hint - Half points<br>Skip - No points' => 'תשובה נכונה - ניקוד מלא<br>תשובה נכונה עם רמז - חצי מהניקוד<br>דילוג - אין ניקוד',
 	'A challenge or location wasn’t there or had changed and I was unable to get the answer. Will I be docked points?' => 'אתגר או מיקום היה חסר או השתנה ולא היה ניתן לגלות את התשובה. האם אפסיד נקודות?',
 	'Nope! We can manually add your points to your team if you shoot us a call.' => 'לא! נוכל להוסיף את הנקודות לקבוצה שלך אם תיצור איתנו קשר.',
-	'Take a quick survay' => 'ענה על סקר קצר'
+	'Take a quick survey' => 'ענה על סקר קצר'
 ];
