@@ -707,11 +707,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	 *
 	 * @return string
 	 */
-	public function resetOrderHunt()
+	public function resetOrderHunt($removePlayers = false, $removeFiles = false)
 	{
 		$ok = true;
 		foreach ($this->Teams as $team) {
-			if (!$team->resetTeam())
+			if (!$team->resetTeam($removePlayers))
 				$ok = false;
 		}
 
@@ -720,6 +720,23 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		$this->removeCacheWildCard($redis, SB_PREFIX . 'breakfb:' . $this->id . ':*');
 		$this->removeCacheWildCard($redis, SB_PREFIX . 'breakp:' . $this->id . ':*');
 		$redis->delete(SB_PREFIX . 'bqanswer:' . $this->id);
+
+		if ($removeFiles) {
+			$config = $this->getDI()->get('config');
+			$baseDir = $config->application->frontUploadsDir->path . $this->id;
+			$baseDirLen = strlen($baseDir) + 1;
+			if (file_exists($baseDir)) {
+				$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($baseDir));
+				$regex = new RegexIterator($iterator, '/^.+\/(\d+|chat)\/[0-9a-z_]+\.(.+?)(jpg|png|gif)$/i', RecursiveRegexIterator::GET_MATCH);
+				foreach ($regex as $file)
+					unlink($file[0]);
+			}
+		}
+
+		if (substr($this->start, 0, 10) == date('Y-m-d') && $this->finish > date('Y-m-d H:i:s')) {
+			$preevent = new \PreeventTask();
+			$preevent->mainAction([0, 0]);
+		}
 
 		return $ok;
 	}

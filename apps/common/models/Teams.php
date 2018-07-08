@@ -175,12 +175,14 @@ class Teams extends \Phalcon\Mvc\Model
 	 *
 	 * @return string
 	 */
-	public function resetTeam()
+	public function resetTeam($removePlayers = false)
 	{
 		$this->name = $this->activation = $this->first_activation = $this->leader = null;
 		if ($this->save()) {
 			$this->Answers->delete();
 			$this->CustomAnswers->delete();
+			if ($removePlayers)
+				$this->Players->delete();
 
 			$redis = Phalcon\Di::getDefault()->get('redis');
 
