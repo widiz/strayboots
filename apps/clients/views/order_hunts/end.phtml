@@ -188,6 +188,7 @@ $hasEvents = !empty($customEvents);
 $ratingQuestions = [
 	'How did you enjoy your event?',
 	'How much did your team engagement improve?',
+	'Your company would appreciate quick feedback about your experience!',
 	'How much did your teamwork improve?'
 ];
 $textReviews = [];
@@ -195,36 +196,41 @@ foreach ($ratingQuestions as $rq)
 	$rating[$rq] = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
 	foreach ($surveyResults as $sr):
 		foreach ($rating as $q => $rq) {
+		// 	echo "<pre>";
+		// var_dump($sr['questions'][$q]);
+		// var_dump($rating[$q][$sr['questions'][$q]]);
+		//die;
 			if (isset($sr['questions'][$q]) && isset($rating[$q][(int)$sr['questions'][$q]])) {
 				$rating[$q][(int)$sr['questions'][$q]]++;
 			}
 		}
-		if (isset($sr['questions']['Please give us a quick feedback. Thanks!']))
-			$textReviews[] = trim($sr['questions']['Please give us a quick feedback. Thanks!']);
+		if (isset($sr['questions']['Your company would appreciate quick feedback about your experience!']))
+			$textReviews[] = trim($sr['questions']['Your company would appreciate quick feedback about your experience!']);
+		
 ?>
 						<tr>
 							<td><?= htmlspecialchars(empty($sr['last_name']) && (empty($sr['first_name']) || $sr['first_name'] === 'Anonymous') ? $sr['email'] : trim($sr['first_name'] . ' ' . $sr['last_name'])) ?></td>
-							<td><?= isset($sr['questions']['How are you enjoying your hunt?']) ? htmlspecialchars($sr['questions']['How are you enjoying your hunt?']) : '' ?></td>
-							<td><?= isset($sr['questions']['How much did this help you engage with your team?']) ? htmlspecialchars($sr['questions']['How much did this help you engage with your team?']) : '' ?></td>
-							<td><?= isset($sr['questions']['Please give us a quick feedback. Thanks!']) ? htmlspecialchars($sr['questions']['Please give us a quick feedback. Thanks!']) : '' ?></td>
-							<td><?= isset($sr['questions']['How much do you think your teamwork improved?']) ? htmlspecialchars($sr['questions']['How much do you think your teamwork improved?']) : '' ?></td>
+							<td><?= isset($sr['questions']['How did you enjoy your event?']) ? htmlspecialchars($sr['questions']['How did you enjoy your event?']) : '' ?></td>
+							<td><?= isset($sr['questions']['How much did your team engagement improve?']) ? htmlspecialchars($sr['questions']['How much did your team engagement improve?']) : '' ?></td>
+							<td><?= isset($sr['questions']['Your company would appreciate quick feedback about your experience!']) ? htmlspecialchars($sr['questions']['Your company would appreciate quick feedback about your experience!']) : '' ?></td>
+							<td><?= isset($sr['questions']['How much did your teamwork improve?']) ? htmlspecialchars($sr['questions']['How much did your teamwork improve?']) : '' ?></td>
 							<td><?= $sr['created_at'] ?></td>
 						</tr>
-<? endforeach ?>
+		<? endforeach ?>
 					</tbody>
 				</table>
 				</div>
 				
 				<div class="charts text-center">
 					<div class="row">
-<? foreach ($rating as $q => $rq): $total = array_sum($rq); if ($total === 0) continue; ?>
+		<? foreach ($rating as $q => $rq): $total = array_sum($rq); if ($total === 0) continue; ?>
 						<div class="col-md-6">
 							<h3><b><?= htmlspecialchars($q) ?></b></h3>
 							<img src="http://chart.apis.google.com/chart?cht=p3&chs=500x170&chdl=Rate+1+%28<?= number_format($rq[1]) ?>%29%7CRate+2+%28<?= number_format($rq[2]) ?>%29%7CRate+3+%28<?= number_format($rq[3]) ?>%29%7CRate+4+%28<?= number_format($rq[4]) ?>%29%7CRate+5+%28<?= number_format($rq[5]) ?>%29&chl=Rate+1+%28<?= round($rq[1] * 100 / $total) ?>%25%29%7CRate+2+%28<?= round($rq[2] * 100 / $total) ?>%25%29%7CRate+3+%28<?= round($rq[3] * 100 / $total) ?>%25%29%7CRate+4+%28<?= round($rq[4] * 100 / $total) ?>%25%29%7CRate+5+%28<?= round($rq[5] * 100 / $total) ?>%25%29&chco=EDC240|AFD8F8|9440ED|8CACC6|CB4B4B&chts=000000,18&chf=bg,s,FFFFFF00&chd=t:<?= implode($rq, ',') ?>" style="display:block;margin:10px auto;max-width:95%">
 						</div>
-<? endforeach ?>
+		<? endforeach ?>
 						<div class="col-md-6">
-							<h3><b>Please give us a quick feedback. Thanks!</b></h3>
+							<h3><b>Quick feedback about your experience!</b></h3>
 							<div style="overflow:auto;width:95%;max-width:500px;max-height:170px;margin:0 auto;-webkit-overflow-scrolling:touch">
 								<table class="table" id="survey-results-txt" style="color:#373737">
 									<tr>
