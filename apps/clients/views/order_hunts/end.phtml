@@ -196,16 +196,17 @@ foreach ($ratingQuestions as $rq)
 	$rating[$rq] = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0];
 	foreach ($surveyResults as $sr):
 		foreach ($rating as $q => $rq) {
-		// 	echo "<pre>";
-		// var_dump($sr['questions'][$q]);
-		// var_dump($rating[$q][$sr['questions'][$q]]);
-		//die;
 			if (isset($sr['questions'][$q]) && isset($rating[$q][(int)$sr['questions'][$q]])) {
 				$rating[$q][(int)$sr['questions'][$q]]++;
 			}
 		}
-		if (isset($sr['questions']['Your company would appreciate quick feedback about your experience!']))
-			$textReviews[] = trim($sr['questions']['Your company would appreciate quick feedback about your experience!']);
+
+		if (isset($sr['questions']['Your company would appreciate quick feedback about your experience!'])) {
+			$textR = trim($sr['questions']['Your company would appreciate quick feedback about your experience!']);
+			if ($textR != '') {
+				$textReviews[] = $textR;
+			}
+		}
 		
 ?>
 						<tr>
