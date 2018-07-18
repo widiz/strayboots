@@ -32,7 +32,7 @@ class TaskBase extends \Phalcon\Cli\Task
 			return '\'' . $e .  '\'';
 		}, $to);
 
-		$unsubscribingList = array_map('array_pop', $this->db->fetchAll('SELECT email FROM unsubscribing_list WHERE email IN (' . implode(',', $emailsTo) . ')'));
+		$unsubscribingList = empty($emailsTo) ? [] : array_map('array_pop', $this->db->fetchAll('SELECT email FROM unsubscribing_list WHERE email IN (' . implode(',', $emailsTo) . ')'));
 
 		foreach ($to as $e) {
 			if (in_array($e, $unsubscribingList))
