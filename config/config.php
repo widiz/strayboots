@@ -1,6 +1,7 @@
 <?php
 $configFn = 'production';
 switch (defined('SBENV') ? SBENV : $_SERVER['SERVER_NAME']) {
+	case 'go.strayboots.com': break;
 	case 'staging.strayboots.com':
 	case 'staging':
 		$configFn = 'staging';
@@ -9,9 +10,11 @@ switch (defined('SBENV') ? SBENV : $_SERVER['SERVER_NAME']) {
 	case 'india':
 		$configFn = 'india';
 		break;
-	case 'pt.strayboots.com':
+	case 'eu.strayboots.com':
+	case 'eu':
+	case 'europe':
 	case 'portugal':
-		$configFn = 'portugal';
+		$configFn = 'europe';
 		break;
 	default:
 }
