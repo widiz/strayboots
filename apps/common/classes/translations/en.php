@@ -45,6 +45,7 @@ Until next time!
 </td>
 </tr>
 </table>
+%unsubscribe%
 EOF
 ,
 	'DanielleOrderHuntPostEventClientText' => <<<EOF
@@ -91,6 +92,7 @@ Until next time!
 </td>
 </tr>
 </table>
+%unsubscribe%
 EOF
 ,
 
@@ -136,6 +138,7 @@ The Strayboots Squad
 </td>
 </tr>
 </table>
+%unsubscribe%
 EOF
 ,
 
@@ -187,6 +190,7 @@ Au revoir for now!
 </td>
 </tr>
 </table>
+%unsubscribe%
 EOF
 ,
 
@@ -224,6 +228,7 @@ Until next time!
 </td>
 </tr>
 </table>
+%unsubscribe%
 EOF
 ,
 ];

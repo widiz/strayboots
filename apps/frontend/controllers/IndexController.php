@@ -487,4 +487,26 @@ EOF
 		$this->assets->collection('script')->addJs('/js/app/custom.preview.js');
 	}
 
+	public function unsubscribeAction() 
+	{
+		$m = $this->request->get('m');
+		$email = $this->crypt->decryptBase64($m);
+		$this->view->msg = 'Something went wrong';
+		if (!$email) {
+			return;
+		}
+
+		$ifIsset = \UnsubscribingList::findFirstByEmail($email);
+		if ($ifIsset) {
+			$this->view->msg = 'You already unsubscribed';
+			return;
+		}
+
+		$unsubscribingList = new \UnsubscribingList();
+		$unsubscribingList->email = $email;
+		
+		if ($unsubscribingList->save() !== false) {
+			$this->view->msg = 'You unsubscribed from the mailing list';
+		}	
+	}
 }

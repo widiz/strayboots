@@ -440,7 +440,7 @@ class OrderHuntsController extends \ControllerBase
 		$this->view->bonusQuestions = $this->db->fetchAll('SELECT bq.*, p.team_id, p.email, p.first_name, p.last_name FROM bonus_questions bq LEFT JOIN players p ON (p.id = bq.winner_id) WHERE bq.order_hunt_id' . ($multihunt ? ' IN (' . $ohids . ')' : ('=' . $ohids)) . ' AND bq.winner_id IS NOT NULL', Db::FETCH_ASSOC);
 
 		$this->view->customEvents = $this->db->fetchAll('SELECT * FROM custom_events WHERE order_hunt_id' . ($multihunt ? ' IN (' . $ohids . ')' : ('=' . $ohids)) . ' AND team_id IS NOT NULL', Db::FETCH_ASSOC);
-
+		
 		if (empty($data = $this->redis->get(SB_PREFIX . 'survey:' . $orderHunt->id . ':api'))) {
 			$data = file_get_contents('https://app.widiz.com/plugins/survey/api/surveys/api/10?v=c7431d7a622bda87db21093c9745cdcc18da0b69&filterKey=Hunt%20ID&filterVal=' . $orderHunt->id);
 			$this->redis->set(SB_PREFIX . 'survey:' . $orderHunt->id . ':api', $data, 600);
@@ -449,7 +449,7 @@ class OrderHuntsController extends \ControllerBase
 			$data = [];
 		else
 			$data = $data['data'];
-
+		
 		$this->view->surveyResults = $data;
 
 		$this->assets->collection('style')

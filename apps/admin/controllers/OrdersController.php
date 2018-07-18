@@ -196,6 +196,7 @@ I hope you and your team are getting excited for your hunt...we’re definitely 
 ~ The Strayboots Squad ~<br>
 (877) 787-2929<br>
 <a href="mailto:events@strayboots.com">events@strayboots.com</a><br>
+%unsubscribe%
 EOF;
 	
 		return [

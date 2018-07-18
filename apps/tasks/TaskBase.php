@@ -24,8 +24,23 @@ class TaskBase extends \Phalcon\Cli\Task
 		ignore_user_abort(true);
 		set_time_limit(120);
 		$success = true;
+
+		$to = array_filter($to, function($e){
+			return filter_var($e, FILTER_VALIDATE_EMAIL);
+		});
+		$emailsTo = array_map(function($e){
+			return '\'' . $e .  '\'';
+		}, $to);
+
+		$unsubscribingList = array_map('array_pop', $this->db->fetchAll('SELECT email FROM unsubscribing_list WHERE email IN (' . implode(',', $emailsTo) . ')'));
+
 		foreach ($to as $e) {
+			if (in_array($e, $unsubscribingList))
+				continue;
 			try {
+				$unsubscribeText = '<hr><p>You can unsubscribe from the mailing list by clicking on the <a href="' . $this->config->fullUri . '/index/unsubscribe?m=' . rawurlencode($this->crypt->encryptBase64($e)) . '">link</a>.</p>';
+				$html = str_replace('%unsubscribe%', $unsubscribeText, $html);
+
 				$success = $this->mailer->sendMessage($this->config->mailgun->domain, [
 					'from'		=> $this->config->mailgun->from, 
 					'to'		=> $e,
