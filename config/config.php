@@ -9,9 +9,12 @@ switch (defined('SBENV') ? SBENV : $_SERVER['SERVER_NAME']) {
 	case 'india':
 		$configFn = 'india';
 		break;
+	case 'eu.strayboots.com':
 	case 'pt.strayboots.com':
 	case 'portugal':
-		$configFn = 'portugal';
+	case 'europe':
+	case 'eu':
+		$configFn = 'europe';
 		break;
 	default:
 }
