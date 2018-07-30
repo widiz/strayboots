@@ -11,8 +11,8 @@
 		} else {
 			$('.icn.chat').addClass('new-msg');
 			try {
-				console.log(m.val());
-				toastr.success('Message from %name%'._({name: m.val().pname}));
+				var message = m.val();
+				toastr.success('Message from %name%'._({name: message.cn || message.pname || ''}), message.content);
 			} catch(E) { }
 			//_room.off('child_added', getMessage);
 		}

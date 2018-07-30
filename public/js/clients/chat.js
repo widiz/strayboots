@@ -202,7 +202,7 @@
 			chatBox.val('');
 			_room.push({
 				pid: data.pid,
-				cn: data.cn,
+				cn: data.cn || data.players[data.pid].name,
 				content: messageText.trim(),
 				timestamp: firebase.database.ServerValue.TIMESTAMP
 			});
@@ -246,7 +246,7 @@
 					if (response.files[i]) {
 						_room.push({
 							pid: data.pid,
-							cn: data.cn,
+							cn: data.cn || data.players[data.pid].name,
 							image: response.files[i],
 							timestamp: firebase.database.ServerValue.TIMESTAMP
 						});
