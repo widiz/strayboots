@@ -10,7 +10,11 @@
 			firstOne = false;
 		} else {
 			$('.icn.chat').addClass('new-msg');
-			_room.off('child_added', getMessage);
+			try {
+				console.log(m.val());
+				toastr.success('Message from %name%'._({name: m.val().pname}));
+			} catch(E) { }
+			//_room.off('child_added', getMessage);
 		}
 	}
 	_room.orderByChild('timestamp').limitToLast(1).on('child_added', getMessage);

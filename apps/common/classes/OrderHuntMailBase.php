@@ -28,7 +28,7 @@ class OrderHuntMailBase
 		if (!is_callable($sendMail))
 			throw new Exception('SendMail isn\'t callable', 792);
 		$mail1 = call_user_func($sendMail, is_null($email) ? $this->client->email : $email, $this->title, $this->text, $this->html, [], !is_null($email) ? [] : [
-			'cc' => '077cca161d@invite.trustpilot.com',
+			// 'cc' => '077cca161d@invite.trustpilot.com',
 			'bcc' => implode(',', $this->cc)
 		]);
 		$mail2 = is_null($email) ? call_user_func($sendMail, 'ariel@safronov.co.il,karen@strayboots.com,madison@strayboots.com,support@strayboots.com', $this->title, $this->text, $this->html) : true;

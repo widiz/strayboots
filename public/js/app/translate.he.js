@@ -29,6 +29,7 @@ window.translate = {
 	'Submit': 'שלח',
 	"Something went wrong, please try again": "שגיאה; אנא נסה שנית",
 	'For %points% points': '%points% נקודות',
+	'Message from %name%' : 'הודעה מ%name%',
 	'Win a Prize': 'זכה בפרס',
 	"Heads up, a bonus question is coming up soon...": "שימו לב, שאלת בונוס מתקרבת...",
 };

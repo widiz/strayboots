@@ -106,7 +106,7 @@ class OrdersController extends \ControllerBase
 			extract(OrdersController::mailPDF($client));
 
 			return $this->jsonResponse([
-				'success' => $this->sendMail($to, 'Your Strayboots Hunt Instructions', $text, $html, $attachments, ['bcc' => '077cca161d@invite.trustpilot.com'])
+				'success' => $this->sendMail($to, 'Your Strayboots Hunt Instructions', $text, $html, $attachments)
 			]);
 		} catch(Exception $e) {
 			return $this->jsonResponse([

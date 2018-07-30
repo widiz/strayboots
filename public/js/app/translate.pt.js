@@ -30,6 +30,7 @@ window.translate = {
 	"Something went wrong, please try again": "Alguma coisa correu mal. Por favor tente novamente",
 	"For %points% points": "Para %points% pontos",
 	"Win a Prize": "Ganhe um prémio",
+	'Message from %name%' : 'Mensagem de %name%',
 	"Heads up, a bonus question is coming up soon...": "Atenção, uma pergunta vem já a seguir...",
 };
 try {
