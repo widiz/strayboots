@@ -8,6 +8,7 @@
 	<script>(new Image()).src='/img/bgn-2.jpg';</script>
 	<link rel="preload" href="/img/bgn-2.jpg" as="image">
 	<script>
+		window.isLeader=!<?= $isLeader ? 0 : 1 ?>;
 		window.loadTime=new Date;
 		(function(vp,de){
 			var setVP=function(){
