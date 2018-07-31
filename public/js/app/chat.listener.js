@@ -14,6 +14,10 @@
 				return _room.off('child_added', getMessage);
 			try {
 				var message = m.val();
+				toastr.options.progressBar = false;
+				toastr.options.timeOut = 0;
+				toastr.options.extendedTimeOut = 0;
+				toastr.options.onclick = function() { $(".chat").click(); };
 				toastr.success('Message from %name%'._({name: message.cn || message.pname || ''}), message.content);
 			} catch(E) { }
 		}
