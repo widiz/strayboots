@@ -11,7 +11,7 @@
 						<a class="endtimer-link" style="font-size:18px;"></a>
 					</div>
 <? endif ?>
-					<a class="navbar-brand logo" href="<?= $this->url->get(isset($ncr) ? '/ncr' : '/') ?>">
+					<a class="navbar-brand logo" href="<?= defined('OVERRIDE_STANDARDLOGIN') && isset($currentURL) ? $currentURL : $this->url->get(isset($ncr) ? '/ncr' : '/') ?>">
 <? if (isset($customLogo)): ?>
 						<img src="<?= $customLogo ?>" alt="" class="customlogo">
 <? else: ?>
@@ -35,7 +35,7 @@
 						<li style="display:block"><a href="<?= $this->url->get('ncr') ?>"><?= $t->_('Login') ?></a></li>
 						<li style="display:block"><a href="<?= $this->url->get('ncr/register') ?>"><?= $t->_('Register') ?></a></li>
 <? else:*/ ?>
-						<li><a href="<?= $this->url->get('/') ?>"><?= $t->_('Home') ?></a></li>
+						<li><a href="<?= defined('OVERRIDE_STANDARDLOGIN') && isset($currentURL) ? $currentURL : $this->url->get(isset($ncr) ? '/ncr' : '/') ?>"><?= $t->_('Home') ?></a></li>
 <? //endif ?>
 						<li><a href="<?= $this->url->get('faq') ?>"><?= $t->_('FAQ') ?></a></li>
 <? if ($loggedIn): ?>
