@@ -60,6 +60,22 @@
 	</div>
 </div>
 
+<div class="form-group">
+	<label for="fieldIsEmailLogin" class="col-sm-2 control-label">Email only</label>
+	<div class="col-sm-10">
+		<input type="checkbox" style="margin-top: 10px" id="fieldIsEmailLogin"
+				onclick="$('#fieldEmailLogin').closest('.form-group').toggleClass('hidden', !this.checked)"
+				<?= empty($this->tag->getValue('email_login')) ? '' : ' checked' ?>> 
+	</div>
+</div>
+
+<div class="form-group<?= empty($this->tag->getValue('email_login')) ? ' hidden' : '' ?>">
+	<label for="fieldEmailLogin" class="col-sm-2 control-label">Email</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(["email_login", "size" => 30, "class" => "form-control", "id" => "fieldEmailLogin"]) ?>
+	</div>
+</div>
+
 <?= $this->tag->hiddenField('id') ?>
 
 <div class="form-group">
