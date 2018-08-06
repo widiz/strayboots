@@ -4,7 +4,7 @@ define('SB_PREFIX', 'sbeu:');
 define('FB_PREFIX', 'eu/');
 return new \Phalcon\Config([
 	'prefix' => 'eu',
-	'altLang' => ['he', 'pt', 'en'],
+	'altLang' => ['he', 'pt'],
 	'defLang' => 0,
 	'fullUri' => 'http://eu.strayboots.com',
 	'database' => [
