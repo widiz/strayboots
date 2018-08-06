@@ -14,6 +14,8 @@ class ErrorController extends ControllerBase
 				define('TITLE_OVERRIDE', $loginPage->title);
 			if (!empty($loginPage->welcome_title))
 				define('OVERRIDE_WELCOME_TITLE', $loginPage->welcome_title);
+			if (!empty($loginPage->email_login))
+				define('OVERRIDE_LOGIN_EMAIL', $loginPage->id);
 			$this->view->currentURL = $this->escaper->escapeHtmlAttr($loginPage->slug);
 			return $this->dispatcher->forward([
 				'controller'	=> 'index',

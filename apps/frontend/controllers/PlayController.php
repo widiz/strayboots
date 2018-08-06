@@ -821,8 +821,6 @@ EOF
 						$titles = ['Time\'s Up'];
 					else if ($lastSkip === 2)
 						$titles = ['Sorry, wrong answer'];
-					else if ($thisOrderHunt->hunt_id === '1403')
-						$titles = ['Too bad, you skipped it.'];
 					else
 						$titles = ['Aw, you skipped it!'];
 				} else {

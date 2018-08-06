@@ -29,7 +29,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 
 		if (defined('ORDER_HUNT_OVERRIDE')) {
 			$orderHunt = OrderHunts::findFirstById(ORDER_HUNT_OVERRIDE);
-			if ($orderHunt && $orderHunt->isCustomLogin())
+			if ($orderHunt && (defined('OVERRIDE_LOGIN_EMAIL') || $orderHunt->isCustomLogin()))
 				define('ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE', $orderHunt->id);
 		}
 
@@ -178,6 +178,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 					$this->view->huntCss = $huntCss;
 				if (file_exists($uploadBase . 'logo.png'))
 					$this->view->customLogo = $clientPaths->uri . 'order.' . $this->orderHunt->order_id . '.logo.png';
+			} else {
+				$this->view->isLeader = false;
 			}
 
 			if ($this->multiLang)

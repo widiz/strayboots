@@ -1,7 +1,7 @@
 		<div class="content-wrapper section-wrapper activate-ticket">
 			<div class="container">
 				<h1><?= $t->_(defined('OVERRIDE_WELCOME_TITLE') ? OVERRIDE_WELCOME_TITLE : 'Welcome to Your Team Building Scavenger Hunt!') ?></h1>
-				<h2><?= $t->_('Activate Your Hunt') ?></h2>
+				<h2><?= $t->_(defined('OVERRIDE_LOGIN_EMAIL') ? 'Insert your email to get your FREE activation code' : 'Activate Your Hunt') ?></h2>
 				<div class="col-sm-12">
 					<div id="activation-wrapper" class="clearfix">
 						<div id="activation-fb">
@@ -24,6 +24,7 @@
 
 								<?= $this->tag->emailField(['email', 'required' => 'required', 'class' => 'answer', 'id' => 'emailField', 'placeholder' => $t->_('Email')]) ?>
 <? if (defined('ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE')): ?>
+								<?= defined('OVERRIDE_LOGIN_EMAIL') ? $this->tag->hiddenField(['lp', 'value' => OVERRIDE_LOGIN_EMAIL]) : '' ?>
 								<?= $this->tag->hiddenField(['id', 'value' => ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE]) ?>
 <? else: ?>
 								<?= $this->tag->textField(['activation', 'required' => 'required', 'class' => 'answer', 'id' => 'activationField', 'placeholder' => $t->_('Activation Code')]) ?>

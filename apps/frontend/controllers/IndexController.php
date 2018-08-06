@@ -29,8 +29,23 @@ class IndexController extends ControllerBase
 			$last_name = $this->request->getPost('last_name', 'trim');
 			$activation = $this->request->getPost('activation', 'trim');
 			$id = (int)$this->request->getPost('id', 'int');
+			$lpId = (int)$this->request->getPost('lp', 'int');
 			if ($id > 0) {
 				$orderHunt = OrderHunts::findFirstById($id);
+				if ($lpId > 0 && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					$lp = \LoginPages::findFirst('id=' . $lpId . ' AND order_hunt_id=' . $id);
+					if ($lp && !empty($lp->email_login)) {
+						if ($this->sendMail($lp->email_login, 'Strayboots login request ' . $lp->slug, 'Email: ' . $email . PHP_EOL . 'OrderHunt: ' . $id . PHP_EOL . $this->config->fullUri . '/admin/order_hunts/' . $orderHunt->order_id)) {
+							$this->view->response_msg = $this->view->t->_('Thank you! The activation code for your FREE scavenger hunt is on its way!');
+							define('cacheFileId', 'loginEmailMessage');
+							$this->assets->collection('style')->addCss('/css/app/play.css');
+							return $this->view->pick('play/message');
+						} else {
+							$this->flash->error('Failed. please try again or contact support');
+							return $this->response->redirect($this->request->getHTTPReferer());
+						}
+					}
+				}
 				if ($orderHunt && !$orderHunt->isCustomLogin())
 					$orderHunt = false;
 				$team = $orderHunt ? Teams::findFirst([
