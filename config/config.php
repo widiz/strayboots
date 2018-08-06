@@ -14,7 +14,7 @@ switch (defined('SBENV') ? SBENV : $_SERVER['SERVER_NAME']) {
 	case 'portugal':
 	case 'europe':
 	case 'eu':
-		$configFn = 'portugal';
+		$configFn = 'europe';
 		break;
 	default:
 }
