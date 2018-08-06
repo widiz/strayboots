@@ -37,6 +37,12 @@ class LoginPages extends \Phalcon\Mvc\Model
 	public $welcome_title;
 
 	/**
+	 *
+	 * @var string
+	 */
+	public $email_login;
+
+	/**
 	 * Validations and business logic
 	 *
 	 * @return boolean
@@ -66,6 +72,12 @@ class LoginPages extends \Phalcon\Mvc\Model
 		$validator->add('slug', new \Phalcon\Validation\Validator\Uniqueness([
 			'message' => 'Slug is already in use'
 		]));
+
+		if (!is_null($this->email_login)) {
+			$validator->add('email_login', new \Phalcon\Validation\Validator\Email([
+				'message' => 'Email is invalid'
+			]));
+		}
 
 		if (substr($this->slug, 0, 1) === '/' || substr($this->slug, -1) === '/') {
 			$this->appendMessage(new Message(

@@ -79,6 +79,7 @@ class LoginPagesController extends \ControllerBase
 			$this->tag->setDefault('slug', $loginPage->slug);
 			$this->tag->setDefault('title', $loginPage->title);
 			$this->tag->setDefault('welcome_title', $loginPage->welcome_title);
+			$this->tag->setDefault('email_login', $loginPage->email_login);
 			$this->tag->setDefault('order_hunt_id', $loginPage->order_hunt_id);
 
 		}
@@ -122,6 +123,9 @@ class LoginPagesController extends \ControllerBase
 		$loginPage->title = trim($this->request->getPost('title', 'string'));
 		$loginPage->welcome_title = trim($this->request->getPost('welcome_title', 'string'));
 		$loginPage->order_hunt_id = $this->request->getPost('order_hunt_id', 'int');
+		$loginPage->email_login = $this->request->getPost('email_login', 'email');
+		if (empty($loginPage->email_login))
+			$loginPage->email_login = null;
 		
 		if (!$loginPage->save()) {
 			foreach ($loginPage->getMessages() as $message) {
@@ -168,6 +172,9 @@ class LoginPagesController extends \ControllerBase
 		$loginPage->title = trim($this->request->getPost('title', 'string'));
 		$loginPage->welcome_title = trim($this->request->getPost('welcome_title', 'string'));
 		$loginPage->order_hunt_id = $this->request->getPost('order_hunt_id', 'int');
+		$loginPage->email_login = $this->request->getPost('email_login', 'email');
+		if (empty($loginPage->email_login))
+			$loginPage->email_login = null;
 		
 		if (!$loginPage->save()) {
 
