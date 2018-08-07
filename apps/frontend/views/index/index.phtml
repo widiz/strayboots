@@ -24,13 +24,20 @@
 
 								<?= $this->tag->emailField(['email', 'required' => 'required', 'class' => 'answer', 'id' => 'emailField', 'placeholder' => $t->_('Email')]) ?>
 <? if (defined('ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE')): ?>
-								<?= defined('OVERRIDE_LOGIN_EMAIL') ? $this->tag->hiddenField(['lp', 'value' => OVERRIDE_LOGIN_EMAIL]) : '' ?>
-								<?= $this->tag->hiddenField(['id', 'value' => ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE]) ?>
+								<?= defined('OVERRIDE_LOGIN_EMAIL') ? $this->tag->hiddenField(['lp', 'value' => OVERRIDE_LOGIN_EMAIL, 'id' => 'lpField']) : '' ?>
+								<?= $this->tag->hiddenField(['id', 'value' => ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE, 'id' => 'ohIdField']) ?>
+								<?= $this->tag->textField(['activation', 'required' => 'required', 'class' => 'answer hidden', 'id' => 'activationField', 'placeholder' => $t->_('Activation Code')]) ?>
 <? else: ?>
 								<?= $this->tag->textField(['activation', 'required' => 'required', 'class' => 'answer', 'id' => 'activationField', 'placeholder' => $t->_('Activation Code')]) ?>
 <? endif ?>
 
 								<?= $this->tag->submitButton([$t->_('Submit'), 'class' => 'submit subxbtn']) ?>
+
+<? if (defined('OVERRIDE_LOGIN_EMAIL')): ?>
+								<div class="atos" style="margin-top:15px;font-size:16px">
+									<a href="javascript:;" onclick="$('#activationField').removeClass('hidden');$(this).parent().remove();$('#lpField,#ohIdField').remove()"><?= $t->_('I already have a code') ?></a>
+								</div>
+<? endif ?>
 
 								<div class="atos" style="margin-top:25px">
 									<?= $t->_('By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>') ?>
