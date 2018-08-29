@@ -11,6 +11,7 @@ use \Orders,
 	\Teams,
 	\Exception,
 	\OrderHuntPDF,
+	\BonusQuestions,
 	Phalcon\Db,
 	DataTables\DataTable,
 	Phalcon\Mvc\Model\Message;
@@ -241,6 +242,36 @@ class OrderHuntsController extends \ControllerBase
 		
 		try {
 			$orderHunt->addTeams($orderHunt->max_teams);
+
+			try {
+				///// Adding BonusQuestions  //////
+				$bonus = new BonusQuestions();
+				$bonus->order_hunt_id = $orderHunt->id;
+				$bonus->type = BonusQuestions::TypeTeam;
+				$bonus->question = 'Where was the fortune cookie invented?';
+				$bonus->answers = "America\nUSA\nUS";
+				$bonus->score = 25;
+				$bonus->save();
+
+				$bonus = new BonusQuestions();
+				$bonus->order_hunt_id = $orderHunt->id;
+				$bonus->type = BonusQuestions::TypeTeam;
+				$bonus->question = 'What name did Theodore Geisel pen his books under?';
+				$bonus->answers = "Dr. Seuss";
+				$bonus->score = 25;
+				$bonus->save();
+				
+				$bonus = new BonusQuestions();
+				$bonus->order_hunt_id = $orderHunt->id;;
+				$bonus->type = BonusQuestions::TypeTeam;
+				$bonus->question = 'The statue of liberty was given to the US by which country?';
+				$bonus->answers = "France";
+				$bonus->score = 25;
+				$bonus->save();
+			} catch (Exception $e) {
+				$this->flash->error('Error creating bonus questions: ' . $e->getMessage());
+			}
+			
 
 			if (substr($orderHunt->start, 0, 10) == date('Y-m-d') && $orderHunt->finish > date("Y-m-d H:i:s")) {
 				$preevent = new \PreeventTask();
