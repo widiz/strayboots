@@ -248,8 +248,8 @@ class OrderHuntsController extends \ControllerBase
 				$bonus = new BonusQuestions();
 				$bonus->order_hunt_id = $orderHunt->id;
 				$bonus->type = BonusQuestions::TypeTeam;
-				$bonus->question = 'Where was the fortune cookie invented?';
-				$bonus->answers = "America\nUSA\nUS";
+				$bonus->question = 'What country was the fortune cookie invented?';
+				$bonus->answers = "USA";
 				$bonus->score = 25;
 				$bonus->save();
 
