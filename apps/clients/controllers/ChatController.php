@@ -2,12 +2,15 @@
 
 namespace Play\Clients\Controllers;
 
+use Phalcon\Db,
+	OrderHunts;
+
 class ChatController extends \ControllerBase
 {
 
 	public function indexAction($id)
 	{
-		$orderHunt = \OrderHunts::findFirstByid((int)$id);
+		$orderHunt = OrderHunts::findFirstByid((int)$id);
 		$order = $orderHunt ? $orderHunt->Order : false;
 
 		if ($this->requireUser(false)) {
@@ -16,14 +19,14 @@ class ChatController extends \ControllerBase
 		}
 
 		if (!$order) {
-			$this->flash->error("Order was not found");
+			$this->flash->error('Order was not found');
 			$this->response->redirect('orders');
 
 			return;
 		}
 
 		if ($orderHunt->isCanceled()) {
-			$this->flash->error("This hunt was canceled");
+			$this->flash->error('This hunt was canceled');
 			$this->response->redirect('order_hunts/' . $order->id);
 
 			return;
@@ -34,7 +37,7 @@ class ChatController extends \ControllerBase
 			'p.last_name as plname, s.first_name as sfname, s.last_name as slname ' .
 			'FROM players p LEFT JOIN teams t ON (p.team_id = t.id) ' .
 			'LEFT JOIN social_players s ON (s.player_id = p.id) WHERE t.order_hunt_id = ' . $orderHunt->id,
-		\Phalcon\Db::FETCH_ASSOC);
+		Db::FETCH_ASSOC);
 
 		$players = [];
 
@@ -76,6 +79,60 @@ class ChatController extends \ControllerBase
 				//->addJs('/js/plugins/jquery.emoji.js')
 				->addJs('/js/clients/chat.js');
 
+	}
+
+	public function playersAction($id)
+	{
+		$orderHunt = OrderHunts::findFirstByid((int)$id);
+		$order = $orderHunt ? $orderHunt->Order : false;
+
+		if ($this->requireUser(false)) {
+			if ($this->requireClient(false) || !$order || $order->client_id != $this->client->id)
+				$order = false;
+		}
+
+		if (!$order) {
+			$this->flash->error('Order was not found');
+			$this->response->redirect('orders');
+
+			return;
+		}
+
+		if ($orderHunt->isCanceled()) {
+			$this->flash->error('This hunt was canceled');
+			$this->response->redirect('order_hunts/' . $order->id);
+
+			return;
+		}
+
+		$p = $this->db->fetchAll(
+			'SELECT p.id, p.team_id, p.email, s.thumbnail, p.first_name as pfname,' .
+			'p.last_name as plname, s.first_name as sfname, s.last_name as slname ' .
+			'FROM players p LEFT JOIN teams t ON (p.team_id = t.id) ' .
+			'LEFT JOIN social_players s ON (s.player_id = p.id) WHERE t.order_hunt_id = ' . $orderHunt->id,
+		Db::FETCH_ASSOC);
+
+		$players = [];
+		foreach ($p as $player) {
+			$players[$player['id']] = [
+				'team'		=> (int)$player['team_id'],
+				'email'		=> $player['email'],
+				'thumb'		=> $player['thumbnail'],
+				'fname'		=> is_null($player['pfname']) ? $player['sfname'] : $player['pfname'],
+				'lname'		=> is_null($player['plname']) ? $player['slname'] : $player['plname'],
+			];
+		}
+
+		$teamsStatus = $orderHunt->getTeamsStatus();
+		$teams = [];
+		foreach ($teamsStatus as $ts)
+			$teams[$ts['id']] = $ts['name'];
+
+		return $this->jsonResponse([
+			'success'	=> true,
+			'players'	=> $players,
+			'teams'		=> $teams
+		]);
 	}
 
 }
