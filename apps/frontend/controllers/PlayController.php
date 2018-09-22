@@ -441,16 +441,15 @@ EOF
 		if ($timeToStart > 0) {
 			$this->view->startTimer = $timeToStart;
 		} else if (is_null($question)) {
+
 			//$this->view->responseLink = ['Leaderboard', $this->url->get('leaderboard')];
 			if (is_null($thisOrderHunt->end_msg))
 				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . $this->view->t->_('You\'ve completed your scavenger hunt!<br>Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots!');
 			else
 				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . nl2br(htmlspecialchars($thisOrderHunt->end_msg));
 
-			$this->view->isSurveyAnswered = true;
 			if (empty($responseMsg) && !$this->isSurveyAnswered())
-				$this->view->isSurveyAnswered = false;
-				// return $this->response->redirect('play/survey');
+				return $this->response->redirect('play/survey');
 
 			$this->view->facebookSDK = true;
 			//if ($isLeader) {
@@ -471,8 +470,11 @@ EOF
 			$this->view->qattachment = is_null($question['qattachment']) ? false : json_decode($question['qattachment'], true);
 
 			if ($timeToEnd < 0) {
+				if (!$this->isSurveyAnswered())
+					return $this->response->redirect('play/survey');
 				if ($thisOrderHunt->isMultiHunt())
 					return $this->response->redirect('index/chooseHunt');
+
 				$responseMsg = $showHint = false;
 				if (is_null($thisOrderHunt->timeout_msg))
 					$this->view->end_msg = '<h2>This hunt has ended!</h2>Meet your group at your end location to hear the official results!<br><br>Hope you had fun - be sure to spread the word about Strayboots!';

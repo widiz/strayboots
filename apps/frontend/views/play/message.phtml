@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function(){
 <? else: ?>
 				<div class="options">
 					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success"><?= $t->_('Leaderboard') ?></a><br>
-					<? if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
+					<? /*if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
 						<a href="/play/survey" class="btn btn-warning"><?= $t->_('Take a quick survey') ?></a>
-					<? endif ?>
+					<? endif*/ ?>
 <? if ($multiHunt && $isLeader && !$lastMulti): ?>
 					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-warning"><?= $t->_('Choose another hunt') ?></a>
 <? endif ?>
