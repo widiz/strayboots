@@ -96,6 +96,9 @@
 
 	data.cn = null;
 
+	var isLoadingPlayers = false,
+		afterLoadPlayers = [];
+
 	var dialog = bootbox.prompt("Please choose your chat name", function(name){
 		if (name)
 			data.cn = name;
@@ -145,14 +148,17 @@
 			}
 		}
 		if (appendMessage) {
-			var player = data.players[message.pid];
-			$messageP.insertBefore($(
+			var player = data.players[message.pid] || {
+				team: 0,
+				name: ''
+			};
+			var messageRow = $(
 				'<div class="message-row" data-pid="' + message.pid + '">' +
 					'<div class="message' + (isImg ? ' img' : '') + '">' +
 						'<div class="message-table clearfix' + (message.pid == data.pid && message.cn == data.cn ? ' me' : '') + '">' +
 							'<div class="message-columns image-column">' +
 								'<div class="image-wrapper">' +
-									'<img src="' + player.thumb + '">' +
+									'<img src="' + (player.thumb || '/img/unknown.jpg') + '" class="player-thumb">' +
 									//'<span class="chat-status online"></span>' + TODO add this
 								'</div>' +
 							'</div>' +
@@ -165,7 +171,40 @@
 						'</div>' +
 					'</div>' +
 				'</div>'
-			).appendTo(block).find('.time'));
+			).appendTo(block);
+			$messageP.insertBefore(messageRow.find('.time'));
+			if (typeof data.players[message.pid] === 'undefined') {
+				afterLoadPlayers.push(function(){
+					player = data.players[message.pid];
+					if (player) {
+						messageRow.find('.player-thumb').attr('src', player.thumb);
+						messageRow.find('h2').html((message.cn ? toText(message.cn) : player.name) + (typeof data.teams[player.team] == 'string' ? ' &nbsp;<span>' + data.teams[player.team] + '</span>' : ''));
+					}
+				});
+				if (!isLoadingPlayers) {
+					isLoadingPlayers = true;
+					$.ajax({
+						url: '/clients/chat/players/' + data.orderHunt,
+						cache: false,
+						success: function(d) {
+							if (d.success && d.teams && d.players) {
+								data.teams = d.teams;
+								setPlayers(d.players);
+								for (var ii = 0; ii < afterLoadPlayers.length; ii++) {
+									try { afterLoadPlayers[ii](); } catch(E) { }
+								}
+								afterLoadPlayers = [];
+								isLoadingPlayers = false;
+							} else {
+								this.error();
+							}
+						},
+						error: function(){
+							isLoadingPlayers = false;
+						}
+					});
+				}
+			}
 		}
 	}
 
@@ -176,21 +215,36 @@
 
 	data.firebase = firebase.database();
 
-	data.players[0] = {
-		team: 0,
-		email: "Strayboots Staff",
-		fname: null,
-		lname: null,
-		thumb: null
-	};
+	function setPlayers(players) {
+		if (typeof players === 'object' && players !== null)
+			data.players = players;
 
-	for (var pid in data.players) {
-		try {
-			var p = data.players[pid];
-			data.players[pid].name = ((p.fname || p.lname) ? toText(p.fname + ' ' + p.lname).trim() : '') || p.email;
-			data.players[pid].thumb = p.thumb || '/img/unknown.jpg';
-		} catch(e){}
+		data.players[0] = {
+			team: 0,
+			email: "Strayboots Staff",
+			fname: null,
+			lname: null,
+			thumb: null
+		};
+		if (!data.players[data.pid]) {
+				data.players[data.pid] = {
+				team: 0,
+				email: 'Me',
+				fname: null,
+				lname: null,
+				thumb: null
+			};
+		}
+
+		for (var pid in data.players) {
+			try {
+				var p = data.players[pid];
+				data.players[pid].name = ((p.fname || p.lname) ? toText(p.fname + ' ' + p.lname).trim() : '') || p.email;
+				data.players[pid].thumb = p.thumb || '/img/unknown.jpg';
+			} catch(e){}
+		}
 	}
+	setPlayers();
 
 	var _room = data.firebase.ref().child(window.FB_PREFIX + 'orderhuntchat/' + data.orderHunt),
 		chatWrapper = $('#chat'),
@@ -325,6 +379,7 @@
 				if (typeof msg.content == 'string' && msg.content) {
 					messages.push({
 						pid: msg.pid,
+						pname: msg.pname || null,
 						cn: msg.cn || null,
 						content: msg.content,
 						timestamp: msg.timestamp
@@ -333,6 +388,7 @@
 					defer(msg.image);
 					messages.push({
 						pid: msg.pid,
+						pname: msg.pname || null,
 						cn: msg.cn || null,
 						image: msg.image,
 						timestamp: msg.timestamp

@@ -2,7 +2,8 @@
 
 namespace Play\Frontend\Controllers;
 
-use \Exception;
+use Exception,
+	Phalcon\Db;
 
 class ChatController extends ControllerBase
 {
@@ -17,7 +18,7 @@ class ChatController extends ControllerBase
 			'p.last_name as plname, s.first_name as sfname, s.last_name as slname ' .
 			'FROM players p LEFT JOIN teams t ON (p.team_id = t.id) ' .
 			'LEFT JOIN social_players s ON (s.player_id = p.id) WHERE t.order_hunt_id = ' . $this->orderHunt->id,
-		\Phalcon\Db::FETCH_ASSOC);
+		Db::FETCH_ASSOC);
 
 		$players = [];
 
@@ -63,6 +64,41 @@ class ChatController extends ControllerBase
 							//->addJs('/js/plugins/jquery.emoji.js')
 							->addJs('/js/app/chat.js');
 
+	}
+
+	public function playersAction()
+	{
+		if ($this->requirePlayer())
+			return true;
+
+		$p = $this->db->fetchAll(
+			'SELECT p.id, p.team_id, p.email, s.thumbnail, p.first_name as pfname,' .
+			'p.last_name as plname, s.first_name as sfname, s.last_name as slname ' .
+			'FROM players p LEFT JOIN teams t ON (p.team_id = t.id) ' .
+			'LEFT JOIN social_players s ON (s.player_id = p.id) WHERE t.order_hunt_id = ' . $this->orderHunt->id,
+		Db::FETCH_ASSOC);
+
+		$players = [];
+		foreach ($p as $player) {
+			$players[$player['id']] = [
+				'team'		=> (int)$player['team_id'],
+				'email'		=> $player['email'],
+				'thumb'		=> $player['thumbnail'],
+				'fname'		=> is_null($player['pfname']) ? $player['sfname'] : $player['pfname'],
+				'lname'		=> is_null($player['plname']) ? $player['slname'] : $player['plname'],
+			];
+		}
+
+		$teamsStatus = $this->orderHunt->getTeamsStatus();
+		$teams = [];
+		foreach ($teamsStatus as $ts)
+			$teams[$ts['id']] = $ts['name'];
+
+		return $this->jsonResponse([
+			'success'	=> true,
+			'players'	=> $players,
+			'teams'		=> $teams
+		]);
 	}
 
 	public function uploadAction()
@@ -205,7 +241,6 @@ class ChatController extends ControllerBase
 			'success' => !empty($files),
 			'files' => $files
 		]);
-
 	}
 
 }
