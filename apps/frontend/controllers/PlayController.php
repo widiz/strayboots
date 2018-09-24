@@ -938,7 +938,7 @@ EOF
 
 	private function isSurveyAnswered()
 	{
-		return $this->orderHunt->isSurveyDisabled() ||
+		return SBENV === 'europe' || $this->orderHunt->isSurveyDisabled() ||
 				$this->cookies->has('survey' . $this->orderHunt->id . 'p' . $this->player->id) ||
 				$this->redis->exists(SB_PREFIX . 'survey:' . $this->orderHunt->id . ':' . $this->player->id);
 	}

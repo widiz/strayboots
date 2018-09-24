@@ -243,33 +243,35 @@ class OrderHuntsController extends \ControllerBase
 		try {
 			$orderHunt->addTeams($orderHunt->max_teams);
 
-			try {
-				///// Adding BonusQuestions  //////
-				$bonus = new BonusQuestions();
-				$bonus->order_hunt_id = $orderHunt->id;
-				$bonus->type = BonusQuestions::TypeTeam;
-				$bonus->question = 'What country was the fortune cookie invented?';
-				$bonus->answers = "USA";
-				$bonus->score = 25;
-				$bonus->save();
+			if (SBENV !== 'europe' && SBENV !== 'india') {
+				try {
+					///// Adding BonusQuestions  //////
+					$bonus = new BonusQuestions();
+					$bonus->order_hunt_id = $orderHunt->id;
+					$bonus->type = BonusQuestions::TypeTeam;
+					$bonus->question = 'What country was the fortune cookie invented?';
+					$bonus->answers = "USA";
+					$bonus->score = 25;
+					$bonus->save();
 
-				$bonus = new BonusQuestions();
-				$bonus->order_hunt_id = $orderHunt->id;
-				$bonus->type = BonusQuestions::TypeTeam;
-				$bonus->question = 'What name did Theodore Geisel pen his books under?';
-				$bonus->answers = "Dr. Seuss";
-				$bonus->score = 25;
-				$bonus->save();
-				
-				$bonus = new BonusQuestions();
-				$bonus->order_hunt_id = $orderHunt->id;;
-				$bonus->type = BonusQuestions::TypeTeam;
-				$bonus->question = 'The statue of liberty was given to the US by which country?';
-				$bonus->answers = "France";
-				$bonus->score = 25;
-				$bonus->save();
-			} catch (Exception $e) {
-				$this->flash->error('Error creating bonus questions: ' . $e->getMessage());
+					$bonus = new BonusQuestions();
+					$bonus->order_hunt_id = $orderHunt->id;
+					$bonus->type = BonusQuestions::TypeTeam;
+					$bonus->question = 'What name did Theodore Geisel pen his books under?';
+					$bonus->answers = "Dr. Seuss";
+					$bonus->score = 25;
+					$bonus->save();
+					
+					$bonus = new BonusQuestions();
+					$bonus->order_hunt_id = $orderHunt->id;;
+					$bonus->type = BonusQuestions::TypeTeam;
+					$bonus->question = 'The statue of liberty was given to the US by which country?';
+					$bonus->answers = "France";
+					$bonus->score = 25;
+					$bonus->save();
+				} catch (Exception $e) {
+					$this->flash->error('Error creating bonus questions: ' . $e->getMessage());
+				}
 			}
 			
 
