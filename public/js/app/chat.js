@@ -84,7 +84,7 @@
 			var time = $(this);
 			var datetime = new Date(time.attr('datetime'));
 			if (datetime)
-				time.text(moment(datetime).fromNow());
+				time.text(moment.utc(datetime).fromNow());
 		});
 	}
 
