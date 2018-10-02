@@ -27,8 +27,10 @@ document.addEventListener("DOMContentLoaded", function(){
 				<?= isset($questions) ? $this->partial('play/strategy_list') : '' ?>
 <? else: ?>
 				<div class="options">
+					<? if (!$leaderboardDisabled): ?>
 					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success"><?= $t->_('Leaderboard') ?></a><br>
-					<? /*if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
+					<? endif;
+					/*if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
 						<a href="/play/survey" class="btn btn-warning"><?= $t->_('Take a quick survey') ?></a>
 					<? endif*/ ?>
 <? if ($multiHunt && $isLeader && !$lastMulti): ?>
