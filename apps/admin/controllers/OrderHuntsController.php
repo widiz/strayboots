@@ -127,7 +127,6 @@ class OrderHuntsController extends \ControllerBase
 		$this->view->client = $order->Client;
 
 		if (!$this->request->isPost()) {
-
 			$this->tag->setDefault('id', $orderHunt->id);
 			$this->tag->setDefault('order_id', $orderHunt->order_id);
 			$this->tag->setDefault('hunt_id', $orderHunt->hunt_id);
@@ -145,7 +144,7 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('canceled', $orderHunt->isCanceled());
 			$this->tag->setDefault('multi_hunt', $orderHunt->isMultiHunt());
 			$this->tag->setDefault('survey_disabled', $orderHunt->isSurveyDisabled());
-			
+			$this->tag->setDefault('leaderboard_disabled', $orderHunt->isLeaderBoardDisabled());
 		}
 		$this->addEdit();
 	}
@@ -213,6 +212,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setCanceled($this->request->getPost('canceled'));
 		$orderHunt->setMultiHunt($this->request->getPost('multi_hunt'));
 		$orderHunt->setSurveyDisabled($this->request->getPost('survey_disabled'));
+		$orderHunt->setLeaderBoardDisabled($this->request->getPost('leaderboard_disabled'));
 
 		$hunt = $orderHunt->Hunt;
 
@@ -355,6 +355,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setCanceled($this->request->getPost('canceled'));
 		$orderHunt->setMultiHunt($this->request->getPost('multi_hunt'));
 		$orderHunt->setSurveyDisabled($this->request->getPost('survey_disabled'));
+		$orderHunt->setLeaderBoardDisabled($this->request->getPost('leaderboard_disabled'));
 
 		$hunt = $orderHunt->Hunt;
 		$isOk = true;
@@ -565,6 +566,8 @@ class OrderHuntsController extends \ControllerBase
 				}
 			}
 			$this->view->customQuestions = $customQuestions;
+		} else {
+			$this->view->customQuestions = [];
 		}
 
 		$files = $ohHunts = [];

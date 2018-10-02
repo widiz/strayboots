@@ -41,9 +41,9 @@
 <? if ($loggedIn): ?>
 						<li><a href="<?= $this->url->get('map') ?>"><?= $t->_('Map') ?></a></li>
 						<li><a href="<?= $this->url->get('chat') ?>"><?= $t->_('Chat') ?></a></li>
-<? if (isset($firebase['appLoc']['orderHunt']) && $firebase['appLoc']['orderHunt'] != 1850): //loyalty ?>
+<? if (!$leaderboardDisabled): ?>
 						<li><a href="<?= $this->url->get('leaderboard') ?>"><?= $t->_('Leaderboard') ?></a></li>
-<? endif // loyalty ?>
+<? endif ?>
 <? if ($isLeader): ?>
 						<li class="visible-xs"><a href="<?= $this->url->get('index/rename') ?>"><?= $t->_('Rename Team') ?></a></li>
 <? if ($isMultiHunt): ?>

@@ -94,14 +94,17 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			if ($orderHunt->isCanceled()) {
 				Players::logout();
 				$orderHunt = $this->team = $this->player = false;
+				$this->view->leaderboardDisabled = $this->view->loggedIn = $this->view->isMultiHunt = false;
+				$multilang = 0;
 			} else {
 				if ($orderHunt->isDurationFinish()) {
 					$orderHunt->finish = date('Y-m-d H:i:s', ($this->team ? strtotime($this->team->activation) : time()) + $this->hunt->getDurationMinutes() * 60);
 				}
+				$this->view->leaderboardDisabled = $orderHunt->isLeaderBoardDisabled();
 				$this->view->isMultiHunt = $orderHunt->isMultiHunt();
 			}
 		} else {
-			$this->view->loggedIn = $this->view->isMultiHunt = false;
+			$this->view->leaderboardDisabled = $this->view->loggedIn = $this->view->isMultiHunt = false;
 			$multilang = 0;
 		}
 

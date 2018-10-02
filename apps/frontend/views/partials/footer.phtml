@@ -20,7 +20,7 @@
 							<i class="arrow"></i>
 						</div>
 					</div>
-<? if (isset($firebase['appLoc']['orderHunt']) && $firebase['appLoc']['orderHunt'] != 1850): //loyalty ?>
+<? if (!$leaderboardDisabled): ?>
 					<div class="col-sm-2">
 						<div>
 							<b class="second_color" style="position:absolute;left:50%;margin-left:-59px"><?= $t->_('Leaderboard') ?></b>
@@ -32,7 +32,7 @@
 							<i class="arrow"></i>
 						</div>
 					</div>
-<? endif //loyalty ?>
+<? endif ?>
 					<div class="col-sm-2">
 						<div>
 							<b class="second_color"><?= $t->_('Map') ?></b>
@@ -68,11 +68,11 @@
 					<div class="col-sm-<?= $colSize ?>">
 						<a href="<?= $this->url->get('/') ?>"<?= $controllerName == 'index' || $controllerName == 'play' ? ' class="active"' : '' ?>><i class="icn home"></i></a>
 					</div>
-<? if (isset($firebase['appLoc']['orderHunt']) && $firebase['appLoc']['orderHunt'] != 1850): //loyalty ?>
+<? if (!$leaderboardDisabled): ?>
 					<div class="col-sm-<?= $colSize ?>">
 						<a href="<?= $this->url->get('leaderboard') ?>"<?= $controllerName == 'leaderboard' ? ' class="active"' : '' ?>><i class="icn leaderboard"></i></a>
 					</div>
-<? endif //loyalty ?>
+<? endif ?>
 					<div class="col-sm-<?= $colSize ?>">
 						<a href="<?= $this->url->get('map') ?>"<?= $controllerName == 'map' ? ' class="active"' : '' ?>><i class="icn map"></i></a>
 					</div>

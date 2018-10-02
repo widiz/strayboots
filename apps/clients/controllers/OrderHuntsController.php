@@ -346,6 +346,8 @@ class OrderHuntsController extends \ControllerBase
 				}
 			}
 			$this->view->customQuestions = $customQuestions;
+		} else {
+			$this->view->customQuestions = [];
 		}
 		if ($multihunt) {
 			$max = (int)$this->db->fetchColumn(
@@ -568,6 +570,8 @@ class OrderHuntsController extends \ControllerBase
 				}
 			}
 			$this->view->customQuestions = $customQuestions;
+		} else {
+			$this->view->customQuestions = [];
 		}
 		foreach ($teamsStatus as $t => $team) {
 			$teamsStatus[$t]['question'] = isset($teamPos[$team['id']]) ? $teamPos[$team['id']] : 0;

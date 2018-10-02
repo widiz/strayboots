@@ -9,7 +9,7 @@ class LeaderboardController extends ControllerBase
 	{
 		if ($this->requirePlayer())
 			return true;
-		if ($this->orderHunt->id == 1850) //loyalty
+		if ($this->orderHunt->isLeaderBoardDisabled()) //loyalty
 			return $this->response->redirect('/play');
 		// Set current status
 		$teamsStatus = $this->orderHunt->getTeamsStatus();

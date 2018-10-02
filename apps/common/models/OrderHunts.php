@@ -677,6 +677,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 16);
 	}
 
+	public function isLeaderBoardDisabled()
+	{
+		return (bool)($this->flags & 32);
+	}
+
 	public function setCustomLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
@@ -700,6 +705,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public function setSurveyDisabled($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 16;
+	}
+
+	public function setLeaderBoardDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 32;
 	}
 
 	/**
