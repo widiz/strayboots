@@ -31,7 +31,7 @@ class OrderHuntMailBase
 			// 'cc' => '077cca161d@invite.trustpilot.com',
 			'bcc' => implode(',', $this->cc)
 		]);
-		$mail2 = is_null($email) ? call_user_func($sendMail, 'ariel@safronov.co.il,karen@strayboots.com,madison@strayboots.com,support@strayboots.com', $this->title, $this->text, $this->html) : true;
+		$mail2 = is_null($email) ? call_user_func($sendMail, 'ariel@safronov.co.il,karen@strayboots.com,ido@strayboots.com,support@strayboots.com', $this->title, $this->text, $this->html) : true;
 		return $mail1 && $mail2;
 	}
 
