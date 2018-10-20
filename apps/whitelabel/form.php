@@ -1,4 +1,18 @@
 		<form method="post" id="activation-form" action="/">
+<? if (defined('password')): ?>
+			<div class="row">
+				<div class="grid-100">
+					<input type="name" id="nameField" name="name" placeholder="Name" />
+					<label class="error" id="nameError"></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="grid-100">
+					<input type="password" id="passwordField" name="password" placeholder="Password" />
+					<label class="error" id="passwordError"></label>
+				</div>
+			</div>
+<? else: ?>
 			<div class="row">
 				<div class="grid-50">
 					<input type="text" id="firstNameField" name="first_name" placeholder="First Name" />
@@ -9,6 +23,7 @@
 					<label class="error" id="lastNameError"></label>
 				</div>
 			</div>
+<? endif ?>
 			<div class="row">
 				<div class="grid-100">
 					<input type="email" id="emailField" name="email" placeholder="Email" />
