@@ -448,21 +448,22 @@ EOF
 			else
 				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . nl2br(htmlspecialchars($thisOrderHunt->end_msg));
 
+			$this->view->facebookSDK = true;
+
+			$firebasePosition = empty($responseMsg) ? 99999 : ('88888_' . (int)$showHint . '_0');
+			if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != $firebasePosition) {
+				if (($fbr = str_replace('"', '', $this->firebase->set(FB_PREFIX . 'orderhuntloc/' . $thisTeam->id, $firebasePosition, [], 3))) != $firebasePosition) {
+					try {
+						$this->logger->critical("Firebase error3: (player {$this->player->id}) " . $fbr . ' should be ' . $firebasePosition);
+					} catch(Exception $e) { }
+				} else {
+					$redis->set(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id, $firebasePosition, 60);
+				}
+			}
+
 			if (empty($responseMsg) && !$this->isSurveyAnswered())
 				return $this->response->redirect('play/survey');
 
-			$this->view->facebookSDK = true;
-			//if ($isLeader) {
-				if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != 99999) {
-					if (($fbr = str_replace('"', '', $this->firebase->set(FB_PREFIX . 'orderhuntloc/' . $thisTeam->id, 99999, [], 3))) != 99999) {
-						try {
-							$this->logger->critical("Firebase error3: (player {$this->player->id}) " . $fbr);
-						} catch(Exception $e) { }
-					} else {
-						$redis->set(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id, 99999, 60);
-					}
-				}
-			//}
 			/*$responseMsg = */$showHint = false;
 			//if ($responseMsg === false)
 			//	$responseMsg = '';
@@ -470,6 +471,15 @@ EOF
 			$this->view->qattachment = is_null($question['qattachment']) ? false : json_decode($question['qattachment'], true);
 
 			if ($timeToEnd < 0) {
+				if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != 99999) {
+					if (($fbr = str_replace('"', '', $this->firebase->set(FB_PREFIX . 'orderhuntloc/' . $thisTeam->id, 99999, [], 3))) != 99999) {
+						try {
+							$this->logger->critical("Firebase error2: (player {$this->player->id}) " . $fbr);
+						} catch(Exception $e) { }
+					} else {
+						$redis->set(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id, 99999, 60);
+					}
+				}
 				if (!$this->isSurveyAnswered())
 					return $this->response->redirect('play/survey');
 				if ($thisOrderHunt->isMultiHunt())
@@ -480,22 +490,12 @@ EOF
 					$this->view->end_msg = '<h2>This hunt has ended!</h2>Meet your group at your end location to hear the official results!<br><br>Hope you had fun - be sure to spread the word about Strayboots!';
 				else
 					$this->view->end_msg = '<h2>This hunt has ended!</h2>' . nl2br(htmlspecialchars($thisOrderHunt->timeout_msg));
-				if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != 99999) {
-					if (($fbr = str_replace('"', '', $this->firebase->set(FB_PREFIX . 'orderhuntloc/' . $thisTeam->id, 99999, [], 3))) != 99999) {
-						try {
-							$this->logger->critical("Firebase error2: (player {$this->player->id}) " . $fbr);
-						} catch(Exception $e) { }
-					} else {
-						$redis->set(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id, 99999, 60);
-					}
-				}
 			} else {
 				$this->view->showHint = $showHint = $redis->exists(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id']);
 
 				$firebasePosition = $question['currentPos'] . '_' . (int)$showHint . '_' . (empty($responseMsg) ? 1 : 0);
-				if (/*$isLeader && */$redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != $firebasePosition) {
+				if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != $firebasePosition) {
 					if (($fbr = str_replace('"', '', $this->firebase->set(FB_PREFIX . 'orderhuntloc/' . $thisTeam->id, $firebasePosition, [], 3))) != $firebasePosition) {
-						//var_dump($fbr);die;
 						try {
 							$this->logger->critical("Firebase error: (player {$this->player->id}) " . $fbr . ' should be ' . $firebasePosition);
 						} catch(Exception $e) { }
@@ -869,9 +869,9 @@ EOF
 			$this->view->firebase = [
 				'config' => $this->config->firebase,
 				'appLoc' => [
-					(int)$thisTeam->id, is_null($question) ? 99999 : $question['currentPos'], $showHint, empty($responseMsg),
+					(int)$thisTeam->id, is_null($question) ? (empty($responseMsg) ? 99999 : '88888_0_0') : $question['currentPos'], $showHint, empty($responseMsg),
 					'orderHunt' => (int)$thisOrderHunt->id,
-					'timeLeft' => isset($this->view->end_msg) ? -1 : $timeToEnd
+					'timeLeft' => isset($this->view->end_msg) && empty($responseMsg) ? -1 : $timeToEnd
 				]
 			];
 		}

@@ -15,6 +15,7 @@ class TaskBase extends \Phalcon\Cli\Task
 	}
 
 	public function sendMail($to, $subject, $text = '', $html = '', $attachments = [], $options = [], $attachmentsOpts = []) {
+		
 		if (!is_array($to))
 			$to = explode(',', $to);
 		if (isset($options['bcc'])) {
