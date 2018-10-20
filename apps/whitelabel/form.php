@@ -6,12 +6,6 @@
 					<label class="error" id="nameError"></label>
 				</div>
 			</div>
-			<div class="row">
-				<div class="grid-100">
-					<input type="password" id="passwordField" name="password" placeholder="Password" />
-					<label class="error" id="passwordError"></label>
-				</div>
-			</div>
 <? else: ?>
 			<div class="row">
 				<div class="grid-50">
@@ -30,6 +24,14 @@
 					<label class="error" id="emailError"></label>
 				</div>
 			</div>
+<? if (defined('password')): ?>
+			<div class="row">
+				<div class="grid-100">
+					<input type="password" id="passwordField" name="password" placeholder="Password" />
+					<label class="error" id="passwordError"></label>
+				</div>
+			</div>
+<? endif ?>
 			<div class="options row">
 				<div class="grid-40"><input type="submit" class="btn btn-success" value="Start now" /></div>
 				<div class="grid-60"><button class="btn btn-fb" id="fblogin">Facebook Login</button></div>
