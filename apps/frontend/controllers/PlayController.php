@@ -450,7 +450,7 @@ EOF
 
 			$this->view->facebookSDK = true;
 
-			$firebasePosition = empty($responseMsg) ? 99999 : ('88888_' . (int)$showHint . '_0');
+			$firebasePosition = empty($responseMsg) ? 99999 : '88888_0_0';
 			if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != $firebasePosition) {
 				if (($fbr = str_replace('"', '', $this->firebase->set(FB_PREFIX . 'orderhuntloc/' . $thisTeam->id, $firebasePosition, [], 3))) != $firebasePosition) {
 					try {
