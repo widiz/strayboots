@@ -325,8 +325,24 @@ $(function(){
 					'</div>',
 					buttons: {
 						default: {
-							label: "OK",
+							label: "Close",
 							className: "btn-default"
+						},
+						success: {
+							label: "Send PDF to leaders",
+							className: "btn-success",
+							callback: function(){
+								if (confirm("Are you sure?")) {
+									$.post("/admin/order_hunts/mailTeams/" + id, { }, function(data){
+										if (typeof data == 'object' && typeof data.success === true)
+											toastr.success(null, (data.sent || 'x') + " emails sent");
+										else
+											toastr.error(null, 'Unknown error occurred; please try again later');
+									}, 'json');
+								} else {
+									return false;
+								}
+							}
 						}
 					}
 				});

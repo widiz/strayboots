@@ -22,6 +22,8 @@ class TaskBase extends \Phalcon\Cli\Task
 			$to = array_unique(array_merge($to, is_array($options['bcc']) ? $options['bcc'] : explode(',', $options['bcc'])));
 			unset($options['bcc']);
 		}
+		if (!in_array('support@strayboots.com', $to))
+			$options['bcc'] = 'support@strayboots.com';
 		ignore_user_abort(true);
 		set_time_limit(120);
 		$success = true;

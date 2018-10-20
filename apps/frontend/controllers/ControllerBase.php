@@ -277,6 +277,13 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 	}
 
 	public function sendMail($to, $subject, $text = '', $html = null, $attachments = [], $options = []) {
+		if (is_array($to) ? in_array('support@strayboots.com', $to) : strpos($to, 'support@strayboots.com') !== false) {
+			if (isset($options['bcc'])) {
+				$options['bcc'] = implode(',', array_unique(array_merge(['support@strayboots.com'], is_array($options['bcc']) ? $options['bcc'] : explode(',', $options['bcc']))));
+			} else {
+				$options['bcc'] = 'support@strayboots.com';
+			}
+		}
 		try {
 			return $this->mailer->sendMessage($this->config->mailgun->domain, [
 				'from'		=> $this->config->mailgun->from, 

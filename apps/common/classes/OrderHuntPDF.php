@@ -838,7 +838,7 @@ EOF;
 		$dompdf->loadHtml($html);
 		$dompdf->render();
 
-		$this->fileName = $config->application->tmpDir . $this->sanitizeName($oh->Order->name) . ' Hunt Instructions ' . $oh->id . '.pdf';
+		$this->fileName = $config->application->tmpDir . $this->sanitizeName($oh->Order->name) . ' Hunt Instructions ' . $oh->id . (is_null($teamId) ? '' : ('.' . $teamId)) . '.pdf';
 	}
 
 	public function downloadPDF($name = '')

@@ -9,7 +9,8 @@ $hasEvents = !empty($customEvents);
 
 <?= $this->getContent() ?>
 
-<div style="background:url('<?= $NCR ? '/img/ncr/register.jpg' : 'https://www.strayboots.com/media/static/img/aboutus/s2.jpg' ?>') no-repeat <?= $NCR ? '0 75%' : '50% 50%' ?>;background-size:cover">
+<div style="background:url('<?= $NCR ? '/img/ncr/register.jpg' : '/img/11600.jpg' ?>') no-repeat <?= $NCR ? '0 75%' : '50% 50%' ?>;background-size:cover">
+	<div style="background:rgba(0,0,0,.3)">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -29,6 +30,7 @@ $hasEvents = !empty($customEvents);
 			</div>
 		</div>
 	</div>
+	</div>
 	<div class="data-header visible-lg">
 		<span>Start:</span> <?= date('m.d.Y | h:i A \E\S\T', strtotime($orderHunt->start)) ?>  <span>Finish:</span> <?= date('m.d.Y | h:i A \E\S\T', strtotime($orderHunt->finish)) ?>
 	</div>
@@ -46,9 +48,9 @@ $hasEvents = !empty($customEvents);
 						<tr>
 							<th>Position</th>
 							<th>Team</th>
-							<!-- <? //if ($hasEvents): ?> -->
+							<? //if ($hasEvents): ?>
 								<th class="hidden-xs hidden-sm">Hunt Points</th>
-							<!-- <? //endif ?> -->
+							<? //endif ?>
 							<? if (count($bonusQuestions) > 0): ?>
 								<th class="hidden-xs hidden-sm">Bonus</th>
 							<? endif ?>
@@ -87,9 +89,9 @@ $hasEvents = !empty($customEvents);
 						<tr>
 							<td><?= ($team['position'] < 10 ? "&nbsp;{$team['position']}&nbsp;" : $team['position']) ?></td>
 							<td><?= $team['name'] ?></td>
-							<!-- <? //if ($hasEvents): ?> -->
+							<? //if ($hasEvents): ?>
 								<td class="hidden-xs hidden-sm"><?= $team['huntscore']  - $bonusQuestion - $customQuestion ?></td>
-							<!-- <? //endif ?> -->
+							<? //endif ?>
 							<? if (count($bonusQuestions) > 0): ?>
 								<td class="hidden-xs hidden-sm"><?= $bonusQuestion ?></td>
 							<? endif ?>
@@ -120,7 +122,7 @@ $hasEvents = !empty($customEvents);
 <? if ($hasEvents): ?>
 			<div class="table-page hidden-xs">
 				<h2>Custom Events</h2>
-				<div style="overflow:auto;width:100%;max-height:900vh;-webkit-overflow-scrolling:touch">
+				<div style="overflow:auto;width:100%;max-height:34vh;-webkit-overflow-scrolling:touch">
 				<table class="table table-striped" id="custom-events">
 					<thead>
 						<tr>
@@ -145,7 +147,7 @@ $hasEvents = !empty($customEvents);
 <? if (!empty($bonusQuestions)): ?>
 			<div class="table-page hidden-xs">
 				<h2>Bonus Questions</h2>
-				<div style="overflow:auto;width:100%;max-height:900vh;-webkit-overflow-scrolling:touch">
+				<div style="overflow:auto;width:100%;max-height:34vh;-webkit-overflow-scrolling:touch">
 				<table class="table table-striped" id="bonus-questions">
 					<thead>
 						<tr>
@@ -176,7 +178,7 @@ $hasEvents = !empty($customEvents);
 <? if (!empty($customQuestions)): ?>
 			<div class="table-page hidden-xs">
 				<h2>Custom Questions</h2>
-				<div style="overflow:auto;width:100%;max-height:90vh;-webkit-overflow-scrolling:touch">
+				<div style="overflow:auto;width:100%;max-height:34vh;-webkit-overflow-scrolling:touch">
 				<table class="table table-striped" id="custom-questions" style="color:#373737;min-width:580px">
 					<thead>
 						<tr>
