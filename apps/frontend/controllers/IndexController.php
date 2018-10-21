@@ -30,9 +30,14 @@ class IndexController extends ControllerBase
 			$activation = $this->request->getPost('activation', 'trim');
 			$id = (int)$this->request->getPost('id', 'int');
 			$lpId = (int)$this->request->getPost('lp', 'int');
+			$validEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+			if ($validEmail && \Blocked::findFirstByEmail($email)) {
+				$this->flash->error('Failed. please contact support 877-787-2929');
+				return $this->response->redirect($this->request->getHTTPReferer());
+			}
 			if ($id > 0) {
 				$orderHunt = OrderHunts::findFirstById($id);
-				if ($lpId > 0 && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				if ($lpId > 0 && $validEmail) {
 					$lp = \LoginPages::findFirst('id=' . $lpId . ' AND order_hunt_id=' . $id);
 					if ($lp && !empty($lp->email_login)) {
 						if ($this->sendMail($lp->email_login, 'Strayboots login request ' . $lp->slug, 'Email: ' . $email . PHP_EOL . 'OrderHunt: ' . $id . PHP_EOL . $this->config->fullUri . '/admin/order_hunts/' . $orderHunt->order_id)) {
@@ -41,7 +46,7 @@ class IndexController extends ControllerBase
 							$this->assets->collection('style')->addCss('/css/app/play.css');
 							return $this->view->pick('play/message');
 						} else {
-							$this->flash->error('Failed. please try again or contact support');
+							$this->flash->error('Failed. please try again or contact support 877-787-2929');
 							return $this->response->redirect($this->request->getHTTPReferer());
 						}
 					}
@@ -211,7 +216,7 @@ class IndexController extends ControllerBase
 								return $this->response->redirect($activationSet && $orderHunt->isMultiHunt() && $isLeader ? 'index/chooseHunt' : 'play');
 							}
 						} else {
-							$this->flash->error('Failed. please try again or contact support');
+							$this->flash->error('Failed. please try again or contact support 877-787-2929');
 						}
 					} else {
 						$this->flash->error('This hunt has expired');
@@ -342,7 +347,7 @@ class IndexController extends ControllerBase
 				//var_dump($routes, \Routes::findFirstById($r)->toArray(), $orderHunt->hunt_id);die;
 
 				if (!($r > 0)) {
-					$this->flash->error('Something went wrong; please try again or contact support');
+					$this->flash->error('Something went wrong; please try again or contact support 877-787-2929');
 					try{
 						$this->logger->error('Failed choose hunt: route failed; team ' . $this->team->id . ' OrderHunt: ' . $this->orderHunt->id . ' NewOrderHunt: ' . $orderHunt->id . ' NewRoute: ' . $r);
 					} catch(Exception $e) { }
@@ -360,7 +365,7 @@ class IndexController extends ControllerBase
 					$this->redis->delete(SB_PREFIX . 'ohloc:' . $this->orderHunt->id . ':' . $this->team->id);
 					$this->redis->delete(SB_PREFIX . 'ohloc:' . $orderHunt->id . ':' . $this->team->id);
 				} else {
-					$this->flash->error('Something went wrong; please try again or contact support');
+					$this->flash->error('Something went wrong; please try again or contact support 877-787-2929');
 					try{
 						$this->logger->error('Failed choose hunt: team ' . $this->team->id . ' OrderHunt: ' . $this->orderHunt->id . ' NewOrderHunt: ' . $orderHunt->id . ' NewRoute: ' . $r);
 					} catch(Exception $e) { }

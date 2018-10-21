@@ -1,4 +1,4 @@
--- Last modification date: 2018-02-17 12:08:16.325
+-- Last modification date: 2018-10-21 11:29:30.22
 
 -- tables
 -- Table: answers
@@ -18,6 +18,12 @@ Skipped',
 );
 
 CREATE INDEX team_action ON answers (team_id,action);
+
+-- Table: blocked
+CREATE TABLE blocked (
+	email varchar(120) NOT NULL,
+	CONSTRAINT blocked_pk PRIMARY KEY (email)
+);
 
 -- Table: bonus_questions
 CREATE TABLE bonus_questions (
@@ -69,6 +75,7 @@ CREATE TABLE cities (
 	id smallint unsigned NOT NULL AUTO_INCREMENT,
 	country_id smallint unsigned NOT NULL,
 	name varchar(100) NOT NULL,
+	timezone varchar(150) NOT NULL DEFAULT America/New_York,
 	status tinyint unsigned NOT NULL DEFAULT 0 COMMENT 'Active
 New
 Coming Soon
@@ -191,6 +198,17 @@ CREATE TABLE hunts (
 
 CREATE INDEX approvedhunts ON hunts (approved);
 
+-- Table: login_pages
+CREATE TABLE login_pages (
+	id int unsigned NOT NULL AUTO_INCREMENT,
+	order_hunt_id int unsigned NOT NULL,
+	slug varchar(200) COLLATE utf8_unicode_ci  NOT NULL,
+	title varchar(200) NOT NULL,
+	welcome_title varchar(200) NOT NULL,
+	UNIQUE INDEX slug (slug),
+	CONSTRAINT login_pages_pk PRIMARY KEY (id)
+);
+
 -- Table: order_hunts
 CREATE TABLE order_hunts (
 	id int unsigned NOT NULL AUTO_INCREMENT,
@@ -208,7 +226,7 @@ CREATE TABLE order_hunts (
 	pdf_finish text NULL,
 	redirect varchar(200) NULL,
 	video varchar(60) NULL,
-	flags tinyint unsigned NOT NULL DEFAULT 0,
+	flags smallint unsigned NOT NULL DEFAULT 0,
 	CONSTRAINT order_hunts_pk PRIMARY KEY (id)
 );
 
@@ -583,6 +601,12 @@ ALTER TABLE hunts ADD CONSTRAINT hunts_cities FOREIGN KEY hunts_cities (city_id)
 ALTER TABLE hunts ADD CONSTRAINT hunts_hunt_types FOREIGN KEY hunts_hunt_types (type_id)
 	REFERENCES hunt_types (id)
 	ON DELETE RESTRICT
+	ON UPDATE CASCADE;
+
+-- Reference: login_pages_order_hunts (table: login_pages)
+ALTER TABLE login_pages ADD CONSTRAINT login_pages_order_hunts FOREIGN KEY login_pages_order_hunts (order_hunt_id)
+	REFERENCES order_hunts (id)
+	ON DELETE CASCADE
 	ON UPDATE CASCADE;
 
 -- Reference: order_hunts_hunts (table: order_hunts)

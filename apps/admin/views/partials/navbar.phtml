@@ -50,6 +50,9 @@
 							<li<? if ($controllerName == 'hunts')echo ' class="active"' ?>><a href="<?= $this->url->get('hunts') ?>">Hunts</a></li>
 						</ul>
 					</li>
+					<li<? if ($controllerName == 'blocked')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('blocked') ?>"><i class="fa fa-times"></i> <span class="nav-label">Blocked</span></a>
+					</li>
 					<li<? if ($controllerName == 'support')echo ' class="active"' ?>>
 						<a href="<?= $this->url->get('support') ?>"><i class="fa fa-life-ring"></i> <span class="nav-label">Support</span></a>
 					</li>
