@@ -283,4 +283,18 @@ $(function(){
 			$h5.html('Team <span>' + tnum + '</span>');
 		$('#add-team option[value="' + team.id + '"]').text(name || ('Team ' + tnum)).parent().select2();
 	}
+
+	$('.sendtoleaders').click(function(){
+		debugger;
+		if (confirm("Are you sure?")) {
+			$.post("/clients/order_hunts/mailTeams/" + $(this).data('id'), { }, function(data){
+				if (typeof data == 'object' && data && data.success === true)
+					toastr.success(null, (data.sent || 'x') + " emails sent");
+				else
+					toastr.error(null, 'Unknown error occurred; please try again later');
+			}, 'json');
+		} else {
+			return false;
+		}
+	});
 });

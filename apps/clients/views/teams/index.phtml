@@ -51,6 +51,7 @@
 		<div class="col-sm-12">
 			<a href="pull-right">
 			<?= $this->tag->linkTo(['teams/csv/' . $orderHunt->id, 'Export', 'class' => 'pull-right btn btn-warning']) ?>
+			<a href="javascript:;" data-id="<?= $orderHunt->id ?>" class="pull-right btn btn-success sendtoleaders" style="margin-right:8px">Send PDF to leaders</a>
 			<h3>Participants: <span class="playersCount">0</span>/<?= $orderHunt->max_players ?></h3>
 		</div>
 	</div>

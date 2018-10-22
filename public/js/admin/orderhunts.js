@@ -334,7 +334,7 @@ $(function(){
 							callback: function(){
 								if (confirm("Are you sure?")) {
 									$.post("/admin/order_hunts/mailTeams/" + id, { }, function(data){
-										if (typeof data == 'object' && typeof data.success === true)
+										if (typeof data == 'object' && data && data.success === true)
 											toastr.success(null, (data.sent || 'x') + " emails sent");
 										else
 											toastr.error(null, 'Unknown error occurred; please try again later');

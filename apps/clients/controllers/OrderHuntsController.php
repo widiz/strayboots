@@ -856,4 +856,75 @@ class OrderHuntsController extends \ControllerBase
 
 	}
 
+	public function mailTeamsAction($id = 0)
+	{
+		if ($this->requireUser())
+			throw new Exception(403, 403);
+
+		$orderHunt = OrderHunts::findFirstByid((int)$id);
+		$order = $orderHunt ? $orderHunt->Order : false;
+		
+		if ($this->requireUser(false)) {
+			if ($this->requireClient(false) || !$order || $order->client_id != $this->client->id)
+				$order = false;
+		}
+
+		if (!$order) {
+			$this->flash->error('Order was not found');
+			$this->response->redirect('orders');
+
+			return;
+		}
+
+		if ($orderHunt->isCanceled()) {
+			$this->flash->error('This hunt was canceled');
+			$this->response->redirect('order_hunts/' . $order->id);
+
+			return;
+		}
+		try {
+
+			$client = $order->Client;
+
+			set_time_limit(0);
+			ignore_user_abort(true);
+			ini_set('memory_limit', '256M');
+
+			$date = date($this->view->dateFormat, strtotime($orderHunt->start));
+
+			$txt = <<<EOF
+Hi %name%,
+Attached you can find your instruction sheet for your upcoming scavenger hunt on {$date}.
+Should you have any questions, please feel free to reply to this email, or call us at 877-787-2929 ext 1111.
+
+Good luck!
+The Strayboots Team
+EOF;
+
+			$sent = 0;
+			foreach ($orderHunt->Teams as $team) {
+				$to = $team->Leader;
+				if (!$to) continue;
+				$text = str_replace('%name%', trim($to->first_name . ' ' . $to->last_name), $txt);
+				$html = nl2br($text);
+				$to = $to->email;
+				$attachments = [];
+				$pdf = new OrderHuntPDF($orderHunt, $this->view->timeFormat, true, true, $team->id);
+				if (file_exists($pdf = $pdf->savePDF()))
+					$attachments[] = '@' . $pdf;
+				if ($this->sendMail($to, 'You have been chosen to be a team captain for your upcoming Strayboots Scavenger hunt', $text, $html, $attachments))
+					$sent++;
+			}
+
+			return $this->jsonResponse([
+				'success' => true,
+				'sent' => $sent
+			]);
+		} catch(Exception $e) {
+			return $this->jsonResponse([
+				'success' => false
+			]);
+		}
+	}
+
 }
