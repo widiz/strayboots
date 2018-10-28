@@ -22,7 +22,7 @@ $(function(){
 				href: document.location.protocol + '//' + document.location.host + '/share.php?' + $.param({
 					title: 'We just successfully finished our Strayboots scavenger hunt!',
 					link: document.location.protocol + '//' + document.location.host + document.location.pathname + document.location.search + '#' + $a.attr('id'),
-					f: ($a.attr('href') || '/img/bg-1.jpg').replace(/^\/?uploads\/[a-z]+\//, '').replace(/\.wm\.\d+\./, '.wm.'),
+					f: ($a.attr('href') || '/img/11600.jpg').replace(/^\/?uploads\/[a-z]+\//, '').replace(/\.wm\.\d+\./, '.wm.'),
 					//caption: 'Strayboots Scavenger Hunts',
 					description: 'That was so much fun!!! #teambuilding #scavengerhunt @strayboots'
 				})

@@ -116,8 +116,12 @@ class Orders extends \Phalcon\Mvc\Model
 		$huntCss = '';
 		if (file_exists($uploadBase . 'background.png') && !isset($removedImages['background']))
 			$huntCss .= 'body{background-image:url(' . $paths->uri . 'order.' . $this->id . '.background.png) !important;background-position:50% !important}';
-		if (isset($customize['header_color']))
+		if (isset($customize['header_color'])) {
 			$huntCss .= '.navbar-default{background-color:' . $customize['header_color'] . '}';
+			$c = strtoupper($customize['header_color']);
+			if ($c === '#FFF' || $c === '#FFFFFF')
+				$huntCss .= '.navbar-toggle{background-color:#000}';
+		}
 		if (isset($customize['background_color']))
 			$huntCss .= 'body{background-color:' . $customize['background_color'] . ' !important;background-image:none}';
 		if (isset($customize['main_color']))#header-score>div>div,
