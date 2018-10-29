@@ -4,7 +4,7 @@ define('APP_PATH', realpath('..'));
 define('PUBLIC_PATH', __DIR__ . '/');
 $config = require '../config/config.php';
 
-$img = '/img/bg-1.jpg';
+$img = '/img/11600.jpg';
 $imgWidth = 1598;
 $imgHeight = 1039;
 if (preg_match('/^(\d+\/(\d+|chat)\/[0-9a-z_]+)(\.wm)?\.(jpg|png|gif)$/', $f = filter_input(INPUT_GET, 'f', FILTER_SANITIZE_STRING), $matches)) {
@@ -58,7 +58,7 @@ ob_start(function($c){
 			height: 100%;
 		}
 		body {
-			background: url(/img/bg-1.jpg) 50% 50% no-repeat;
+			background: url(/img/11600.jpg) 50% 50% no-repeat;
 			background-size: 100%;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
