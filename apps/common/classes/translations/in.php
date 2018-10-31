@@ -153,8 +153,8 @@ Congratulations to your team on finishing their adventure—we hope you had a bl
 
 Your teams earned bragging rights, so head on over to check out their scores, photos, responses, and more. You’ve got a one-stop shop for everything to relive your group’s glory—from holiday card-worthy photos to showing off to the folks who weren’t lucky enough play along.
 
-We really hope that you had fun with your team, and will appreciate if you can leave a *positive* review, so people can learn more about Strayboots.
-If you can spare just 2 minutes, we will follow up with a quick email from *TrustPilot*, so you can leave your review there.
+We really hope that you had fun with your team, and will appreciate if you can leave a positive review, so people can learn more about Strayboots.
+If you can spare just 2 minutes, we will follow up with a quick email from TrustPilot, so you can leave your review there.
 (If you don't think we deserve a positive review, please reply to this email and we'll find a way to sort it out)
  
 We hope to help you plan your next adventure, too.
@@ -179,8 +179,8 @@ Congratulations to your team on finishing their adventure—we hope you had a bl
 <br><br>
 Your teams earned bragging rights, so head on over to check out their scores, photos, responses, and more. You’ve got a one-stop shop for everything to relive your group’s glory—from holiday card-worthy photos to showing off to the folks who weren’t lucky enough play along.<br>
 <br>
-We really hope that you had fun with your team, and will appreciate if you can leave a *positive* review, so people can learn more about Strayboots.<br>
-If you can spare just 2 minutes, we will follow up with a quick email from *TrustPilot*, so you can leave your review there.<br>
+We really hope that you had fun with your team, and will appreciate if you can leave a <b>positive</b> review, so people can learn more about Strayboots.<br>
+If you can spare just 2 minutes, we will follow up with a quick email from <b>TrustPilot</b>, so you can leave your review there.<br>
 (If you don't think we deserve a positive review, please reply to this email and we'll find a way to sort it out)<br>
 <br>
 We hope to help you plan your next adventure, too.<br>
