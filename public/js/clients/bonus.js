@@ -2,7 +2,7 @@ $(function(){
 	var numberRender = $.fn.dataTable.render.number(',', '.', 0),
 		questionTypes = ["Team", "Private"];
 	$('#bonus-list').DataTable({
-		ajax: "/clients/bonus/datatable/" + window.orderHuntId + "?cb=" + Math.floor(Math.random() * 1e6),
+		ajax: '/clients/bonus/datatable/' + window.orderHuntId + '?cb=' + Math.floor(Math.random() * 1e6),
 		dom: 'T<"clear">lfrtip',
 		processing: true,
 		serverSide: true,
@@ -37,8 +37,8 @@ $(function(){
 				searchable: false,
 				width: 300,
 				render: function(data, type, row, meta){
-					return (window.removable ? '<a href="/clients/bonus/edit/' + row.id + '" class="btn btn-warning">Edit</a> ' +
-							'<a href="/clients/bonus/delete/' + row.id + '" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</a>' : '');
+					return '<a href="/clients/bonus/edit/' + row.id + '" class="btn btn-warning">Edit</a> ' +
+							(window.removable ? '<a href="/clients/bonus/delete/' + row.id + '" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</a>' : '');
 				}
 			}
 		],

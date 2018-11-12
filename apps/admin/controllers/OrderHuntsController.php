@@ -801,7 +801,6 @@ class OrderHuntsController extends \ControllerBase
 				$to = $client->email;
 
 			extract(OrdersController::mailPDF($client));
-
 			return $this->jsonResponse([
 				'success' => $this->sendMail($to, 'Your Strayboots Hunt Instructions', $text, $html, $attachments)
 			]);
