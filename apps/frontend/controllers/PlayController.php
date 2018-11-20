@@ -620,6 +620,18 @@ EOF
 									$this->wrongAnswer($question, $showHint, $answer);
 									return $this->response->redirect('play');
 								}
+							} else if ($question['question_type'] == QuestionTypes::OpenText) {
+								$answer = $request->getPost('answer');
+								$a->action = $showHint ? Answers::AnsweredWithHint : Answers::Answered;
+								$a->answer = $answer;
+								if ($a->save()) {
+									return $this->response->redirect('play');
+								} else {
+									try {
+										$this->logger->error('Answer failed: team:' . $thisTeam->id . ' question: ' . $question['id'] . ' answer: ' . $answer . ' msgs: ' . var_export(array_map(function($m){return (string)$m;},$a->getMessages()), true));
+									} catch(Exception $e) { }
+									$this->flash->error('Failed; please try again');
+								}
 							} else if ($question['question_type'] == QuestionTypes::Photo) {
 								$photoSuccess = false;
 								$uploadPath = $this->config->application->frontUploadsDir->path . $thisOrderHunt->id . '/' . $thisTeam->id . '/';

@@ -96,6 +96,8 @@ endif ?>
 							<?php
 								if ($question['question_type'] == QuestionTypes::Text) {
 									echo $this->tag->textField(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer'), 'value' => '']);
+								} else if ($question['question_type'] == QuestionTypes::OpenText) {
+									echo $this->tag->textArea(['answer', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer'), 'value' => '']);
 								} else if ($question['question_type'] == QuestionTypes::Completion) {
 									echo $this->tag->{isset($completion) ? 'hiddenField' : 'textField'}(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer')]);
 								} else if ($question['question_type'] == QuestionTypes::Photo) {

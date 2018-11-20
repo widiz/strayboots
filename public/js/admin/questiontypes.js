@@ -5,7 +5,8 @@ $(function(){
 		"Completion",
 		"Other",
 		"Timer",
-		"Choose"
+		"Choose",
+		"Open Text"
 	];
 	var txtRender = $.fn.dataTable.render.text(),
 		numberFormat = $.fn.dataTable.render.number(',', '.', 0);

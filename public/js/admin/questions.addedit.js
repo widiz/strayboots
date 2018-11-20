@@ -15,7 +15,7 @@ $(function(){
 		$answers		= $('#fieldAnswers');
 
 	$('.typeselector').change(function(){
-		if (typeof window.qTypes[this.value] != 'number')
+		if (typeof window.qTypes[this.value] !== 'number')
 			return;
 		var type = window.qTypes[this.value];
 		if (type == 2) {
@@ -103,7 +103,7 @@ $(function(){
 			$attachmentType.filter('[value="youtube"]').prop('checked', true);
 			$('#youtube input').val(attachment.video);
 		}
-	} catch(E) {vimeo
+	} catch(E) {
 		$attachmentType.filter('[value=""]').prop('checked', true);
 	}
 

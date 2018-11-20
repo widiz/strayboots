@@ -158,6 +158,7 @@ html.welcomescreen body {
 	font-size: 16px;
 }
 
+.content-wrapper textarea.answer,
 .content-wrapper input.answer {
 	width: 100%;
 	outline: none;
@@ -170,6 +171,13 @@ html.welcomescreen body {
 	font-size: 20px;
 	border: 0;
 	margin-bottom: 15px;
+}
+
+.content-wrapper textarea.answer {
+	height: auto;
+	min-height: 128px;
+	line-height: 1.5;
+	padding: 15px 25px;
 }
 
 .blackbox .subxbtn,
@@ -220,6 +228,19 @@ html.welcomescreen body {
 .content-wrapper input:-ms-input-placeholder {
 	line-height: 64px;
 	font-size: 20px;
+	color: #fff;
+}
+
+.content-wrapper textarea::-webkit-input-placeholder {
+	color: #fff;
+}
+.content-wrapper textarea:-moz-placeholder {
+	color: #fff;
+}
+.content-wrapper textarea::-moz-placeholder {
+	color: #fff;
+}
+.content-wrapper textarea:-ms-input-placeholder {
 	color: #fff;
 }
 
@@ -1304,6 +1325,33 @@ html.welcomescreen .col-sm-2:nth-child(5) > a > .icn {
 	animation-delay: 2s;
 }
 
+.content-wrapper.activate-ticket h1 {
+	font-size: 27px;
+	line-height: 1.4;
+	margin-bottom: 30px;
+	font-weight: 500;
+}
+.content-wrapper.activate-ticket h2 {
+	line-height: 1.4;
+	margin-bottom: 20px;
+}
+.content-wrapper.activate-ticket .subxbtn.facebook {
+	line-height: 24px;
+	height: auto;
+	font-size: 16px;
+	width: 185px;
+	padding: 10px 0;
+}
+@media (max-width: 480px) {
+	.content-wrapper.activate-ticket h2 {
+		font-size: 22px;
+	}
+}
+.content-wrapper.activate-ticket .subxbtn.email {
+	margin-top: 30px;
+}
+
+
 @keyframes pulse {
 	0% { transform: scale(1); }
 	50% { transform: scale(1.11); }
@@ -1346,29 +1394,4 @@ html.welcomescreen .col-sm-2:nth-child(5) > a > .icn {
 	0% { transform: scale(1); }
 	50% { transform: scale(1.3); }
 	100% { transform: scale(1); }
-}
-.content-wrapper.activate-ticket h1 {
-	font-size: 27px;
-	line-height: 1.4;
-	margin-bottom: 30px;
-	font-weight: 500;
-}
-.content-wrapper.activate-ticket h2 {
-	line-height: 1.4;
-	margin-bottom: 20px;
-}
-.content-wrapper.activate-ticket .subxbtn.facebook {
-	line-height: 24px;
-	height: auto;
-	font-size: 16px;
-	width: 185px;
-	padding: 10px 0;
-}
-@media (max-width: 480px) {
-	.content-wrapper.activate-ticket h2 {
-		font-size: 22px;
-	}
-}
-.content-wrapper.activate-ticket .subxbtn.email {
-	margin-top: 30px;
 }
