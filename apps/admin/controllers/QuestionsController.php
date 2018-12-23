@@ -394,6 +394,14 @@ class QuestionsController extends \ControllerBase
 									$filePath = $uploadPath . $bname;
 								} while (file_exists($filePath));
 
+								if ($img_info[2] == IMAGETYPE_GIF) {
+									$file->moveTo($filePath);
+									if (file_exists($filePath) && getimagesize($filePath) !== false) {
+										$photo = $uploadUri . $bname;
+										break;
+									}
+								}
+
 								$width = $img_info[0];
 								$height = $img_info[1];
 
