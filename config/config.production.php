@@ -6,7 +6,7 @@ return new \Phalcon\Config([
 	'prefix' => 'production',
 	'altLang' => ['he', 'pt'],
 	'defLang' => 0, // altIndex + 1
-	'fullUri' => 'http://go.strayboots.com',
+	'fullUri' => 'https://go.strayboots.com',
 	'database' => [
 		'adapter'	=> 'Mysql',
 		'host'		=> 'mysql.go.strayboots.com',
