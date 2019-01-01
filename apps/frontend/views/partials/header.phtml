@@ -39,7 +39,9 @@
 <? //endif ?>
 						<li><a href="<?= $this->url->get('faq') ?>"><?= $t->_('FAQ') ?></a></li>
 <? if ($loggedIn): ?>
+<? if (!$mapDisabled): ?>
 						<li><a href="<?= $this->url->get('map') ?>"><?= $t->_('Map') ?></a></li>
+<? endif ?>
 						<li><a href="<?= $this->url->get('chat') ?>"><?= $t->_('Chat') ?></a></li>
 <? if (!$leaderboardDisabled): ?>
 						<li><a href="<?= $this->url->get('leaderboard') ?>"><?= $t->_('Leaderboard') ?></a></li>

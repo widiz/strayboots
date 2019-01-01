@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <? endif ?>
 					<script type="text/javascript">window.shareInfoEnd={title:'<?= $t->_('We just successfully finished our Strayboots scavenger hunt!') ?>',image:'<? if (isset($image)) echo $image; ?>',description:'<?= $t->_('That was so much fun!!! #teambuilding #scavengerhunt @strayboots') ?>',url:'https://www.strayboots.com/',caption:'Strayboots Scavenger Hunt'}</script>
 
-<? if (isset($question) || isset($end_msg)): ?>
+<? if ((isset($question) || isset($end_msg)) && !$facebookDisabled): ?>
 					<div id="shareblock">
 						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
 					</div>
@@ -98,7 +98,7 @@ endif ?>
 					<?= $this->tag->endForm() ?>
 <? endif ?>
 <? endif ?>
-<? if (isset($answerAction) && (isset($question) || (isset($end_msg) && !isset($response_msg)))): ?>
+<? if (isset($answerAction) && !$facebookDisabled && (isset($question) || (isset($end_msg) && !isset($response_msg)))): ?>
 					<div id="shareblock">
 						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
 					</div>

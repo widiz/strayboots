@@ -119,8 +119,11 @@ class Orders extends \Phalcon\Mvc\Model
 		if (isset($customize['header_color'])) {
 			$huntCss .= '.navbar-default{background-color:' . $customize['header_color'] . '}';
 			$c = strtoupper($customize['header_color']);
-			if ($c === '#FFF' || $c === '#FFFFFF')
+			if ($c === '#FFF' || $c === '#FFFFFF') {
 				$huntCss .= '.navbar-toggle{background-color:#000}';
+				if (empty($customize['main_color']))
+					$customize['main_color'] = '#000000';
+			}
 		}
 		if (isset($customize['background_color']))
 			$huntCss .= 'body{background-color:' . $customize['background_color'] . ' !important;background-image:none}';

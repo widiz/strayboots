@@ -146,6 +146,20 @@
 </div>
 
 <div class="form-group">
+	<label for="fieldMapDisabled" class="col-sm-2 control-label">Map Disabled</label>
+	<div class="col-sm-10 checkbox-inline">
+		<?= $this->tag->checkField(['map_disabled', 'value' => 1, 'id' => 'fieldMapDisabled']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldFacebookDisabled" class="col-sm-2 control-label">Facebook Disabled</label>
+	<div class="col-sm-10 checkbox-inline">
+		<?= $this->tag->checkField(['facebook_disabled', 'value' => 1, 'id' => 'fieldFacebookDisabled']) ?>
+	</div>
+</div>
+
+<div class="form-group">
 	<div class="col-sm-offset-2 col-sm-10">
 		<?= $this->tag->submitButton(['Save', 'class' => 'btn btn-default']) ?>
 	</div>

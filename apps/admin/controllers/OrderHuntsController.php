@@ -145,6 +145,8 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('multi_hunt', $orderHunt->isMultiHunt());
 			$this->tag->setDefault('survey_disabled', $orderHunt->isSurveyDisabled());
 			$this->tag->setDefault('leaderboard_disabled', $orderHunt->isLeaderBoardDisabled());
+			$this->tag->setDefault('map_disabled', $orderHunt->isMapDisabled());
+			$this->tag->setDefault('facebook_disabled', $orderHunt->isFacebookDisabled());
 		}
 		$this->addEdit();
 	}
@@ -213,6 +215,8 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setMultiHunt($this->request->getPost('multi_hunt'));
 		$orderHunt->setSurveyDisabled($this->request->getPost('survey_disabled'));
 		$orderHunt->setLeaderBoardDisabled($this->request->getPost('leaderboard_disabled'));
+		$orderHunt->setMapDisabled($this->request->getPost('map_disabled'));
+		$orderHunt->setFacebookDisabled($this->request->getPost('facebook_disabled'));
 
 		$hunt = $orderHunt->Hunt;
 
@@ -356,6 +360,8 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setMultiHunt($this->request->getPost('multi_hunt'));
 		$orderHunt->setSurveyDisabled($this->request->getPost('survey_disabled'));
 		$orderHunt->setLeaderBoardDisabled($this->request->getPost('leaderboard_disabled'));
+		$orderHunt->setMapDisabled($this->request->getPost('map_disabled'));
+		$orderHunt->setFacebookDisabled($this->request->getPost('facebook_disabled'));
 
 		$hunt = $orderHunt->Hunt;
 		$isOk = true;

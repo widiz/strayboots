@@ -32,7 +32,7 @@
 					<?= $t->_('Your hunt will begin in:') ?>
 					<div id="start-timer" data-seconds="<?= $startTimer ?>"></div>
 					<a href="<?= $this->url->get('play') ?>" class="btn btn-success"><?= $t->_('Try again') ?></a>
-<? if (!(isset($ncr) && $ncr)): ?>
+<? if (!$facebookDisabled): ?>
 					<h2 style="font-size:20px;margin:35px 0"><?= $t->_('While you are waiting for your adventure, feel free to check some of our cool posts') ?></h2>
 					<a class="btn btn-primary" href="https://www.facebook.com/Strayboots/" target="_blank"><?= $t->_('Check it out!') ?></a>
 <? endif ?>

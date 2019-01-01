@@ -13,7 +13,9 @@ if (SBENV === 'europe') {
 				<div class="col-sm-12">
 					<div id="activation-wrapper" class="clearfix">
 						<div id="activation-fb">
+<? if (!$facebookDisabled): ?>
 							<button class="subxbtn facebook"><?= $t->_('Login With Facebook') ?></button>
+<? endif ?>
 							<button class="subxbtn email"><?= $t->_('Login With Email') ?></button>
 							<div class="atos" style="margin-top:40px">
 								<?= $tos ?>

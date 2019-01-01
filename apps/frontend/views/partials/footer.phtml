@@ -33,6 +33,7 @@
 						</div>
 					</div>
 <? endif ?>
+<? if (!$mapDisabled): ?>
 					<div class="col-sm-2">
 						<div>
 							<b class="second_color"><?= $t->_('Map') ?></b>
@@ -43,6 +44,7 @@
 							<i class="arrow"></i>
 						</div>
 					</div>
+<? endif ?>
 					<div class="col-sm-2">
 						<div>
 							<b class="second_color"><?= $t->_('Chat') ?></b>
@@ -73,9 +75,11 @@
 						<a href="<?= $this->url->get('leaderboard') ?>"<?= $controllerName == 'leaderboard' ? ' class="active"' : '' ?>><i class="icn leaderboard"></i></a>
 					</div>
 <? endif ?>
+<? if (!$mapDisabled): ?>
 					<div class="col-sm-<?= $colSize ?>">
 						<a href="<?= $this->url->get('map') ?>"<?= $controllerName == 'map' ? ' class="active"' : '' ?>><i class="icn map"></i></a>
 					</div>
+<? endif ?>
 					<div  class="col-sm-<?= $colSize ?>">
 						<a href="<?= $this->url->get('chat') ?>"<?= $controllerName == 'chat' ? ' class="active"' : '' ?>><i class="icn chat"><div class="beeper"></div></i></a>
 					</div>

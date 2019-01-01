@@ -9,6 +9,9 @@ class MapController extends ControllerBase
 	{
 		if ($this->requirePlayer())
 			return true;
+		if ($this->orderHunt->isMapDisabled())
+			return $this->response->redirect('/play');
+
 		$teamsStatus = $this->orderHunt->getTeamsStatus();
 		foreach ($teamsStatus as $team) {
 			if ($team['id'] == $this->team->id) {

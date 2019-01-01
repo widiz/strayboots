@@ -682,6 +682,16 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 32);
 	}
 
+	public function isMapDisabled()
+	{
+		return (bool)($this->flags & 64);
+	}
+
+	public function isFacebookDisabled()
+	{
+		return (bool)($this->flags & 128);
+	}
+
 	public function setCustomLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
@@ -710,6 +720,16 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public function setLeaderBoardDisabled($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 32;
+	}
+
+	public function setMapDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 64;
+	}
+
+	public function setFacebookDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 128;
 	}
 
 	/**
