@@ -1,5 +1,7 @@
 <?php
 
+use Phalcon\Validation\Validator\PresenceOf;
+
 class BonusQuestions extends \Phalcon\Mvc\Model
 {
 
@@ -45,6 +47,18 @@ class BonusQuestions extends \Phalcon\Mvc\Model
 	 */
 	public $score;
 
+	/**
+	 *
+	 * @var string
+	 */
+	public $answer_time;
+
+	/**
+	 *
+	 * @var string
+	 */
+	public $answer;
+
 	const TypeTeam = 0;
 	const TypePrivate = 1;
 
@@ -66,7 +80,7 @@ class BonusQuestions extends \Phalcon\Mvc\Model
 				'message' => 'Order hunt doesn\'t exists'
 			]
 		]);
-		$this->skipAttributesOnCreate(['winner_id']);
+		$this->skipAttributesOnCreate(['winner_id', 'answer_time', 'answer']);
 	}
 
 	/**
@@ -82,10 +96,10 @@ class BonusQuestions extends \Phalcon\Mvc\Model
 			'domain' => [0, 1],
 			'message' => 'Type is invalid'
 		]));
-		$validator->add('question', new Phalcon\Validation\Validator\PresenceOf([
+		$validator->add('question', new PresenceOf([
 			'message'	=> 'Question is required'
 		]));
-		$validator->add('answers', new Phalcon\Validation\Validator\PresenceOf([
+		$validator->add('answers', new PresenceOf([
 			'message'	=> 'Answers are required'
 		]));
 		if ($this->type == BonusQuestions::TypeTeam) {

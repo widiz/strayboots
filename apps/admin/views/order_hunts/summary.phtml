@@ -213,7 +213,9 @@ $hasEvents = !empty($customEvents);
 					<th>Question</th>
 					<th>Team</th>
 					<th>Player</th>
+					<th>Answer</th>
 					<th>Score</th>
+					<th>Timestamp</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -223,7 +225,9 @@ $hasEvents = !empty($customEvents);
 					<td><?= $bq['question'] ?></td>
 					<td><?= isset($teamNames[$bq['team_id']]) ? $teamNames[$bq['team_id']][0] : '' ?></td>
 					<td><?= $bq['email'] . (is_null($bq['first_name']) ? '' :  (' ' . htmlspecialchars(trim($bq['first_name'] . ' ' . $bq['last_name'])))) ?></td>
+					<td><?= htmlspecialchars($bq['answer']) ?></td>
 					<td><?= $bq['score'] ?></td>
+					<td><?= $bq['answer_time'] ?></td>
 				</tr>
 <? endforeach ?>
 			</tbody>

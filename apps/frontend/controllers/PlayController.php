@@ -389,8 +389,11 @@ EOF
 						'reload' => true
 					]);
 				}
-				if (Answers::checkAnswer($bonusQuestion->answers, $request->getPost('answer', 'trim'))) {
+				$ans = $request->getPost('answer', 'trim');
+				if (Answers::checkAnswer($bonusQuestion->answers, $ans)) {
 					$bonusQuestion->winner_id = $this->player->id;
+					$bonusQuestion->answer = $ans;
+					$bonusQuestion->answer_time = date('Y-m-d H:i:s');
 					if ($bonusQuestion->save()) {
 						$redis->set(SB_PREFIX . 'bqanswer:' . $thisOrderHunt->id, (int)$bonusQuestion->id, 40);
 						if (($fbr = $this->firebase->set(FB_PREFIX . 'bonusq/' . $thisOrderHunt->id . '/' . BonusQuestions::count('order_hunt_id=' . $thisOrderHunt->id . ' AND id < ' . $bonusQuestion->id), false, [], 5)) != 'false') {
