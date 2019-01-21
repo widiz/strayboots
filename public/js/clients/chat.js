@@ -163,7 +163,7 @@
 								'</div>' +
 							'</div>' +
 							'<div class="message-columns content-column">' +
-								'<h2>' + (message.cn ? toText(message.cn) : player.name) + (typeof data.teams[player.team] == 'string' ? ' &nbsp;<span>' + data.teams[player.team] + '</span>' : '') + '</h2>' +
+								'<h2>' + (message.cn ? toText(message.cn) : player.name) + (typeof data.teams[player.team] == 'string' ? ' &nbsp;<span>' + data.teams[player.team] + '</span>' : '') + (message.tid > 0 ? ' - <span> Private (' + data.teams[message.tid] + ')</span>' : '') + '</h2>' +
 								(isNaN(x) ? '' : '<div class="time">' +
 									'<i></i> <time datetime="' + toMysqlFormat(x) + '" data-timestamp="' + message.timestamp + '">' + moment(x).fromNow() + '</time>' +
 								'</div>') +
@@ -255,6 +255,7 @@
 		if (messageText.length) {
 			chatBox.val('');
 			_room.push({
+				tid: $('#teamId').val() || 0,
 				pid: data.pid,
 				cn: data.cn || data.players[data.pid].name,
 				content: messageText.trim(),
@@ -273,6 +274,7 @@
 		formdata.append("orderHunt", window.appLoc.orderHunt);
 		for (var i = 0; i < this.files.length; i++)
 			formdata.append("file[]", this.files[i]);
+		var tid = $('#teamId').val() || 0;
 		$.ajax({
 			url: "/chat/upload",
 			type: "POST",
@@ -299,6 +301,7 @@
 				for (i = 0; i < response.files.length; i++) {
 					if (response.files[i]) {
 						_room.push({
+							tid: tid,
 							pid: data.pid,
 							cn: data.cn || data.players[data.pid].name,
 							image: response.files[i],
@@ -378,6 +381,7 @@
 			if (typeof msg == 'object' && typeof msg.pid == 'number' && typeof msg.timestamp == 'number') {
 				if (typeof msg.content == 'string' && msg.content) {
 					messages.push({
+						tid: msg.tid,
 						pid: msg.pid,
 						pname: msg.pname || null,
 						cn: msg.cn || null,
@@ -387,6 +391,7 @@
 				} else if (typeof msg.image == 'string' && msg.image) {
 					defer(msg.image);
 					messages.push({
+						tid: msg.tid,
 						pid: msg.pid,
 						pname: msg.pname || null,
 						cn: msg.cn || null,

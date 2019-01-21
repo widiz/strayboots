@@ -114,6 +114,8 @@
 	}
 
 	function addMessage(message, block){
+		if (message.tid > 0 && !(data.players[data.pid] && data.players[data.pid].team == message.tid))
+			return;
 		var $messageP = $(document.createElement('p')),
 			isImg = typeof message.image == 'string';
 		if (isImg)
@@ -151,7 +153,7 @@
 								'</div>' +
 							'</div>' +
 							'<div class="message-columns content-column">' +
-								'<h2>' + (message.cn ? toText(message.cn) : player.name) + (typeof data.teams[player.team] == 'string' ? ' &nbsp;<span>' + data.teams[player.team] + '</span>' : '') + '</h2>' +
+								'<h2>' + (message.cn ? toText(message.cn) : player.name) + (typeof data.teams[player.team] == 'string' ? ' &nbsp;<span>' + data.teams[player.team] + '</span>' : '') + (message.tid > 0 ? ' - <span> Private </span>' : '') + '</h2>' +
 								(isNaN(x) ? '' : '<div class="time">' +
 									'<i></i> <time datetime="' + toMysqlFormat(x) + '" data-timestamp="' + message.timestamp + '">' + moment(x).fromNow() + '</time>' +
 								'</div>') +
@@ -365,6 +367,7 @@
 			if (typeof msg == 'object' && typeof msg.pid == 'number' && typeof msg.timestamp == 'number') {
 				if (typeof msg.content == 'string' && msg.content) {
 					messages.push({
+						tid: msg.tid,
 						pid: msg.pid,
 						pname: msg.pname || null,
 						cn: msg.cn || null,
@@ -374,6 +377,7 @@
 				} else if (typeof msg.image == 'string' && msg.image) {
 					defer(msg.image);
 					messages.push({
+						tid: msg.tid,
 						pid: msg.pid,
 						pname: msg.pname || null,
 						cn: msg.cn || null,

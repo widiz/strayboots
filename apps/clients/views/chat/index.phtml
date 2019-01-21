@@ -26,7 +26,15 @@
 	<div id="chat">
 		<div id="chat-textbox" class="clearfix">
 			<div class="upload-progress"></div>
-			<textarea></textarea>
+			<div class="clearfix">
+				<textarea></textarea>
+				<select id="teamId" placeholder="team" class="form-control">
+					<option></option>
+					<? foreach ($firebase['appLoc']['teams'] as $id => $name): ?>
+						<option value="<?= $id ?>"><?= htmlspecialchars($name) ?></option>
+					<? endforeach ?>
+				</select>
+			</div>
 			<button type="button" class="chat-button">Post</button>
 			<div class="upload-container">
 				<i></i>

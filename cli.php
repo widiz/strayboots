@@ -82,9 +82,11 @@ try {
 	$application->handle($arguments);
 	echo PHP_EOL;
 } catch (\Phalcon\Exception $e) {
+//var_dump($e->getTraceAsString());
 	echo $e->getMessage() . PHP_EOL;
 	exit(255);
 } catch (Exception $e) {
+	//var_dump($e->getTraceAsString());
 	echo $e->getMessage() . PHP_EOL;
 	exit(255);
 }

@@ -455,3 +455,13 @@ iframe[name="google_conversion_frame"] {
 .note p {
 	margin: 0
 }
+#chat-textbox textarea {
+	width: 72% !important;
+	float: left;
+}
+#chat-textbox #teamId {
+	height: 46px;
+	width: 25%;
+	margin-left: 3%;
+	float: left;
+}
