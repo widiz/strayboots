@@ -8,19 +8,23 @@ class ErrorController extends ControllerBase
 	public function e404Action()
 	{
 		if ($loginPage = \LoginPages::findFirstBySlug(trim($_GET['_url'], ' /'))) {
-			define('ORDER_HUNT_OVERRIDE', $loginPage->order_hunt_id);
-			define('OVERRIDE_STANDARDLOGIN', 1);
-			if (!empty($loginPage->title))
-				define('TITLE_OVERRIDE', $loginPage->title);
-			if (!empty($loginPage->welcome_title))
-				define('OVERRIDE_WELCOME_TITLE', $loginPage->welcome_title);
-			if (!empty($loginPage->email_login))
-				define('OVERRIDE_LOGIN_EMAIL', $loginPage->id);
-			$this->view->currentURL = $this->escaper->escapeHtmlAttr($loginPage->slug);
-			return $this->dispatcher->forward([
-				'controller'	=> 'index',
-				'action'		=> 'index'
-			]);
+			$orderHunt = $loginPage->OrderHunt;
+			if ($orderHunt && !$orderHunt->isCanceled()) {
+				define('ORDER_HUNT_OVERRIDE', $loginPage->order_hunt_id);
+				define('ORDER_HUNT_OVERRIDE_USE_ACTIVATION_CODE', $loginPage->isActivationCodeLogin());
+				define('OVERRIDE_STANDARDLOGIN', 1);
+				if (!empty($loginPage->title))
+					define('TITLE_OVERRIDE', $loginPage->title);
+				if (!empty($loginPage->welcome_title))
+					define('OVERRIDE_WELCOME_TITLE', $loginPage->welcome_title);
+				if (!empty($loginPage->email_login))
+					define('OVERRIDE_LOGIN_EMAIL', $loginPage->id);
+				$this->view->currentURL = $this->escaper->escapeHtmlAttr($loginPage->slug);
+				return $this->dispatcher->forward([
+					'controller'	=> 'index',
+					'action'		=> 'index'
+				]);
+			}
 		}
 		$this->response->setStatusCode(404);
 	}

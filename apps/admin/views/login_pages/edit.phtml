@@ -60,19 +60,34 @@
 	</div>
 </div>
 
+<style>
+	#e1:not(.hidden) + #e2 {
+		display: none !important;
+	}
+	.col-sm-10 > input[type="checkbox"] {
+		margin-top: 10px;
+	}
+</style>
+
 <div class="form-group">
 	<label for="fieldIsEmailLogin" class="col-sm-2 control-label">Email only</label>
 	<div class="col-sm-10">
-		<input type="checkbox" style="margin-top: 10px" id="fieldIsEmailLogin"
-				onclick="$('#fieldEmailLogin').closest('.form-group').toggleClass('hidden', !this.checked);this.checked || $('#fieldEmailLogin').val('')"
+		<input type="checkbox" id="fieldIsEmailLogin" onclick="$('#fieldEmailLogin').closest('.form-group').toggleClass('hidden', !this.checked);this.checked || $('#fieldEmailLogin').val('')"
 				<?= empty($this->tag->getValue('email_login')) ? '' : ' checked' ?>> 
 	</div>
 </div>
 
-<div class="form-group<?= empty($this->tag->getValue('email_login')) ? ' hidden' : '' ?>">
+<div class="form-group<?= empty($this->tag->getValue('email_login')) ? ' hidden' : '' ?>" id="e1">
 	<label for="fieldEmailLogin" class="col-sm-2 control-label">Email</label>
 	<div class="col-sm-10">
 		<?= $this->tag->textField(["email_login", "size" => 30, "class" => "form-control", "id" => "fieldEmailLogin"]) ?>
+	</div>
+</div>
+
+<div class="form-group" id="e2">
+	<label for="fieldActivationCodeLogin" class="col-sm-2 control-label">Use Activation Code</label>
+	<div class="col-sm-10">
+		<?= $this->tag->checkField(['activation_code_login', 'value' => 1, 'id' => 'fieldActivationCodeLogin']) ?>
 	</div>
 </div>
 

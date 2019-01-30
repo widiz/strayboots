@@ -43,6 +43,12 @@ class LoginPages extends \Phalcon\Mvc\Model
 	public $email_login;
 
 	/**
+	 *
+	 * @var integer
+	 */
+	public $flags;
+
+	/**
 	 * Validations and business logic
 	 *
 	 * @return boolean
@@ -91,13 +97,33 @@ class LoginPages extends \Phalcon\Mvc\Model
 		return $this->validate($validator) && $success;
 	}
 
+	public function beforeSave()
+	{
+		if (is_null($this->email_login))
+			$this->email_login = '';
+		else
+			$this->setActivationCodeLogin(false);
+	}
+
+	public function afterFetch()
+	{
+		if (empty($this->email_login))
+			$this->email_login = null;
+	}
+
+	public function afterSave()
+	{
+		if (empty($this->email_login))
+			$this->email_login = null;
+	}
+
 	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()
 	{
 		$this->belongsTo('order_hunt_id', 'OrderHunts', 'id', [
-			'alias' => 'OrderHunts',
+			'alias' => 'OrderHunt',
 			'foreignKey' => [
 				'message' => "Order hunt doesn'nt exists"
 			]
@@ -112,6 +138,16 @@ class LoginPages extends \Phalcon\Mvc\Model
 	public function getSource()
 	{
 		return 'login_pages';
+	}
+
+	public function isActivationCodeLogin()
+	{
+		return (bool)($this->flags & 1);
+	}
+
+	public function setActivationCodeLogin($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
 	}
 
 }

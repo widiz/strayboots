@@ -663,7 +663,7 @@ EOF;
 EOF;
 		$leaderh = $showLeader ? '' : ' hidden';
 		$playerh = $showPlayer ? '' : ' hidden';
-		$txtUrl = preg_replace('/^https?:\/\//', '', $config->fullUri);
+		$txtUrl = preg_replace('/^https?:\/\//', '', $config->fullUri);$i = 0;
 		foreach ($oh->getTeams(is_null($teamId) ? false : true) as $t => $team) {
 			if (!(is_null($teamId) || $teamId == $team->id))
 				continue;

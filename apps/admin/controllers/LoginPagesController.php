@@ -81,6 +81,7 @@ class LoginPagesController extends \ControllerBase
 			$this->tag->setDefault('welcome_title', $loginPage->welcome_title);
 			$this->tag->setDefault('email_login', $loginPage->email_login);
 			$this->tag->setDefault('order_hunt_id', $loginPage->order_hunt_id);
+			$this->tag->setDefault('activation_code_login', $loginPage->isActivationCodeLogin());
 
 		}
 
@@ -126,7 +127,9 @@ class LoginPagesController extends \ControllerBase
 		$loginPage->email_login = $this->request->getPost('email_login', 'email');
 		if (empty($loginPage->email_login))
 			$loginPage->email_login = null;
-		
+
+		$loginPage->setActivationCodeLogin($this->request->getPost('activation_code_login'));
+
 		if (!$loginPage->save()) {
 			foreach ($loginPage->getMessages() as $message) {
 				$this->flash->error($message);
@@ -175,7 +178,9 @@ class LoginPagesController extends \ControllerBase
 		$loginPage->email_login = $this->request->getPost('email_login', 'email');
 		if (empty($loginPage->email_login))
 			$loginPage->email_login = null;
-		
+
+		$loginPage->setActivationCodeLogin($this->request->getPost('activation_code_login'));
+
 		if (!$loginPage->save()) {
 
 			foreach ($loginPage->getMessages() as $message) {

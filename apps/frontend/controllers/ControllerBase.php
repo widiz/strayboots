@@ -29,7 +29,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 
 		if (defined('ORDER_HUNT_OVERRIDE')) {
 			$orderHunt = OrderHunts::findFirstById(ORDER_HUNT_OVERRIDE);
-			if ($orderHunt && (defined('OVERRIDE_LOGIN_EMAIL') || $orderHunt->isCustomLogin()))
+			if ($orderHunt && (defined('OVERRIDE_LOGIN_EMAIL') || $orderHunt->isCustomLogin()) && !ORDER_HUNT_OVERRIDE_USE_ACTIVATION_CODE)
 				define('ORDER_HUNT_CUSTOM_LOGIN_ID_OVERRIDE', $orderHunt->id);
 		}
 
