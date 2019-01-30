@@ -1,6 +1,6 @@
 <? return [
 
-	'(NO neeed to install an app!)' => '(NO need to install an app!)',
+	'(NO need to install an app!)' => '(NO need to install an app!)',
 	'Whoever has the most points WINS!' => 'Whomever has the most points WINS!',
 	
 	//DanielleOrderHuntPostEvent

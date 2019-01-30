@@ -8,7 +8,7 @@
 	'Other team members' => 'Other team members',
 	'Insert your Activation Code' => 'Insert your Activation Code',
 	'can use the player code to follow along' => 'can use the player code to follow along',
-	'(NO neeed to install an app!)' => '(NO need to install an app!)',
+	'(NO need to install an app!)' => '(NO need to install an app!)',
 	'Whoever has the most points WINS!' => 'Whomever has the most points WINS!',
 	'<span class="ft15">Correct</span> answers get' => '<span class="ft15">Correct</span> answers get',
 	'FULL points' => 'FULL points',

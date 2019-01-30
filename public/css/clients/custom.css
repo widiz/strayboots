@@ -465,3 +465,6 @@ iframe[name="google_conversion_frame"] {
 	margin-left: 3%;
 	float: left;
 }
+.flex {
+	display: flex !important;
+}

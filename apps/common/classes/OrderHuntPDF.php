@@ -59,7 +59,7 @@ class OrderHuntPDF extends OrderHuntMailBase {
 			'othermembers'	=> $translate->_('Other team members'),
 			'insert.code'	=> $translate->_('Insert your Activation Code'),
 			'can.use'		=> $translate->_('can use the player code to follow along'),
-			'no.install'	=> $translate->_('(NO neeed to install an app!)'),
+			'no.install'	=> $translate->_('(NO need to install an app!)'),
 			'whoever.wins'	=> $translate->_('Whoever has the most points WINS!'),
 
 			'correct.answer'	=> $translate->_('<span class="ft15">Correct</span> answers get'),

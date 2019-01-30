@@ -60,7 +60,7 @@ class OrderHuntPDFNCR extends OrderHuntMailBase {
 			'othermembers'	=> $translate->_('Other team members'),
 			'insert.code'	=> $translate->_('insert your Activation Code'),
 			'can.use'		=> $translate->_('can use the member code to follow along'),
-			'no.install'	=> $translate->_('(NO neeed to install an app!)'),
+			'no.install'	=> $translate->_('(NO need to install an app!)'),
 			'whoever.wins'	=> $translate->_('Whomever has the most points WINS $100 MARTA or GRTA passes!'),
 			'other.prizes'	=> $translate->_('Other prizes will also be awarded for the best photos and trivia answers!'),
 

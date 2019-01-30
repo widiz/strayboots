@@ -618,7 +618,7 @@ for ($i = 0; $i < 50; $i++)
 				</tr>
 				<tr>
 					<td class="tr6 td4"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr6 td5"><p class="p6 ft9">(NO neeed to install an app!)</p></td>
+					<td class="tr6 td5"><p class="p6 ft9">(NO need to install an app!)</p></td>
 					<td class="tr6 td6"><p class="p3 ft6">&nbsp;</p></td>
 					<td class="tr6 td7"><p class="p3 ft6">&nbsp;</p></td>
 					<td class="tr6 td10"><p class="p3 ft6">&nbsp;</p></td>

@@ -26,6 +26,9 @@
 					<li<? if ($controllerName == 'login_pages')echo ' class="active"' ?>>
 						<a href="<?= $this->url->get('login_pages') ?>"><i class="fa fa-puzzle-piece"></i> <span class="nav-label">Login Pages</span></a>
 					</li>
+					<li<? if ($controllerName == 'event_emails')echo ' class="active"' ?>>
+						<a href="<?= $this->url->get('event_emails') ?>"><i class="fa fa-envelope"></i> <span class="nav-label">Event Emails</span></a>
+					</li>
 					<li<? if (in_array($controllerName, ['countries', 'cities']))echo ' class="active"' ?>>
 						<a href="<?= $this->url->get('countries') ?>"><i class="fa fa-globe"></i> <span class="nav-label">Countries/Cities</span></a>
 					</li>
