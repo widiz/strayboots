@@ -8,10 +8,12 @@ class NewOrderHuntPostEvent extends OrderHuntMailBase {
 	{
 		parent::__construct($orderHunt);
 
+		$data = EventEmails::findFirstByEmailId($toPlayers ? EventEmails::NewPostEventEmailPlayers : EventEmails::NewPostEventEmail);
+
 		$translate = $this->translate;
 
 		$this->client = $orderHunt->Order->Client;
-		$this->title = $translate->_('It’s final--the scores are in');
+		$this->title = $translate->_($data ? $data->title : 'It’s final--the scores are in');
 
 		$di = Phalcon\Di::getDefault();
 		$db = $di->get('db');
@@ -71,7 +73,7 @@ class NewOrderHuntPostEvent extends OrderHuntMailBase {
 
 		$mvpH = $translate->_('MVP Highlights');
 
-		$this->text = $translate->_('NewOrderHuntPostEventText', [
+		$this->text = $data ? str_replace('%url%', $eurl, $data->text) : $translate->_('NewOrderHuntPostEventText', [
 			'url' => $eurl
 		]);
 		if ($mvp) {
@@ -96,7 +98,7 @@ EOF;
 		} else {
 			$mvp = '';
 		}
-		$this->html = $translate->_('NewOrderHuntPostEventHTML', [
+		$this->html = $data ? str_replace(['%url%', '%mvp%'], [$eurl, $mvp], $data->html) : $translate->_('NewOrderHuntPostEventHTML', [
 			'url' => $eurl,
 			'mvp' => $mvp
 		]);

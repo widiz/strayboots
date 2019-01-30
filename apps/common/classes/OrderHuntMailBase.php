@@ -23,6 +23,16 @@ class OrderHuntMailBase
 		]);
 	}
 
+	public function getHtml()
+	{
+		return $this->html;
+	}
+
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
 	public function send(callable $sendMail, $email = null)
 	{
 		if (!is_callable($sendMail))

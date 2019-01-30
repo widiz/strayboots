@@ -8,10 +8,12 @@ class DanielleOrderHuntPostEvent extends OrderHuntMailBase {
 	{
 		parent::__construct($orderHunt);
 
+		$data = EventEmails::findFirstByEmailId($toPlayers ? EventEmails::DaniellePostEventEmailPlayers : EventEmails::DaniellePostEventEmail);
+
 		$translate = $this->translate;
 
 		$this->client = $orderHunt->Order->Client;
-		$this->title = $translate->_('We hope you had an awesome time yesterday');
+		$this->title = $data ? $data->title : $translate->_('We hope you had an awesome time yesterday');
 
 		$di = Phalcon\Di::getDefault();
 		$db = $di->get('db');
@@ -34,17 +36,17 @@ class DanielleOrderHuntPostEvent extends OrderHuntMailBase {
 			$ohids = implode(',', array_keys($ohids));
 			$this->cc = array_map('array_pop', $db->fetchAll("SELECT email FROM players WHERE team_id IN (SELECT id FROM teams WHERE order_hunt_id IN (" . $ohids . ")) AND email IS NOT NULL", Db::FETCH_ASSOC));
 
-			$this->text = $translate->_('DanielleOrderHuntPostEventPlayersText', [
+			$this->text = $data ? str_replace('%url%', $eurl, $data->text) : $translate->_('DanielleOrderHuntPostEventPlayersText', [
 				'url' => $eurl
 			]);
-			$this->html = $translate->_('DanielleOrderHuntPostEventPlayersHTML', [
+			$this->html = $data ? str_replace('%url%', $eurl, $data->html) : $translate->_('DanielleOrderHuntPostEventPlayersHTML', [
 				'url' => $eurl
 			]);
 		} else {
-			$this->text = $translate->_('DanielleOrderHuntPostEventClientText', [
+			$this->text = $data ? str_replace('%url%', $eurl, $data->text) : $translate->_('DanielleOrderHuntPostEventClientText', [
 				'url' => $eurl
 			]);
-			$this->html = $translate->_('DanielleOrderHuntPostEventClientHTML', [
+			$this->html = $data ? str_replace('%url%', $eurl, $data->html) : $translate->_('DanielleOrderHuntPostEventClientHTML', [
 				'url' => $eurl
 			]);
 		}

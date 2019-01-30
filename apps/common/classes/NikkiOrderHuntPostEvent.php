@@ -8,10 +8,12 @@ class NikkiOrderHuntPostEvent extends OrderHuntMailBase {
 	{
 		parent::__construct($orderHunt);
 
+		$data = EventEmails::findFirstByEmailId(EventEmails::NikkiPostEventEmail);
+
 		$translate = $this->translate;
 
 		$this->client = $orderHunt->Order->Client;
-		$this->title = $translate->_('Pro Tip: Keep the team momentum going');
+		$this->title = $data ? $data->title : $translate->_('Pro Tip: Keep the team momentum going');
 
 		$di = Phalcon\Di::getDefault();
 		$db = $di->get('db');
@@ -35,10 +37,10 @@ class NikkiOrderHuntPostEvent extends OrderHuntMailBase {
 				$eurl = $endlink;
 		}
 
-		$this->text = $translate->_('NikkiOrderHuntPostEventText', [
+		$this->text = $data ? str_replace('%url%', $eurl, $data->text) : $translate->_('NikkiOrderHuntPostEventText', [
 			'url' => $eurl
 		]);
-		$this->html = $translate->_('NikkiOrderHuntPostEventHTML', [
+		$this->html = $data ? str_replace('%url%', $eurl, $data->html) : $translate->_('NikkiOrderHuntPostEventHTML', [
 			'url' => $eurl
 		]);
 	}
