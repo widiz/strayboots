@@ -121,8 +121,8 @@ class Orders extends \Phalcon\Mvc\Model
 			$c = strtoupper($customize['header_color']);
 			if ($c === '#FFF' || $c === '#FFFFFF') {
 				$huntCss .= '.navbar-toggle{background-color:#000}';
-				if (empty($customize['main_color']))
-					$customize['main_color'] = '#000000';
+				//if (empty($customize['main_color']))
+				//	$customize['main_color'] = '#000000';
 			}
 		}
 		if (isset($customize['background_color']))
