@@ -97,7 +97,9 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 				$this->view->mapDisabled = $this->view->facebookDisabled = $this->view->leaderboardDisabled = $this->view->loggedIn = $this->view->isMultiHunt = false;
 				$multilang = 0;
 			} else {
-				if ($orderHunt->isDurationFinish()) {
+				if ($orderHunt->isB2CEnabled()) {
+					$orderHunt->finish = date('Y-m-d H:i:s', ($this->team ? strtotime($this->team->activation) : time()) + max(120, $this->hunt->getDurationMinutes()) * 60);
+				} else if ($orderHunt->isDurationFinish()) {
 					$orderHunt->finish = date('Y-m-d H:i:s', ($this->team ? strtotime($this->team->activation) : time()) + $this->hunt->getDurationMinutes() * 60);
 				}
 				$this->view->leaderboardDisabled = $orderHunt->isLeaderBoardDisabled();

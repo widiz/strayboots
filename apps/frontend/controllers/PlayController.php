@@ -445,6 +445,44 @@ EOF
 			$this->view->startTimer = $timeToStart;
 		} else if (is_null($question)) {
 
+			if ($thisOrderHunt->isB2CEnabled()) {
+				if (empty($responseMsg))
+					$this->view->leaderBoardPaypal = true;
+				if ($redis->get(SB_PREFIX . 'ohmail:' . $thisOrderHunt->id . ':' . $thisTeam->id) != 1) {
+					try {
+						$attachments = [];
+						$files = glob($this->config->application->frontUploadsDir->path . $thisOrderHunt->id . '/' . $thisTeam->id . '/*{0,1,2,3,4,5,6,7,8,9}.jpg', GLOB_BRACE | GLOB_NOSORT);
+						$a = [];
+						$s = 0;
+						$maxMsg = 15*1024*1024;
+						foreach ($files as $f) {
+							$fs = filesize($f);
+							$f = '@'.$f;
+							if ($s + $fs < $maxMsg) {
+								$s += $fs;
+								$a[] = $f;
+							} else {
+								if (!empty($a)) 
+									$attachments[] = $a;
+								if ($fs < $maxMsg) {
+									$a = [$f];
+									$s = $fs;
+								}
+							}
+						}
+						if (count($attachments) === 0 || !empty($a))
+							$attachments[] = $a;
+						$loader = new \Phalcon\Loader();
+						$loader->registerDirs([APP_PATH . '/apps/common/classes'])->register();
+						$pe = new \BCOrderHuntPostEvent($thisOrderHunt);
+						foreach ($attachments as $a) {
+							if ($pe->send([$this, 'sendMail'], $this->player->email, $a) === true)
+								$redis->set(SB_PREFIX . 'ohmail:' . $thisOrderHunt->id . ':' . $thisTeam->id, 1, 86400 * 14);
+						}
+					} catch(Exception $e) { }
+				}
+			}
+
 			//$this->view->responseLink = ['Leaderboard', $this->url->get('leaderboard')];
 			if (is_null($thisOrderHunt->end_msg))
 				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . $this->view->t->_('You\'ve completed your scavenger hunt!<br>Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots!');

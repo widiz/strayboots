@@ -92,7 +92,7 @@ ob_start(function($c){
 			-moz-border-radius: 4px;
 			border-radius: 4px;
 			font-size: 18px;
-			padding:10px 0;
+			padding: 10px;
 			color: #fff;
 			-ms-touch-action: manipulation;
 			touch-action: manipulation;

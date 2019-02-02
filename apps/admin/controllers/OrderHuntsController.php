@@ -147,6 +147,7 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('leaderboard_disabled', $orderHunt->isLeaderBoardDisabled());
 			$this->tag->setDefault('map_disabled', $orderHunt->isMapDisabled());
 			$this->tag->setDefault('facebook_disabled', $orderHunt->isFacebookDisabled());
+			$this->tag->setDefault('b2c_enabled', $orderHunt->isB2CEnabled());
 		}
 		$this->addEdit();
 	}
@@ -217,6 +218,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setLeaderBoardDisabled($this->request->getPost('leaderboard_disabled'));
 		$orderHunt->setMapDisabled($this->request->getPost('map_disabled'));
 		$orderHunt->setFacebookDisabled($this->request->getPost('facebook_disabled'));
+		$orderHunt->setB2CEnabled($this->request->getPost('b2c_enabled'));
 
 		$hunt = $orderHunt->Hunt;
 
@@ -354,7 +356,6 @@ class OrderHuntsController extends \ControllerBase
 		if (empty($orderHunt->video))
 			$orderHunt->video = null;
 
-		$orderHunt->setCustomLogin($this->request->getPost('custom_login'));
 		$orderHunt->setDurationFinish($this->request->getPost('duration_finish'));
 		$orderHunt->setCanceled($this->request->getPost('canceled'));
 		$orderHunt->setMultiHunt($this->request->getPost('multi_hunt'));
@@ -362,6 +363,8 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setLeaderBoardDisabled($this->request->getPost('leaderboard_disabled'));
 		$orderHunt->setMapDisabled($this->request->getPost('map_disabled'));
 		$orderHunt->setFacebookDisabled($this->request->getPost('facebook_disabled'));
+		$orderHunt->setB2CEnabled($this->request->getPost('b2c_enabled'));
+		$orderHunt->setCustomLogin($orderHunt->isB2CEnabled() ? true : $this->request->getPost('custom_login'));
 
 		$hunt = $orderHunt->Hunt;
 		$isOk = true;

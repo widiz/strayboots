@@ -1,4 +1,5 @@
 <?php
+define('fullName', true);
 define('password', 'demo2018');
 $orderHuntID = 156;
 require '../../apps/whitelabel/header.php';

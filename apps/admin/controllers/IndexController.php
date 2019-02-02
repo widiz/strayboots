@@ -36,8 +36,6 @@ class IndexController extends \ControllerBase
 			throw new Exception(403, 403);
 
 		$now = date('Y-m-d H:i:s');
-		$est = 'EST';//(new \DateTime('01-01-2010', new \DateTimeZone('America/New_York')))->format('T');
-		//(new \DateTime('01-01-2010', new \DateTimeZone('America/New_York')))->format('T');
 		$builder = $this->modelsManager->createBuilder()
 							->columns([
 								'OrderHunts.id', 'OrderHunts.order_id', 'OrderHunts.start',

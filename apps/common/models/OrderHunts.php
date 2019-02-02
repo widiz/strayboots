@@ -692,6 +692,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 128);
 	}
 
+	public function isB2CEnabled()
+	{
+		return (bool)($this->flags & 256);
+	}
+
 	public function setCustomLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
@@ -730,6 +735,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public function setFacebookDisabled($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 128;
+	}
+
+	public function setB2CEnabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 256;
 	}
 
 	/**

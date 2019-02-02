@@ -15,7 +15,9 @@ $(function(){
 						'Danielle Post Event Email Client',
 						'Nikki Post Event Email',
 						'Shauna Post Event Email',
-						'Post Event Email'
+						'Post Event Email Client',
+						'Post Event Email Players',
+						'B2C Player Post Hunt Email'
 					][data] || data;
 				}
 			},

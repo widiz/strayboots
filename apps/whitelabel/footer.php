@@ -43,7 +43,8 @@
 	function formCheck(e){
 		var error = false,
 			tmp = form.email.nextElementSibling,
-			names = [<? if (defined('password')): ?>'name'<? else: ?>'first_name', 'last_name'<? endif ?>];
+			names = [<? if (defined('fullName')): ?>'name'<? else: ?>'first_name', 'last_name'<? endif ?>];
+<? if (function_exists('form_check')) form_check() ?>
 		if (form.email.value.length > 120 || form.email.value.match(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/) === null) {
 			error = true;
 			tmp.innerText = "Email is invalid";
@@ -88,7 +89,7 @@
 						FB.api('/me?fields=id,first_name,last_name,email', function(response) {
 							if (!(typeof response == 'object' && response.id > 0))
 								throw '';
-<? if (defined('password')): ?>
+<? if (defined('fullName')): ?>
 							form.nameField.value = (response.first_name + ' ' + response.last_name).trim();
 <? else: ?>
 							form.firstNameField.value = response.first_name;
@@ -113,5 +114,6 @@
 	addEvent(form, 'submit', formCheck);
 })();
 </script>
+<? if (function_exists('after_body')) after_body() ?>
 </body>
 </html><? ob_end_flush() ?>

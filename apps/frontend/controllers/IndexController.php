@@ -58,6 +58,12 @@ class IndexController extends ControllerBase
 					'order' => 'id ASC',
 					'bind' => [$id]
 				]) : false;
+				if (!$team && $orderHunt && $orderHunt->isB2CEnabled()) {
+					$team = array_pop($orderHunt->addTeams(1));
+					$orderHunt->max_teams += 1;
+					$orderHunt->max_players = max($orderHunt->max_players + 1, $orderHunt->max_teams);
+					$orderHunt->save();
+				}
 				if ($team)
 					$activation = $team->activation_leader;
 			} else {
@@ -67,7 +73,7 @@ class IndexController extends ControllerBase
 				]);
 				$orderHunt = $team ? $team->OrderHunt : false;
 			}
-			if ($team) {
+			if ($team && !$orderHunt->isB2CEnabled()) {
 				$found = false;
 				foreach ($orderHunt->getTeams() as $t) {
 					if ($t->id == $team->id) {

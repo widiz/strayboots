@@ -142,6 +142,52 @@ The Strayboots Squad
 EOF
 ,
 
+	//BCOrderHuntPostEvent
+	'Thank you for using Strayboots!' => 'Thank you for using Strayboots!',
+	'BCOrderHuntPostEventText' => <<<EOF
+Hi!
+
+We hope you had an amazing time on your scavenger hunt adventure! 
+Attached you can find your photos from today. If you happen to post them on Facebook, Twitter, Instagram, or any other social network, don’t forget to mention @strayboots, and use the hashtags #strayboots and #strayonthego.
+
+At Strayboots, we also focus on large team events, and our scavenger hunts and team building activities are available in more than 100 cities worldwide!
+So next time your team or company is planning a corporate event, don’t forget to mention us! 
+
+We hope you enjoyed your scavenger hunt and look forward to working with you in the future.
+
+Best,
+The Strayboots Team
+
+EOF
+,
+	'BCOrderHuntPostEventHTML' => <<<EOF
+<table cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:100%;margin:0 auto">
+<tr>
+<td>
+<div style="text-align:center">
+<img src="https://www.strayboots.com/media/static/img/home/logo.png" width="163" height="50">
+</div>
+<br>
+Hi,<br>
+<br>
+We hope you had an amazing time on your scavenger hunt adventure!<br>
+Attached you can find your photos from today. If you happen to post them on Facebook, Twitter, Instagram, or any other social network, don’t forget to mention @strayboots, and use the hashtags #strayboots and #strayonthego.<br>
+<br>
+At Strayboots, we also focus on large team events, and our scavenger hunts and team building activities are available in more than 100 cities worldwide!<br>
+So next time your team or company is planning a corporate event, don’t forget to mention us!<br>
+<br>
+We hope you enjoyed your scavenger hunt and look forward to working with you in the future.<br>
+<br>
+Best,<br>
+The Strayboots Team<br>
+<br>
+</td>
+</tr>
+</table>
+%unsubscribe%
+EOF
+,
+
 	//NewOrderHuntPostEvent
 	'It’s final--the scores are in' => 'It’s final--the scores are in',
 	'MVP Highlights' => 'MVP Highlights',

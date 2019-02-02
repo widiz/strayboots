@@ -35,6 +35,7 @@ class EventEmails extends \Phalcon\Mvc\Model
 	const ShaunaPostEventEmail = 3;
 	const NewPostEventEmail = 4;
 	const NewPostEventEmailPlayers = 5;
+	const BCOrderHuntPostEvent = 6;
 
 	/**
 	 * Validations and business logic
