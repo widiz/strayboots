@@ -87,12 +87,39 @@ $(function(){
 		$('input.btn-default[type="submit"]').prop('disabled', true);
 	});
 
+	// $('.customize-form').submit(function(e){
+	// 	e.preventDefault();
+	// 	var self = this;
+	// 	bootbox.confirm("Did you verify that all texts are visible correctly after your change?<br>Please make sure that the colors you've selected oppose the background colors! We don't want it to affect your experience.<br>If you wish to reset the design, please make sure to hit the RESET button, and then the SAVE button.", function(result) {
+			// if (result)
+			// 	self.submit();
+	// 	}).addClass('flex').css({
+	// 		'align-items': 'center',
+	// 		'justify-content': 'center',
+	// 		'font-size': '20px'
+	// 	});
+	// 	return false;
+	// });
+
 	$('.customize-form').submit(function(e){
 		e.preventDefault();
 		var self = this;
-		bootbox.confirm("Did you verify that all texts are visible correctly after your change?<br>Please make sure that the colors you've selected oppose the background colors! We don't want it to affect your experience.<br>If you wish to reset the design, please make sure to hit the RESET button, and then the SAVE button.", function(result) {
-			if (result)
+		bootbox.confirm({
+			message: "Did you verify that all texts are visible correctly after your change?<br>Please make sure that the colors you've selected oppose the background colors! We don't want it to affect your experience.<br>If you wish to reset the design, please make sure to hit the RESET button, and then the SAVE button.",
+			buttons: {
+		        confirm: {
+		            label: 'Looks good to me',
+		            className: 'btn-primary'
+		        },
+		        cancel: {
+		            label: 'Go back to edit',
+		            className: 'btn-default'
+		        }
+		    },
+		    callback: function (result) {
+		        if (result)
 				self.submit();
+		    }
 		}).addClass('flex').css({
 			'align-items': 'center',
 			'justify-content': 'center',
