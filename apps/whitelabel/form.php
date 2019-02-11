@@ -35,8 +35,12 @@
 <? endif ?>
 <? if (function_exists('before_options')) before_options() ?>
 			<div class="options row">
+<? if (defined('noFacebook')): ?>
+				<div class="grid-100"><input type="submit" class="btn btn-success" value="<?= isset($buttonText) ? $buttonText : 'Start now' ?>" style="width:auto" /></div>
+<? else: ?>
 				<div class="grid-40"><input type="submit" class="btn btn-success" value="<?= isset($buttonText) ? $buttonText : 'Start now' ?>" /></div>
 				<div class="grid-60"><button class="btn btn-fb" id="fblogin">Facebook Login</button></div>
+<? endif ?>
 			</div>
 			<div style="margin-top:20px;font-size:12px">
 By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>

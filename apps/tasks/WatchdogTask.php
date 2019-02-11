@@ -7,7 +7,7 @@ class WatchdogTask extends TaskBase
 		echo 'Watchdog v' . VERSION . PHP_EOL;
 		$cache = isset($args[0]) ? (bool)$args[0] : true;
 
-		$hourAgo = date('Y-m-d H:i:s', strtotime('-90 minutes'));
+		$hourAgo = date('Y-m-d H:i:s', strtotime('-900000 minutes'));
 		$twentyMinAgo = date('Y-m-d H:i:s', strtotime('-20 minutes'));
 
 		echo 'Querying...';

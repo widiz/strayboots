@@ -448,6 +448,7 @@ EOF
 			if ($thisOrderHunt->isB2CEnabled()) {
 				if (empty($responseMsg))
 					$this->view->leaderBoardPaypal = true;
+					$this->view->fullUri = $this->config->fullUri;
 				if ($redis->get(SB_PREFIX . 'ohmail:' . $thisOrderHunt->id . ':' . $thisTeam->id) != 1) {
 					try {
 						$attachments = [];
@@ -481,13 +482,14 @@ EOF
 						}
 					} catch(Exception $e) { }
 				}
-			}
 
-			//$this->view->responseLink = ['Leaderboard', $this->url->get('leaderboard')];
-			if (is_null($thisOrderHunt->end_msg))
-				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . $this->view->t->_('You\'ve completed your scavenger hunt!<br>Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots!');
-			else
-				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . nl2br(htmlspecialchars($thisOrderHunt->end_msg));
+				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . (is_null($thisOrderHunt->end_msg) ? 'You\'ve completed your scavenger hunt! Hope you had fun today, and be sure to spread the word about Strayboots' : nl2br(htmlspecialchars($thisOrderHunt->end_msg)));
+			} else {
+
+				//$this->view->responseLink = ['Leaderboard', $this->url->get('leaderboard')];
+				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . (is_null($thisOrderHunt->end_msg) ? $this->view->t->_('You\'ve completed your scavenger hunt!<br>Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots!') : nl2br(htmlspecialchars($thisOrderHunt->end_msg)));
+
+			}
 
 			$this->view->facebookSDK = true;
 

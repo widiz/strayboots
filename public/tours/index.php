@@ -1,5 +1,6 @@
 <?php
 define('fullName', true);
+define('noFacebook', true);
 $buttonText = 'Let\'s Hunt!!!';
 
 define('APP_PATH', dirname(dirname(__DIR__)));
@@ -44,13 +45,13 @@ function before_form() {
 		<div class="grid-100">
 			<select class="select2" name="city" placeholder="Choose Your City" style="width:100%" id="city-select">
 				<option disabled selected></option>
-<? foreach ($countries as $id => $country): ?>
-				<optgroup label="<?= $country['name'] ?>">
-<? foreach ($country['cities'] as $cid => $city): ?>
+<? foreach ($countries as $id => $country): 
+				//<optgroup label="<?= $country['name'] ? >">
+foreach ($country['cities'] as $cid => $city): ?>
 					<option value="<?= $cid ?>"><?= $city ?></option>
-<? endforeach ?>
-				</optgroup>
-<? endforeach ?>
+<? endforeach;
+				//</optgroup>
+endforeach ?>
 			</select>
 			<label class="error" id="cityError"></label>
 		</div>
@@ -118,6 +119,7 @@ function after_body() {
 
 require APP_PATH . '/apps/whitelabel/header.php';
 ?>
+	<title>Strayboots tours</title>
 	<link rel="stylesheet" href="/template/css/plugins/select2/select2.min.css" />
 	<style type="text/css">
 		html {
@@ -201,13 +203,13 @@ require APP_PATH . '/apps/whitelabel/header.php';
 		</div>
 	</div>
 	<div class="content-wrapper">
-		<h1>Welcome to the amazing world of Strayboots!</h1>
+		<h1>Welcome to The Amazing World of Strayboots!</h1>
 		<div id="page1">
 			<div class="row">
 				<div class="grid-100">
-					<h2>Are you ready for your Do-It-Yourself scavenger hunt?</h2>
+					<h2>Are you ready for your scavenger hunt adventure?</h2>
 					<p>
-						We love scavenger hunts. And we pride in the quality of our scavenger hunts. This is why we are offering you something that no one has ever done - A <b>Pay What You Want</b> Scavenger Hunt!
+						We love scavenger hunt, and we take pride in our quality product. This is why we are offering you something that no one has ever done - A <b>Pay What You Want</b> Scavenger Hunt!
 						<br><br>
 						Ready?
 					</p>
