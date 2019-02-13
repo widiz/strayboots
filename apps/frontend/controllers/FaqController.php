@@ -55,7 +55,11 @@ EOF
 					'timeLeft' => strtotime($this->orderHunt->finish) - time()
 				]
 			];
+
+			if ($this->orderHunt->isB2CEnabled())
+				$this->view->pick('faq/b2c');
 		}
+
 
 		$this->assets->collection('style')->addCss('/css/app/faq.css');
 	}

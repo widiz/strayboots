@@ -441,11 +441,12 @@ EOF
 
 		unset($questions);
 
+		$isB2C = $thisOrderHunt->isB2CEnabled();
+
 		if ($timeToStart > 0) {
 			$this->view->startTimer = $timeToStart;
 		} else if (is_null($question)) {
-
-			if ($thisOrderHunt->isB2CEnabled()) {
+			if ($isB2C) {
 				if (empty($responseMsg))
 					$this->view->leaderBoardPaypal = true;
 					$this->view->fullUri = $this->config->fullUri;
@@ -529,10 +530,16 @@ EOF
 					return $this->response->redirect('index/chooseHunt');
 
 				$responseMsg = $showHint = false;
-				if (is_null($thisOrderHunt->timeout_msg))
-					$this->view->end_msg = '<h2>This hunt has ended!</h2>Meet your group at your end location to hear the official results!<br><br>Hope you had fun - be sure to spread the word about Strayboots!';
-				else
+				if (is_null($thisOrderHunt->timeout_msg)) {
+					if ($isB2C) {
+						$this->view->leaderBoardPaypal = true;
+						$this->view->end_msg = '<h2>This hunt has ended!</h2>Hope you had fun, and be sure to spread the word about Strayboots!';
+					} else {
+						$this->view->end_msg = '<h2>This hunt has ended!</h2>Meet your group at your end location to hear the official results!<br><br>Hope you had fun - be sure to spread the word about Strayboots!';
+					}
+				} else {
 					$this->view->end_msg = '<h2>This hunt has ended!</h2>' . nl2br(htmlspecialchars($thisOrderHunt->timeout_msg));
+				}
 			} else {
 				$this->view->showHint = $showHint = $redis->exists(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id']);
 

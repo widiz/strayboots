@@ -208,11 +208,7 @@ require APP_PATH . '/apps/whitelabel/header.php';
 			<div class="row">
 				<div class="grid-100">
 					<h2>Are you ready for your scavenger hunt adventure?</h2>
-					<p>
-						We love scavenger hunt, and we take pride in our quality product. This is why we are offering you something that no one has ever done - A <b>Pay What You Want</b> Scavenger Hunt!
-						<br><br>
-						Ready?
-					</p>
+					<p>We love scavenger hunts, and we take pride in our quality product. This is why we are offering you something that no one has ever done - <br>A <b>Pay What You Want</b> Scavenger Hunt!<br><br><b>Ready?</b></p>
 					<button class="btn btn-success" onclick="$('#page1').slideUp();$('#page2').slideDown()" style="width:auto">Click here to choose your city!</button>
 				</div>
 			</div>
