@@ -7,8 +7,49 @@ class WatchdogTask extends TaskBase
 		echo 'Watchdog v' . VERSION . PHP_EOL;
 		$cache = isset($args[0]) ? (bool)$args[0] : true;
 
-		$hourAgo = date('Y-m-d H:i:s', strtotime('-120 minutes'));
-		$twentyMinAgo = date('Y-m-d H:i:s', strtotime('-20 minutes'));
+		$start = date('Y-m-d H:i:s', strtotime('-35 minutes'));
+		$end = date('Y-m-d H:i:s', strtotime('+20 minutes'));
+
+		echo 'Starting alert' . PHP_EOL;
+		echo 'Querying...';
+		$flagged = $this->db->fetchAll(<<<EOF
+SELECT oh.id, h.name as huntname,
+o.name as ordername, c.company
+FROM order_hunts oh
+LEFT JOIN orders o ON (o.id = oh.order_id)
+LEFT JOIN hunts h ON (h.id = oh.hunt_id)
+LEFT JOIN clients c ON (c.id = o.client_id)
+WHERE oh.start >= '{$start}' AND oh.start <= '{$end}'
+AND oh.flags & 4 = 0
+EOF
+		, Phalcon\Db::FETCH_ASSOC);
+		echo 'done' . PHP_EOL;
+
+		foreach ($flagged as $i => $orderHunt) {
+			echo 'Processing OrderHunt #' . $orderHunt['id'] . '...';
+			if ($cache && $this->redis->exists(SB_PREFIX . 'alert:na:' . $orderHunt['id'])) {
+				unset($flagged[$i]);
+				echo 'cached' . PHP_EOL;
+				continue;
+			}
+			$this->redis->set(SB_PREFIX . 'alert:na:' . $orderHunt['id'], 1, 7200);
+			echo 'done' . PHP_EOL;
+		}
+		if (!empty($flagged)) {
+			$text = "Hunts starting soon:\r\n";
+			$html = 'Hunts starting soon:<br>';
+			foreach ($flagged as $orderHunt) {
+				$link = $this->config->fullUri . '/admin/order_hunts/summary/' . $orderHunt['id'];
+				$text .= "\r\n#" . $orderHunt['id'] . ": " . $orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname'] . ' ' . $link;
+				$html .= '<br><a href="' . $link . '">#' . $orderHunt['id'] . ': ' . htmlspecialchars($orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname']) . '</a>';
+			}
+			$this->sendMail('support@strayboots.com,nikki@strayboots.com,ido@strayboots.com', 'Alert: Hunts starting soon', $text, $html, [], [
+				'cc' => 'ariel@safronov.co.il,danielle@strayboots.com'
+			]); 
+		}
+
+		echo 'done' . PHP_EOL . PHP_EOL;
+		echo 'Starting Watchdog' . PHP_EOL;
 
 		echo 'Querying...';
 		$flagged = $this->db->fetchAll(<<<EOF
@@ -56,7 +97,7 @@ EOF
 			}
 			$this->sendMail('support@strayboots.com,nikki@strayboots.com,ido@strayboots.com', 'Watchdog: Hunts are not activated', $text, $html, [], [
 				'cc' => 'ariel@safronov.co.il,danielle@strayboots.com'
-			]);
+			]); 
 		}
 	}
 }
