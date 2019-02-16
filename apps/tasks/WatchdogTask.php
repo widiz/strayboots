@@ -25,6 +25,9 @@ EOF
 		, Phalcon\Db::FETCH_ASSOC);
 		echo 'done' . PHP_EOL;
 
+		$link = $this->config->fullUri . '/admin/order_hunts/summary/';
+		$textBase = "Please double check:\r\n1 - Design\r\n2 - Start and end time\r\n3 - Bonus questions\r\n4 - Event host, if needed\r\n5 - Any special requests";
+		$htmlBase = nl2br($textBase);
 		foreach ($flagged as $i => $orderHunt) {
 			echo 'Processing OrderHunt #' . $orderHunt['id'] . '...';
 			if ($cache && $this->redis->exists(SB_PREFIX . 'alert:na:' . $orderHunt['id'])) {
@@ -32,20 +35,11 @@ EOF
 				echo 'cached' . PHP_EOL;
 				continue;
 			}
-			$this->redis->set(SB_PREFIX . 'alert:na:' . $orderHunt['id'], 1, 7200);
+			$text = "#" . $orderHunt['id'] . ": " . $orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname'] . ' ' . $link . $orderHunt['id'] . "\r\n\r\n" . $textBase;
+			$html = '<a href="' . $link . $orderHunt['id'] . '">#' . $orderHunt['id'] . ': ' . htmlspecialchars($orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname']) . '</a><br><br>' . $htmlBase;
+			if ($this->sendMail('ashley@strayboots.com,danielle@strayboots.com,ido@strayboots.com', 'Please verify the upcoming hunt for ' . $orderHunt['company'], $text, $html))
+				$this->redis->set(SB_PREFIX . 'alert:na:' . $orderHunt['id'], 1, 7200);
 			echo 'done' . PHP_EOL;
-		}
-		if (!empty($flagged)) {
-			$text = "Hunts starting soon:\r\n";
-			$html = 'Hunts starting soon:<br>';
-			foreach ($flagged as $orderHunt) {
-				$link = $this->config->fullUri . '/admin/order_hunts/summary/' . $orderHunt['id'];
-				$text .= "\r\n#" . $orderHunt['id'] . ": " . $orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname'] . ' ' . $link;
-				$html .= '<br><a href="' . $link . '">#' . $orderHunt['id'] . ': ' . htmlspecialchars($orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname']) . '</a>';
-			}
-			$this->sendMail('support@strayboots.com,nikki@strayboots.com,ido@strayboots.com', 'Alert: Hunts starting soon', $text, $html, [], [
-				'cc' => 'ariel@safronov.co.il,danielle@strayboots.com'
-			]); 
 		}
 
 		echo 'done' . PHP_EOL . PHP_EOL;
