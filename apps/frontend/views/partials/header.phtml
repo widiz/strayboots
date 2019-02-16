@@ -72,6 +72,7 @@
 <? endif ?>
 		<div id="header-score">
 			<!--i class="fa fa-trophy"></i-->
+<? if (!isset($noScore)): ?>
 			<div>
 				<div><?= $t->_('Place') ?></div>
 				<span><?= $teamStatus['position'] ?></span>
@@ -80,6 +81,7 @@
 				<div><?= $t->_('Team Score') ?></div>
 				<span><?= $teamStatus['score'] ?></span>
 			</div>
+<? endif ?>
 <? if (isset($question)): ?>
 			<div>
 				<div><?= $t->_('Progress') ?></div>

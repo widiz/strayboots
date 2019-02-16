@@ -7,11 +7,11 @@
 							<button type="button" class="bootbox-close-button close" data-dismiss="modal" style="margin-top:-10px">×</button>
 <? if (is_array($showBonusQuestionBox)): ?>
 							<img src="/img/bq1.png" width="450" height="285">
-							<h2><?= $t->_('Your team won' . ($bqPoints ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
+							<h2><?= $t->_('Your team won' . ($bqPoints > 0 ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
 							<h3><b class="specialcolor" style="word-break:break-all"><?= is_null($showBonusQuestionBox[1]) ? $showBonusQuestionBox[0] : htmlspecialchars(trim($showBonusQuestionBox[1] . ' ' . $showBonusQuestionBox[2])) ?></b> got it right</h3>
 <? elseif ($showBonusQuestionBox): ?>
 							<img src="/img/bq1.png" width="450" height="285">
-							<h2><?= $t->_('You Won' . ($bqPoints ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
+							<h2><?= $t->_('You Won' . ($bqPoints > 0 ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
 <? else: ?>
 							<img src="/img/bq1.png" width="450" height="285">
 							<h2><?= $t->_('You Lost') ?></h2>
@@ -144,7 +144,7 @@ endif ?>
 							<form method="POST" action="<?= $this->url->get('play') ?>" id="hint-form">
 								<input type="hidden" name="qid" value="<?= $question['id'] ?>">
 								<input type="hidden" name="action" value="hint">
-								<a href="javascript:;" class="btn btn-warning"><?= $t->_('Hint') ?></a>
+								<a href="javascript:;" data-warn="<?= $question['cscore'] > 0 ? 1 : 0 ?>" class="btn btn-warning"><?= $t->_('Hint') ?></a>
 							</form>
 <? endif ?>
 							<form method="POST" action="<?= $this->url->get('play') ?>" id="skip-form">

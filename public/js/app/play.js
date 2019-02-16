@@ -206,12 +206,16 @@ $(function(){
 		if ($('.bootbox-confirm .btn-default').length)
 			return false;
 		$('body').focus();
-		bootbox.confirm("Using a HINT will deduct half of the points. Are you sure?"._(), function(result){
-			if (result)
-				$('#hint-form').submit();
-		}).on('shown.bs.modal',function(){
-			$('.bootbox-confirm .btn-default').focus();
-		});
+		if ($(this).data('warn') > 0) {
+			bootbox.confirm("Using a HINT will deduct half of the points. Are you sure?"._(), function(result){
+				if (result)
+					$('#hint-form').submit();
+			}).on('shown.bs.modal',function(){
+				$('.bootbox-confirm .btn-default').focus();
+			});
+		} else {
+			$('#hint-form').submit();
+		}
 		return false;
 	});
 

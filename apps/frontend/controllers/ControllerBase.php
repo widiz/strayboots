@@ -87,6 +87,11 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 	{
 		if ($orderHunt !== false) {
 
+			if ($orderHunt->order_id == 2249) {
+				define('noScore', true);
+				$this->view->noScore = true;
+			}
+
 			$this->hunt = $orderHunt->Hunt;
 
 			$multilang = $this->hunt->multilang;
@@ -175,12 +180,14 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 					$huntCss = $this->orderHunt->Order->getCSS($clientPaths);
 					$cache->set($key, $huntCss, 7200);
 				}
-				if ($this->orderHunt->order_id == 1176 || /* TODO remove that */ $this->orderHunt->order_id == NcrController::ORDER_ID) {
+				/*if ($this->orderHunt->order_id == 1176 || $this->orderHunt->order_id == NcrController::ORDER_ID) {
 					$this->view->ncr = true;
 					$this->view->headerHTML = '<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">';
-				}
+				}*/
 				if (defined('OVERRIDE_STANDARDLOGIN'))
 					$huntCss .= '#activation-email{visibility:visible;display:block}#activation-fb{display:none}';
+				if (defined('noScore'))
+					$huntCss .= '#playground .question{text-align:center}';
 				if (!empty($huntCss))
 					$this->view->huntCss = $huntCss;
 				if (file_exists($uploadBase . 'logo.png'))

@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", function(){
 					<b class="wyg">You got it correct.</b><br>
 <? else: ?>
 <? if ($answerAction == Answers::AnsweredWithHint): ?>
-					<b class="wyg"><?= $t->_('You got %points% points, nice work', ['points' => $points]) ?></b><br>
+					<b class="wyg"><?= isset($noScore) ? '' : $t->_('You got %points% points, nice work', ['points' => $points]) ?></b><br>
 <? else: ?>
-					<b class="wyg"><?= $t->_('You got %points% points, keep it going!', ['points' => $points]) ?></b><br>		
+					<b class="wyg"><?= isset($noScore) ? '' : $t->_('You got %points% points, keep it going!', ['points' => $points]) ?></b><br>		
 <? endif ?>
 <? endif ?>
 <? endif ?>

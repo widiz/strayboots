@@ -61,6 +61,11 @@ ORDER BY idx ASC, type_id DESC
 EOF
 		, Db::FETCH_ASSOC);
 
+		if (defined('noScore')) {
+			foreach ($questions as $i => $q)
+				$questions[$i]['cscore'] = 0;
+		}
+
 		$strategy = $this->view->strategy = $hunt->isStrategyHunt();
 		if ($strategy) {
 			$_questions = $questions;
