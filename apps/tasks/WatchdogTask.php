@@ -37,7 +37,7 @@ EOF
 			}
 			$text = "#" . $orderHunt['id'] . ": " . $orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname'] . ' ' . $link . $orderHunt['id'] . "\r\n\r\n" . $textBase;
 			$html = '<a href="' . $link . $orderHunt['id'] . '">#' . $orderHunt['id'] . ': ' . htmlspecialchars($orderHunt['company'] . ' / ' . $orderHunt['ordername'] . ' / ' . $orderHunt['huntname']) . '</a><br><br>' . $htmlBase;
-			if ($this->sendMail('ashley@strayboots.com,danielle@strayboots.com,ido@strayboots.com', 'Please verify the upcoming hunt for ' . $orderHunt['company'], $text, $html))
+			if ($this->sendMail('ashley@strayboots.com,danielle@strayboots.com,ido@strayboots.com,content@strayboots.com', 'Please verify the upcoming hunt for ' . $orderHunt['company'], $text, $html))
 				$this->redis->set(SB_PREFIX . 'alert:na:' . $orderHunt['id'], 1, 7200);
 			echo 'done' . PHP_EOL;
 		}

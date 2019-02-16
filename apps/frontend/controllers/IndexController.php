@@ -522,6 +522,9 @@ EOF
 			return;
 		}
 
+		if (preg_match('/@strayboots\.com$/i', $email))
+			return $this->view->msg = '@strayboots.com emails cannot be unsubscribed';
+
 		$ifIsset = \UnsubscribingList::findFirstByEmail($email);
 		if ($ifIsset) {
 			$this->view->msg = 'You already unsubscribed';
