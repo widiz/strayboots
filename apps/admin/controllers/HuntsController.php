@@ -733,4 +733,62 @@ class HuntsController extends \ControllerBase
 		$this->response->redirect('hunts');
 	}
 
+	public function XLSXAction($id = 0)
+	{
+		if ($this->requireUser())
+			return true;
+
+		$hunt = Hunts::findFirstByid($id);
+		if (!$hunt) {
+			$this->flash->error('Hunt was not found');
+			return $this->response->redirect('hunts');
+		}
+
+		$writer = new \XLSXWriter();
+		$writer->writeSheetHeader('Questions', [
+			'ID' => 'integer',
+			'Point' => 'string',
+			'Type' => 'string',
+			'Score' => 'integer',
+			'Question' => 'string',
+			'Timeout' => 'string',
+			'Hint' => 'string',
+			'Fun Facts' => 'string',
+			'Answers' => 'string'
+		]);
+
+		$huntId = (int)$this->request->getQuery('huntId', 'int');
+		$questions = new \Phalcon\Mvc\Model\Query\Builder([
+			'models'	 => ['hp' => 'HuntPoints'],
+			'columns'	 => 'q.id, p.name as pointname, qt.name as type, q.score, q.question, q.hint, q.funfact, q.timeout, q.answers',
+			'order'		 => 'hp.idx ASC',
+			'conditions' => 'hp.hunt_id=' . $hunt->id
+		]);
+		$questions->leftJoin('Points', 'hp.point_id = p.id', 'p');
+		$questions->leftJoin('Questions', 'q.id = hp.question_id', 'q');
+		$questions->leftJoin('QuestionTypes', 'qt.id = q.type_id', 'qt');
+		$questions = $questions->getQuery()->execute();
+
+		foreach ($questions as $question) {
+			$writer->writeSheetRow('Questions', [
+				(int)$question->id,
+				$question->pointname,
+				$question->type,
+				is_null($question->score) ? 0 : (int)$question->score,
+				$question->question,
+				gmdate('H:i:s', $question->timeout),
+				$question->hint,
+				$question->funfact,
+				str_replace("\n", '|', $question->answers),
+				$question->activehunts
+			]);
+		}
+
+		header('Content-disposition: attachment; filename="questions.xlsx"');
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Transfer-Encoding: binary');
+		$writer->writeToStdOut();
+		exit;
+	}
+
 }
