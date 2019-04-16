@@ -7,7 +7,7 @@ require '../../apps/whitelabel/header.php';
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand logo" href="http://www.strayboots.com/">
+				<a class="navbar-brand logo" href="https://www.strayboots.com/">
 					<img src="/img/logo.png" alt="Strayboots">
 				</a>
 			</div>

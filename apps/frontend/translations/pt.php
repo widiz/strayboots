@@ -4,7 +4,7 @@
 	'Welcome to your scavenger hunt adventure. We hope you brought your wit and a sharp eye.<br>Best of luck!' => 'Bem-vindo(a) ao vosso Jogo de Teambuilding. Esperamos que tenha trazido o seu olhar curioso e se divirta a (re)descobrir a cidade. Boa sorte!',
 	'Login With Facebook' => 'Entrar com o Facebook',
 	'Login With Email' => 'Entrar com Email',
-	'By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>' => 'Ao aceder, concorda com o <a href="http://www.strayboots.com/terms-of-service" target="_blank">termos de utilização</a> e <a href="http://www.strayboots.com/privacy-policy" target="_blank">Política de Privacidade</a> da Strayboots Europe',
+	'By signing up, you agree to Strayboots <a href="https://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="https://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>' => 'Ao aceder, concorda com o <a href="https://www.strayboots.com/terms-of-service" target="_blank">termos de utilização</a> e <a href="https://www.strayboots.com/privacy-policy" target="_blank">Política de Privacidade</a> da Strayboots Europe',
 	'For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>' => 'Em caso de assistência, ligue <a href="tel:+351960020010">(+351) 960 020 010</a>',
 	'Activation Code' => 'Código de ativação',
 	'Place' => 'Localização',

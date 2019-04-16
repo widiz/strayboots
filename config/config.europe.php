@@ -6,7 +6,7 @@ return new \Phalcon\Config([
 	'prefix' => 'eu',
 	'altLang' => ['he', 'pt'],
 	'defLang' => 0,
-	'fullUri' => 'http://eu.strayboots.com',
+	'fullUri' => 'https://eu.strayboots.com',
 	'database' => [
 		'adapter'	=> 'Mysql',
 		'host'		=> 'mysql.go.strayboots.com',

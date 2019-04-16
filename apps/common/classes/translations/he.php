@@ -83,7 +83,7 @@ Give a shout out to your winners and recap your Hunt <a href="%url%">here</a>, a
 <br>
 I'd love to put some time on the calendar this or next week to hear about how your Strayboots event went. It should be a pretty quick call -- about 10 minutes. If you just follow the calendar link below, you can choose a date and time that works best for you.<br>
 <br>
-To make sure we connect quickly, you can easily see my real-time availability and schedule time with me at <a href="http://calendly.com/danielle-25">calendly.com/danielle-25</a>.<br>
+To make sure we connect quickly, you can easily see my real-time availability and schedule time with me at <a href="https://calendly.com/danielle-25">calendly.com/danielle-25</a>.<br>
 <br>
 We hope you enjoyed your Hunt and look forward to working with you in the future.<br>
 <br>
@@ -103,7 +103,7 @@ Hi,
 
 It’s a no-brainer that the secret to a productive team is employee happiness, right? As leaders, we’re all trying to find that special sauce that will promote serious team bonding and truly motivate everyone. You already got a taste of it with your last Strayboots event (%url%), but here at HQ we’re always trying to come up with better ways to up the team love without the hokey trust falls. 
 
-So, what’s the one word that will motivate your co-workers more than anything else? Relatedness. Neuroscientist Matt Lieberman argues (http://bit.ly/2hVSDaN) that intrinsic motivation, motivation that comes from the heart, stems from giving employees the feeling of working as a team even if the majority of their work is done solo. 
+So, what’s the one word that will motivate your co-workers more than anything else? Relatedness. Neuroscientist Matt Lieberman argues (https://bit.ly/2hVSDaN) that intrinsic motivation, motivation that comes from the heart, stems from giving employees the feeling of working as a team even if the majority of their work is done solo. 
 
 We want to help you and other teams smash the relatedness factor so employees feel like they truly belong. So, if you spread the love and refer another company to Strayboots, both of you will receive 20% off towards your next event when they book with us!
 
@@ -126,7 +126,7 @@ Hi,<br>
 <br>
 It’s a no-brainer that the secret to a productive team is employee happiness, right? As leaders, we’re all trying to find that special sauce that will promote serious team bonding and truly motivate everyone. You already got a taste of it with your last <a href="%url%">Strayboots event</a>, but here at HQ we’re always trying to come up with better ways to up the team love without the hokey trust falls.<br>
 <br>
-So, what’s the one word that will motivate your co-workers more than anything else? Relatedness. Neuroscientist Matt Lieberman <a href="http://bit.ly/2hVSDaN">argues</a> that intrinsic motivation, motivation that comes from the heart, stems from giving employees the feeling of working as a team even if the majority of their work is done solo.<br>
+So, what’s the one word that will motivate your co-workers more than anything else? Relatedness. Neuroscientist Matt Lieberman <a href="https://bit.ly/2hVSDaN">argues</a> that intrinsic motivation, motivation that comes from the heart, stems from giving employees the feeling of working as a team even if the majority of their work is done solo.<br>
 <br>
 We want to help you and other teams smash the relatedness factor so employees feel like they truly belong. So, if you spread the love and refer another company to Strayboots, both of you will receive 20% off towards your next event when they book with us!<br>
 <br>
@@ -245,7 +245,7 @@ EOF
 	'NikkiOrderHuntPostEventText' => <<<EOF
 Congrats, you did it! Last week you had an awesome team building activity. What now? What do you do with it?
  
-Often times, your team building experience is great, but it can be tough to carry the momentum forward to produce longstanding results. According to Gayle Lantz, Executive Coach and Leadership Speaker at WorkMatters (http://bit.ly/2isjler),  three of the most important aspects following an event are to set goals based on the results of your event, debrief with someone else from your team, and reconnect with the participants.
+Often times, your team building experience is great, but it can be tough to carry the momentum forward to produce longstanding results. According to Gayle Lantz, Executive Coach and Leadership Speaker at WorkMatters (https://bit.ly/2isjler),  three of the most important aspects following an event are to set goals based on the results of your event, debrief with someone else from your team, and reconnect with the participants.
  
 Until your next event, keep some of these tips in mind to make the most of your experience. To revisit all that your group accomplished, check out your page (%url%). At Strayboots, we believe in forging deeper connections and engagement through plain, simple fun. 
 
@@ -264,7 +264,7 @@ EOF
 <br>
 Congrats, you did it! Last week you had an awesome team building activity. What now? What do you do with it?<br>
 <br>
-Often times, your team building experience is great, but it can be tough to carry the momentum forward to produce longstanding results. <a href="http://bit.ly/2isjler">According to Gayle Lantz, Executive Coach and Leadership Speaker at WorkMatters</a>,  three of the most important aspects following an event are to set goals based on the results of your event, debrief with someone else from your team, and reconnect with the participants.<br>
+Often times, your team building experience is great, but it can be tough to carry the momentum forward to produce longstanding results. <a href="https://bit.ly/2isjler">According to Gayle Lantz, Executive Coach and Leadership Speaker at WorkMatters</a>,  three of the most important aspects following an event are to set goals based on the results of your event, debrief with someone else from your team, and reconnect with the participants.<br>
 <br>
 Until your next event, keep some of these tips in mind to make the most of your experience. To revisit all that your group accomplished, <a href="%url%">check out your page</a>. At Strayboots, we believe in forging deeper connections and engagement through plain, simple fun.<br>
 <br>

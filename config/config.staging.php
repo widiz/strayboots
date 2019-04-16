@@ -6,7 +6,7 @@ return new \Phalcon\Config([
 	'prefix' => 'staging',
 	'altLang' => ['he', 'pt'],
 	'defLang' => 0,
-	'fullUri' => 'http://staging.strayboots.com',
+	'fullUri' => 'https://staging.strayboots.com',
 	'database' => [
 		'adapter'	=> 'Mysql',
 		'host'		=> 'mysql.go.strayboots.com',

@@ -43,7 +43,7 @@
 <? endif ?>
 			</div>
 			<div style="margin-top:20px;font-size:12px">
-By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>
+By signing up, you agree to Strayboots <a href="https://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="https://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>
 			</div>
 			<input type="hidden" name="network_id" id="networkIdField" />
 			<input type="hidden" name="network" id="networkField" />

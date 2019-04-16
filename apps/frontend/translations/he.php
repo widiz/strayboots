@@ -20,7 +20,7 @@
 	'Activation Code' => 'קוד התחברות',
 	'Activate Your Hunt' => 'הזן קוד התחברות',
 	'Login With Facebook' => 'התחבר עם Facebook',
-	'By signing up, you agree to Strayboots <a href="http://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="http://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>' => 'המשך מהווה אישור ל<a href="http://www.strayboots.com/terms-of-service" target="_blank">תנאי השימוש</a> ו<a href="http://www.strayboots.com/privacy-policy" target="_blank">הסכם הפרטיות</a> של Strayboots',
+	'By signing up, you agree to Strayboots <a href="https://www.strayboots.com/terms-of-service" target="_blank">Terms of Use</a> and <a href="https://www.strayboots.com/privacy-policy" target="_blank">Privacy Policy</a>' => 'המשך מהווה אישור ל<a href="https://www.strayboots.com/terms-of-service" target="_blank">תנאי השימוש</a> ו<a href="https://www.strayboots.com/privacy-policy" target="_blank">הסכם הפרטיות</a> של Strayboots',
 	'For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>' => 'לתמיכה, צור קשר <a href="tel:877-787-2929">877-787-2929</a>',
 	'Login With Email' => 'התחבר עם דוא"ל',
 	'Welcome to Your Team Building Scavenger Hunt!' => 'ברוך הבא',
