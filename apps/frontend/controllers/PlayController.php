@@ -546,7 +546,7 @@ EOF
 					$this->view->end_msg = '<h2>This hunt has ended!</h2>' . nl2br(htmlspecialchars($thisOrderHunt->timeout_msg));
 				}
 			} else {
-				$this->view->showHint = $showHint = $redis->exists(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id']);
+				$this->view->showHint = $showHint = !defined('hideHints') && $redis->exists(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id']);
 
 				$firebasePosition = $question['currentPos'] . '_' . (int)$showHint . '_' . (empty($responseMsg) ? 1 : 0);
 				if ($redis->get(SB_PREFIX . 'ohloc:' . $thisOrderHunt->id . ':' . $thisTeam->id) != $firebasePosition) {

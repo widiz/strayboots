@@ -87,9 +87,11 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 	{
 		if ($orderHunt !== false) {
 
-			if ($orderHunt->order_id == 2249) {
+			if ($orderHunt->order_id == 2422) {
 				define('noScore', true);
 				$this->view->noScore = true;
+				define('hideHints', true);
+				$this->view->hideHints = true;
 			}
 
 			$this->hunt = $orderHunt->Hunt;

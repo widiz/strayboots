@@ -41,14 +41,19 @@
 
 				<div class="inner-content">
 					<div class="question">
-<? if ($question['cscore'] > 0): ?>
-						<b><?= $t->_('For ' . ($showHint ? '<s>%original%</s> ' : '') . '%points% points', $showHint ? ['original' => $question['cscore'], 'points' => floor($question['cscore'] / 2)] : ['points' => $question['cscore']]);
+<?
 $types = [
 	4 => 'RIDDLE ME THIS...',
 	3 => 'PHOTO OP!',
 	5 => 'LOCAL TRIVIA!',
 	9 => 'ID THE IMAGE!'
 ];
+if (isset($noScore) && $noScore):
+	if (isset($types[$question['type_id']]))
+		echo $t->_($types[$question['type_id']]);
+?></b><br>
+<? elseif ($question['cscore'] > 0): ?>
+						<b><?= $t->_('For ' . ($showHint ? '<s>%original%</s> ' : '') . '%points% points', $showHint ? ['original' => $question['cscore'], 'points' => floor($question['cscore'] / 2)] : ['points' => $question['cscore']]);
 if (isset($types[$question['type_id']]))
 	echo ', ' . $t->_($types[$question['type_id']]);
 ?></b><br>
@@ -140,7 +145,7 @@ endif ?>
 <? else: ?>
 						<div class="options">
 <? endif ?>
-<? if (!($showHint || empty($question['hint'])) && $question['question_type'] != QuestionTypes::Photo): ?>
+<? if (!($showHint || empty($question['hint']) || $hideHints) && $question['question_type'] != QuestionTypes::Photo): ?>
 							<form method="POST" action="<?= $this->url->get('play') ?>" id="hint-form">
 								<input type="hidden" name="qid" value="<?= $question['id'] ?>">
 								<input type="hidden" name="action" value="hint">
