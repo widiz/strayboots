@@ -50,7 +50,7 @@ $types = [
 ];
 if (isset($noScore) && $noScore):
 	if (isset($types[$question['type_id']]))
-		echo $t->_($types[$question['type_id']]);
+		echo '<b>' . $t->_($types[$question['type_id']]);
 ?></b><br>
 <? elseif ($question['cscore'] > 0): ?>
 						<b><?= $t->_('For ' . ($showHint ? '<s>%original%</s> ' : '') . '%points% points', $showHint ? ['original' => $question['cscore'], 'points' => floor($question['cscore'] / 2)] : ['points' => $question['cscore']]);
