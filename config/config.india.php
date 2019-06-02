@@ -4,7 +4,7 @@ define('SB_PREFIX', 'sbin:');
 define('FB_PREFIX', 'india/');
 return new \Phalcon\Config([
 	'prefix' => 'india',
-	'altLang' => ['he', 'pt'],
+	'altLang' => ['he', 'pt', 'ar'],
 	'defLang' => 0,
 	'fullUri' => 'https://in.strayboots.com',
 	'database' => [

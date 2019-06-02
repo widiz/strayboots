@@ -4,7 +4,7 @@ define('SB_PREFIX', 'sb:');
 define('FB_PREFIX', '');
 return new \Phalcon\Config([
 	'prefix' => 'production',
-	'altLang' => ['he', 'pt'],
+	'altLang' => ['he', 'pt', 'ar'],
 	'defLang' => 0, // altIndex + 1
 	'fullUri' => 'https://go.strayboots.com',
 	'database' => [

@@ -4,7 +4,7 @@ define('SB_PREFIX', 'sbs:');
 define('FB_PREFIX', 'staging/');
 return new \Phalcon\Config([
 	'prefix' => 'staging',
-	'altLang' => ['he', 'pt'],
+	'altLang' => ['he', 'pt', 'ar'],
 	'defLang' => 0,
 	'fullUri' => 'https://staging.strayboots.com',
 	'database' => [

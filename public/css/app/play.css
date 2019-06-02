@@ -6,7 +6,8 @@
 	-moz-opacity: 0;
 	opacity: 0;
 	-webkit-transition: -webkit-opacity 0.4s linear;
-	-moz-transition: -moz-opacity 0.4s linear;
+	-webkit-transition: opacity 0.4s linear;
+	-o-transition: opacity 0.4s linear;
 	transition: opacity 0.4s linear;
 }
 #postground.show,
@@ -161,7 +162,6 @@
 #completion-wrapper input,
 input, input:before, input:after {
 	-webkit-user-select: initial;
-	-khtml-user-select: initial;
 	-moz-user-select: initial;
 	-ms-user-select: initial;
 	user-select: initial;
@@ -189,12 +189,13 @@ input, input:before, input:after {
 	width: 30px;
 	overflow: visible;
 	text-align: center;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
 	transition: .5s;
 	color: #fff;
 	position: relative;
 	cursor: default;
 	-webkit-box-shadow: #000 0 4px 1px -3px;
-	-moz-box-shadow: #000 0 4px 1px -3px;
 	box-shadow: #000 0 4px 1px -3px;
 }
 #completion-wrapper .letter.spacer {
@@ -214,7 +215,6 @@ input, input:before, input:after {
 input:focus {
 	outline: none;
 	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
 	box-shadow: none;
 }
 
@@ -298,7 +298,8 @@ input:focus {
 	display: inline-block;
 	vertical-align: top;
 	border: 1px solid #f39c12;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 	margin: 4px 0.5em 0;
 }
 #radio-wrapper input[type=radio]:checked + label::before {
@@ -332,7 +333,7 @@ input:focus {
 	height: 100%;
 	z-index: 1;
 	-webkit-transition: width .9s linear;
-	-moz-transition: width .9s linear;
+	-o-transition: width .9s linear;
 	transition: width .9s linear;
 }
 .timeout-progress > time {
@@ -342,6 +343,10 @@ input:focus {
 	font-size: 10px;
 	position: relative;
 	z-index: 2;
+}
+
+::-moz-selection {
+  background: #AAA; /* WebKit/Blink Browsers */
 }
 
 ::selection {

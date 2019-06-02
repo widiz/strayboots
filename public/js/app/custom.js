@@ -107,16 +107,25 @@ $(function(){
 	}
 
 	if (!getCookie('welcomescreen')) {
+		var openTime = new Date();
 		$('#welcome-screen a').click(function(){
+			if ((new Date()).getTime() - openTime.getTime() < 5000)
+				return false;
 			$('#welcome-screen').fadeOut();
 			$('html').removeClass('welcomescreen');
 			setCookie('welcomescreen', 1, 7);
 			$(window).unbind('.wsc');
+			return false;
 		});
 		setTimeout(function(){
 			var w = $('#welcome-screen').fadeIn();
 			if (w.length === 0)
 				return;
+			w.find('.subxbtn').addClass('disabled');
+			setTimeout(function(){
+				w.find('.subxbtn').removeClass('disabled');
+			}, 5000);
+			openTime = new Date();
 			$('html').addClass('welcomescreen');
 			$(window).on('resize.wsc orientationchange.wsc', function(){
 				if (w.height() === 0 || w.css('visibility') === 'hidden') {
@@ -342,7 +351,7 @@ $(function(){
 					var cname = 'bqwarn' + window.appLoc.orderHunt + '_' + (bNum + 1);
 					if (!getCookie(cname)) {
 						//debugger;
-						blackbox("Heads up, a bonus question is coming up soon..."._());
+						blackbox("Heads up, a bonus question is coming up soon..."._() + "\r\n\r\n" + 'All players get them at the same time, and only the first to get them right gets the points for his team!'._());
 						setCookie(cname, 1, 1);
 					}
 				}

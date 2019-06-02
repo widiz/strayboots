@@ -138,6 +138,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 		$translation['lang.en'] = 'English';
 		$translation['lang.pt'] = 'Português';
 		$translation['lang.he'] = 'עברית';
+		$translation['lang.ar'] = 'العربية';
 		//$translation['lang.in'] = 'हिन्दी';
 
 		$this->view->t = new \Phalcon\Translate\Adapter\NativeArray([
