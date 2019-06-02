@@ -24,7 +24,7 @@ window.translate = {
 	"Are you sure you want to exit the hunt?": "בטוח שברצונך להתנתק?",
 	"You've got 20 minutes left for your scavenger hunt.<br>Let's get things rolling!": "נשארו 20 דקות לסיום.<br>זה הזמן לזוז!",
 	'Bonus Question': 'שאלת בונוס',
-	'Are you ready?': 'מוכנים?',
+	'Everyone\'s Ready?': 'מוכנים?',
 	'Answer': 'תשובה',
 	'Submit': 'שלח',
 	"Something went wrong, please try again": "שגיאה; אנא נסה שנית",
