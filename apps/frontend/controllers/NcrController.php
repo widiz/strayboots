@@ -403,7 +403,7 @@ class NcrController extends ControllerBase
 		//-----
 
 		$text = "Hello!\r\n\r\nThank you for registering for the hunt. Your activation code is: {$team->activation_leader}\r\n\r\nThank you!";
-		$html = '<table align="left" border="0" dir="ltr" style="max-width:600px;border:0"><tr><td>Hello!<br><br>Thank you for registering for the hunt. Your activation code is: {$team->activation_leader}<br><br>Thank you!</td></tr></table>';
+		$html = '<table align="left" border="0" dir="ltr" style="max-width:600px;border:0"><tr><td>Hello!<br><br>Thank you for registering for the hunt. Your activation code is: ' . $team->activation_leader . '<br><br>Thank you!</td></tr></table>';
 
 		$emails = empty($players) ? [] : array_map(function($p){
 			return $p[0];
