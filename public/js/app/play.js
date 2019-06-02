@@ -85,10 +85,20 @@ $(function(){
 	}
 	var $preground = $('.pmessagebox');
 	if ($preground.length) {
-		$preground.find('a.btn.continue').removeAttr('disabled').click(function(){
-			$('#ack-form').submit();
-			return false;
-		});
+		var $pBtn = $preground.find('a.btn.continue'),
+			iTime = 10;
+		$pBtn.append(' <span>' + iTime + '</span>')
+		setTimeout(function(){
+			$pBtn.removeClass('disabled').removeAttr('disabled').click(function(){
+				$('#ack-form').submit();
+				return false;
+			}).find('span').hide();
+		}, iTime * 1e3);
+		for (; iTime > 0; iTime--) {
+			setTimeout(function(x){
+				$pBtn.find('span').text(x);
+			}, 1e4, iTime);
+		}
 	} else {
 		$('#playground,#postground').addClass('show');
 	}

@@ -131,7 +131,7 @@ $(function(){
 		var fbdb = firebase.database(),
 			_loadTime = window.loadTime.getTime(),
 			state = 0, bonusQuestions = {}, intervals,
-			bonusQTime = 120, bonusQAlertTimer = 10;
+			bonusQTime = 120, bonusQAlertTimer = 15;
 
 		var showBonusQTimer = function(time){
 			if (!(time > 0))
@@ -155,7 +155,7 @@ $(function(){
 										'<div></div>' +
 									'</div>' +
 									'<span class="sec"></span>' +
-									'<h3>' + 'Are you ready?'._() + '</h3>' +
+									'<h3>' + 'Everyone\'s Ready?'._() + '</h3>' +
 								'</div>' +
 							'</div>' +
 						'</div>' +

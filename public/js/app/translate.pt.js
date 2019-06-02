@@ -24,7 +24,7 @@ window.translate = {
 	"Are you sure you want to exit the hunt?": "Tem a certeza que deseja sair do jogo?",
 	"You've got 20 minutes left for your scavenger hunt.<br>Let's get things rolling!": "Já só tem 20 minutos para terminar o jogo.<br>Vamos lá avançar rapidamente!",
 	"Bonus Question": "Pergunta Bónus",
-	"Are you ready?": "Está pronto?",
+	"Everyone\'s Ready?": "Está pronto?",
 	"Answer": "Resposta",
 	"Submit": "Enviar",
 	"Something went wrong, please try again": "Alguma coisa correu mal. Por favor tente novamente",
