@@ -11,6 +11,8 @@ class ErrorController extends ControllerBase
 			$orderHunt = $loginPage->OrderHunt;
 			if ($orderHunt && !$orderHunt->isCanceled()) {
 				define('ORDER_HUNT_OVERRIDE', $loginPage->order_hunt_id);
+				if ($loginPage->slug === 'jeddah')
+					define('SAUDI_ARABIA_HUNT', 1);
 				define('ORDER_HUNT_OVERRIDE_USE_ACTIVATION_CODE', $loginPage->isActivationCodeLogin());
 				define('OVERRIDE_STANDARDLOGIN', 1);
 				if (!empty($loginPage->title))

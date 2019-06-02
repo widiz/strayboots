@@ -14,6 +14,7 @@ class IndexController extends ControllerBase
 
 	public function indexAction()
 	{
+		$saudi = defined('SAUDI_ARABIA_HUNT');
 		if ($this->player instanceof Players) {
 			if (filter_input(INPUT_POST, 'logout', FILTER_VALIDATE_BOOLEAN)) {
 				$this->orderHunt = $this->team = $this->player = false;
@@ -35,7 +36,7 @@ class IndexController extends ControllerBase
 				$this->flash->error('Failed. please contact support 877-787-2929');
 				return $this->response->redirect($this->request->getHTTPReferer());
 			}
-			if ($id > 0) {
+			if ($id > 0 && !$saudi) {
 				$orderHunt = OrderHunts::findFirstById($id);
 				if ($lpId > 0 && $validEmail) {
 					$lp = \LoginPages::findFirst('id=' . $lpId . ' AND order_hunt_id=' . $id);
@@ -73,7 +74,7 @@ class IndexController extends ControllerBase
 				]);
 				$orderHunt = $team ? $team->OrderHunt : false;
 			}
-			if ($team && !$orderHunt->isB2CEnabled()) {
+			if (!$saudi && $team && !$orderHunt->isB2CEnabled()) {
 				$found = false;
 				foreach ($orderHunt->getTeams() as $t) {
 					if ($t->id == $team->id) {
@@ -241,9 +242,21 @@ class IndexController extends ControllerBase
 			}
 		}
 		$this->view->facebookSDK = true;
-		$this->assets->collection('script')
-					->addJs('/template/js/plugins/validate/jquery.validate.min.js')
-					->addJs('/js/app/login.js');
+
+		if ($saudi) {
+			$this->view->pick('index/saudi');
+
+			$this->assets->collection('style')
+						->addCss('/css/app/saudi.css');
+
+			$this->assets->collection('script')
+						->addJs('/template/js/plugins/validate/jquery.validate.min.js')
+						->addJs('/js/app/saudi.js');
+		} else {
+			$this->assets->collection('script')
+						->addJs('/template/js/plugins/validate/jquery.validate.min.js')
+						->addJs('/js/app/login.js');
+		}
 	}
 
 	public function logoutAction()

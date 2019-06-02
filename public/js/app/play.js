@@ -94,10 +94,10 @@ $(function(){
 				return false;
 			}).find('span').hide();
 		}, iTime * 1e3);
-		for (; iTime > 0; iTime--) {
+		for (var ii = iTime; ii > 0; ii--) {
 			setTimeout(function(x){
 				$pBtn.find('span').text(x);
-			}, 1e4, iTime);
+			}, 1e3 * (iTime - ii), ii);
 		}
 	} else {
 		$('#playground,#postground').addClass('show');

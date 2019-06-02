@@ -245,4 +245,184 @@ class NcrController extends ControllerBase
 		]);
 	}
 
+	public function saudiAction()
+	{
+		$orderHunt = OrderHunts::findFirstById((int)$this->request->getPost('eventId', 'int'));
+		if (!$orderHunt/* || $orderHunt->order_id != self::ORDER_ID*/) {
+			return $this->jsonResponse([
+				'success' => false,
+				'error' => 'event was not found'
+			]);
+		}
+
+		$splitName = function($name){
+			$name = explode(' ', $name, 2);
+			return [isset($name[0]) && !empty($name[0]) ? substr($name[0], 0, 20) : null, isset($name[1]) && !empty($name[1]) ? substr($name[1], 0, 20) : null];
+		};
+
+		$this->db->begin();
+
+		$leaderEmail = $this->request->getPost('leader', 'email');
+		$leaderName = $splitName($this->request->getPost('leaderName', 'trim'));
+		$leaderPhone = $this->request->getPost('leaderPhone', 'trim');
+		$leaderId = $this->request->getPost('leaderId', 'trim');
+		$players = json_decode($this->request->getPost('players', 'trim'), true);
+		if (!is_array($players))
+			$players = [];
+
+		ini_set('memory_limit', '256M');
+		$emails = array_flip(array_column($this->db->fetchAll("SELECT p.email FROM players p LEFT JOIN teams t ON t.id = p.team_id WHERE t.order_hunt_id=" . (int)$orderHunt->id, Db::FETCH_ASSOC), 'email'));
+		if (!filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
+			$this->db->rollback();
+			return $this->jsonResponse([
+				'success' => false,
+				'error' => htmlspecialchars($leaderEmail) . ' is not a valid email address'
+			]);
+		}
+		if (isset($emails[$leaderEmail])) {
+			$this->db->rollback();
+			return $this->jsonResponse([
+				'success' => false,
+				'error' => htmlspecialchars($leaderEmail) . ' already exists'
+			]);
+		}
+		$emails[$leaderEmail] = 0;
+		$uniqueFields = array_flip(array_column($this->db->fetchAll("SELECT meta_value FROM player_meta WHERE meta_value != ''", Db::FETCH_ASSOC), 'meta_value')); // todo change this to match only players with the same hunt
+		foreach ($players as $p) {
+			if (!empty($p[2])) {
+				if (isset($uniqueFields[$p[2]])) {
+					$this->db->rollback();
+					return $this->jsonResponse([
+						'success' => false,
+						'error' => htmlspecialchars($p[2]) . ' already exists'
+					]);
+				}
+				$uniqueFields[$p[2]] = 0;
+			}
+			if (isset($uniqueFields[$p[3]])) {
+				$this->db->rollback();
+				return $this->jsonResponse([
+					'success' => false,
+					'error' => htmlspecialchars($p[3]) . ' already exists'
+				]);
+			}
+			$uniqueFields[$p[3]] = 0;
+			if (!filter_var($p[0], FILTER_VALIDATE_EMAIL)) {
+				$this->db->rollback();
+				return $this->jsonResponse([
+					'success' => false,
+					'error' => htmlspecialchars($p[0]) . ' is not a valid email address'
+				]);
+			}
+			if (isset($emails[$p[0]])) {
+				$this->db->rollback();
+				return $this->jsonResponse([
+					'success' => false,
+					'error' => htmlspecialchars($p[0]) . ' already exists'
+				]);
+			}
+			$emails[$p[0]] = 0;
+		}
+
+		$team = $this->db->fetchOne('SELECT t.id FROM teams t LEFT JOIN players p ON p.team_id=t.id WHERE t.order_hunt_id=' . $orderHunt->id . ' AND t.activation IS NULL AND t.name IS NULL AND p.id IS NULL ORDER BY t.id ASC LIMIT 1', Db::FETCH_ASSOC);
+		if (empty($team)) {
+			$team = $orderHunt->addTeams(1);
+			$team = empty($team) ? false : $team[0];
+		} else {
+			$team = Teams::findFirstById($team['id']);
+		}
+		if (!$team) {
+			$this->db->rollback();
+			return $this->jsonResponse([
+				'success' => false,
+				'error' => 'failed to find or create a team; please contact support'
+			]);
+		}
+
+		$player = new Players();
+		$player->team_id = $team->id;
+		$player->email = $leaderEmail;
+		$player->first_name = $leaderName[0];
+		$player->last_name = $leaderName[1];
+		if (!$player->save()) {
+			$this->db->rollback();
+			return $this->jsonResponse([
+				'success' => false,
+				'error' => 'failed to create a player; please contact support'
+			]);
+		}
+		$player->setMeta('phone', $leaderPhone);
+		$player->setMeta('id', $leaderId);
+		$team->leader = $player->id;
+		$teamSave = $this->db->update(
+			'teams',
+			['leader'],
+			[$team->leader],
+			'id=' . $team->id
+		);
+		if (!$teamSave) {
+			try {
+				$team->resetTeam();
+				$player->delete();
+			} catch(Exception $E) {}
+			$this->db->rollback();
+			return $this->jsonResponse([
+				'success' => false,
+				'error' => 'failed to save team; please contact support'
+			]);
+		}
+
+		$pInstances = [];
+		foreach ($players as $pl) {
+			$p = new Players();
+			$p->team_id = $team->id;
+			$p->email = $pl[0];
+			$name = $splitName(trim($pl[1]));
+			$p->first_name = $name[0];
+			$p->last_name = $name[1];
+			if ($p->save()) {
+				if ($pl[2])
+					$p->setMeta('phone', $pl[2]);
+				$p->setMeta('id', $pl[3]);
+				$pInstances[] = $p;
+			} else {
+				try {
+					$team->resetTeam();
+					$player->delete();
+					foreach ($pInstances as $pp)
+						$pp->delete();
+				} catch(Exception $E) {}
+				$this->db->rollback();
+				return $this->jsonResponse([
+					'success' => false,
+					'error' => 'failed to create players; please contact support'
+				]);
+			}
+		}
+
+		//-----
+
+		$text = "Hello!\r\n\r\nThank you for registering for the hunt. Your activation code is: {$team->activation_leader}\r\n\r\nThank you!";
+		$html = '<table align="left" border="0" dir="ltr" style="max-width:600px;border:0"><tr><td>Hello!<br><br>Thank you for registering for the hunt. Your activation code is: {$team->activation_leader}<br><br>Thank you!</td></tr></table>';
+
+		$emails = empty($players) ? [] : array_map(function($p){
+			return $p[0];
+		}, $players);
+		$emails[] = $leaderEmail;
+		if (!$this->sendMail($emails, 'Your hunt activation code', $text, $html)) {
+			$this->db->rollback();
+			$this->jsonResponse([
+				'success' => false,
+				'error' => 'failed to send instructions, please contact support'
+			]);
+		}
+
+		$this->db->commit();
+
+		return $this->jsonResponse([
+			'success' => true,
+			'activation' => $team->activation_leader
+		]);
+	}
+
 }

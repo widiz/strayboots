@@ -141,4 +141,24 @@ class Players extends \Phalcon\Mvc\Model
 		$di->get('session')->remove('playerID');
 	}
 
+	public function setMeta($key, $value)
+	{
+		$di = Phalcon\DI::getDefault();
+		return $di->get('db')->query('INSERT INTO player_meta (player_id, meta_key, meta_value) VALUES (:player, :key, :value) ON DUPLICATE KEY UPDATE meta_value=:value', [
+			'player'	=> $this->id,
+			'key'		=> $key,
+			'value'		=> $value
+		]);
+	}
+
+	public function getMeta($key, $default = null)
+	{
+		$di = Phalcon\DI::getDefault();
+		$value = $di->get('db')->fetchColumn('SELECT value FROM player_meta WHERE player_id=:player AND meta_key=:key', [
+			'player'	=> $this->id,
+			'key'		=> $key
+		]);
+		return $value === false ? $default : $value;
+	}
+
 }
