@@ -87,6 +87,8 @@ class IndexController extends ControllerBase
 			}
 			$activationSet = false;
 			if ($team && $orderHunt) {
+				if ($saudi && empty($email) && $team->leader)
+					$email = $this->db->fetchColumn('SELECT email FROM players WHERE id='. (int)$team->leader);
 				if (!SB_PRODUCTION && $orderHunt->id == 76)
 					$team->resetTeam();
 				$now = time();
