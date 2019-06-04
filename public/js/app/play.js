@@ -86,7 +86,7 @@ $(function(){
 	var $preground = $('.pmessagebox');
 	if ($preground.length) {
 		var $pBtn = $preground.find('a.btn.continue'),
-			iTime = 10;
+			iTime = 5;
 		$pBtn.append(' <span>' + iTime + '</span>')
 		setTimeout(function(){
 			$pBtn.removeClass('disabled').removeAttr('disabled').click(function(){
