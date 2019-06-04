@@ -40,11 +40,11 @@
 						<li><a href="<?= $this->url->get('faq') ?>"><?= $t->_('FAQ') ?></a></li>
 <? if ($loggedIn): ?>
 <? if (!$mapDisabled): ?>
-						<li><a href="<?= $this->url->get('map') ?>"><?= $t->_('Map') ?></a></li>
+						<li class="m-map"><a href="<?= $this->url->get('map') ?>"><?= $t->_('Map') ?></a></li>
 <? endif ?>
-						<li><a href="<?= $this->url->get('chat') ?>"><?= $t->_('Chat') ?></a></li>
+						<li class="m-chat"><a href="<?= $this->url->get('chat') ?>"><?= $t->_('Chat') ?></a></li>
 <? if (!$leaderboardDisabled): ?>
-						<li><a href="<?= $this->url->get('leaderboard') ?>"><?= $t->_('Leaderboard') ?></a></li>
+						<li class="m-leaderboard"><a href="<?= $this->url->get('leaderboard') ?>"><?= $t->_('Leaderboard') ?></a></li>
 <? endif ?>
 <? if ($isLeader): ?>
 						<li class="visible-xs"><a href="<?= $this->url->get('index/rename') ?>"><?= $t->_('Rename Team') ?></a></li>

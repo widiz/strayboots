@@ -7,6 +7,7 @@
 	'Progress' => 'התקדמות',
 	'You Won' => 'התקדמות',
 	'Welcome to your scavenger hunt adventure. We hope you brought your wit and a sharp eye.<br>Best of luck!' => 'ברוך הבא. אנו מקווים שיש לכם עין חדה והרבה שכל.<br>בהצלחה!',
+	'Welcome to your Strayboots Scavenger hunt! We hope you brought your wit and a sharp eye. <br>Please be considerate of others, respect restaurants or public spaces, look both ways before crossing any street, don\'t run and most of all, have fun.' => 'ברוך הבא. אנו מקווים שיש לכם עין חדה והרבה שכל.<br>בהצלחה!',
 	'Your team won' => 'הקבוצה שלך זכתה',
 	'Your team won %points% points' => 'הקבוצה שלך זכתה ב%points% נקודות',
 	'You Won' => 'ניצחת',
