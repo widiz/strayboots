@@ -50,6 +50,8 @@ footer .col-sm-6,
 		float: left !important;
 	}
 }
+fieldset,
+.steps-wrapper > .step form label,
 .navbar-default .navbar-nav>li,
 #faq {
 	text-align: right;

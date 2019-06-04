@@ -9,59 +9,59 @@
 							<a class="submit subxbtn pull-left" href="javascript:;" data-val="player"><?= $t->_('INDIVIDUAL') ?></a>
 							<a class="submit subxbtn pull-right" href="javascript:;" data-val="team" style="background:#2ea9e0"><?= $t->_('TEAM') ?></a>
 						</div>
-						<a href="javascript:;" id="code-activation">I already have a login code</a>
+						<a href="javascript:;" id="code-activation"><?= $t->_('I already have a login code') ?></a>
 					</div>
 				</div>
 			</div>
 			<div class="container step step2-player">
-				<h1><?= $t->_('Individual') ?></h1>
+				<h1><?= $t->_('INDIVIDUAL') ?></h1>
 				<div>
 					<form id="player-reg" method="post">
-						<label>Your Details:</label>
-						<?= $this->tag->textField(['name', 'required' => "required", 'class' => "answer", 'id' => "playerNameField", 'placeholder' => "Name"]) ?>
-						<?= $this->tag->textField(['phone', 'required' => "required", 'type' => 'tel', 'class' => "answer", 'id' => "playerPhoneField", 'placeholder' => "Phone Number"]) ?>
-						<?= $this->tag->textField(['id', 'required' => "required", 'class' => "answer", 'id' => "playerIDField", 'placeholder' => "ID Number"]) ?>
-						<?= $this->tag->emailField(['email', 'required' => "required", 'class' => "answer", 'id' => "playerEmailField", 'placeholder' => "Email"]) ?>
-						<input type="submit" class="submit subxbtn email" id="register-player" href="javascript:;" value="Register">
+						<label><?= $t->_('Your Details:') ?></label>
+						<?= $this->tag->textField(['name', 'required' => "required", 'class' => "answer", 'id' => "playerNameField", 'placeholder' => $t->_('Name')]) ?>
+						<?= $this->tag->textField(['phone', 'required' => "required", 'type' => 'tel', 'class' => "answer", 'id' => "playerPhoneField", 'placeholder' => $t->_('Phone Number')]) ?>
+						<?= $this->tag->textField(['id', 'required' => "required", 'class' => "answer", 'id' => "playerIDField", 'placeholder' => $t->_('ID Number')]) ?>
+						<?= $this->tag->emailField(['email', 'required' => "required", 'class' => "answer", 'id' => "playerEmailField", 'placeholder' => $t->_('Email')]) ?>
+						<input type="submit" class="submit subxbtn email" id="register-player" href="javascript:;" value="<?= $t->_('Register') ?>">
 					</form>
 				</div>
 			</div>
 			<div class="container step step2-team">
-				<h1><?= $t->_('Team') ?></h1>
+				<h1><?= $t->_('TEAM') ?></h1>
 				<div>
 					<form id="team-reg" method="post">
-						<label>Team Leader Details:</label>
-						<?= $this->tag->textField(['name', 'required' => "required", 'class' => "answer", 'id' => "leaderNameField", 'placeholder' => "Leader Name"]) ?>
-						<?= $this->tag->textField(['phone', 'required' => "required", 'type' => 'tel', 'class' => "answer", 'id' => "leaderPhoneField", 'placeholder' => "Leader Phone Number"]) ?>
-						<?= $this->tag->textField(['id', 'required' => "required", 'class' => "answer", 'id' => "leaderIDField", 'placeholder' => "Leader ID Number"]) ?>
-						<?= $this->tag->emailField(['email', 'required' => "required", 'class' => "answer", 'id' => "leaderEmailField", 'placeholder' => "Leader Email"]) ?>
+						<label><?= $t->_('Team Leader Details:') ?></label>
+						<?= $this->tag->textField(['name', 'required' => "required", 'class' => "answer", 'id' => "leaderNameField", 'placeholder' => $t->_('Leader Name')]) ?>
+						<?= $this->tag->textField(['phone', 'required' => "required", 'type' => 'tel', 'class' => "answer", 'id' => "leaderPhoneField", 'placeholder' => $t->_('Leader Phone Number')]) ?>
+						<?= $this->tag->textField(['id', 'required' => "required", 'class' => "answer", 'id' => "leaderIDField", 'placeholder' => $t->_('Leader ID Number')]) ?>
+						<?= $this->tag->emailField(['email', 'required' => "required", 'class' => "answer", 'id' => "leaderEmailField", 'placeholder' => $t->_('Leader Email')]) ?>
 
 						<fieldset id="players-list" class="buttonable">
-							<legend>Team Member Details:</legend>
+							<legend><?= $t->_('Team Member Details:') ?></legend>
 							<div class="row player">
 								<div class="col-sm-12">
-									<input type="text" name="name1" class="answer" required="required" placeholder="Team Member Name">
+									<input type="text" name="name1" class="answer" required="required" placeholder="<?= $t->_('Team Member Name') ?>">
 									<!-- <input type="tel" name="phone1" class="answer" required="required" placeholder="Team Member Phone Number"> -->
-									<input type="text" name="id1" class="answer" required="required" placeholder="Team Member ID Number">
-									<input type="email" name="email1" class="answer" required="required" placeholder="Team Member Email">
+									<input type="text" name="id1" class="answer" required="required" placeholder="<?= $t->_('Team Member ID Number') ?>">
+									<input type="email" name="email1" class="answer" required="required" placeholder="<?= $t->_('Team Member Email') ?>">
 									<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>
 								</div>
 							</div>
 							<div class="row player">
 								<div class="col-sm-12">
-									<input type="text" name="name2" class="answer" required="required" placeholder="Team Member Name">
+									<input type="text" name="name2" class="answer" required="required" placeholder="<?= $t->_('Team Member Name') ?>">
 									<!-- <input type="tel" name="phone2" class="answer" required="required" placeholder="Team Member Phone Number"> -->
-									<input type="text" name="id2" class="answer" required="required" placeholder="Team Member ID Number">
-									<input type="email" name="email2" class="answer" required="required" placeholder="Team Member Email">
+									<input type="text" name="id2" class="answer" required="required" placeholder="<?= $t->_('Team Member ID Number') ?>">
+									<input type="email" name="email2" class="answer" required="required" placeholder="<?= $t->_('Team Member Email') ?>">
 									<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>
 								</div>
 							</div>
 							<div class="row player">
 								<div class="col-sm-12">
-									<input type="text" name="name3" class="answer" required="required" placeholder="Team Member Name">
+									<input type="text" name="name3" class="answer" required="required" placeholder="<?= $t->_('Team Member Name') ?>">
 									<!-- <input type="tel" name="phone3" class="answer" required="required" placeholder="Team Member Phone Number"> -->
-									<input type="text" name="id3" class="answer" required="required" placeholder="Team Member ID Number">
-									<input type="email" name="email3" class="answer" required="required" placeholder="Team Member Email">
+									<input type="text" name="id3" class="answer" required="required" placeholder="<?= $t->_('Team Member ID Number') ?>">
+									<input type="email" name="email3" class="answer" required="required" placeholder="<?= $t->_('Team Member Email') ?>">
 									<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>
 								</div>
 							</div>
@@ -70,7 +70,7 @@
 							<a class="btn btn-primary" id="add-player" href="javascript:;"><i class="fa fa-plus"></i></a>
 						</div>
 
-						<input type="submit" class="submit subxbtn email" id="register-player" href="javascript:;" value="Register">
+						<input type="submit" class="submit subxbtn email" id="register-player" href="javascript:;" value="<?= $t->_('Register') ?>">
 					</form>
 				</div>
 			</div>
@@ -80,25 +80,24 @@
 
 					<input type="hidden" name="id" value="<?= ORDER_HUNT_OVERRIDE ?>">
 					<input type="hidden" name="email" id="activationEmail">
-					<?= $this->tag->textField(['activation', 'required' => "required", 'class' => "answer", 'id' => "activationField", 'placeholder' => "Activation Code"]) ?>
+					<?= $this->tag->textField(['activation', 'required' => 'required', 'class' => 'answer', 'id' => 'activationField', 'placeholder' => $t->_('Activation Code')]) ?>
 					
 					<div style="padding:20px 0">
-						<?= $this->tag->submitButton(["Start the hunt!", "class" => "submit subxbtn"]) ?>
+						<?= $this->tag->submitButton([$t->_('Start the hunt!'), 'class' => 'submit subxbtn']) ?>
 					</div>
 
 				<?= $this->tag->endForm() ?>
 			</div>
 			<div class="container step step4">
-				<h1>Thank You!</h1>
+				<h1><?= $t->_('Thank You!') ?></h1>
 				<p>
-					Please check your email for further instructions and details.
+					<?= $t->_('Please check your email for further instructions and details.') ?>
 				</p>
 			</div>
 		</div>
 		<div class="container text-center">
 			<div class="atos help" style="margin-top:30px">
-				For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>
+				<?= $t->_('For assistance, please call <a href="tel:877-787-2929">877-787-2929</a>') ?>
 			</div>
 		</div>
 		<div id="loading-indicator"></div>
-		<div class="content-wrapper section-wrapper activate-ticket">

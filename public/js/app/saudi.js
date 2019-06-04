@@ -138,4 +138,7 @@ $(function(){
 			});
 		}
 	});
+	try {
+		setCookie('welcomescreen', 1, 14);
+	} catch(E) { }
 });

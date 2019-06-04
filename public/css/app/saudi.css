@@ -40,9 +40,9 @@ a.subxbtn {
 	font-weight: 500;
 	display: block;
 	width: 100%;
-	text-align: right;
 	font-size: 22px;
 	margin-bottom: 10px;
+	text-align: left;
 }
 .content-wrapper input.answer {
 	margin-bottom: 10px;
@@ -56,7 +56,7 @@ fieldset {
 	margin: 15px 2px 0;
 	border: 1px solid silver;
 	margin-bottom: 15px;
-	text-align: right;
+	text-align: left;
 }
 fieldset > legend {
 	display: block;
@@ -116,10 +116,11 @@ fieldset.buttonable {
 	color: #FFF;
 	font-size: 22px;
 }
-/*.content-wrapper h2 {
-	font-size: 33px;
+.content-wrapper h2 {
+	font-size: 30px;
+	line-height: 1.3;
 	margin: 40px 0;
-}*/
+}
 
 .steps-wrapper.content-wrapper .subxbtn {
 	max-width: 360px;
