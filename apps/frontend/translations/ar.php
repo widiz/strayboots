@@ -117,4 +117,6 @@
 	'Name' => 'اسم',
 	'Register' => 'تسجيل',
 	'Your Details:' => 'تفاصيلك:',
+	'Individual registration' => 'تسجيل فردي',
+	'Team registration' => 'تسجيل الفريق'
 ];

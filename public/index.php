@@ -14,7 +14,7 @@ if ($isDebug) {
 	ini_set('display_errors', 0);
 }
 
-define('STRAYBOOTS_BUILD', 1174);
+define('STRAYBOOTS_BUILD', 1175);
 
 define('APP_PATH', realpath('..'));
 define('PUBLIC_PATH', __DIR__ . '/');
