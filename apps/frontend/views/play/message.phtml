@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <? else: ?>
 				<div class="options">
 					<? if (!($leaderboardDisabled || (isset($leaderBoardPaypal) && $leaderBoardPaypal))): ?>
-					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success"><?= $t->_('Leaderboard') ?></a><br>
+					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success" id="final-leaderboard"><?= $t->_('Leaderboard') ?></a><br>
 					<? endif;
 					/*if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
 						<a href="/play/survey" class="btn btn-warning"><?= $t->_('Take a quick survey') ?></a>

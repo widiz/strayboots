@@ -1,7 +1,7 @@
 		<input type="hidden" id="eventId" value="<?= ORDER_HUNT_OVERRIDE ?>">
 		<div class="content-wrapper steps-wrapper">
+			<h1><?= $t->_(defined('OVERRIDE_WELCOME_TITLE') ? OVERRIDE_WELCOME_TITLE : 'Welcome to Your Team Building Scavenger Hunt!') ?></h1>
 			<div class="container step step1">
-				<h1><?= $t->_(defined('OVERRIDE_WELCOME_TITLE') ? OVERRIDE_WELCOME_TITLE : 'Welcome to Your Team Building Scavenger Hunt!') ?></h1>
 				<h2><?= $t->_('Sign up as an Individual (one user one phone) or as a Team (Family or Multiple Members - using only one phone)') ?></h2>
 				<div>
 					<div id="activation-wrapper" class="clearfix">
@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="container step step2-player">
-				<h1><?= $t->_('INDIVIDUAL') ?></h1>
+				<h2><?= $t->_('Individual registration') ?></h2>
 				<div>
 					<form id="player-reg" method="post">
 						<label><?= $t->_('Your Details:') ?></label>
@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<div class="container step step2-team">
-				<h1><?= $t->_('TEAM') ?></h1>
+				<h2><?= $t->_('Team registration') ?></h2>
 				<div>
 					<form id="team-reg" method="post">
 						<label><?= $t->_('Team Leader Details:') ?></label>

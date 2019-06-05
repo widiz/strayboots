@@ -147,6 +147,7 @@ class OrdersController extends \ControllerBase
 			$config = \HTMLPurifier_Config::createDefault();
 			$config->set('Filter.ExtractStyleBlocks', true);
 			$config->set('CSS.AllowImportant', true);
+			$config->set('CSS.AllowTricky', true);
 
 			$purifier = new \HTMLPurifier($config);
 			$css = $purifier->purify('<style>' . $customCSS . '</style>');
