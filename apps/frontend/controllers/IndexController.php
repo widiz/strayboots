@@ -55,7 +55,7 @@ class IndexController extends ControllerBase
 				if ($orderHunt && !$orderHunt->isCustomLogin())
 					$orderHunt = false;
 				$team = $orderHunt ? Teams::findFirst([
-					'order_hunt_id = ?0 AND activation IS NULL',
+					'order_hunt_id = ?0 AND activation IS NULL AND leader IS NULL',
 					'order' => 'id ASC',
 					'bind' => [$id]
 				]) : false;
@@ -129,7 +129,7 @@ class IndexController extends ControllerBase
 							//}
 						}
 						if ($player) {
-							$isLeader = mb_strtolower($activation) == mb_strtolower($team->activation_leader);
+							$isLeader = mb_strtolower($activation) === mb_strtolower($team->activation_leader);
 							if (is_null($team->activation) && $isLeader) {
 								//$team->activation = date('Y-m-d H:i:s');
 								// not using team->save because of validation rejection possibility

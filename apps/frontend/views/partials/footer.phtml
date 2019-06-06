@@ -67,20 +67,20 @@
 						<a id="team-name"><?= $teamStatus['name'] ?></a>
 					</div>
 <? else: $colSize = 3; endif; ?>
-					<div class="col-sm-<?= $colSize ?>">
+					<div class="col-sm-<?= $colSize ?> f-home">
 						<a href="<?= $this->url->get('/') ?>"<?= $controllerName == 'index' || $controllerName == 'play' ? ' class="active"' : '' ?>><i class="icn home"></i></a>
 					</div>
 <? if (!$leaderboardDisabled): ?>
-					<div class="col-sm-<?= $colSize ?>">
+					<div class="col-sm-<?= $colSize ?> f-leaderboard">
 						<a href="<?= $this->url->get('leaderboard') ?>"<?= $controllerName == 'leaderboard' ? ' class="active"' : '' ?>><i class="icn leaderboard"></i></a>
 					</div>
 <? endif ?>
 <? if (!$mapDisabled): ?>
-					<div class="col-sm-<?= $colSize ?>">
+					<div class="col-sm-<?= $colSize ?> f-map">
 						<a href="<?= $this->url->get('map') ?>"<?= $controllerName == 'map' ? ' class="active"' : '' ?>><i class="icn map"></i></a>
 					</div>
 <? endif ?>
-					<div  class="col-sm-<?= $colSize ?>">
+					<div  class="col-sm-<?= $colSize ?> f-chat">
 						<a href="<?= $this->url->get('chat') ?>"<?= $controllerName == 'chat' ? ' class="active"' : '' ?>><i class="icn chat"><div class="beeper"></div></i></a>
 					</div>
 					<? /*<a href="<?= $this->url->get('index/logout') ?>"><i class="fa fa-times"></i></a> */ ?>

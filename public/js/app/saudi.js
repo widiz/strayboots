@@ -23,16 +23,16 @@ $(function(){
 			$(
 				'<div class="row player" style="display:none">' +
 					'<div class="col-sm-12">' +
-						'<input type="text" name="name' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="Team Member Name">' +
-						//'<input type="tel" name="phone' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="Team Member Phone Number">' +
-						'<input type="text" name="id' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="Team Member ID Number">' +
-						'<input type="email" name="email' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="Team Member Email">' +
+						'<input type="text" name="name' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="' + 'Team Member Name'._() + '">' +
+						//'<input type="tel" name="phone' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="' + 'Team Member Phone Number'._() + '">' +
+						'<input type="text" name="id' + Math.floor(Math.random() * 1e6) + '" class="answer" required="required" placeholder="' + 'Team Member ID Number'._() + '">' +
+						'<input type="email" name="email' + Math.floor(Math.random() * 1e6) + '" class="answer" placeholder="' + 'Team Member Email'._() + '">' +
 						'<a class="btn btn-danger" href="javascript:;"><i class="fa fa-minus"></i></a>' +
 					'</div>' +
 				'</div>'
 			).appendTo('#players-list').slideDown(150);
 		} else {
-			alert('Players limit reached; up to 8 per team');
+			alert('Players limit reached; up to 8 per team'._());
 		}
 		return false;
 	});

@@ -288,7 +288,7 @@ class NcrController extends ControllerBase
 		}
 		$emails[$leaderEmail] = 0;
 		$uniqueFields = array_flip(array_column($this->db->fetchAll("SELECT meta_value FROM player_meta WHERE meta_value != ''", Db::FETCH_ASSOC), 'meta_value')); // todo change this to match only players with the same hunt
-		foreach ($players as $p) {
+		foreach ($players as $pIdx => $p) {
 			if (!empty($p[2])) {
 				if (isset($uniqueFields[$p[2]])) {
 					$this->db->rollback();
@@ -307,6 +307,8 @@ class NcrController extends ControllerBase
 				]);
 			}
 			$uniqueFields[$p[3]] = 0;
+			if (empty($p[0]))
+				$players[$pIdx][0] = $p[0] = 'r' . mt_rand(1e2, 1e4) . date('hms') . mt_rand(1e6, 1e7) . '@sb-auto-not-real.com';
 			if (!filter_var($p[0], FILTER_VALIDATE_EMAIL)) {
 				$this->db->rollback();
 				return $this->jsonResponse([
@@ -335,7 +337,7 @@ class NcrController extends ControllerBase
 			$this->db->rollback();
 			return $this->jsonResponse([
 				'success' => false,
-				'error' => 'failed to find or create a team; please contact support'
+				'error' => 'failed to find or create a team; please contact support #1223'
 			]);
 		}
 
@@ -348,7 +350,7 @@ class NcrController extends ControllerBase
 			$this->db->rollback();
 			return $this->jsonResponse([
 				'success' => false,
-				'error' => 'failed to create a player; please contact support'
+				'error' => 'failed to create a player; please contact support #7497'
 			]);
 		}
 		$player->setMeta('phone', $leaderPhone);
@@ -395,7 +397,7 @@ class NcrController extends ControllerBase
 				$this->db->rollback();
 				return $this->jsonResponse([
 					'success' => false,
-					'error' => 'failed to create players; please contact support'
+					'error' => 'failed to create players; please contact support #6585'
 				]);
 			}
 		}
