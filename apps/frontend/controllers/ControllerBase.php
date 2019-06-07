@@ -23,7 +23,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 		if (preg_match('/^\d+$/', ($lang = $this->request->getQuery('lang')))) {
 			if ($lang == 0 || isset($this->config->altLang[$lang - 1]))
 				$this->cookies->set('lang', (int)$lang, $time + 864e4, '/', false/*is secure?*/, $_SERVER['HTTP_HOST'], true);
-		} elseif (defined('SAUDI_ARABIA_HUNT')) {
+		} elseif (defined('SAUDI_ARABIA_HUNT') && SAUDI_ARABIA_HUNT_AUTO_ARAB) {
 			$this->cookies->set('lang', 3, $time + 864e4 * 30, '/', false/*is secure?*/, $_SERVER['HTTP_HOST'], true);
 		}
 

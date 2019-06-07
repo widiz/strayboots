@@ -55,10 +55,10 @@
 						<li><a href="<?= $this->url->get('index/logout') ?>" id="logout-btn"><?= $t->_('Log Out') ?></a></li>
 <? endif ?>
 						<li class="visible-xs">
-							<select onchange="document.location.href='?lang='+this.value" class="form-control">
+							<select onchange="document.location.href='?lang='+this.value" class="form-control" id="lang-selector">
 								<? $def = (int)$this->config->defLang; $langs = array_merge(['en'], array_values((array)$this->config->altLang)); if (!isset($langs[$def])) $def = 0; ?>
 								<? foreach ($langs as $i => $l): ?>
-									<option value="<?= $i ?>"<?= $i === $multiLang ? ' selected' : '' ?>><?= $t->_('lang.' . $l) ?></option>
+									<option class="lang-<?= $i ?>" value="<?= $i ?>"<?= $i === $multiLang ? ' selected' : '' ?>><?= $t->_('lang.' . $l) ?></option>
 								<? endforeach ?>
 							</select>
 						</li>
