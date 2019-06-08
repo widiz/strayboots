@@ -5,6 +5,7 @@
 .nav option[value="2"] {
 	display: none;
 }
+#lang-selector .lang-1, #lang-selector .lang-2 {display:none !important}
 @media all and (max-width: 700px) {
 	.content-wrapper .subxbtn {
 		max-width: none;

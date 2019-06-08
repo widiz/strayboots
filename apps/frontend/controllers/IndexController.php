@@ -246,6 +246,7 @@ class IndexController extends ControllerBase
 		$this->view->facebookSDK = true;
 
 		if ($saudi) {
+			define('cacheFileId', 'saudi');
 			$this->view->pick('index/saudi');
 
 			$this->assets->collection('style')

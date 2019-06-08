@@ -57,7 +57,7 @@
 						<li class="visible-xs">
 							<select onchange="document.location.href='?lang='+this.value" class="form-control" id="lang-selector">
 								<? $def = (int)$this->config->defLang; $langs = array_merge(['en'], array_values((array)$this->config->altLang)); if (!isset($langs[$def])) $def = 0; ?>
-								<? foreach ($langs as $i => $l): ?>
+								<? foreach ($langs as $i => $l): if (defined('SAUDI_ARABIA_HUNT') && ($i === 1 || $i === 2)) continue; ?>
 									<option class="lang-<?= $i ?>" value="<?= $i ?>"<?= $i === $multiLang ? ' selected' : '' ?>><?= $t->_('lang.' . $l) ?></option>
 								<? endforeach ?>
 							</select>
