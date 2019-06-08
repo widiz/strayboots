@@ -404,14 +404,14 @@ class NcrController extends ControllerBase
 
 		//-----
 
-		$text = "Hello!\r\n\r\nThank you for registering for the hunt. Your activation code is: {$team->activation_leader}\r\n\r\nThank you!";
-		$html = '<table align="left" border="0" dir="ltr" style="max-width:600px;border:0"><tr><td>Hello!<br><br>Thank you for registering for the hunt. Your activation code is: ' . $team->activation_leader . '<br><br>Thank you!</td></tr></table>';
+		$text = "Hello!\r\n\r\nThank you for registering for the hunt. Your activation code is: {$team->activation_leader}\r\n\r\nThank you!\r\n\r\n\r\nمرحباً بك!\r\n\r\nنشكرك على التسجيل في البحث عن الكنز. إن رمز التفعيل الخاص بك هو: {$team->activation_leader}\r\n\r\nمع أطيب تحياتنا!";
+		$html = '<table align="left" border="0" dir="ltr" style="max-width:600px;border:0"><tr><td>Hello!<br><br>Thank you for registering for the hunt. Your activation code is: ' . $team->activation_leader . '<br><br>Thank you!<br><br><br>مرحباً بك!<br><br>نشكرك على التسجيل في البحث عن الكنز. إن رمز التفعيل الخاص بك هو: ' . $team->activation_leader . '<br><br>مع أطيب تحياتنا!</td></tr></table>';
 
 		$emails = empty($players) ? [] : array_map(function($p){
 			return $p[0];
 		}, $players);
 		$emails[] = $leaderEmail;
-		if (!$this->sendMail($emails, 'Your hunt activation code', $text, $html)) {
+		if (!$this->sendMail($emails, 'Your hunt activation code (رمز التفعيل الخاص بك للبحث عن الكنز‎)', $text, $html)) {
 			$this->db->rollback();
 			$this->jsonResponse([
 				'success' => false,
