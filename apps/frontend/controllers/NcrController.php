@@ -188,7 +188,7 @@ class NcrController extends ControllerBase
 		}, $players);
 		$emails[] = $leaderEmail;
 		if (!$this->sendMail($emails, 'Your NCR Scavenger Hunt Registration Confirmation', $text, $html)) {
-			$this->jsonResponse([
+			return $this->jsonResponse([
 				'success' => false,
 				'error' => 'failed to send instructions, please contact support'
 			]);
@@ -210,7 +210,7 @@ class NcrController extends ControllerBase
 		$html = 'Hi there!<br><br>Attached you will find your All Routes Lead to Midtown Scavenger Hunt Instructions. At your hunt time, please click the link and enter your code to start the hunt.<br><br><a href="' . $this->config->fullUri . '">' . $this->config->fullUri . '</a><br><br>Have Fun!';
 
 		if (!$this->sendMail($leaderEmail, 'Your NCR Scavenger Hunt Instructions', $text, $html, $attachments)) {
-			$this->jsonResponse([
+			return $this->jsonResponse([
 				'success' => false,
 				'error' => 'failed to send instructions, please contact support'
 			]);
@@ -232,7 +232,7 @@ class NcrController extends ControllerBase
 				return $p[0];
 			}, $players);
 			if (!$this->sendMail($emails, 'Your NCR Scavenger Hunt Instructions', $text, $html, $attachments)) {
-				$this->jsonResponse([
+				return $this->jsonResponse([
 					'success' => false,
 					'error' => 'failed to send instructions, please contact support'
 				]);
@@ -412,11 +412,11 @@ class NcrController extends ControllerBase
 		}, $players);
 		$emails[] = $leaderEmail;
 		if (!$this->sendMail($emails, 'Your hunt activation code (رمز التفعيل الخاص بك للبحث عن الكنز‎)', $text, $html)) {
-			$this->db->rollback();
-			$this->jsonResponse([
+			/*$this->db->rollback();
+			return $this->jsonResponse([
 				'success' => false,
 				'error' => 'failed to send instructions, please contact support'
-			]);
+			]);*/
 		}
 
 		$this->db->commit();
