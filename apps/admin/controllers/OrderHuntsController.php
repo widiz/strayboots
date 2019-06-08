@@ -666,10 +666,19 @@ class OrderHuntsController extends \ControllerBase
 			if (empty($tids)) {
 				$this->view->surveyResults = $this->view->customEvents = $this->view->customQuestions = $this->view->bonusQuestions = $this->view->wrongAnswers = $this->view->players = [];
 			} else {
-				$this->view->players = Players::find([
+				$this->view->players = $this->modelsManager->createBuilder()
+							->columns('p.id, p.team_id, p.email, p.first_name, p.last_name, pm.meta_value as phone, pm2.meta_value as id_num')
+							->from(['p' => 'Players'])
+							->leftJoin('PlayerMeta', 'p.id = pm.player_id AND pm.meta_key=\'phone\'', 'pm')
+							->leftJoin('PlayerMeta', 'p.id = pm2.player_id AND pm2.meta_key=\'id\'', 'pm2')
+							->where('p.team_id IN (' . $tids . ')')
+							->getQuery()
+							->execute();
+
+				/*$this->view->players = Players::find([
 					'team_id IN (' . $tids . ')',
 					//'order' => 'team_id ASC'
-				]);
+				]);*/
 
 				$this->view->bonusQuestions = $this->db->fetchAll('SELECT bq.*, p.team_id, p.email, p.first_name, p.last_name FROM bonus_questions bq LEFT JOIN players p ON (p.id = bq.winner_id) WHERE bq.order_hunt_id' . ($multihunt ? ' IN (' . $ohids . ')' : ('=' . $ohids)) . ' AND bq.winner_id IS NOT NULL', Db::FETCH_ASSOC);
 				$this->view->customEvents = $this->db->fetchAll('SELECT * FROM custom_events WHERE order_hunt_id' . ($multihunt ? ' IN (' . $ohids . ')' : ('=' . $ohids)) . ' AND team_id IS NOT NULL', Db::FETCH_ASSOC);

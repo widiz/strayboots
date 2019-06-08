@@ -11,31 +11,19 @@ class PlayerMeta extends \Phalcon\Mvc\Model
 	 *
 	 * @var integer
 	 */
-	public $id;
+	public $player_id;
 
 	/**
 	 *
 	 * @var integer
 	 */
-	public $team_id;
+	public $meta_key;
 
 	/**
 	 *
 	 * @var string
 	 */
-	public $email;
-
-	/**
-	 *
-	 * @var string
-	 */
-	public $first_name;
-
-	/**
-	 *
-	 * @var string
-	 */
-	public $last_name;
+	public $meta_value;
 
 	/**
 	 * Initialize method for model.

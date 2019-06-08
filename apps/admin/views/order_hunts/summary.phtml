@@ -416,6 +416,8 @@ if ($hasFiles): ?>
 					<th>Email</th>
 					<th>First name</th>
 					<th>Last name</th>
+					<th>Phone</th>
+					<th>ID</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -426,6 +428,8 @@ if ($hasFiles): ?>
 					<td><?= $player->email ?></td>
 					<td><?= is_null($player->first_name) ? '' : htmlspecialchars($player->first_name) ?></td>
 					<td><?= is_null($player->last_name) ? '' : htmlspecialchars($player->last_name) ?></td>
+					<td><?= is_null($player->phone) ? '' : htmlspecialchars($player->phone) ?></td>
+					<td><?= is_null($player->id_num) ? '' : htmlspecialchars($player->id_num) ?></td>
 				</tr>
 <? endforeach ?>
 			</tbody>
