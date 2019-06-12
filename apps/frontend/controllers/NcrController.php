@@ -287,7 +287,9 @@ class NcrController extends ControllerBase
 			]);
 		}
 		$emails[$leaderEmail] = 0;
-		$uniqueFields = array_flip(array_column($this->db->fetchAll("SELECT meta_value FROM player_meta WHERE meta_value != ''", Db::FETCH_ASSOC), 'meta_value')); // todo change this to match only players with the same hunt
+		$uniqueFields = array_flip(array_column($this->db->fetchAll('SELECT meta_value FROM player_meta', Db::FETCH_ASSOC), 'meta_value')); // todo change this to match only players with the same hunt
+		if (isset($uniqueFields['']))
+			unset($uniqueFields['']);
 		foreach ($players as $pIdx => $p) {
 			if (!empty($p[2])) {
 				if (isset($uniqueFields[$p[2]])) {
