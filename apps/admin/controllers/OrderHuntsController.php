@@ -654,6 +654,15 @@ class OrderHuntsController extends \ControllerBase
 		}
 		$this->view->eurl = $eurl;
 
+		if (!$ceurl = $this->redis->get(SB_PREFIX . 'celink:' . $orderHunt->id)) {
+			$celink = $this->config->fullUri . '/clients/order_hunts/end/?h=' . rawurlencode($this->crypt->encryptBase64($orderHunt->id)) . '&x=' . rawurlencode($this->crypt->encryptBase64('cl' . $orderHunt->id));
+			if ($ceurl = $this->bitly($celink))
+				$this->redis->set(SB_PREFIX . 'celink:' . $orderHunt->id, $ceurl, max(strtotime($orderHunt->expire) - time(), 0) + 604800);
+			else
+				$ceurl = $celink;
+		}
+		$this->view->ceurl = $ceurl;
+
 		if ($this->view->hideHeader) {
 			$this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
 			$this->view->customEvents = $this->view->customQuestions = $this->view->bonusQuestions = [];

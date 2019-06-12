@@ -270,8 +270,11 @@ class NcrController extends ControllerBase
 		if (!is_array($players))
 			$players = [];
 
+		$orderHuntIds = array_column($this->db->fetchAll('SELECT id FROM order_hunts WHERE order_id=2508 OR order_id=2487', Db::FETCH_ASSOC), 'id');
+		$orderHuntIds[] = $orderHunt->id;
+
 		ini_set('memory_limit', '256M');
-		$emails = array_flip(array_column($this->db->fetchAll("SELECT p.email FROM players p LEFT JOIN teams t ON t.id = p.team_id WHERE t.order_hunt_id=" . (int)$orderHunt->id, Db::FETCH_ASSOC), 'email'));
+		$emails = array_flip(array_column($this->db->fetchAll('SELECT p.email FROM players p LEFT JOIN teams t ON t.id = p.team_id WHERE t.order_hunt_id IN (' . implode(',', $orderHuntIds) . ')', Db::FETCH_ASSOC), 'email'));
 		if (!filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
 			$this->db->rollback();
 			return $this->jsonResponse([

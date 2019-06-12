@@ -51,6 +51,7 @@ $hasEvents = !empty($customEvents);
 		<div>Start:		<?= $start = date($timeFormat, strtotime($orderHunt->start)) . (!empty($tzStart) ? ' <small>Local: ' . $tzStart . '</small>' : '') ?></div>
 		<div>Finish:	<?= date($timeFormat, strtotime($orderHunt->finish)) . (!empty($tzFinish) ? ' <small>Local: ' . $tzFinish . '</small>' : '') ?></div>
 		<div>Public URL:	<a href="<?= $eurl; ?>" target="_blank"><?= $eurl; ?></a></div>
+		<div>Public URL (also available when canceled):	<a href="<?= $ceurl; ?>" target="_blank"><?= $ceurl; ?></a></div>
 	</div>
 </div>
 <div class="row">

@@ -105,12 +105,12 @@ class OrderHuntsController extends \ControllerBase
 			return;
 		}
 
-		if ($orderHunt->isCanceled()) {
+		/*if ($orderHunt->isCanceled()) {
 			$this->flash->error('This hunt was canceled');
 			$this->response->redirect('order_hunts/' . $order->id);
 
 			return;
-		}
+		}*/
 
 		$ohFiles = [];
 		if ($multihunt = $this->request->getQuery('mh') && $orderHunt->isMultiHunt()) {
@@ -245,7 +245,13 @@ class OrderHuntsController extends \ControllerBase
 		if ($id)
 			$id = (int)$this->crypt->decryptBase64($id);
 		$orderHunt = $id > 0 ? OrderHunts::findFirstByid($id) : false;
-		if (!$orderHunt || $orderHunt->isCanceled()) {
+		if ($orderHunt && $orderHunt->isCanceled()) {
+			if ($x = str_replace(' ', '+', $this->request->getQuery('x')))
+				$x = $this->crypt->decryptBase64($x);
+			if (!(preg_match('/^cl(\d+)$/', $x, $m) && $m[1] == $id))
+				$orderHunt = false;
+		}
+		if (!$orderHunt) {
 			$this->flash->error('Page was not found');
 			$this->response->redirect('orders');
 
