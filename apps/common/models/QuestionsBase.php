@@ -138,11 +138,20 @@ class QuestionsBase extends \Phalcon\Mvc\Model
 				});
 				$c = count($options);
 				if ($c > 1 && $c < 6) {
-					if ($numCorrect == 1) {
-						$this->answers = implode("\n", $options);
+					if ($numCorrect > 0) {
+						if ($numCorrect >= $c) {
+							$this->appendMessage(new Message(
+								'Too many correct answers',
+								'answers',
+								'error'
+							));
+							$success = false;
+						} else {
+							$this->answers = implode("\n", $options);
+						}
 					} else {
 						$this->appendMessage(new Message(
-							'Choose one correct answer (* in the beginning of the line)',
+							'Choose at least one correct answer (* in the beginning of the line)',
 							'answers',
 							'error'
 						));
