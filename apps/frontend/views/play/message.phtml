@@ -46,12 +46,13 @@ document.addEventListener("DOMContentLoaded", function(){
 				<?= isset($questions) ? $this->partial('play/strategy_list') : '' ?>
 <? else: ?>
 				<div class="options">
-					<? if (!($leaderboardDisabled || (isset($leaderBoardPaypal) && $leaderBoardPaypal))): ?>
-					<a href="/clients/order_hunts/end/?h=<?= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success" id="final-leaderboard"><?= $t->_('Leaderboard') ?></a><br>
-					<? endif;
+					<!-- <?// if (!($leaderboardDisabled || (isset($leaderBoardPaypal) && $leaderBoardPaypal))): ?>
+					<a href="/clients/order_hunts/end/?h=<?//= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success" id="final-leaderboard"><?//= $t->_('Leaderboard') ?></a><br> -->
+					<!-- <?// endif;
+
 					/*if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
 						<a href="/play/survey" class="btn btn-warning"><?= $t->_('Take a quick survey') ?></a>
-					<? endif*/ ?>
+					<? endif*/ ?> -->
 <? if ($multiHunt && $isLeader && !$lastMulti): ?>
 					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-warning"><?= $t->_('Choose another hunt') ?></a>
 <? endif ?>
