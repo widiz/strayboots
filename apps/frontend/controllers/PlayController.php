@@ -493,7 +493,7 @@ EOF
 			} else {
 
 				//$this->view->responseLink = ['Leaderboard', $this->url->get('leaderboard')];
-				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . (is_null($thisOrderHunt->end_msg) ? $this->view->t->_('You\'ve completed your scavenger hunt!<br>Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots!') : nl2br(htmlspecialchars($thisOrderHunt->end_msg)));
+				$this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . (is_null($thisOrderHunt->end_msg) ? $this->view->t->_('You\'ve completed your scavenger hunt!<br>Meet your group at your end location and be sure to spread the word about Strayboots!') : nl2br(htmlspecialchars($thisOrderHunt->end_msg)));
 
 			}
 

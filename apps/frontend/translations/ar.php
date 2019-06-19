@@ -1,6 +1,6 @@
 <? return [
 	'Great job!' => 'عمل رائع!',
-	'You\'ve completed your scavenger hunt!<br>Hope you had fun today. Meet your group at your end location and be sure to spread the word about Strayboots!' => 'لقد أكملت البحث عن الزبال! <br> آمل أن تكون قد استمتعت اليوم',
+	'You\'ve completed your scavenger hunt!<br>Meet your group at your end location and be sure to spread the word about Strayboots!' => 'لقد أكملت البحث عن الزبال! <br> آمل أن تكون قد استمتعت اليوم',
 	'Place' => 'المكان',
 	'Team Score' => 'نقاط الفريق',
 	'Progress' => 'مدى التقدم',

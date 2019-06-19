@@ -73,14 +73,16 @@
 		<div id="header-score">
 			<!--i class="fa fa-trophy"></i-->
 <? if (!isset($noScore)): ?>
-			<div>
-				<div><?= $t->_('Place') ?></div>
-				<span><?= $teamStatus['position'] ?></span>
-			</div>
-			<div>
-				<div><?= $t->_('Team Score') ?></div>
-				<span><?= $teamStatus['score'] ?></span>
-			</div>
+	<? if (!$leaderboardDisabled): ?>
+		<div id="place">
+			<div><?= $t->_('Place') ?></div>
+			<span><?= $teamStatus['position'] ?></span>
+		</div>
+	<? endif ?>
+	<div id="team-score">
+		<div><?= $t->_('Team Score') ?></div>
+		<span><?= $teamStatus['score'] ?></span>
+	</div>
 <? endif ?>
 <? if (isset($question)): ?>
 			<div>
