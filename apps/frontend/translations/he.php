@@ -1,6 +1,6 @@
 <? return [
 	'Great job!' => 'כל הכבוד!',
-	'You\'ve completed your scavenger hunt!<br>Meet your group at your end location and be sure to spread the word about Strayboots!' => 'סיימתם את ההרפתקאה שלכם!<br>מקווים שנהנתם ונשמח לראותכם שוב!',
+	'You\'ve completed your scavenger hunt!<br>Meet your group at your end location and be sure to spread the word about Strayboots!<br>(Check your email for the final Leaderboard and photos)' => 'סיימתם את ההרפתקאה שלכם!<br>מקווים שנהנתם ונשמח לראותכם שוב!',
 	'Place' => 'מיקום',
 	'Team Score' => 'מיקום',
 	'Team Score' => 'נקודות',
