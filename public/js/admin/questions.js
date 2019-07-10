@@ -48,7 +48,10 @@ $(function(){
 				searchable: false,
 				data: 'answers',
 				width: 90,
-				render: numberRender
+				render: function(data, type, row, meta) {
+					return '<a href="/admin/questions/submittion/' + row.id + '">' + numberRender.display(data) + '</a>';
+				}
+				// render: numberRender
 			},
 			{
 				searchable: false,

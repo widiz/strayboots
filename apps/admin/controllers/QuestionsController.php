@@ -96,6 +96,21 @@ class QuestionsController extends \ControllerBase
 		exit;
 	}
 
+	public function datatableSubmittionAction($question)
+	{
+		if ($this->requireUser())
+			throw new \Exception(403, 403);
+
+		$builder = $this->modelsManager->createBuilder()
+							->columns('a.id, t.name, a.answer, a.created')
+							->from(['a' => 'Answers'])
+							->leftJoin('Teams', 't.id = a.team_id','t')
+							->where('a.question_id = ' . (int)$question);
+		$dataTables = new DataTable();
+		$dataTables->fromBuilder($builder)->sendResponse();
+		exit;
+	}
+
 	/**
 	 * Displays the creation form
 	 */
@@ -172,7 +187,6 @@ class QuestionsController extends \ControllerBase
 
 			return;
 		}
-
 		$this->view->question = $question;
 
 
@@ -180,6 +194,36 @@ class QuestionsController extends \ControllerBase
 				->addJs('/template/js/plugins/dataTables/datatables.min.js')
 				->addJs('/template/js/plugins/tabletools/js/dataTables.tableTools.js')
 				->addJs('/js/admin/questions.wrong.js');
+		$this->assets->collection('style')
+				->addCss('/template/css/plugins/dataTables/datatables.min.css')
+				->addCss('/template/js/plugins/tabletools/css/dataTables.tableTools.css');
+	}
+
+	/**
+	 * View דubmittions answers for a question
+	 *
+	 * @param string $id
+	 */
+	public function submittionAction($id)
+	{
+		if ($this->requireUser())
+			return true;
+
+		$question = Questions::findFirstByid($id);
+		if (!$question) {
+			$this->flash->error('Question was not found');
+
+			$this->response->redirect('questions');
+
+			return;
+		}
+		$this->view->question = $question;
+
+
+		$this->assets->collection('script')
+				->addJs('/template/js/plugins/dataTables/datatables.min.js')
+				->addJs('/template/js/plugins/tabletools/js/dataTables.tableTools.js')
+				->addJs('/js/admin/questions.submittion.js');
 		$this->assets->collection('style')
 				->addCss('/template/css/plugins/dataTables/datatables.min.css')
 				->addCss('/template/js/plugins/tabletools/css/dataTables.tableTools.css');
