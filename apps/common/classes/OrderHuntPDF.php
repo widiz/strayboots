@@ -401,17 +401,17 @@ EOF;
 	}
 	.p5 {
 		text-align: right;
-		padding-right: 11px;
+		padding-right: 4px;
 		white-space: nowrap;
 	}
 	.p6 {
 		text-align: left;
-		padding-left: 11px;
+		padding-left: 4px;
 		white-space: nowrap;
 	}
 	.p7 {
 		text-align: right;
-		padding-right: 27px;
+		padding-right: 8px;
 		white-space: nowrap;
 	}
 	.nwc {
@@ -655,6 +655,13 @@ EOF;
 	}
 	.yw {
 		white-space: normal;
+	}
+	.tr4.td5 {
+		padding-right: 10px;
+		border-right: 2px solid #e1e1e1;
+	}
+	.tr5.td5 {
+		border-right: 2px solid #e1e1e1;
 	}
 	{$hebcss}
 	</style>
