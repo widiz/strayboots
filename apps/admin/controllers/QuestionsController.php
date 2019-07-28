@@ -262,6 +262,8 @@ class QuestionsController extends \ControllerBase
 			$this->tag->setDefault('question', $question->question);
 			$this->tag->setDefault('qattachment', $question->qattachment);
 			$this->tag->setDefault('hint', $question->hint);
+			$this->tag->setDefault('disable_skip', $question->disable_skip);
+			$this->tag->setDefault('disable_hint', $question->disable_hint);
 			$this->tag->setDefault('funfact', $question->funfact);
 			$this->tag->setDefault('response_correct', $question->response_correct);
 			$this->tag->setDefault('answers', $question->QuestionType->type == QuestionTypes::Choose ? str_replace("\n", "\r\n", $question->answers) : $question->answers);
@@ -305,6 +307,8 @@ class QuestionsController extends \ControllerBase
 		$question->response_correct = $this->request->getPost('response_correct', 'trim');
 		$question->answers = $this->request->getPost('answers');
 		$question->timeout = $this->request->getPost('timeout', 'trim');
+		$question->disable_skip = (int)$this->request->getPost('disable_skip');
+		$question->disable_hint = (int)$this->request->getPost('disable_hint');
 		if (empty($question->point_id))
 			$question->point_id = null;
 		if (empty($question->score))
@@ -573,6 +577,8 @@ class QuestionsController extends \ControllerBase
 		$question->response_correct = $this->request->getPost('response_correct', 'trim');
 		$question->answers = $this->request->getPost('answers');
 		$question->timeout = $this->request->getPost('timeout', 'trim');
+		$question->disable_skip = (int)$this->request->getPost('disable_skip');
+		$question->disable_hint = (int)$this->request->getPost('disable_hint');
 		if (empty($question->point_id))
 			$question->point_id = null;
 		if (empty($question->score))

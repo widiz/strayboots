@@ -148,6 +148,8 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('map_disabled', $orderHunt->isMapDisabled());
 			$this->tag->setDefault('facebook_disabled', $orderHunt->isFacebookDisabled());
 			$this->tag->setDefault('b2c_enabled', $orderHunt->isB2CEnabled());
+			$this->tag->setDefault('disable_skip', $orderHunt->isSkippingButtonDisabled());
+			$this->tag->setDefault('disable_hint', $orderHunt->isHintDisabled());
 		}
 		$this->addEdit();
 	}
@@ -219,6 +221,8 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setMapDisabled($this->request->getPost('map_disabled'));
 		$orderHunt->setFacebookDisabled($this->request->getPost('facebook_disabled'));
 		$orderHunt->setB2CEnabled($this->request->getPost('b2c_enabled'));
+		$orderHunt->setSkippingButtonDisabled($this->request->getPost('disable_skip'));
+		$orderHunt->setHintDisabled($this->request->getPost('disable_hint'));
 
 		$hunt = $orderHunt->Hunt;
 
@@ -365,6 +369,8 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setFacebookDisabled($this->request->getPost('facebook_disabled'));
 		$orderHunt->setB2CEnabled($this->request->getPost('b2c_enabled'));
 		$orderHunt->setCustomLogin($orderHunt->isB2CEnabled() ? true : $this->request->getPost('custom_login'));
+		$orderHunt->setSkippingButtonDisabled($this->request->getPost('disable_skip'));
+		$orderHunt->setHintDisabled($this->request->getPost('disable_hint'));
 
 		$hunt = $orderHunt->Hunt;
 		$isOk = true;

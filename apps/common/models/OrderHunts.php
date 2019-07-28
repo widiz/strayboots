@@ -205,7 +205,7 @@ class OrderHunts extends \Phalcon\Mvc\Model
 			'message'	=> 'Max teams is invalid'
 		]));
 		$validator->add('flags', new Regex([
-			'pattern'	=> '/^\d{1,3}$/',
+			'pattern'	=> '/^\d{1,4}$/',
 			'message'	=> 'Flags are invalid'
 		]));
 		$validator->add('start', new Regex([
@@ -697,6 +697,16 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 256);
 	}
 
+	public function isSkippingButtonDisabled()
+	{
+		return (bool)($this->flags & 512);
+	}
+
+	public function isHintDisabled()
+	{
+		return (bool)($this->flags & 1024);
+	}
+
 	public function setCustomLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
@@ -740,6 +750,16 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public function setB2CEnabled($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 256;
+	}
+
+	public function setSkippingButtonDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 512;
+	}
+
+	public function setHintDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1024;
 	}
 
 	/**

@@ -80,6 +80,18 @@ class QuestionsBase extends \Phalcon\Mvc\Model
 	 */
 	public $timeout;
 
+	/**
+	 *
+	 * @var boolean
+	 */
+	public $disable_skip;
+
+	/**
+	 *
+	 * @var boolean
+	 */
+	public $disable_hint;
+
 	const ATTACHMENT_PHOTO = 1;
 	const ATTACHMENT_VIMEO = 2;
 	const ATTACHMENT_YOUTUBE = 3;

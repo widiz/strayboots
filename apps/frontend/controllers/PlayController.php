@@ -40,10 +40,10 @@ class PlayController extends ControllerBase
 		}
 //var_dump($thisOrderHunt->Teams->toArray());die;
 		$questions = $this->db->fetchAll(<<<EOF
-SELECT q.id, q.point_id, q.type_id, q.name, q.question, q.qattachment, q.hint, 
+SELECT q.id, q.point_id, q.type_id, q.name, q.question, q.qattachment, q.hint,  
 	q.funfact, q.response_correct, q.answers, q.attachment, q.timeout, 0 AS `customq`, 
 	IF(q.score IS NULL,qt.score,q.score) as `cscore`, rp.idx, a.created, 
-	qt.type as `question_type`, qt.limitAnswers, a.action as `answer_action`, a.funfact_viewed, a.id as aid 
+	qt.type as `question_type`, qt.limitAnswers, a.action as `answer_action`, a.funfact_viewed, a.id as aid, q.disable_hint, q.disable_skip 
 FROM route_points rp 
 	LEFT JOIN hunt_points hp ON (rp.hunt_point_id = hp.id) 
 	LEFT JOIN questions q ON (hp.question_id = q.id) 
@@ -52,7 +52,7 @@ FROM route_points rp
 WHERE rp.route_id = {$thisTeam->route_id} 
 UNION ALL SELECT cq.id, NULL as `point_id`, cq.type_id, cq.name, cq.question, cq.qattachment, cq.hint, cq.funfact, 
 		cq.response_correct, cq.answers, cq.attachment, cq.timeout, 1 AS `customq`, cq.score as `cscore`, cq.idx, ca.created, 
-		qt.type as `question_type`, qt.limitAnswers, ca.action as `answer_action`, ca.funfact_viewed, ca.id as aid 
+		qt.type as `question_type`, qt.limitAnswers, ca.action as `answer_action`, ca.funfact_viewed, ca.id as aid, NULL as `disable_hint`, NULL as `isable_skip` 
 FROM custom_questions cq 
 	LEFT JOIN question_types qt ON (cq.type_id = qt.id) 
 	LEFT JOIN custom_answers ca ON (ca.team_id = {$thisTeam->id} AND ca.custom_question_id = cq.id) 
@@ -581,6 +581,9 @@ EOF
 					}
 					$this->view->timerTimeLeft = max(0, $timerTimeLeft - $time);
 				}
+				
+				$this->view->disableHint = (int)$question['disable_hint'];
+				$this->view->disableSkip = (int)$question['disable_skip'];
 
 				$question['timeout'] = (int)$question['timeout'];
 				if ($question['timeout'] > 0) {
@@ -943,6 +946,7 @@ EOF
 			];
 		}
 
+		$this->view->orderHunt = $thisOrderHunt;
 		$this->view->orderHuntId = $thisOrderHunt->id;
 
 		$this->assets->collection('style')->addCss('/css/app/play.css');

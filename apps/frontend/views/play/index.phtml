@@ -146,18 +146,27 @@ endif ?>
 						<div class="options">
 <? endif ?>
 <? if (!($showHint || empty($question['hint']) || $hideHints) && $question['question_type'] != QuestionTypes::Photo): ?>
-							<form method="POST" action="<?= $this->url->get('play') ?>" id="hint-form">
-								<input type="hidden" name="qid" value="<?= $question['id'] ?>">
-								<input type="hidden" name="action" value="hint">
-								<a href="javascript:;" data-warn="<?= $question['cscore'] > 0 ? 1 : 0 ?>" class="btn btn-warning"><?= $t->_('Hint') ?></a>
-							</form>
+						<? if (!$orderHunt->isHintDisabled()) :?>
+							<? if (!$disableHint) :?>
+								<form method="POST" action="<?= $this->url->get('play') ?>" id="hint-form">
+									<input type="hidden" name="qid" value="<?= $question['id'] ?>">
+									<input type="hidden" name="action" value="hint">
+									<a href="javascript:;" data-warn="<?= $question['cscore'] > 0 ? 1 : 0 ?>" class="btn btn-warning"><?= $t->_('Hint') ?></a>
+								</form>
+							<? endif ?>
+						<? endif ?>
 <? endif ?>
-							<form method="POST" action="<?= $this->url->get('play') ?>" id="skip-form">
-								<input type="hidden" name="qid" value="<?= $question['id'] ?>">
-								<input type="hidden" name="action" value="skip">
-								<a href="javascript:;" class="btn btn-danger"><?= $t->_($strategy ? 'Give Up?' : 'Skip') ?></a>
-							</form>
+						<? if (!$orderHunt->isSkippingButtonDisabled()) :?>
+							<? if (!$disableSkip) :?>
+								<form method="POST" action="<?= $this->url->get('play') ?>" id="skip-form">
+									<input type="hidden" name="qid" value="<?= $question['id'] ?>">
+									<input type="hidden" name="action" value="skip">
+									<a href="javascript:;" class="btn btn-danger"><?= $t->_($strategy ? 'Give Up?' : 'Skip') ?></a>
+								</form>
+							<? endif ?>
+						<? endif ?>
 						</div>
+
 <? endif ?>
 
 					</div>
