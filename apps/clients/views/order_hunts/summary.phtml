@@ -107,7 +107,7 @@ $hasEvents = !empty($customEvents);
 						<td><?= isset($teamNames[$log['team_id']]) ? $teamNames[$log['team_id']][0] : '' ?></td>
 						<td><?= mb_strimwidth($log['question'][1], 0, 110, '...') ?></td>
 						<td><?= $log['action'] == Answers::Answered ? 'Answered' : ($log['action'] == Answers::Skipped ? "Skipped" : "Answered with hint") ?></td>
-						<td><?= htmlspecialchars($log['answer']) ?></td>
+						<td><?= nl2br(htmlspecialchars($log['answer'])) ?></td>
 						<td><?= $log['scored'] . '/' . $log['question'][2] ?></td>
 						<td><?= date($timeFormat, strtotime($log['created'])) ?></td>
 					</tr>
@@ -193,7 +193,7 @@ $hasEvents = !empty($customEvents);
 						<td><?= $cq['question'] ?></td>
 						<td><?= isset($teamNames[$cq['team_id']]) ? $teamNames[$cq['team_id']][0] : '' ?></td>
 						<td><?= $cq['action'] == Answers::AnsweredWithHint ? floor($cq['score'] / 2) : $cq['score'] ?></td>
-						<td><?= htmlspecialchars($cq['answer']) ?></td>
+						<td><?= nl2br(htmlspecialchars($cq['answer'])) ?></td>
 						<td><?= date($timeFormat, strtotime($cq['created'])) ?></td>
 					</tr>
 <? endforeach ?>

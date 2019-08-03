@@ -1,196 +1,210 @@
 <? if (isset($showBonusQuestionBox)): ?>
-		<div id="bq-timer" class="bootbox modal fade qbox">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="bootbox-body">
-							<button type="button" class="bootbox-close-button close" data-dismiss="modal" style="margin-top:-10px">×</button>
+    <div id="bq-timer" class="bootbox modal fade qbox">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="bootbox-body">
+              <button type="button" class="bootbox-close-button close" data-dismiss="modal" style="margin-top:-10px">×</button>
 <? if (is_array($showBonusQuestionBox)): ?>
-							<img src="/img/bq1.png" width="450" height="285">
-							<h2><?= $t->_('Your team won' . ($bqPoints > 0 ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
-							<h3><b class="specialcolor" style="word-break:break-all"><?= is_null($showBonusQuestionBox[1]) ? $showBonusQuestionBox[0] : htmlspecialchars(trim($showBonusQuestionBox[1] . ' ' . $showBonusQuestionBox[2])) ?></b> got it right</h3>
+              <img src="/img/bq1.png" width="450" height="285">
+              <h2><?= $t->_('Your team won' . ($bqPoints > 0 ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
+              <h3><b class="specialcolor" style="word-break:break-all"><?= is_null($showBonusQuestionBox[1]) ? $showBonusQuestionBox[0] : htmlspecialchars(trim($showBonusQuestionBox[1] . ' ' . $showBonusQuestionBox[2])) ?></b> got it right</h3>
 <? elseif ($showBonusQuestionBox): ?>
-							<img src="/img/bq1.png" width="450" height="285">
-							<h2><?= $t->_('You Won' . ($bqPoints > 0 ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
+              <img src="/img/bq1.png" width="450" height="285">
+              <h2><?= $t->_('You Won' . ($bqPoints > 0 ? ' %points% points' : ''), ['points' => $bqPoints]) ?></h2>
 <? else: ?>
-							<img src="/img/bq1.png" width="450" height="285">
-							<h2><?= $t->_('You Lost') ?></h2>
-							<h3><?= $t->_('Someone else beat you to it') ?></h3>
+              <img src="/img/bq1.png" width="450" height="285">
+              <h2><?= $t->_('You Lost') ?></h2>
+              <h3><?= $t->_('Someone else beat you to it') ?></h3>
 <? endif ?>
-							<a href="javascript:;" class="btn" data-dismiss="modal"><?= $t->_('OK') ?></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+              <a href="javascript:;" class="btn" data-dismiss="modal"><?= $t->_('OK') ?></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 <? endif ?>
-		<div class="content-wrapper section-wrapper" id="playground" style="visibility:hidden">
-			<div class="container">
+    <div class="content-wrapper section-wrapper" id="playground" style="visibility:hidden">
+      <div class="container">
 <? if (isset($startTimer)): ?>
-				<div class="question" style="text-align:center">
-					<?= $t->_('Welcome to your scavenger hunt adventure!') ?><br>
-					<?= $t->_('Your hunt will begin in:') ?>
-					<div id="start-timer" data-seconds="<?= $startTimer ?>"></div>
-					<a href="<?= $this->url->get('play') ?>" class="btn btn-success"><?= $t->_('Try again') ?></a>
+        <div class="question" style="text-align:center">
+          <?= $t->_('Welcome to your scavenger hunt adventure!') ?><br>
+          <?= $t->_('Your hunt will begin in:') ?>
+          <div id="start-timer" data-seconds="<?= $startTimer ?>"></div>
+          <a href="<?= $this->url->get('play') ?>" class="btn btn-success"><?= $t->_('Try again') ?></a>
 <? if (!$facebookDisabled): ?>
-					<h2 style="font-size:20px;margin:35px 0"><?= $t->_('While you are waiting for your adventure, feel free to check some of our cool posts') ?></h2>
-					<a class="btn btn-primary" href="https://www.facebook.com/Strayboots/" target="_blank"><?= $t->_('Check it out!') ?></a>
+          <h2 style="font-size:20px;margin:35px 0"><?= $t->_('While you are waiting for your adventure, feel free to check some of our cool posts') ?></h2>
+          <a class="btn btn-primary" href="https://www.facebook.com/Strayboots/" target="_blank"><?= $t->_('Check it out!') ?></a>
 <? endif ?>
-				</div>
+        </div>
 <? else: ?>
 
-				<div class="inner-content">
-					<div class="question">
+        <div class="inner-content">
+          <div class="question">
 <?
 $types = [
-	4 => 'RIDDLE ME THIS...',
-	3 => 'PHOTO OP!',
-	5 => 'LOCAL TRIVIA!',
-	9 => 'ID THE IMAGE!'
+  4 => 'RIDDLE ME THIS...',
+  3 => 'PHOTO OP!',
+  5 => 'LOCAL TRIVIA!',
+  9 => 'ID THE IMAGE!'
 ];
 if (isset($noScore) && $noScore):
-	if (isset($types[$question['type_id']]))
-		echo '<b>' . $t->_($types[$question['type_id']]);
+  if (isset($types[$question['type_id']]))
+    echo '<b>' . $t->_($types[$question['type_id']]);
 ?></b><br>
 <? elseif ($question['cscore'] > 0): ?>
-						<b><?= $t->_('For ' . ($showHint ? '<s>%original%</s> ' : '') . '%points% points', $showHint ? ['original' => $question['cscore'], 'points' => floor($question['cscore'] / 2)] : ['points' => $question['cscore']]);
+            <b><?= $t->_('For ' . ($showHint ? '<s>%original%</s> ' : '') . '%points% points', $showHint ? ['original' => $question['cscore'], 'points' => floor($question['cscore'] / 2)] : ['points' => $question['cscore']]);
 if (isset($types[$question['type_id']]))
-	echo ', ' . $t->_($types[$question['type_id']]);
+  echo ', ' . $t->_($types[$question['type_id']]);
 ?></b><br>
 <? endif ?>
 <? if (isset($qattachment) && is_array($qattachment) && isset($qattachment['type'])):
-	if ($qattachment['type'] == Questions::ATTACHMENT_PHOTO && isset($qattachment['photo']) && !empty($qattachment['photo'])) {
-		?><div class="a-img"><img src="<?= $qattachment['photo'] ?>" alt=""></div><br><?
-	} else if ($qattachment['type'] == Questions::ATTACHMENT_YOUTUBE && isset($qattachment['video']) && !empty($qattachment['video'])) {
-		?><div class="vimeo"><iframe src="https://www.youtube.com/embed/<?= $qattachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><br><?
-	} else if ($qattachment['type'] == Questions::ATTACHMENT_VIMEO && isset($qattachment['video']) && !empty($qattachment['video'])) {
-		?><div class="vimeo"><iframe src="//player.vimeo.com/video/<?= $qattachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><br><?
-	}
+  if ($qattachment['type'] == Questions::ATTACHMENT_PHOTO && isset($qattachment['photo']) && !empty($qattachment['photo'])) {
+    ?><div class="a-img"><img src="<?= $qattachment['photo'] ?>" alt=""></div><br><?
+  } else if ($qattachment['type'] == Questions::ATTACHMENT_YOUTUBE && isset($qattachment['video']) && !empty($qattachment['video'])) {
+    ?><div class="vimeo"><iframe src="https://www.youtube.com/embed/<?= $qattachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><br><?
+  } else if ($qattachment['type'] == Questions::ATTACHMENT_VIMEO && isset($qattachment['video']) && !empty($qattachment['video'])) {
+    ?><div class="vimeo"><iframe src="//player.vimeo.com/video/<?= $qattachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><br><?
+  }
 endif ?>
-						<?= nl2br(htmlspecialchars($question['question'])) ?>
+            <?= nl2br(htmlspecialchars($question['question'])) ?>
 
 <? if (isset($timerTimeLeft)): ?>
-						<div id="start-timer" data-seconds="<?= $timerTimeLeft ?>"></div>
+            <div id="start-timer" data-seconds="<?= $timerTimeLeft ?>"></div>
 <? endif ?>
 
-					</div>
+          </div>
 <? if ($showHint): ?>
-					<div class="hint-title"><?= $t->_('Hint') ?></div>
+          <div class="hint-title"><?= $t->_('Hint') ?></div>
 <? if ($question['question_type'] == QuestionTypes::Photo): ?>
-					<div class="hint"><?= $t->_('Upload your photo or skip to continue.<br>If you\'re having issues, try switching phones or instead send your photo to pics@strayboots.com.<br>Thanks!') ?></div>
+          <div class="hint"><?= $t->_('Upload your photo or skip to continue.<br>If you\'re having issues, try switching phones or instead send your photo to pics@strayboots.com.<br>Thanks!') ?></div>
 <? else: ?>
-					<div class="hint"><?= nl2br(htmlspecialchars($question['hint'])) ?></div>
+          <div class="hint"><?= nl2br(htmlspecialchars($question['hint'])) ?></div>
 <? endif ?>
 <? endif ?>
 <? if ($isLeader): ?>
-					<div id="answer-form-wrapper" class="clearfix">
-						<?php
-							$fs = [
-								'play',
-								'autocomplete' => "off",
-								'id' => "main-form"
-							];
-							if ($question['question_type'] == QuestionTypes::Photo)
-								$fs['enctype'] = "multipart/form-data";
-							echo $this->tag->form($fs);
-						?>
+          <div id="answer-form-wrapper" class="clearfix">
+            <?php
+              $fs = [
+                'play',
+                'autocomplete' => "off",
+                'id' => "main-form"
+              ];
+              if ($question['question_type'] == QuestionTypes::Photo)
+                $fs['enctype'] = "multipart/form-data";
+              echo $this->tag->form($fs);
+            ?>
 
-							<input type="hidden" name="action" value="answer">
-							<input type="hidden" name="qid" value="<?= $question['id'] ?>">
+              <input type="hidden" name="action" value="answer">
+              <input type="hidden" name="qid" value="<?= $question['id'] ?>">
 
-							<?php
-								if ($question['question_type'] == QuestionTypes::Text) {
-									echo $this->tag->textField(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer'), 'value' => '']);
-								} else if ($question['question_type'] == QuestionTypes::OpenText) {
-									echo $this->tag->textArea(['answer', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer'), 'value' => '']);
-								} else if ($question['question_type'] == QuestionTypes::Completion) {
-									echo $this->tag->{isset($completion) ? 'hiddenField' : 'textField'}(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer')]);
-								} else if ($question['question_type'] == QuestionTypes::Photo) {
-									echo $this->tag->fileField(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'accept' => 'image/*']);
-								}
-							?>
+              <?php
+                if ($question['question_type'] == QuestionTypes::Text) {
+                  echo $this->tag->textField(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer'), 'value' => '']);
+                } else if ($question['question_type'] == QuestionTypes::OpenText) {
+                  echo $this->tag->textArea(['answer', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer'), 'value' => '']);
+                } else if ($question['question_type'] == QuestionTypes::Completion) {
+                  echo $this->tag->{isset($completion) ? 'hiddenField' : 'textField'}(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'placeholder' => $t->_('Answer')]);
+                } else if ($question['question_type'] == QuestionTypes::Photo) {
+                  echo $this->tag->fileField(['answer', 'required' => 'required', 'class' => 'answer', 'id' => 'answerField', 'accept' => 'image/*']);
+                }
+              ?>
 
 <? if (isset($completion)): ?>
-							<div id="completion-wrapper">
-								<ul class="word">
+              <div id="completion-wrapper">
+                <ul class="word">
 <? foreach ($completion as $l => $letter): ?>
-									<?= is_null($letter) ? '<li class="letter"><input type="text" maxlength="1" name="completion' . $l . '">' : (empty(trim($letter)) ? '<li class="letter spacer">' : ('<li class="letter">' . htmlspecialchars($letter))) ?></li>
+                  <?= is_null($letter) ? '<li class="letter"><input type="text" maxlength="1" name="completion' . $l . '">' : (empty(trim($letter)) ? '<li class="letter spacer">' : ('<li class="letter">' . htmlspecialchars($letter))) ?></li>
 <? endforeach ?>
-								</ul>
-							</div>
+                </ul>
+              </div>
 <? endif ?>
 
 <? if ($question['question_type'] == QuestionTypes::Choose): ?>
-							<div id="radio-wrapper" class="question">
+              <div id="radio-wrapper" class="question">
 <? foreach (explode("\n", $question['answers']) as $i => $a): ?>
-								<input id="r<?= $i ?>" type="radio" name="answer" class="radio<?= $i ?>" value="<?= $i + 1 ?>" required />
-								<label for="r<?= $i ?>"><?= ltrim($a, ' *') ?></label>
+                <input id="r<?= $i ?>" type="radio" name="answer" class="radio<?= $i ?>" value="<?= $i + 1 ?>" required />
+                <label for="r<?= $i ?>"><?= ltrim($a, ' *') ?></label>
 <? endforeach ?>
-							</div>
+              </div>
+<? elseif ($question['question_type'] == QuestionTypes::OpenCheckbox): ?>
+              <div id="radio-wrapper" class="question checkboxes">
+<? foreach (explode("\n", $question['answers']) as $i => $a): ?>
+                <input id="r<?= $i ?>" type="checkbox" name="answer[]" class="radio<?= $i ?>" value="<?= $i + 1 ?>" />
+                <label for="r<?= $i ?>"><?= ltrim($a, ' *') ?></label>
+<? endforeach ?>
+              </div>
 <? endif ?>
 <? if ($question['question_type'] == QuestionTypes::Timer): ?>
 
-							<br>
-							<?= $this->tag->submitButton([$t->_('OK'), 'class' => 'submit subxbtn timerbtn hidden', 'disabled' => 'disabled']) ?>
+              <br>
+              <?= $this->tag->submitButton([$t->_('OK'), 'class' => 'submit subxbtn timerbtn hidden', 'disabled' => 'disabled']) ?>
 <? else: ?>
-							<?= $this->tag->submitButton([$t->_($question['question_type'] == QuestionTypes::Other ? 'OK' : 'Submit'), 'class' => 'submit subxbtn']) ?>
+              <?= $this->tag->submitButton([$t->_($question['question_type'] == QuestionTypes::Other ? 'OK' : 'Submit'), 'class' => 'submit subxbtn']) ?>
 <? endif ?>
-							
-						<?= $this->tag->endForm() ?>
+              
+            <?= $this->tag->endForm() ?>
 
 <? if ($question['question_type'] != QuestionTypes::Other && $question['question_type'] != QuestionTypes::Timer): ?>
 <? if ($strategy): ?>
-						<div class="options tight">
-							<a href="<?= $this->url->get('play') ?>?back=1" class="btn btn-default"><?= $t->_('Back') ?></a>
+            <div class="options tight">
+              <a href="<?= $this->url->get('play') ?>?back=1" class="btn btn-default"><?= $t->_('Back') ?></a>
 <? else: ?>
-						<div class="options">
+            <div class="options">
 <? endif ?>
-<? if (!($showHint || empty($question['hint']) || $hideHints) && $question['question_type'] != QuestionTypes::Photo): ?>
-						<? if (!$orderHunt->isHintDisabled()) :?>
-							<? if (!$disableHint) :?>
-								<form method="POST" action="<?= $this->url->get('play') ?>" id="hint-form">
-									<input type="hidden" name="qid" value="<?= $question['id'] ?>">
-									<input type="hidden" name="action" value="hint">
-									<a href="javascript:;" data-warn="<?= $question['cscore'] > 0 ? 1 : 0 ?>" class="btn btn-warning"><?= $t->_('Hint') ?></a>
-								</form>
-							<? endif ?>
-						<? endif ?>
+<? if (!($showHint || empty($question['hint']) || (isset($hideHints) && $hideHints)) && $question['question_type'] != QuestionTypes::Photo): ?>
+            <? if (!$orderHunt->isHintDisabled()) :?>
+              <? if (!$disableHint) :?>
+                <form method="POST" action="<?= $this->url->get('play') ?>" id="hint-form">
+                  <input type="hidden" name="qid" value="<?= $question['id'] ?>">
+                  <input type="hidden" name="action" value="hint">
+                  <a href="javascript:;" data-warn="<?= $question['cscore'] > 0 ? 1 : 0 ?>" class="btn btn-warning"><?= $t->_('Hint') ?></a>
+                </form>
+              <? endif ?>
+            <? endif ?>
 <? endif ?>
-						<? if (!$orderHunt->isSkippingButtonDisabled()) :?>
-							<? if (!$disableSkip) :?>
-								<form method="POST" action="<?= $this->url->get('play') ?>" id="skip-form">
-									<input type="hidden" name="qid" value="<?= $question['id'] ?>">
-									<input type="hidden" name="action" value="skip">
-									<a href="javascript:;" class="btn btn-danger"><?= $t->_($strategy ? 'Give Up?' : 'Skip') ?></a>
-								</form>
-							<? endif ?>
-						<? endif ?>
-						</div>
+            <? if (!$orderHunt->isSkippingButtonDisabled()) :?>
+              <? if (!$disableSkip) :?>
+                <form method="POST" action="<?= $this->url->get('play') ?>" id="skip-form">
+                  <input type="hidden" name="qid" value="<?= $question['id'] ?>">
+                  <input type="hidden" name="action" value="skip">
+                  <a href="javascript:;" class="btn btn-danger"><?= $t->_($strategy ? 'Give Up?' : 'Skip') ?></a>
+                </form>
+              <? endif ?>
+            <? endif ?>
+            </div>
 
 <? endif ?>
 
-					</div>
+          </div>
 <? elseif (isset($completion)): ?>
-					<div id="completion-wrapper">
-						<ul class="word">
+          <div id="completion-wrapper">
+            <ul class="word">
 <? foreach ($completion as $l => $letter): ?>
-							<?= is_null($letter) ? '<li class="letter">&nbsp;' : (empty(trim($letter)) ? '<li class="letter spacer">' : ('<li class="letter">' . htmlspecialchars($letter))) ?></li>
+              <?= is_null($letter) ? '<li class="letter">&nbsp;' : (empty(trim($letter)) ? '<li class="letter spacer">' : ('<li class="letter">' . htmlspecialchars($letter))) ?></li>
 <? endforeach ?>
-						</ul>
-					</div>
+            </ul>
+          </div>
 <? elseif ($question['question_type'] == QuestionTypes::Choose): ?>
-					<div id="radio-wrapper" class="question disabled">
+          <div id="radio-wrapper" class="question disabled">
 <? foreach (explode("\n", $question['answers']) as $i => $a): ?>
-						<input id="r<?= $i ?>" type="radio" name="answer" class="radio<?= $i ?>" value="<?= $i + 1 ?>" disabled />
-						<label for="r<?= $i ?>"><?= ltrim($a, ' *') ?></label>
+            <input id="r<?= $i ?>" type="radio" name="answer" class="radio<?= $i ?>" value="<?= $i + 1 ?>" disabled />
+            <label for="r<?= $i ?>"><?= ltrim($a, ' *') ?></label>
 <? endforeach ?>
-					</div>
+          </div>
+<? elseif ($question['question_type'] == QuestionTypes::OpenCheckbox): ?>
+          <div id="radio-wrapper" class="question checkboxes disabled">
+<? foreach (explode("\n", $question['answers']) as $i => $a): ?>
+            <input id="r<?= $i ?>" type="checkbox" name="answer" class="radio<?= $i ?>" value="<?= $i + 1 ?>" disabled />
+            <label for="r<?= $i ?>"><?= ltrim($a, ' *') ?></label>
+<? endforeach ?>
+          </div>
 <? endif ?>
-				</div>
+        </div>
 <? endif ?>
-			</div>
-		</div>
-		<div id="loading-indicator"></div>
+      </div>
+    </div>
+    <div id="loading-indicator"></div>
 <script type="text/javascript">window.isLeader=<?= $isLeader ? 'true' : 'false' ?>;
 <? if (isset($qtimeout)): ?>window.qtimeout=<?= json_encode($qtimeout, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>;<? endif ?>
 <? if (isset($answerLimit)): ?>window.answerLimit=<?= $answerLimit ?><? endif ?>

@@ -48,6 +48,7 @@ class QuestionTypes extends \Phalcon\Mvc\Model
 	const Timer = 4;
 	const Choose = 5;
 	const OpenText = 6;
+	const OpenCheckbox = 7;
 
 	/**
 	 * Initialize method for model.
@@ -92,7 +93,7 @@ class QuestionTypes extends \Phalcon\Mvc\Model
 			'message'   => 'Question type name already exists'
 		]));
 		$validator->add('type', new Phalcon\Validation\Validator\InclusionIn([
-			'domain' => [0, 1, 2, 3, 4, 5, 6],
+			'domain' => [0, 1, 2, 3, 4, 5, 6, 7],
 			'message' => 'Invalid type'
 		]));
 		$validator->add('score', new Phalcon\Validation\Validator\Regex([

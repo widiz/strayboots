@@ -5,229 +5,230 @@
 ?>
 
 <div class="row">
-	<nav>
-		<ul class="pager">
-			<li class="previous"><?= $this->tag->linkTo(['questions', 'Go Back']) ?></li>
-		</ul>
-	</nav>
+  <nav>
+    <ul class="pager">
+      <li class="previous"><?= $this->tag->linkTo(['questions', 'Go Back']) ?></li>
+    </ul>
+  </nav>
 </div>
 
 <div class="page-header">
-	<h1>Add a new question</h1>
+  <h1>Add a new question</h1>
 </div>
 
 <?= $this->getContent() ?>
 
 <?php
-	echo $this->tag->form([
-		'questions/create',
-		'autocomplete' => 'off',
-		'enctype' => 'multipart/form-data',
-		'class' => 'form-horizontal'
-	]);
+  echo $this->tag->form([
+    'questions/create',
+    'autocomplete' => 'off',
+    'enctype' => 'multipart/form-data',
+    'class' => 'form-horizontal'
+  ]);
 ?>
 
 <div class="form-group">
-	<label for="fieldPointId" class="col-sm-2 control-label">Point</label>
-	<div class="col-sm-10">
-		<?= $this->tag->select([
-			'point_id',
-			Points::find(),
-			'id'			=> 'fieldPointId',
-			'class'			=> 'form-control select2-auto',
-			'using'			=> ['id', 'name'],
-			'useEmpty'		=> true,
-			'emptyText'		=> '',
-			'emptyValue'	=> ''
-		]); ?>
-	</div>
+  <label for="fieldPointId" class="col-sm-2 control-label">Point</label>
+  <div class="col-sm-10">
+    <?= $this->tag->select([
+      'point_id',
+      Points::find(),
+      'id'      => 'fieldPointId',
+      'class'     => 'form-control select2-auto',
+      'using'     => ['id', 'name'],
+      'useEmpty'    => true,
+      'emptyText'   => '',
+      'emptyValue'  => ''
+    ]); ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldTypeId" class="col-sm-2 control-label">Type</label>
-	<div class="col-sm-10">
-		<?php
-		$qt = QuestionTypes::find();
-		echo $this->tag->select([
-			'type_id',
-			$qt,
-			'id'			=> 'fieldTypeId',
-			'class'			=> 'form-control select2-auto typeselector',
-			'using'			=> ['id', 'name'],
-			'useEmpty'		=> true,
-			'emptyText'		=> '',
-			'emptyValue'	=> ''
-		]);
-		$types = []; 
-		foreach ($qt as $q)
-			$types[$q->id] = (int)$q->type;
-		?>
-	</div>
+  <label for="fieldTypeId" class="col-sm-2 control-label">Type</label>
+  <div class="col-sm-10">
+    <?php
+    $qt = QuestionTypes::find();
+    echo $this->tag->select([
+      'type_id',
+      $qt,
+      'id'      => 'fieldTypeId',
+      'class'     => 'form-control select2-auto typeselector',
+      'using'     => ['id', 'name'],
+      'useEmpty'    => true,
+      'emptyText'   => '',
+      'emptyValue'  => ''
+    ]);
+    $types = []; 
+    foreach ($qt as $q)
+      $types[$q->id] = (int)$q->type;
+    ?>
+  </div>
 </div>
 <script type="text/javascript">window.qTypes=<?= json_encode($types, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 
 <div class="form-group">
-	<label for="fieldName" class="col-sm-2 control-label">Name <small>for Strategy Game</small></label>
-	<div class="col-sm-10">
-		<?= $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
-	</div>
+  <label for="fieldName" class="col-sm-2 control-label">Name <small>for Strategy Game</small></label>
+  <div class="col-sm-10">
+    <?= $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldQuestion" class="col-sm-2 control-label">Question</label>
-	<div class="col-sm-10">
-		<?= $this->tag->textArea(['question', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldQuestion']) ?>
-	</div>
+  <label for="fieldQuestion" class="col-sm-2 control-label">Question</label>
+  <div class="col-sm-10">
+    <?= $this->tag->textArea(['question', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldQuestion']) ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldHint" class="col-sm-2 control-label">Hint</label>
-	<div class="col-sm-10">
-		<?= $this->tag->textArea(['hint', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldHint']) ?>
-	</div>
+  <label for="fieldHint" class="col-sm-2 control-label">Hint</label>
+  <div class="col-sm-10">
+    <?= $this->tag->textArea(['hint', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldHint']) ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldResponseCorrect" class="col-sm-2 control-label">Fun fact</label>
-	<div class="col-sm-10">
-		<?= $this->tag->textArea(['funfact', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldFunfact']) ?>
-	</div>
+  <label for="fieldResponseCorrect" class="col-sm-2 control-label">Fun fact</label>
+  <div class="col-sm-10">
+    <?= $this->tag->textArea(['funfact', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldFunfact']) ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldResponseCorrect" class="col-sm-2 control-label">Correct Response</label>
-	<div class="col-sm-10">
-		<?= $this->tag->textArea(['response_correct', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldResponseCorrect']) ?>
-	</div>
+  <label for="fieldResponseCorrect" class="col-sm-2 control-label">Correct Response</label>
+  <div class="col-sm-10">
+    <?= $this->tag->textArea(['response_correct', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldResponseCorrect']) ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldScore" class="col-sm-2 control-label">Score</label>
-	<div class="col-sm-10">
-		<?= $this->tag->numericField(['score', 'type' => 'number', 'min' => 0, 'class' => 'form-control', 'id' => 'fieldScore']) ?>
-	</div>
+  <label for="fieldScore" class="col-sm-2 control-label">Score</label>
+  <div class="col-sm-10">
+    <?= $this->tag->numericField(['score', 'type' => 'number', 'min' => 0, 'class' => 'form-control', 'id' => 'fieldScore']) ?>
+  </div>
 </div>
 
 <div id="qwrapper">
-	<div class="form-group regular">
-		<label for="fieldAnswers" class="col-sm-2 control-label">Answers</label>
-		<div class="col-sm-10">
-			<?= $this->tag->textArea(['answers', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldAnswers']) ?>
-			<div class="xtimer" style="display:none">* Answer should be a timer (30:00 for example)</div>
-			<div class="xchoose" style="display:none">* Enter 2-5 options. one option per line. choose at least one correct answer with <b>*</b> in the beginning of the line.</div>
-		</div>
-	</div>
-	<div class="form-group col-sm-12 comp">
-		<label class="col-sm-2 control-label">Answer</label>
-		<div class="col-sm-10">
-			<input type="text" minlength="2" maxlength="100" id="completionWord">
-			<ul class="word"></ul>
-			<div>* Enter a phrase and click letters to hide them</div>
-		</div>
-	</div>
+  <div class="form-group regular">
+    <label for="fieldAnswers" class="col-sm-2 control-label">Answers</label>
+    <div class="col-sm-10">
+      <?= $this->tag->textArea(['answers', 'cols' => 30, 'rows' => 4, 'class' => 'form-control', 'id' => 'fieldAnswers']) ?>
+      <div class="xtimer" style="display:none">* Answer should be a timer (30:00 for example)</div>
+      <div class="xchoose" style="display:none">* Enter 2-5 options. one option per line. choose at least one correct answer with <b>*</b> in the beginning of the line.</div>
+      <div class="xcheckbox" style="display:none">* Enter 2-5 options. one option per line.</div>
+    </div>
+  </div>
+  <div class="form-group col-sm-12 comp">
+    <label class="col-sm-2 control-label">Answer</label>
+    <div class="col-sm-10">
+      <input type="text" minlength="2" maxlength="100" id="completionWord">
+      <ul class="word"></ul>
+      <div>* Enter a phrase and click letters to hide them</div>
+    </div>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldTimeout" class="col-sm-2 control-label">Timeout</label>
-	<div class="col-sm-10">
-		<div class="row">
-			<div class="col-md-3">
-				<div class="input-group" data-autoclose="true">
-					<?= $this->tag->textField(['timeout', 'size' => 30, 'class' => 'form-control datetimepicker', 'id' => 'fieldTimeout']) ?>
-					<span class="input-group-addon">
-						<span class="fa fa-clock-o"></span>
-					</span>
-				</div>
-				<div>* Empty or 00:00:00 = no timeout</div>
-			</div>
-		</div>
-	</div>
+  <label for="fieldTimeout" class="col-sm-2 control-label">Timeout</label>
+  <div class="col-sm-10">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="input-group" data-autoclose="true">
+          <?= $this->tag->textField(['timeout', 'size' => 30, 'class' => 'form-control datetimepicker', 'id' => 'fieldTimeout']) ?>
+          <span class="input-group-addon">
+            <span class="fa fa-clock-o"></span>
+          </span>
+        </div>
+        <div>* Empty or 00:00:00 = no timeout</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldAttachment" class="col-sm-2 control-label">Question attachment</label>
-	<div class="col-sm-10">
-		<?= $this->tag->hiddenField(['qattachment', 'id' => 'fieldQAttachment']) ?>
-		<label><input type="radio" name="at2" value=""> None</label><br>
-		<label><input type="radio" name="at2" value="photo"> Photo</label><br>
-		<div id="photo2" style="display:none;margin:10px 0">
-			<div class="img-preview" style="width:300px;height:250px;padding:0"><a href="#"><i class="fa fa-times"></i></a></div>
-			<input type="file" name="img2" accept="image/*">
-		</div>
-		<label><input type="radio" name="at2" value="vimeo"> Vimeo</label><br>
-		<div id="vimeo2" style="display:none;margin:10px 0">
-			<input type="text" name="vimeo2" value="" placeholder="Vimeo id">
-			<div class="video"></div>
-		</div>
-		<label><input type="radio" name="at2" value="youtube"> Youtube</label><br>
-		<div id="youtube2" style="display:none;margin:10px 0">
-			<input type="text" name="youtube2" value="" placeholder="Youtube id">
-			<div class="video">
-				<iframe width="480" height="360" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div>
-	</div>
+  <label for="fieldAttachment" class="col-sm-2 control-label">Question attachment</label>
+  <div class="col-sm-10">
+    <?= $this->tag->hiddenField(['qattachment', 'id' => 'fieldQAttachment']) ?>
+    <label><input type="radio" name="at2" value=""> None</label><br>
+    <label><input type="radio" name="at2" value="photo"> Photo</label><br>
+    <div id="photo2" style="display:none;margin:10px 0">
+      <div class="img-preview" style="width:300px;height:250px;padding:0"><a href="#"><i class="fa fa-times"></i></a></div>
+      <input type="file" name="img2" accept="image/*">
+    </div>
+    <label><input type="radio" name="at2" value="vimeo"> Vimeo</label><br>
+    <div id="vimeo2" style="display:none;margin:10px 0">
+      <input type="text" name="vimeo2" value="" placeholder="Vimeo id">
+      <div class="video"></div>
+    </div>
+    <label><input type="radio" name="at2" value="youtube"> Youtube</label><br>
+    <div id="youtube2" style="display:none;margin:10px 0">
+      <input type="text" name="youtube2" value="" placeholder="Youtube id">
+      <div class="video">
+        <iframe width="480" height="360" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldAttachment" class="col-sm-2 control-label">Fun fact attachment</label>
-	<div class="col-sm-10">
-		<?= $this->tag->hiddenField(['attachment', 'id' => 'fieldAttachment']) ?>
-		<label><input type="radio" name="at1" value=""> None</label><br>
-		<label><input type="radio" name="at1" value="photo"> Photo</label><br>
-		<div id="photo" style="display:none;margin:10px 0">
-			<div class="img-preview" style="width:300px;height:250px;padding:0"><a href="#"><i class="fa fa-times"></i></a></div>
-			<input type="file" name="img1" accept="image/*">
-		</div>
-		<label><input type="radio" name="at1" value="vimeo"> Vimeo</label><br>
-		<div id="vimeo" style="display:none;margin:10px 0">
-			<input type="text" name="vimeo" value="" placeholder="Vimeo id">
-			<div class="video"></div>
-		</div>
-		<label><input type="radio" name="at1" value="youtube"> Youtube</label><br>
-		<div id="youtube" style="display:none;margin:10px 0">
-			<input type="text" name="youtube" value="" placeholder="Youtube id">
-			<div class="video">
-				<iframe width="480" height="360" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div>
-	</div>
+  <label for="fieldAttachment" class="col-sm-2 control-label">Fun fact attachment</label>
+  <div class="col-sm-10">
+    <?= $this->tag->hiddenField(['attachment', 'id' => 'fieldAttachment']) ?>
+    <label><input type="radio" name="at1" value=""> None</label><br>
+    <label><input type="radio" name="at1" value="photo"> Photo</label><br>
+    <div id="photo" style="display:none;margin:10px 0">
+      <div class="img-preview" style="width:300px;height:250px;padding:0"><a href="#"><i class="fa fa-times"></i></a></div>
+      <input type="file" name="img1" accept="image/*">
+    </div>
+    <label><input type="radio" name="at1" value="vimeo"> Vimeo</label><br>
+    <div id="vimeo" style="display:none;margin:10px 0">
+      <input type="text" name="vimeo" value="" placeholder="Vimeo id">
+      <div class="video"></div>
+    </div>
+    <label><input type="radio" name="at1" value="youtube"> Youtube</label><br>
+    <div id="youtube" style="display:none;margin:10px 0">
+      <input type="text" name="youtube" value="" placeholder="Youtube id">
+      <div class="video">
+        <iframe width="480" height="360" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldB2CEnabled" class="col-sm-2 control-label">Disable skipping button</label>
-	<div class="col-sm-10 checkbox-inline">
-		<?= $this->tag->checkField(['disable_skip', 'value' => 1, 'id' => 'disableSkippingButton']) ?>
-	</div>
+  <label for="fieldB2CEnabled" class="col-sm-2 control-label">Disable skipping button</label>
+  <div class="col-sm-10 checkbox-inline">
+    <?= $this->tag->checkField(['disable_skip', 'value' => 1, 'id' => 'disableSkippingButton']) ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<label for="fieldB2CEnabled" class="col-sm-2 control-label">Disable hint</label>
-	<div class="col-sm-10 checkbox-inline">
-		<?= $this->tag->checkField(['disable_hint', 'value' => 1, 'id' => 'diasbleHint']) ?>
-	</div>
+  <label for="fieldB2CEnabled" class="col-sm-2 control-label">Disable hint</label>
+  <div class="col-sm-10 checkbox-inline">
+    <?= $this->tag->checkField(['disable_hint', 'value' => 1, 'id' => 'diasbleHint']) ?>
+  </div>
 </div>
 
 
 <div class="form-group">
-	<label for="fieldPointId" class="col-sm-2 control-label">Tags</label>
-	<div class="col-sm-10">
-		<?= $this->tag->hiddenField(['tags', 'id' => 'fieldTagsVal']) ?>
-		<?= $this->tag->selectStatic([
-			'',
-			Tags::find(),
-			'class'			=> 'form-control select2-auto',
-			'id'			=> 'fieldTags',
-			'using'			=> ['id', 'tag'],
-			'multiple'		=> true
-		]); ?>
-	</div>
+  <label for="fieldPointId" class="col-sm-2 control-label">Tags</label>
+  <div class="col-sm-10">
+    <?= $this->tag->hiddenField(['tags', 'id' => 'fieldTagsVal']) ?>
+    <?= $this->tag->selectStatic([
+      '',
+      Tags::find(),
+      'class'     => 'form-control select2-auto',
+      'id'      => 'fieldTags',
+      'using'     => ['id', 'tag'],
+      'multiple'    => true
+    ]); ?>
+  </div>
 </div>
 
 <div class="form-group">
-	<div class="col-sm-offset-2 col-sm-10">
-		<?= $this->tag->submitButton(['Save', 'class' => 'btn btn-default']) ?>
-	</div>
+  <div class="col-sm-offset-2 col-sm-10">
+    <?= $this->tag->submitButton(['Save', 'class' => 'btn btn-default']) ?>
+  </div>
 </div>
 
 <?= $this->tag->endForm() ?>
