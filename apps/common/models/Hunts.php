@@ -166,7 +166,7 @@ class Hunts extends \Phalcon\Mvc\Model
 			'message' => 'Approved is invalid'
 		]));
 		$validator->add('multilang', new InclusionIn([
-			'domain' => [0, 1, 2],
+			'domain' => [0, 1, 2, 3],
 			'message' => 'Language is invalid'
 		]));
 		$validator->add('flags', new Regex([
