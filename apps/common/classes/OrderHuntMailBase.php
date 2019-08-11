@@ -42,7 +42,7 @@ class OrderHuntMailBase
 			'bcc' => implode(',', $this->cc)
 		]);
 		// $mail2 = is_null($email) ? call_user_func($sendMail, 'ariel@safronov.co.il,karen@strayboots.com,ido@strayboots.com,support@strayboots.com', $this->title, $this->text, $this->html) : true;
-		$mail2 = is_null($email) ? call_user_func($sendMail, 'ariel@safronov.co.il,cs@strayboots.com', $this->title, $this->text, $this->html) : true;
+		$mail2 = is_null($email) ? call_user_func($sendMail, 'ido@strayboots.com,ariel@safronov.co.il,cs@strayboots.com', $this->title, $this->text, $this->html) : true;
 		return $mail1 && $mail2;
 	}
 
