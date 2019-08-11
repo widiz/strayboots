@@ -19,7 +19,7 @@ class DanielleposteventTask extends TaskBase
 		$sm = [$this, 'sendMail'];
 		foreach ($results as $orderHunt) {
 			echo 'Processing order hunt #' . $orderHunt->id;
-			$pe = new DanielleOrderHuntPostEvent($orderHunt, false);
+			// $pe = new DanielleOrderHuntPostEvent($orderHunt, false);
 			$pe2 = new DanielleOrderHuntPostEvent($orderHunt, true);
 			$pe2->setClientEmail('support@strayboots.com');
 			echo '.';
@@ -42,7 +42,8 @@ class DanielleposteventTask extends TaskBase
 			try {
 				if ($post->save()) {
 					echo '.';
-					$mail = $pe->send($sm) && $pe2->send($sm);
+					// $mail = $pe->send($sm) && $pe2->send($sm);
+					$mail = $pe2->send($sm);
 					echo '.';
 					if ($mail === true) {
 						echo 'done' . PHP_EOL;
