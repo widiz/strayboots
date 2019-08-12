@@ -244,7 +244,7 @@ class IndexController extends ControllerBase
 			}
 		}
 		$this->view->facebookSDK = true;
-
+		$this->view->orderId = $this->orderHunt->order_id;
 		if ($saudi) {
 			define('cacheFileId', 'saudi');
 			$this->view->pick('index/saudi');
