@@ -2,13 +2,24 @@
 			<div class="container">
 <? if (isset($startTimer)): ?>
 				<div class="question" style="text-align:center">
-					<?= $t->_('Welcome to your scavenger hunt adventure!') ?><br>
-					<?= $t->_('Your hunt will begin in:') ?>
+					<? if ($orderId == 2651) :?>
+						<?= $t->_('Welcome to your Fun Learning Experience!') ?><br>
+						<?= $t->_('Your game will begin in:') ?>
+					<? else :?>
+						<?= $t->_('Welcome to your scavenger hunt adventure!') ?><br>
+						<?= $t->_('Your hunt will begin in:') ?>
+					<? endif ?>
+					
+					
 					<div id="start-timer" data-seconds="<?= $startTimer ?>"></div>
 					<a href="<?= $this->url->get('play') ?>" class="btn btn-success"><?= $t->_('Try again') ?></a>
 <? if (!$facebookDisabled): ?>
 					<h2 style="font-size:20px;margin:35px 0"><?= $t->_('While you are waiting for your adventure, feel free to check some of our cool posts') ?></h2>
-					<a class="btn btn-primary" href="https://www.facebook.com/Strayboots/" target="_blank"><?= $t->_('Check it out!') ?></a>
+					<? if ($orderId == 2651) :?>
+						<a class="btn btn-primary" href="https://www.facebook.com/Asurion/" target="_blank"><?= $t->_('Check it out!') ?></a>
+					<? else :?>
+						<a class="btn btn-primary" href="https://www.facebook.com/Strayboots/" target="_blank"><?= $t->_('Check it out!') ?></a>
+					<? endif ?>
 <? endif ?>
 				</div>
 <? else: ?>
