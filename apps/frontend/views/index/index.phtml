@@ -9,7 +9,11 @@ if (SBENV === 'europe') {
 		<div class="content-wrapper section-wrapper activate-ticket">
 			<div class="container">
 				<h1><?= $t->_(defined('OVERRIDE_WELCOME_TITLE') ? OVERRIDE_WELCOME_TITLE : 'Welcome to Your Team Building Scavenger Hunt!') ?></h1>
-				<h2><?= $t->_(defined('OVERRIDE_LOGIN_EMAIL') ? 'Insert your email to get your FREE activation code' : 'Activate Your Hunt') ?></h2>
+				<?if ($orderId == 2651) :?>
+					<h2><?= $t->_('Activate Your Game') ?></h2>
+				<? else :?>
+					<h2><?= $t->_(defined('OVERRIDE_LOGIN_EMAIL') ? 'Insert your email to get your FREE activation code' : 'Activate Your Hunt') ?></h2>
+				<? endif ?>
 				<div class="col-sm-12">
 					<div id="activation-wrapper" class="clearfix">
 						<div id="activation-fb">
