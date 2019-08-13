@@ -58,9 +58,11 @@ EOF
 
 			if ($this->orderHunt->isB2CEnabled())
 				$this->view->pick('faq/b2c');
+			
+			if ($this->orderHunt->order_id == 2651)
+				$this->view->pick('faq/asurion');
 		}
 
-		$this->view->orderId = $this->orderHunt->order_id;
 		$this->assets->collection('style')->addCss('/css/app/faq.css');
 	}
 
