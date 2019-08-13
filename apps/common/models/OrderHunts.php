@@ -105,6 +105,12 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public $flags;
 
 	/**
+	 *
+	 * @var string
+	 */
+	public $survey_id;
+
+	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()
@@ -707,6 +713,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 1024);
 	}
 
+	public function isEmailsDisabled()
+	{
+		return (bool)($this->flags & 2048);
+	}
+
 	public function setCustomLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
@@ -760,6 +771,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public function setHintDisabled($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1024;
+	}
+
+	public function setEmailsDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 2048;
 	}
 
 	/**

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function(){
 	try {
 		color = $('.content-wrapper h1').css('color');
 	} catch(E) {}
-	widizSurvey("RtSsk8zmv2XC6rmB1BTl6r1XhYdfpC9M", function(){
+	widizSurvey("<?=$surveyId?>", function(){
 		setSurveyConfig("<?= $this->escaper->escapeHtmlAttr($surveyInfo[0]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[1]) ?>", "<?= $this->escaper->escapeHtmlAttr($surveyInfo[2]) ?>", <?= $surveyInfo[3] ?>, '/play/survey?completed=y');
 	}, { text_color: color });
 });

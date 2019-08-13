@@ -95,6 +95,7 @@ class OrderHuntsController extends \ControllerBase
 			return $this->response->redirect('orders');
 
 		$this->tag->setDefault('order_id', $order->id);
+		$this->tag->setDefault('survey_id', 'RtSsk8zmv2XC6rmB1BTl6r1XhYdfpC9M');
 
 		$this->view->order = $order;
 		$this->view->client = $order->Client;
@@ -119,7 +120,7 @@ class OrderHuntsController extends \ControllerBase
 
 			return;
 		}
-
+		
 		$this->view->id = $orderHunt->id;
 		$order = $orderHunt->Order;
 		$this->view->order = $order;
@@ -132,6 +133,7 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('hunt_id', $orderHunt->hunt_id);
 			$this->tag->setDefault('max_players', $orderHunt->max_players);
 			$this->tag->setDefault('max_teams', $orderHunt->max_teams);
+			$this->tag->setDefault('survey_id', $orderHunt->survey_id);
 			$this->tag->setDefault('start', date($this->view->timeFormat, strtotime($orderHunt->start)));
 			$this->tag->setDefault('finish', date($this->view->timeFormat, strtotime($orderHunt->finish)));
 			$this->tag->setDefault('expire', date($this->view->timeFormat, strtotime($orderHunt->expire)));
@@ -150,6 +152,7 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('b2c_enabled', $orderHunt->isB2CEnabled());
 			$this->tag->setDefault('disable_skip', $orderHunt->isSkippingButtonDisabled());
 			$this->tag->setDefault('disable_hint', $orderHunt->isHintDisabled());
+			$this->tag->setDefault('disable_emails', $orderHunt->isEmailsDisabled());
 		}
 		$this->addEdit();
 	}
@@ -184,6 +187,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->hunt_id = $this->request->getPost('hunt_id', 'int');
 		$orderHunt->max_players = $this->request->getPost('max_players', 'int');
 		$orderHunt->max_teams = $this->request->getPost('max_teams', 'int');
+		$orderHunt->survey_id = $this->request->getPost('survey_id', 'trim');
 
 		if ($orderHunt->start = strtotime($this->request->getPost('start', 'trim')))
 			$orderHunt->start = date('Y-m-d H:i:s', $orderHunt->start);
@@ -223,6 +227,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setB2CEnabled($this->request->getPost('b2c_enabled'));
 		$orderHunt->setSkippingButtonDisabled($this->request->getPost('disable_skip'));
 		$orderHunt->setHintDisabled($this->request->getPost('disable_hint'));
+		$orderHunt->setEmailsDisabled($this->request->getPost('disable_emails'));
 
 		$hunt = $orderHunt->Hunt;
 
@@ -329,6 +334,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->hunt_id = $this->request->getPost('hunt_id', 'int');
 		$orderHunt->max_players = $this->request->getPost('max_players', 'int');
 		$orderHunt->max_teams = $this->request->getPost('max_teams', 'int');
+		$orderHunt->survey_id = $this->request->getPost('survey_id', 'trim');
 
 		if ($orderHunt->start = strtotime($this->request->getPost('start', 'trim')))
 			$orderHunt->start = date('Y-m-d H:i:s', $orderHunt->start);
@@ -371,6 +377,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setCustomLogin($orderHunt->isB2CEnabled() ? true : $this->request->getPost('custom_login'));
 		$orderHunt->setSkippingButtonDisabled($this->request->getPost('disable_skip'));
 		$orderHunt->setHintDisabled($this->request->getPost('disable_hint'));
+		$orderHunt->setEmailsDisabled($this->request->getPost('disable_emails'));
 
 		$hunt = $orderHunt->Hunt;
 		$isOk = true;

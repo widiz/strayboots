@@ -482,9 +482,12 @@ EOF
             $loader = new \Phalcon\Loader();
             $loader->registerDirs([APP_PATH . '/apps/common/classes'])->register();
             $pe = new \BCOrderHuntPostEvent($thisOrderHunt);
-            foreach ($attachments as $a) {
-              if ($pe->send([$this, 'sendMail'], $this->player->email, $a) === true)
-                $redis->set(SB_PREFIX . 'ohmail:' . $thisOrderHunt->id . ':' . $thisTeam->id, 1, 86400 * 14);
+
+            if (!$thisOrderHunt->isEmailsDisabled()) {
+              foreach ($attachments as $a) {
+                if ($pe->send([$this, 'sendMail'], $this->player->email, $a) === true)
+                  $redis->set(SB_PREFIX . 'ohmail:' . $thisOrderHunt->id . ':' . $thisTeam->id, 1, 86400 * 14);
+              }
             }
           } catch(Exception $e) { }
         }
@@ -989,6 +992,8 @@ EOF
     if ($this->isSurveyAnswered())
       return $this->response->redirect('play');
 
+    $this->view->surveyId = $this->orderHunt->survey_id;
+    
     if ($this->request->getQuery('completed') === 'y') {
       if ($this->request->getQuery('skip') === 'y') {
         try {
