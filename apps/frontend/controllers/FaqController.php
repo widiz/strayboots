@@ -60,7 +60,7 @@ EOF
 				$this->view->pick('faq/b2c');
 		}
 
-
+		$this->view->orderId = $this->orderHunt->order_id;
 		$this->assets->collection('style')->addCss('/css/app/faq.css');
 	}
 
