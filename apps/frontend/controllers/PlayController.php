@@ -483,12 +483,12 @@ EOF
             $loader->registerDirs([APP_PATH . '/apps/common/classes'])->register();
             $pe = new \BCOrderHuntPostEvent($thisOrderHunt);
 
-            if (!$thisOrderHunt->isEmailsDisabled()) {
+            // if (!$thisOrderHunt->isEmailsDisabled()) {
               foreach ($attachments as $a) {
                 if ($pe->send([$this, 'sendMail'], $this->player->email, $a) === true)
                   $redis->set(SB_PREFIX . 'ohmail:' . $thisOrderHunt->id . ':' . $thisTeam->id, 1, 86400 * 14);
               }
-            }
+            // }
           } catch(Exception $e) { }
         }
 
