@@ -1,0 +1,26 @@
+    <div class="content-wrapper">
+      <h1><?= $t->_(defined('OVERRIDE_WELCOME_TITLE') ? OVERRIDE_WELCOME_TITLE : 'Welcome to Your Team Building Scavenger Hunt!') ?></h1>
+      <div class="container">
+        <h2><?= $t->_('Would you like to continue your current game, or start a new one?') ?></h2>
+        <div>
+          <div id="activation-wrapper" class="clearfix">
+            <div class="clearfix">
+              <?= $this->tag->form(['id' => 'activation-form1']) ?>
+                <? foreach ($request as $key => $value): ?>
+                      <?= $this->tag->hiddenField([$key, 'value' => $value]) ?>
+                <? endforeach ?>
+                <?= $this->tag->hiddenField(['existing', 'value' => 1]) ?>
+                <?= $this->tag->submitButton([$t->_('Continue'), 'class' => 'submit subxbtn pull-left']) ?>
+              <?= $this->tag->endForm() ?>
+              <?= $this->tag->form(['id' => 'activation-form2']) ?>
+                <? foreach ($request as $key => $value): ?>
+                      <?= $this->tag->hiddenField([$key, 'value' => $value]) ?>
+                <? endforeach ?>
+                <?= $this->tag->hiddenField(['existing', 'value' => 2]) ?>
+                <?= $this->tag->submitButton([$t->_('Start over'), 'class' => 'submit subxbtn pull-right']) ?>
+              <?= $this->tag->endForm() ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
