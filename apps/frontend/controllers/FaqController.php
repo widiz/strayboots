@@ -59,7 +59,7 @@ EOF
 			if ($this->orderHunt->isB2CEnabled())
 				$this->view->pick('faq/b2c');
 			
-			if ($this->orderHunt->order_id == 2651)
+			if ($this->orderHunt->order_id == 2651 || $this->orderHunt->order_id == 2674)
 				$this->view->pick('faq/asurion');
 		}
 
