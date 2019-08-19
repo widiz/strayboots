@@ -45,6 +45,8 @@ EOF
 		echo 'done' . PHP_EOL . PHP_EOL;
 		echo 'Starting Watchdog' . PHP_EOL;
 
+		$hourAgo = date('Y-m-d H:i:s', strtotime('-1 hour'));
+		$twentyMinAgo = date('Y-m-d H:i:s', strtotime('-20 minutes'));
 		echo 'Querying...';
 		$flagged = $this->db->fetchAll(<<<EOF
 SELECT z.* FROM (
