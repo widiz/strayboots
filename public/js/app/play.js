@@ -87,18 +87,18 @@ $(function(){
 	if ($preground.length) {
 		var $pBtn = $preground.find('a.btn.continue'),
 			iTime = 5;
+		$pBtn.append(' <span>' + iTime + '</span>');
+		setTimeout(function(){
 			$pBtn.removeClass('disabled').removeAttr('disabled').click(function(){
 				$('#ack-form').submit();
 				return false;
 			}).find('span').hide();
-		// $pBtn.append(' <span>' + iTime + '</span>')
-		// setTimeout(function(){
-		// }, iTime * 1e3);
-		// for (var ii = iTime; ii > 0; ii--) {
-		// 	setTimeout(function(x){
-		// 		$pBtn.find('span').text(x);
-		// 	}, 1e3 * (iTime - ii), ii);
-		// }
+		}, iTime * 1e3);
+		for (var ii = iTime; ii > 0; ii--) {
+			setTimeout(function(x){
+				$pBtn.find('span').text(x);
+			}, 1e3 * (iTime - ii), ii);
+		}
 	} else {
 		$('#playground,#postground').addClass('show');
 	}
