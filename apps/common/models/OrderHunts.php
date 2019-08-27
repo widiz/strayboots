@@ -111,6 +111,12 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public $survey_id;
 
 	/**
+	 *
+	 * @var string
+	 */
+	public $team_text;
+
+	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()
@@ -173,7 +179,8 @@ class OrderHunts extends \Phalcon\Mvc\Model
 			'start_msg',
 			'end_msg',
 			'video',
-			'timeout_msg'
+			'timeout_msg',
+			'team_text'
 		]);
 	}
 

@@ -68,6 +68,11 @@ class ActivateController extends ControllerBase
 			// $this->view->start_msg = 'Welcome to your scavenger hunt adventure. We hope you brought your wit and a sharp eye.<br>Best of luck!';
 		else
 			$this->view->start_msg =  nl2br(htmlspecialchars($this->orderHunt->start_msg));
+		
+		if (empty($this->orderHunt->team_text))
+			$this->view->team_text = "Name Your Team";
+		else
+			$this->view->team_text =  nl2br(htmlspecialchars($this->orderHunt->team_text));
 
 		$this->view->firebase = [
 			'config' => $this->config->firebase,

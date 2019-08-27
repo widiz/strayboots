@@ -139,6 +139,7 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('expire', date($this->view->timeFormat, strtotime($orderHunt->expire)));
 			$this->tag->setDefault('pdf_start', $orderHunt->pdf_start);
 			$this->tag->setDefault('pdf_finish', $orderHunt->pdf_finish);
+			$this->tag->setDefault('team_text', $orderHunt->team_text);
 			$this->tag->setDefault('redirect', $orderHunt->redirect);
 			$this->tag->setDefault('video', $orderHunt->video);
 			$this->tag->setDefault('custom_login', $orderHunt->isCustomLogin());
@@ -207,6 +208,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->pdf_start = $this->request->getPost('pdf_start', 'trim');
 		$orderHunt->pdf_finish = $this->request->getPost('pdf_finish', 'trim');
 		$orderHunt->redirect = $this->request->getPost('redirect', 'trim');
+		$orderHunt->team_text = $this->request->getPost('team_text', 'trim');
 		if (empty($orderHunt->expire))
 			$orderHunt->expire = null;
 		if (empty($orderHunt->pdf_start))
@@ -354,6 +356,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->pdf_start = $this->request->getPost('pdf_start', 'trim');
 		$orderHunt->pdf_finish = $this->request->getPost('pdf_finish', 'trim');
 		$orderHunt->redirect = $this->request->getPost('redirect', 'trim');
+		$orderHunt->team_text = $this->request->getPost('team_text', 'trim');
 		$orderHunt->video = strip_tags($this->request->getPost('video', 'trim'));
 		if (empty($orderHunt->expire))
 			$orderHunt->expire = null;
