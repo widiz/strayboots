@@ -31,11 +31,9 @@
 					'autocomplete' => "off",
 					'id' => "name-form"
 				]); ?>
-				<? if ($orderId == 2651 || $orderId == 2674) :?>
-					<h2><?= $t->_("What's Your Full Name?") ?></h2>
-				<? else :?>
-					<h2><?= $t->_($team_text) ?></h2>
-				<? endif ?>
+				
+				<h2><?= $t->_($team_text) ?></h2>
+				
 					<div>
 						<input type="text" id="fieldName" name="name" class="form-control" value="" placeholder="<?= $tname ?>" data-default="<?= $tname ?>" data-focusclear="1">
 					</div>
