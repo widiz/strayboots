@@ -21,7 +21,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-<? if (isset($timeToEnd)): ?>
+<? if (isset($timeToEnd) && !isset($end_msg)): ?>
 						<li id="end-timer" data-seconds="<?= $timeToEnd ?>" class="hidden-xs"><a class="endtimer-link"></a></li>
 <? endif ?>
 <? if (isset($teamStatus) && isset($user_info)): ?>
