@@ -993,7 +993,7 @@ EOF
       return $this->response->redirect('play');
 
     $this->view->surveyId = $this->orderHunt->survey_id;
-    
+    $this->view->end_msg = true;
     if ($this->request->getQuery('completed') === 'y') {
       if ($this->request->getQuery('skip') === 'y') {
         try {
