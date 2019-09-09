@@ -75,6 +75,7 @@ class OrdersController extends \ControllerBase
 			$this->tag->setDefault('background_color', isset($customize['background_color']) ? $customize['background_color'] : '');
 			$this->tag->setDefault('main_color', isset($customize['main_color']) ? $customize['main_color'] : '');
 			$this->tag->setDefault('second_color', isset($customize['second_color']) ? $customize['second_color'] : '');
+			$this->tag->setDefault('submit_color', isset($customize['submit_color']) ? $customize['submit_color'] : '');
 			$this->tag->setDefault('custom_css', isset($customize['custom_css']) ? $customize['custom_css'] : '');
 		}
 		$this->assets->collection('script')
@@ -122,6 +123,7 @@ class OrdersController extends \ControllerBase
 		$backgroundColor = $this->request->getPost('background_color', 'trim');
 		$mainColor = $this->request->getPost('main_color', 'trim');
 		$secondColor = $this->request->getPost('second_color', 'trim');
+		$submitColor = $this->request->getPost('submit_color', 'trim');
 		$removedImages = $this->request->getPost('removed_images', 'trim');
 		$customCSS = $this->request->getPost('custom_css');
 
@@ -141,6 +143,10 @@ class OrdersController extends \ControllerBase
 		if (!(empty($secondColor) || preg_match('/^#[0-9a-f]{6}$/i', $secondColor))) {
 			$valid = false;
 			$this->flash->error('Second color is invalid');
+		}
+		if (!(empty($submitColor) || preg_match('/^#[0-9a-f]{6}$/i', $submitColor))) {
+			$valid = false;
+			$this->flash->error('Submit button color is invalid');
 		}
 
 		if (!empty($customCSS)) {
@@ -236,6 +242,10 @@ class OrdersController extends \ControllerBase
 			$customize['second_color'] = $secondColor;
 		else if (isset($customize['second_color']))
 			unset($customize['second_color']);
+		if (!empty($submitColor))
+			$customize['submit_color'] = $submitColor;
+		else if (isset($customize['submit_color']))
+			unset($customize['submit_color']);
 		if (!empty($customCSS))
 			$customize['custom_css'] = $customCSS;
 		else if (isset($customize['custom_css']))

@@ -134,6 +134,9 @@ class Orders extends \Phalcon\Mvc\Model
 		}
 		if (isset($customize['second_color']))//,#bq-timer h2,#bq-timer .sec
 			$huntCss .= '#playground h2,#header-score>div>span,b.second_color,#playground .hint-title,#playground .hint{color:' . $customize['second_color'] . '}';
+		if (isset($customize['submit_color'])) {
+			$huntCss .= '#main-form > input.submit.subxbtn{background-color:' . $customize['submit_color'] . '}';
+		}
 		if (file_exists($uploadBase . 'header.png') && !isset($removedImages['header']))
 			$huntCss .= '.navbar-default{background-image:url(' . $paths->uri . 'order.' . $this->id . '.header.png)}';
 		if (isset($customize['custom_css']))

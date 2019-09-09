@@ -492,11 +492,11 @@ EOF
     $removedImages = [];
     if ($this->request->isPost()) {
       $customize = [];
-
       $headerColor = $this->request->getPost('header_color', 'trim');
       $backgroundColor = $this->request->getPost('background_color', 'trim');
       $mainColor = $this->request->getPost('main_color', 'trim');
       $secondColor = $this->request->getPost('second_color', 'trim');
+      $submitColor = $this->request->getPost('submit_color', 'trim');
       $removedImages = array_flip(explode(',', $this->request->getPost('removed_images', 'trim')));
       $customCSS = $this->request->getPost('custom_css');
 
@@ -508,6 +508,8 @@ EOF
         $customize['main_color'] = $mainColor;
       if (preg_match('/^#[0-9a-f]{6}$/i', $secondColor))
         $customize['second_color'] = $secondColor;
+      if (preg_match('/^#[0-9a-f]{6}$/i', $submitColor))
+        $customize['submit_color'] = $submitColor;
 
       if (!empty($customCSS)) {
         $config = \HTMLPurifier_Config::createDefault();

@@ -89,6 +89,10 @@ $jscolor = 'jscolor {refine:false, hash:true}';
 					<?= $this->tag->textField(['second_color', 'size' => 30, 'class' => 'form-control ' . $jscolor, 'id' => 'fieldSecondColor']) ?>
 					<p>(hints, progress, score)</p>
 				</div>
+				<div class="col-sm-4">
+					<h4>Submit button color</h4>
+					<?= $this->tag->textField(['submit_color', 'size' => 30, 'class' => 'form-control ' . $jscolor, 'id' => 'fieldSubmitColor']) ?>
+				</div>
 			</div>
 			<p>Colors should oppose the background colors</p>
 			<div class="form-group">
