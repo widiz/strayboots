@@ -631,6 +631,7 @@ class OrderHuntsController extends \ControllerBase
 		$this->view->logs = $logs;
 		$this->view->orderHunt = $orderHunt;
 		$this->view->teamNames = $teamNames;
+		$this->view->teams = $orderHunt->teams;
 
 		$map = [];
 		foreach ($teamsStatus as $team) {
@@ -710,7 +711,9 @@ class OrderHuntsController extends \ControllerBase
 				$this->view->wrongAnswers = $this->db->fetchAll('SELECT wa.question_id, q.question, wa.answer, wa.player_id, wa.hint, wa.created, p.email, p.team_id FROM wrong_answers wa LEFT JOIN questions q ON (q.id = wa.question_id) LEFT JOIN players p ON (p.id = wa.player_id) WHERE order_hunt_id' . ($multihunt ? ' IN (' . $ohids . ')' : ('=' . $ohids)), Db::FETCH_ASSOC);
 
 				if (empty($data = $this->redis->get(SB_PREFIX . 'survey:' . $orderHunt->id . ':api'))) {
-					$data = file_get_contents('https://app.widiz.com/plugins/survey/api/surveys/api/10?v=c7431d7a622bda87db21093c9745cdcc18da0b69&filterKey=Hunt%20ID&filterVal=' . $orderHunt->id);
+					$secretStr = sha1('.Widiz$SurVey^P+_' . $orderHunt->survey_id . '$WD');
+					$data = file_get_contents('https://app.widiz.com/plugins/survey/api/surveys/api/' . rawurlencode($orderHunt->survey_id) . '?v=' . $secretStr . '&filterKey=Hunt%20ID&filterVal=' . $orderHunt->id);
+					// $data = file_get_contents('https://app.widiz.com/plugins/survey/api/surveys/api/10?v=c7431d7a622bda87db21093c9745cdcc18da0b69&filterKey=Hunt%20ID&filterVal=' . $orderHunt->id);
 					$this->redis->set(SB_PREFIX . 'survey:' . $orderHunt->id . ':api', $data, 600);
 				}
 				if (!is_array($data = json_decode($data, true)) || $data['success'] !== true)
