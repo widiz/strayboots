@@ -631,7 +631,6 @@ class OrderHuntsController extends \ControllerBase
 		$this->view->logs = $logs;
 		$this->view->orderHunt = $orderHunt;
 		$this->view->teamNames = $teamNames;
-		$this->view->teams = $orderHunt->teams;
 
 		$map = [];
 		foreach ($teamsStatus as $team) {
