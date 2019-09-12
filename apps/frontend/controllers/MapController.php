@@ -48,8 +48,40 @@ EOF
 		$findQ = false;
 
 		$strategyMap = [];
+
+		// foreach ($questions as $i => $q) {
+		// 	if (is_null($q['answer_action'])) {
+		// 		if ($findQ) {
+		// 			$findQ = false;
+		// 			$q['currentPos'] = $i + 1;
+		// 			$q['numQuestions'] = count($questions);
+		// 			$this->view->question = $q;
+		// 		}
+		// 		if ($doBreak)
+		// 			break;
+		// 	}
+		// 	if ($q['point_id'] > 0) {
+		// 		$points[] = $q['point_id'];
+		// 		if ($strategy) {
+		// 			if (is_null($q['answer_action']))
+		// 				$strategyMap[$q['point_id']] = 'w';
+		// 			else if ($q['answer_action'] != \Answers::Skipped)
+		// 				$strategyMap[$q['point_id']] = 'g';
+		// 		}
+		// 	}
+		// }
+		
 		foreach ($questions as $i => $q) {
 			if (is_null($q['answer_action'])) {
+				if ($q['point_id'] > 0) {
+					$points[] = $q['point_id'];
+					if ($strategy) {
+						if (is_null($q['answer_action']))
+							$strategyMap[$q['point_id']] = 'w';
+						else if ($q['answer_action'] != \Answers::Skipped)
+							$strategyMap[$q['point_id']] = 'g';
+					}
+				}
 				if ($findQ) {
 					$findQ = false;
 					$q['currentPos'] = $i + 1;
@@ -59,17 +91,22 @@ EOF
 				if ($doBreak)
 					break;
 			}
-			if ($q['point_id'] > 0) {
-				$points[] = $q['point_id'];
-				if ($strategy) {
-					if (is_null($q['answer_action']))
-						$strategyMap[$q['point_id']] = 'w';
-					else if ($q['answer_action'] != \Answers::Skipped)
-						$strategyMap[$q['point_id']] = 'g';
+			else {
+				if ($q['point_id'] > 0) {
+					$points[] = $q['point_id'];
+					if ($strategy) {
+						if (is_null($q['answer_action']))
+							$strategyMap[$q['point_id']] = 'w';
+						else if ($q['answer_action'] != \Answers::Skipped)
+							$strategyMap[$q['point_id']] = 'g';
+					}
 				}
 			}
 		}
-
+		if (count($points) > 1) {
+			$points = [end($points)];
+		}
+		
 		if (empty($questions)) {
 			$map = [];
 		} else {
