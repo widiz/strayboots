@@ -154,7 +154,8 @@ $hasEvents = !empty($customEvents);
 			<thead>
 				<tr>
 					<th>Team</th>
-					<th>Name</th>
+					<th>Team Name</th>
+					<th>Leader Name</th>
 					<th>Email</th>
 					<th>Leader Code</th>
 					<th>Activation Time</th>
@@ -162,27 +163,24 @@ $hasEvents = !empty($customEvents);
 			</thead>
 			<tbody>
 				<? foreach ($leaderboard as $t) :?>
-					<? if ($t['name'] != null) :?>
+					<?php
+						$email = '';
+						$leaderName = '';
+						if ($t['leader'] != null) {
+							$l = $this->db->fetchOne('SELECT first_name, last_name, email FROM players WHERE id= ' . (int)$t['leader']);
+							$leaderName = $l['first_name'] . ' ' . $l['last_name'];
+							$email = $l['email'];
+						}
+					?>
 						<tr<?= isset($teamNames[$t['id']]) ? " style=\"background-color:{$teamNames[$t['id']][1]}\"" : '' ?>>
+							<td><?= 'Team ' . $t['num']?></td>
 							<td><?=$t['name']?></td>
-							<td>
-								<?php 
-									if ($t['leader'] != null) {
-										echo $this->db->fetchColumn('SELECT first_name FROM players WHERE id= ' . (int)$t['leader']) . ' ' . $this->db->fetchColumn('SELECT last_name FROM players WHERE id= ' . (int)$t['leader']);
-									}
-								?>
-							</td>
-							<td>
-								<?php 
-									if ($t['leader'] != null) {
-										echo $this->db->fetchColumn('SELECT email FROM players WHERE id= ' . (int)$t['leader']);
-									}
-								?>
-							</td>
+							<td><?=$leaderName?></td>
+							<td><?=$email?></td>
 							<td><?=$t['activation_leader']?></td>
 							<td><?= $t['activation'] ? date($timeFormat, strtotime($t['activation'])) : '' ?></td>
 						</tr>
-					<? endif?>
+					
 				<? endforeach ?>
 			</tbody>
 		</table>
