@@ -64,7 +64,7 @@ class PreeventTask extends TaskBase
 							$this->logger->critical('Firebase error: failed to set bonus intervals ' . $fbr);
 						} catch(Exception $e) { }
 					} else{
-						$this->redis->set(SB_PREFIX . 'bonusq:set:' . $ohId, 1, max(8e4, $orderHuntsData[$ohId][1] - $time));
+						$this->redis->set(SB_PREFIX . 'bonusq:set:' . $ohId, 'tes', (int)max(8e4, $orderHuntsData[$ohId][1] - $time));
 						if ($verbose)
 							echo 'done' . PHP_EOL;
 						continue;

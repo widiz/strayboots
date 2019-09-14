@@ -648,7 +648,7 @@ EOF
             $a->team_id = $thisTeam->id;
 
             if ($action === 'hint') {
-              $redis->set(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id'], 1, max(259200, $cacheTime));
+              $redis->set(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id'], 1, (int)max(259200, $cacheTime));
               return $this->response->redirect('play');
             } else if ($action === 'skip') {
               $a->action = Answers::Skipped;
