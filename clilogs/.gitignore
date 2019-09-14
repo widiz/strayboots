@@ -2,5 +2,4 @@
 *.txt
 *.tar.gz
 *.tgz
-backup/*
 !.gitignore

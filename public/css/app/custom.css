@@ -550,6 +550,10 @@ footer .col-sm-6 {
 	}
 }
 @media (max-width: 769px) {
+	.existing-block .pull-right,
+	.existing-block .pull-left {
+		float: none !important;
+	}
 	.logo img.customlogo {
 		max-height: 36px;
 	}

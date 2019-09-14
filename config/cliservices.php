@@ -45,9 +45,12 @@ $di->set('security', function(){
 
 $di->setShared('redis', function() use ($config){
 	$redis = new \Redis;
-	$redis->pconnect('/var/tmp/redis.sock');
-	if (!$redis->IsConnected())
+	//$redis->pconnect('/var/tmp/redis.sock');
+	$redis->pconnect('127.0.0.1', 6379, 10);
+	if (!$redis->IsConnected()) {
+		usleep(10000);
 		$redis->pconnect('127.0.0.1', 6379, 10);
+	}
 	$redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_PHP);
 	return $redis;
 });

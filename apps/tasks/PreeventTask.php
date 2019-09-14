@@ -39,15 +39,15 @@ class PreeventTask extends TaskBase
 						echo 'cached' . PHP_EOL;
 					continue;
 				}
-				$huntTime = floor(($orderHuntsData[$ohId][1] - $orderHuntsData[$ohId][0]) / 2);
+				$huntTime = min(3600 /* max 1 hour */, $orderHuntsData[$ohId][1] - 1200 /*20min offset*/ - $orderHuntsData[$ohId][0]);
 				if (!($huntTime > 0)) {
 					try {
 						$this->logger->critical('Preevent error: failed to calculate intervals for ' . $ohId);
 					} catch(Exception $e) { }
 					continue;
 				}
-				$interval = ceil($huntTime / (count($bq) + 1)) + 1;
-				if (!($interval > 0)) {
+				$interval = ceil($huntTime / (count($bq) + 1));
+				if (!($interval > 1)) {
 					try {
 						$this->logger->critical('Preevent error2: failed to calculate intervals for ' . $ohId);
 					} catch(Exception $e) { }

@@ -121,7 +121,7 @@ class PosteventTask extends TaskBase
 				}
 			} catch (\Exception $e) {
 				echo 'exception' . PHP_EOL;
-				var_dump($e->getMessage());
+				var_dump($e->getMessage() . $e->getTraceAsString());
 			}
 		}
 	}
@@ -179,7 +179,7 @@ class PosteventTask extends TaskBase
 				}
 			} catch (\Exception $e) {
 				echo 'exception' . PHP_EOL;
-				var_dump($e->getMessage());
+				var_dump($e->getMessage() . $e->getTraceAsString());
 			}
 		}
 	}
