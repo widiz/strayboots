@@ -307,7 +307,7 @@ $(function(){
       var bNum = Math.floor(timePassed / intervals[1]) - 1;
       timePassed = timePassed % intervals[1];
       timeLeft = bonusQTime + bonusQAlertTimer - timePassed;
-      console.log(bNum, timePassed, timeLeft);
+      //console.log(bNum, timePassed, timeLeft);
       if (timeLeft > 0 && bNum >= 0) {
         //debugger;
         var hideTimeout = setTimeout(hideBonusQ, timeLeft * 1e3, bNum), bqFire, bqInterval;
@@ -348,7 +348,7 @@ $(function(){
         //return;
       } else {
         timeLeft = intervals[1] - timePassed;
-        console.log('left' + timeLeft);
+        //console.log('left' + timeLeft);
         if (timeLeft > 60 && timeLeft < 300) {
           var cname = 'bqwarn' + window.appLoc.orderHunt + '_' + (bNum + 1);
           if (!getCookie(cname)) {
