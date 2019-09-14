@@ -297,17 +297,17 @@ $(function(){
     var checkBonusQ = function(){
       if (state != 0)
         return;
-      var timeLeft = (Math.min(3600 /* max 1 hour */, window.appLoc.timeLeft) + 1200 /*20min offset*/) - intervals[0] - Math.ceil(((new Date()).getTime() - _loadTime) / 1e3);
+      var timeLeft = Math.min(intervals[0] /* max 1 hour */, window.appLoc.timeLeft) - Math.ceil(((new Date()).getTime() - _loadTime) / 1e3);
       if (!(timeLeft > 0))
         return;
-      var timePassed = intervals[0] - timeLeft;
+      var timePassed = intervals[0] - timeLeft - 1200 /*20min offset*/;
       if (!(timePassed > 0))
         return;
       //if (!(timePassed > intervals[1])) return;
       var bNum = Math.floor(timePassed / intervals[1]) - 1;
       timePassed = timePassed % intervals[1];
       timeLeft = bonusQTime + bonusQAlertTimer - timePassed;
-      //console.log(bNum, timePassed, timeLeft);
+      console.log(bNum, timePassed, timeLeft);
       if (timeLeft > 0 && bNum >= 0) {
         //debugger;
         var hideTimeout = setTimeout(hideBonusQ, timeLeft * 1e3, bNum), bqFire, bqInterval;
@@ -348,7 +348,7 @@ $(function(){
         //return;
       } else {
         timeLeft = intervals[1] - timePassed;
-        //console.log('left' + timeLeft);
+        console.log('left' + timeLeft);
         if (timeLeft > 60 && timeLeft < 300) {
           var cname = 'bqwarn' + window.appLoc.orderHunt + '_' + (bNum + 1);
           if (!getCookie(cname)) {
