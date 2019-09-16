@@ -54,6 +54,7 @@ abstract class ClassDiscovery
                 $candidates = call_user_func($strategy.'::getCandidates', $type);
             } catch (StrategyUnavailableException $e) {
                 $exceptions[] = $e;
+
                 continue;
             }
 
@@ -150,7 +151,7 @@ abstract class ClassDiscovery
     }
 
     /**
-     * Evaulates conditions to boolean.
+     * Evaluates conditions to boolean.
      *
      * @param mixed $condition
      *
@@ -199,7 +200,7 @@ abstract class ClassDiscovery
                 return $class();
             }
         } catch (\Exception $e) {
-            throw new ClassInstantiationFailedException('Unexcepced exception when instantiating class.', 0, $e);
+            throw new ClassInstantiationFailedException('Unexpected exception when instantiating class.', 0, $e);
         }
 
         throw new ClassInstantiationFailedException('Could not instantiate class because parameter is neither a callable nor a string');

@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -14,7 +14,7 @@ use Mailgun\Tests\Mock\Mailgun;
 class OptInHandlerTest extends \Mailgun\Tests\MailgunTestCase
 {
     private $client;
-    private $sampleDomain = 'samples.mailgun.org';
+
     private $optInHandler;
 
     public function setUp()

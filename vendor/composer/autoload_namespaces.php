@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'xrstf\\Composer52' => array($vendorDir . '/xrstf/composer-php52/lib'),
     'Whoops' => array($vendorDir . '/filp/whoops/src'),
     'Svg\\' => array($vendorDir . '/phenx/php-svg-lib/src'),
     'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -18,8 +18,8 @@ class InlineFileTest extends \PHPUnit_Framework_TestCase
     {
         $fileValidator = function ($files) {
             $fileNames = [
-                ['name' => 'inline[0]', 'filename' => 'foo.png'],
-                ['name' => 'inline[1]', 'filename' => 'bar.png'],
+                ['name' => 'inline', 'filename' => 'foo.png'],
+                ['name' => 'inline', 'filename' => 'bar.png'],
             ];
 
             // Make sure that both files exists
@@ -27,6 +27,7 @@ class InlineFileTest extends \PHPUnit_Framework_TestCase
                 foreach ($files as $file) {
                     if ($file['name'] === $fileName['name'] && $file['filename'] === $fileName['filename']) {
                         unset($fileNames[$idx]);
+
                         break;
                     }
                 }
@@ -36,7 +37,7 @@ class InlineFileTest extends \PHPUnit_Framework_TestCase
         };
 
         // Create the mocked mailgun client. We use $this->assertEquals on $method, $uri and $body parameters.
-        $mailgun = MockedMailgun::create($this, 'POST', 'domain/messages', [], $fileValidator);
+        $mailgun = MockedMailgun::createMock($this, 'POST', 'domain/messages', [], $fileValidator);
 
         $builder = $mailgun->MessageBuilder();
         $builder->setFromAddress('bob@example.com');

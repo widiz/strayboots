@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -14,6 +14,7 @@ use Mailgun\Tests\Mock\Mailgun;
 class BatchMessageTest extends \Mailgun\Tests\MailgunTestCase
 {
     private $client;
+
     private $sampleDomain = 'samples.mailgun.org';
 
     public function setUp()
@@ -32,7 +33,7 @@ class BatchMessageTest extends \Mailgun\Tests\MailgunTestCase
         $message = $this->client->BatchMessage($this->sampleDomain);
         $message->addToRecipient('test@samples.mailgun.org', ['first' => 'Test', 'last' => 'User']);
         $messageObj = $message->getMessage();
-        $this->assertEquals(['to' => ["'Test User' <test@samples.mailgun.org>"]], $messageObj);
+        $this->assertEquals(['to' => ['"Test User" <test@samples.mailgun.org>']], $messageObj);
 
         $reflectionClass = new \ReflectionClass(get_class($message));
         $property = $reflectionClass->getProperty('counters');
@@ -60,7 +61,7 @@ class BatchMessageTest extends \Mailgun\Tests\MailgunTestCase
         $message = $this->client->BatchMessage($this->sampleDomain);
         $message->addToRecipient('test@samples.mailgun.org', ['first' => 'Test', 'last' => 'User']);
         $messageObj = $message->getMessage();
-        $this->assertEquals(['to' => ["'Test User' <test@samples.mailgun.org>"]], $messageObj);
+        $this->assertEquals(['to' => ['"Test User" <test@samples.mailgun.org>']], $messageObj);
 
         $reflectionClass = new \ReflectionClass(get_class($message));
         $property = $reflectionClass->getProperty('batchRecipientAttributes');
@@ -75,7 +76,7 @@ class BatchMessageTest extends \Mailgun\Tests\MailgunTestCase
         $message = $this->client->BatchMessage($this->sampleDomain);
         $message->addCcRecipient('test@samples.mailgun.org', ['first' => 'Test', 'last' => 'User']);
         $messageObj = $message->getMessage();
-        $this->assertEquals(['cc' => ["'Test User' <test@samples.mailgun.org>"]], $messageObj);
+        $this->assertEquals(['cc' => ['"Test User" <test@samples.mailgun.org>']], $messageObj);
 
         $reflectionClass = new \ReflectionClass(get_class($message));
         $property = $reflectionClass->getProperty('batchRecipientAttributes');
@@ -90,7 +91,7 @@ class BatchMessageTest extends \Mailgun\Tests\MailgunTestCase
         $message = $this->client->BatchMessage($this->sampleDomain);
         $message->addBccRecipient('test@samples.mailgun.org', ['first' => 'Test', 'last' => 'User']);
         $messageObj = $message->getMessage();
-        $this->assertEquals(['bcc' => ["'Test User' <test@samples.mailgun.org>"]], $messageObj);
+        $this->assertEquals(['bcc' => ['"Test User" <test@samples.mailgun.org>']], $messageObj);
 
         $reflectionClass = new \ReflectionClass(get_class($message));
         $property = $reflectionClass->getProperty('batchRecipientAttributes');

@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -23,6 +23,8 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * This class is a wrapper for the HTTP client.
+ *
+ * @deprecated Will be removed in 3.0
  */
 class RestClient
 {
@@ -96,7 +98,7 @@ class RestClient
                 $builder->addResource($file['name'], $file['contents'], $file);
             }
             $body = $builder->build();
-            $headers['Content-Type'] = 'multipart/form-data; boundary='.$builder->getBoundary();
+            $headers['Content-Type'] = 'multipart/form-data; boundary="'.$builder->getBoundary().'"';
         } elseif (is_array($body)) {
             $body = http_build_query($body);
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -104,6 +106,26 @@ class RestClient
 
         $request = MessageFactoryDiscovery::find()->createRequest($method, $this->getApiUrl($uri), $headers, $body);
         $response = $this->getHttpClient()->sendRequest($request);
+
+        return $this->responseHandler($response);
+    }
+
+    /**
+     * @param string $url
+     *
+     * @throws GenericHTTPError
+     * @throws InvalidCredentials
+     * @throws MissingEndpoint
+     * @throws MissingRequiredParameters
+     *
+     * @return \stdClass
+     */
+    public function getAttachment($url)
+    {
+        $headers['User-Agent'] = Api::SDK_USER_AGENT.'/'.Api::SDK_VERSION;
+        $headers['Authorization'] = 'Basic '.base64_encode(sprintf('%s:%s', Api::API_USER, $this->apiKey));
+        $request = MessageFactoryDiscovery::find()->createRequest('get', $url, $headers);
+        $response = HttpClientDiscovery::find()->sendRequest($request);
 
         return $this->responseHandler($response);
     }
@@ -128,10 +150,8 @@ class RestClient
         foreach ($fields as $fieldName) {
             if (isset($files[$fieldName])) {
                 if (is_array($files[$fieldName])) {
-                    $fileIndex = 0;
                     foreach ($files[$fieldName] as $file) {
-                        $postFiles[] = $this->prepareFile($fieldName, $file, $fileIndex);
-                        ++$fileIndex;
+                        $postFiles[] = $this->prepareFile($fieldName, $file);
                     }
                 } else {
                     $postFiles[] = $this->prepareFile($fieldName, $files[$fieldName]);
@@ -142,10 +162,9 @@ class RestClient
         $postDataMultipart = [];
         foreach ($postData as $key => $value) {
             if (is_array($value)) {
-                $index = 0;
                 foreach ($value as $subValue) {
                     $postDataMultipart[] = [
-                        'name' => sprintf('%s[%d]', $key, $index++),
+                        'name' => $key,
                         'contents' => $subValue,
                     ];
                 }
@@ -227,7 +246,7 @@ class RestClient
             $jsonResponseData = json_decode($data, false);
             $result = new \stdClass();
             // return response data as json if possible, raw if not
-            $result->http_response_body = $data && $jsonResponseData === null ? $data : $jsonResponseData;
+            $result->http_response_body = $data && null === $jsonResponseData ? $data : $jsonResponseData;
             $result->http_response_code = $httpResponseCode;
 
             return $result;
@@ -251,7 +270,7 @@ class RestClient
     {
         $body = (string) $responseObj->getBody();
         $response = json_decode($body);
-        if (json_last_error() == JSON_ERROR_NONE && isset($response->message)) {
+        if (JSON_ERROR_NONE == json_last_error() && isset($response->message)) {
             return ' '.$response->message;
         }
 
@@ -263,11 +282,10 @@ class RestClient
      *
      * @param string       $fieldName
      * @param string|array $filePath
-     * @param int          $fileIndex
      *
      * @return array
      */
-    protected function prepareFile($fieldName, $filePath, $fileIndex = 0)
+    protected function prepareFile($fieldName, $filePath)
     {
         $filename = null;
 
@@ -285,15 +303,12 @@ class RestClient
             }
 
             // Remove leading @ symbol
-            if (strpos($filePath, '@') === 0) {
+            if (0 === strpos($filePath, '@')) {
                 $filePath = substr($filePath, 1);
             }
 
             $resource = fopen($filePath, 'r');
         }
-
-        // Add index for multiple file support
-        $fieldName .= '['.$fileIndex.']';
 
         return [
             'name' => $fieldName,
@@ -307,7 +322,7 @@ class RestClient
      */
     protected function getHttpClient()
     {
-        if ($this->httpClient === null) {
+        if (null === $this->httpClient) {
             $this->httpClient = HttpClientDiscovery::find();
         }
 

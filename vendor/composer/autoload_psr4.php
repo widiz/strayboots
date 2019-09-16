@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
+    'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
@@ -16,7 +17,7 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Http\\Promise\\' => array($vendorDir . '/php-http/promise/src'),
     'Http\\Message\\MultipartStream\\' => array($vendorDir . '/php-http/multipart-stream-builder/src'),
-    'Http\\Message\\' => array($vendorDir . '/php-http/message-factory/src', $vendorDir . '/php-http/message/src'),
+    'Http\\Message\\' => array($vendorDir . '/php-http/message/src', $vendorDir . '/php-http/message-factory/src'),
     'Http\\Discovery\\' => array($vendorDir . '/php-http/discovery/src'),
     'Http\\Client\\Common\\' => array($vendorDir . '/php-http/client-common/src'),
     'Http\\Client\\' => array($vendorDir . '/php-http/httplug/src'),

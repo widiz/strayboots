@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -10,16 +10,16 @@
 namespace Mailgun\Tests\Integration;
 
 use Mailgun\Api\Domain;
-use Mailgun\Resource\Api\ErrorResponse;
-use Mailgun\Resource\Api\Domain\CreateCredentialResponse;
-use Mailgun\Resource\Api\Domain\DeleteCredentialResponse;
-use Mailgun\Resource\Api\Domain\DeleteResponse;
-use Mailgun\Resource\Api\Domain\Domain as DomainObject;
-use Mailgun\Resource\Api\Domain\CredentialResponseItem;
-use Mailgun\Resource\Api\Domain\CredentialResponse;
-use Mailgun\Resource\Api\Domain\ConnectionResponse;
-use Mailgun\Resource\Api\Domain\UpdateConnectionResponse;
-use Mailgun\Resource\Api\Domain\UpdateCredentialResponse;
+use Mailgun\Model\Domain\CreateCredentialResponse;
+use Mailgun\Model\Domain\DeleteCredentialResponse;
+use Mailgun\Model\Domain\DeleteResponse;
+use Mailgun\Model\Domain\Domain as DomainObject;
+use Mailgun\Model\Domain\CredentialResponseItem;
+use Mailgun\Model\Domain\CredentialResponse;
+use Mailgun\Model\Domain\ConnectionResponse;
+use Mailgun\Model\Domain\UpdateConnectionResponse;
+use Mailgun\Model\Domain\UpdateCredentialResponse;
+use Mailgun\Model\Domain\VerifyResponse;
 use Mailgun\Tests\Api\TestCase;
 
 /**
@@ -27,9 +27,17 @@ use Mailgun\Tests\Api\TestCase;
  */
 class DomainApiTest extends TestCase
 {
+    private static $domainName;
+
     protected function getApiClass()
     {
         return 'Mailgun\Api\Domain';
+    }
+
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        self::$domainName = 'example.'.uniqid().'notareal.tld';
     }
 
     /**
@@ -69,16 +77,30 @@ class DomainApiTest extends TestCase
     }
 
     /**
+     * Performs `PUT /v3/domains/<domain>/verify` for verify domain.
+     */
+    public function testDomainVerify()
+    {
+        $mg = $this->getMailgunClient();
+
+        $ret = $mg->domains()->verify($this->testDomain);
+
+        $this->assertNotNull($ret);
+        $this->assertInstanceOf(VerifyResponse::class, $ret);
+        $this->assertEquals('Domain DNS records have been updated', $ret->getMessage());
+    }
+
+    /**
      * Performs `DELETE /v3/domains/<domain>` on a non-existent domain.
+     *
+     * @expectedException \Mailgun\Exception\HttpClientException
+     * @expectedExceptionCode 404
      */
     public function testRemoveDomainNoExist()
     {
         $mg = $this->getMailgunClient();
 
-        $ret = $mg->domains()->delete('example.notareal.tld');
-        $this->assertNotNull($ret);
-        $this->assertInstanceOf(DeleteResponse::class, $ret);
-        $this->assertEquals('Domain not found', $ret->getMessage());
+        $mg->domains()->delete('example.notareal.tld');
     }
 
     /**
@@ -90,7 +112,7 @@ class DomainApiTest extends TestCase
         $mg = $this->getMailgunClient();
 
         $domain = $mg->domains()->create(
-            'example.notareal.tld',     // domain name
+            self::$domainName,     // domain name
             'exampleOrgSmtpPassword12', // smtp password
             'tag',                      // default spam action
             false                       // wildcard domain?
@@ -104,20 +126,20 @@ class DomainApiTest extends TestCase
     /**
      * Performs `POST /v3/domains` to attempt to create a domain with duplicate
      * values.
+     *
+     * @expectedException \Mailgun\Exception\HttpClientException
+     * @expectedExceptionCode 400
      */
     public function testDomainCreateDuplicateValues()
     {
         $mg = $this->getMailgunClient();
 
-        $domain = $mg->domains()->create(
-            'example.notareal.tld',     // domain name
+        $mg->domains()->create(
+            self::$domainName,     // domain name
             'exampleOrgSmtpPassword12', // smtp password
             'tag',                      // default spam action
             false                       // wildcard domain?
         );
-        $this->assertNotNull($domain);
-        $this->assertInstanceOf(ErrorResponse::class, $domain);
-        $this->assertEquals('This domain name is already taken', $domain->getMessage());
     }
 
     /**
@@ -127,7 +149,7 @@ class DomainApiTest extends TestCase
     {
         $mg = $this->getMailgunClient();
 
-        $ret = $mg->domains()->delete('example.notareal.tld');
+        $ret = $mg->domains()->delete(self::$domainName);
         $this->assertNotNull($ret);
         $this->assertInstanceOf(DeleteResponse::class, $ret);
         $this->assertEquals('Domain has been deleted', $ret->getMessage());
@@ -214,15 +236,15 @@ class DomainApiTest extends TestCase
 
     /**
      * Performs `GET /v3/domains/<domain>/credentials` on a non-existent domain.
+     *
+     * @expectedException \Mailgun\Exception\HttpClientException
+     * @expectedExceptionCode 404
      */
     public function testListCredentialsBadDomain()
     {
         $mg = $this->getMailgunClient();
 
-        $ret = $mg->domains()->credentials('mailgun.org');
-        $this->assertNotNull($ret);
-        $this->assertInstanceOf(ErrorResponse::class, $ret);
-        $this->assertEquals('Domain not found: mailgun.org', $ret->getMessage());
+        $mg->domains()->credentials('mailgun.org');
     }
 
     /**
@@ -306,6 +328,9 @@ class DomainApiTest extends TestCase
     /**
      * Performs `DELETE /v3/domains/<domain>/credentials/<login>` to remove an invalid
      * credential pair from a domain.
+     *
+     * @expectedException \Mailgun\Exception\HttpClientException
+     * @expectedExceptionCode 404
      */
     public function testRemoveCredentialNoExist()
     {
@@ -313,13 +338,10 @@ class DomainApiTest extends TestCase
 
         $mg = $this->getMailgunClient();
 
-        $ret = $mg->domains()->deleteCredential(
+        $mg->domains()->deleteCredential(
             $this->testDomain,
             $login
         );
-        $this->assertNotNull($ret);
-        $this->assertInstanceOf(DeleteCredentialResponse::class, $ret);
-        $this->assertEquals('Credentials not found', $ret->getMessage());
     }
 
     /**

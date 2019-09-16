@@ -12,6 +12,7 @@ class ComposerStaticInit55f79b142707974b76e47d3356f096d7
         '8cff32064859f4559445b89279f3199c' => __DIR__ . '/..' . '/php-http/message/src/filters.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
@@ -25,6 +26,7 @@ class ComposerStaticInit55f79b142707974b76e47d3356f096d7
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\OptionsResolver\\' => 34,
@@ -74,6 +76,10 @@ class ComposerStaticInit55f79b142707974b76e47d3356f096d7
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
+        'Symfony\\Polyfill\\Php72\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -112,8 +118,8 @@ class ComposerStaticInit55f79b142707974b76e47d3356f096d7
         ),
         'Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/php-http/message-factory/src',
-            1 => __DIR__ . '/..' . '/php-http/message/src',
+            0 => __DIR__ . '/..' . '/php-http/message/src',
+            1 => __DIR__ . '/..' . '/php-http/message-factory/src',
         ),
         'Http\\Discovery\\' => 
         array (
@@ -170,13 +176,6 @@ class ComposerStaticInit55f79b142707974b76e47d3356f096d7
     );
 
     public static $prefixesPsr0 = array (
-        'x' => 
-        array (
-            'xrstf\\Composer52' => 
-            array (
-                0 => __DIR__ . '/..' . '/xrstf/composer-php52/lib',
-            ),
-        ),
         'W' => 
         array (
             'Whoops' => 

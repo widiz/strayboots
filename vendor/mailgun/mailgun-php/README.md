@@ -7,15 +7,12 @@ official documentation
 at http://documentation.mailgun.com
 
 [![Latest Version](https://img.shields.io/github/release/mailgun/mailgun-php.svg?style=flat-square)](https://github.com/mailgun/mailgun-php/releases)
-[![Build Status](https://img.shields.io/travis/mailgun/mailgun-php.svg?style=flat-square)](https://travis-ci.org/mailgun/mailgun-php)
+[![Build Status](https://img.shields.io/travis/mailgun/mailgun-php/master.svg?style=flat-square)](https://travis-ci.org/mailgun/mailgun-php)
 [![StyleCI](https://styleci.io/repos/11654443/shield?branch=master)](https://styleci.io/repos/11654443)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/mailgun/mailgun-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/mailgun/mailgun-php)
 [![Quality Score](https://img.shields.io/scrutinizer/g/mailgun/mailgun-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/mailgun/mailgun-php)
 [![Total Downloads](https://img.shields.io/packagist/dt/mailgun/mailgun-php.svg?style=flat-square)](https://packagist.org/packages/mailgun/mailgun-php)
 [![Join the chat at https://gitter.im/mailgun/mailgun-php](https://badges.gitter.im/mailgun/mailgun-php.svg)](https://gitter.im/mailgun/mailgun-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-**This is the documentation for dev-master. You find documentation for the latest stable 
-release [here](https://github.com/mailgun/mailgun-php/tree/v2.1.2).**
 
 ## Installation
 
@@ -36,12 +33,11 @@ If you just want to get started quickly you should run the following command:
 ```bash
 php composer.phar require mailgun/mailgun-php php-http/curl-client guzzlehttp/psr7
 ```
-**For shared hosts without SSH access, check out our [Shared Host Instructions](SharedHostInstall.md).**
 
 ### Why requiring so many packages?
 
 Mailgun has a dependency on the virtual package
-[php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation) which requires to you install **an** adapter, but we do not care which one. That is an implementation detail in your application. We also need **a** PSR-7 implementation and **a** message factory. 
+[php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation) which requires you to install **an** adapter, but we do not care which one. That is an implementation detail in your application. We also need **a** PSR-7 implementation and **a** message factory. 
 
 You do not have to use the `php-http/curl-client` if you do not want to. You may use the `php-http/guzzle6-adapter`. Read more about the virtual packages, why this is a good idea and about the flexibility it brings at the [HTTPlug docs](http://docs.php-http.org/en/latest/httplug/users.html).
 
@@ -57,36 +53,34 @@ use Mailgun\Mailgun;
 Here's how to send a message using the SDK:
 
 ```php
-# First, instantiate the SDK with your API credentials and define your domain. 
-$mg = new Mailgun("key-example");
-$domain = "example.com";
+# First, instantiate the SDK with your API credentials
+$mg = Mailgun::create('key-example');
 
 # Now, compose and send your message.
-$mg->sendMessage($domain, array('from'    => 'bob@example.com', 
-                                'to'      => 'sally@example.com', 
-                                'subject' => 'The PHP SDK is awesome!', 
-                                'text'    => 'It is so simple to send a message.'));
+# $mg->messages()->send($domain, $params);
+$mg->messages()->send('example.com', [
+  'from'    => 'bob@example.com',
+  'to'      => 'sally@example.com',
+  'subject' => 'The PHP SDK is awesome!',
+  'text'    => 'It is so simple to send a message.'
+]);
 ```
 
-Or obtain the last 25 log items: 
-```php
-# First, instantiate the SDK with your API credentials and define your domain. 
-$mg = new Mailgun("key-example");
-$domain = "example.com";
+Attention: `$domain` must match to the domain you have configured on [app.mailgun.com](https://app.mailgun.com/app/domains).
 
-# Now, issue a GET against the Logs endpoint.
-$mg->get("$domain/log", array('limit' => 25, 
-                              'skip'  => 0));
-```
+### All usage examples
+
+You find more detailed documentation at [/doc](doc/index.md) and on 
+[https://documentation.mailgun.com](https://documentation.mailgun.com/api_reference.html).
 
 ### Response
 
-The results of a API call is, by default, a domain object. This will make it easy
+The result of an API call is, by default, a domain object. This will make it easy
 to understand the response without reading the documentation. One can just read the
-doc blocks on the response classes. This provide an excellet IDE integration.
+doc blocks on the response classes. This provides an excellent IDE integration.
  
 ```php
-$mg = new Mailgun("key-example");
+$mg = Mailgun::create('key-example');
 $dns = $mg->domains()->show('example.com')->getInboundDNSRecords();
 
 foreach ($dns as $record) {
@@ -94,13 +88,16 @@ foreach ($dns as $record) {
 }
 ```
 
-If you rather be working with array then object you can inject the `ArrayDeserializer`
+If you'd rather work with an array than an object you can inject the `ArrayHydrator`
 to the Mailgun class. 
 
 ```php
-use Mailgun\Deserializer\ArrayDeserializer;
+use Mailgun\Hydrator\ArrayHydrator;
 
-$mg = new Mailgun("key-example", null, null, new ArrayDeserializer());
+$configurator = new HttpClientConfigurator();
+$configurator->setApiKey('key-example');
+
+$mg = Mailgun::configure($configurator, new ArrayHydrator());
 $data = $mg->domains()->show('example.com');
 
 foreach ($data['receiving_dns_records'] as $record) {
@@ -108,8 +105,10 @@ foreach ($data['receiving_dns_records'] as $record) {
 }
 ```
 
-You could also use the `PSR7Deserializer` to get a PSR7 Response returned from 
+You can also use the `NoopHydrator` to get a PSR7 Response returned from 
 the API calls. 
+
+**Warning: When using `NoopHydrator` there will be no exceptions on a non-200 response.**
 
 ### Debugging
 
@@ -125,20 +124,22 @@ Go to http://bin.mailgun.net. The Postbin will generate a special URL. Save that
 
 **Step 2 - Instantiate the Mailgun client using Postbin.**  
 
-*Tip: The bin id will be the URL part after bin.mailgun.net. It will be random generated letters and numbers. For example, the bin id in this URL, http://bin.mailgun.net/aecf68de, is "aecf68de".*
+*Tip: The bin id will be the URL part after bin.mailgun.net. It will be random generated letters and numbers. 
+For example, the bin id in this URL, http://bin.mailgun.net/aecf68de, is "aecf68de".*
 
 ```php
-# First, instantiate the SDK with your API credentials and define your domain. 
-$mg = new Mailgun('key-example', null, 'bin.mailgun.net');
-$mg->setApiVersion('aecf68de');
-$mg->setSslEnabled(false);
-$domain = 'example.com';
+$configurator = new HttpClientConfigurator();
+$configurator->setEndpoint('http://bin.mailgun.net/aecf68de');
+$configurator->setDebug(true);
+$mg = Mailgun::configure($configurator);
 
 # Now, compose and send your message.
-$mg->sendMessage($domain, array('from'    => 'bob@example.com', 
-                                'to'      => 'sally@example.com', 
-                                'subject' => 'The PHP SDK is awesome!', 
-                                'text'    => 'It is so simple to send a message.'));
+$mg->messages()->send('example.com', [
+  'from'    => 'bob@example.com', 
+  'to'      => 'sally@example.com', 
+  'subject' => 'The PHP SDK is awesome!', 
+  'text'    => 'It is so simple to send a message.'
+]);
 ```
 ### Additional Info
 
@@ -158,9 +159,10 @@ batch messaging is eliminated!
 
 If you are using a framework you might consider these composer packages to make the framework integration easier. 
 
-* [tehplague/swiftmailer-mailgun-bundle](https://github.com/tehplague/swiftmailer-mailgun-bundle) for Symfony2
-* [Bogardo/Mailgun](https://github.com/Bogardo/Mailgun) for Laravel 4
+* [tehplague/swiftmailer-mailgun-bundle](https://github.com/tehplague/swiftmailer-mailgun-bundle) for Symfony
+* [Bogardo/Mailgun](https://github.com/Bogardo/Mailgun) for Laravel
 * [katanyoo/yii2-mailgun-mailer](https://github.com/katanyoo/yii2-mailgun-mailer) for Yii2
+* [narendravaghela/cakephp-mailgun](https://github.com/narendravaghela/cakephp-mailgun) for CakePHP
 
 ## Contribute
 

@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -13,12 +13,14 @@ use Http\Client\Common\HttpMethodsClient;
 use Http\Client\HttpClient;
 use Mailgun\Connection\RestClient;
 use Mailgun\Constants\ExceptionMessages;
+use Mailgun\HttpClient\Plugin\History;
 use Mailgun\Lists\OptInHandler;
 use Mailgun\Messages\BatchMessage;
 use Mailgun\Messages\Exceptions;
 use Mailgun\Messages\MessageBuilder;
-use Mailgun\Deserializer\ModelDeserializer;
-use Mailgun\Deserializer\ResponseDeserializer;
+use Mailgun\Hydrator\ModelHydrator;
+use Mailgun\Hydrator\Hydrator;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * This class is the base class for the Mailgun SDK.
@@ -43,9 +45,9 @@ class Mailgun
     private $httpClient;
 
     /**
-     * @var ResponseDeserializer
+     * @var Hydrator
      */
-    private $deserializer;
+    private $hydrator;
 
     /**
      * @var RequestBuilder
@@ -53,43 +55,63 @@ class Mailgun
     private $requestBuilder;
 
     /**
-     * @param string|null                 $apiKey
-     * @param HttpClient|null             $httpClient
-     * @param string                      $apiEndpoint
-     * @param ResponseDeserializer|null   $deserializer
-     * @param HttpClientConfigurator|null $clientConfigurator
-     * @param RequestBuilder|null         $requestBuilder
+     * This is a object that holds the last response from the API.
+     *
+     * @var History
+     */
+    private $responseHistory = null;
+
+    /**
+     * @param string|null         $apiKey
+     * @param HttpClient|null     $httpClient
+     * @param string              $apiEndpoint
+     * @param Hydrator|null       $hydrator
+     * @param RequestBuilder|null $requestBuilder
+     *
+     * @internal Use Mailgun::configure or Mailgun::create instead.
      */
     public function __construct(
-        $apiKey = null,
-        HttpClient $httpClient = null, /* Deprecated, will be removed in 3.0 */
+        $apiKey = null, /* Deprecated, will be removed in 3.0 */
+        HttpClient $httpClient = null,
         $apiEndpoint = 'api.mailgun.net', /* Deprecated, will be removed in 3.0 */
-        ResponseDeserializer $deserializer = null,
-        HttpClientConfigurator $clientConfigurator = null,
+        Hydrator $hydrator = null,
         RequestBuilder $requestBuilder = null
     ) {
         $this->apiKey = $apiKey;
         $this->restClient = new RestClient($apiKey, $apiEndpoint, $httpClient);
 
-        if (null === $clientConfigurator) {
-            $clientConfigurator = new HttpClientConfigurator();
-
-            /*
-             * To be backward compatible
-             */
-            if ($apiEndpoint !== 'api.mailgun.net') {
-                $clientConfigurator->setEndpoint($apiEndpoint);
-            }
-            if ($httpClient !== null) {
-                $clientConfigurator->setHttpClient($httpClient);
-            }
-        }
-
-        $clientConfigurator->setApiKey($apiKey);
-
-        $this->httpClient = $clientConfigurator->createConfiguredClient();
+        $this->httpClient = $httpClient;
         $this->requestBuilder = $requestBuilder ?: new RequestBuilder();
-        $this->deserializer = $deserializer ?: new ModelDeserializer();
+        $this->hydrator = $hydrator ?: new ModelHydrator();
+    }
+
+    /**
+     * @param HttpClientConfigurator $configurator
+     * @param Hydrator|null          $hydrator
+     * @param RequestBuilder|null    $requestBuilder
+     *
+     * @return Mailgun
+     */
+    public static function configure(
+        HttpClientConfigurator $configurator,
+        Hydrator $hydrator = null,
+        RequestBuilder $requestBuilder = null
+    ) {
+        $httpClient = $configurator->createConfiguredClient();
+
+        return new self($configurator->getApiKey(), $httpClient, 'api.mailgun.net', $hydrator, $requestBuilder);
+    }
+
+    /**
+     * @param string $apiKey
+     *
+     * @return Mailgun
+     */
+    public static function create($apiKey)
+    {
+        $httpClientConfigurator = (new HttpClientConfigurator())->setApiKey($apiKey);
+
+        return self::configure($httpClientConfigurator);
     }
 
     /**
@@ -104,6 +126,8 @@ class Mailgun
      * @throws Exceptions\MissingRequiredMIMEParameters
      *
      * @return \stdClass
+     *
+     * @deprecated Use Mailgun->messages()->send() instead. Will be removed in 3.0
      */
     public function sendMessage($workingDomain, $postData, $postFiles = [])
     {
@@ -137,10 +161,12 @@ class Mailgun
      * @param array|null $postData
      *
      * @return bool
+     *
+     * @deprecated Use Mailgun->webhook() instead. Will be removed in 3.0
      */
     public function verifyWebhookSignature($postData = null)
     {
-        if ($postData === null) {
+        if (null === $postData) {
             $postData = $_POST;
         }
         if (!isset($postData['timestamp']) || !isset($postData['token']) || !isset($postData['signature'])) {
@@ -157,11 +183,21 @@ class Mailgun
     }
 
     /**
+     * @return ResponseInterface|null
+     */
+    public function getLastResponse()
+    {
+        return $this->responseHistory->getLastResponse();
+    }
+
+    /**
      * @param string $endpointUrl
      * @param array  $postData
      * @param array  $files
      *
      * @return \stdClass
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function post($endpointUrl, $postData = [], $files = [])
     {
@@ -173,6 +209,8 @@ class Mailgun
      * @param array  $queryString
      *
      * @return \stdClass
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function get($endpointUrl, $queryString = [])
     {
@@ -180,9 +218,23 @@ class Mailgun
     }
 
     /**
+     * @param string $url
+     *
+     * @return \stdClass
+     *
+     * @deprecated Will be removed in 3.0
+     */
+    public function getAttachment($url)
+    {
+        return $this->restClient->getAttachment($url);
+    }
+
+    /**
      * @param string $endpointUrl
      *
      * @return \stdClass
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function delete($endpointUrl)
     {
@@ -194,6 +246,8 @@ class Mailgun
      * @param array  $putData
      *
      * @return \stdClass
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function put($endpointUrl, $putData)
     {
@@ -204,6 +258,8 @@ class Mailgun
      * @param string $apiVersion
      *
      * @return Mailgun
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function setApiVersion($apiVersion)
     {
@@ -228,6 +284,8 @@ class Mailgun
 
     /**
      * @return MessageBuilder
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function MessageBuilder()
     {
@@ -236,6 +294,8 @@ class Mailgun
 
     /**
      * @return OptInHandler
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function OptInHandler()
     {
@@ -247,6 +307,8 @@ class Mailgun
      * @param bool   $autoSend
      *
      * @return BatchMessage
+     *
+     * @deprecated Will be removed in 3.0
      */
     public function BatchMessage($workingDomain, $autoSend = true)
     {
@@ -258,7 +320,7 @@ class Mailgun
      */
     public function stats()
     {
-        return new Api\Stats($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Stats($this->httpClient, $this->requestBuilder, $this->hydrator);
     }
 
     /**
@@ -266,7 +328,15 @@ class Mailgun
      */
     public function domains()
     {
-        return new Api\Domain($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Domain($this->httpClient, $this->requestBuilder, $this->hydrator);
+    }
+
+    /**
+     * @return Api\Tag
+     */
+    public function tags()
+    {
+        return new Api\Tag($this->httpClient, $this->requestBuilder, $this->hydrator);
     }
 
     /**
@@ -274,15 +344,15 @@ class Mailgun
      */
     public function events()
     {
-        return new Api\Event($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Event($this->httpClient, $this->requestBuilder, $this->hydrator);
     }
 
     /**
-     * @return Api\Routes
+     * @return Api\Route
      */
     public function routes()
     {
-        return new Api\Routes($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Route($this->httpClient, $this->requestBuilder, $this->hydrator);
     }
 
     /**
@@ -290,7 +360,7 @@ class Mailgun
      */
     public function webhooks()
     {
-        return new Api\Webhook($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Webhook($this->httpClient, $this->requestBuilder, $this->hydrator, $this->apiKey);
     }
 
     /**
@@ -298,6 +368,14 @@ class Mailgun
      */
     public function messages()
     {
-        return new Api\Message($this->httpClient, $this->requestBuilder, $this->deserializer);
+        return new Api\Message($this->httpClient, $this->requestBuilder, $this->hydrator);
+    }
+
+    /**
+     * @return Api\Suppression
+     */
+    public function suppressions()
+    {
+        return new Api\Suppression($this->httpClient, $this->requestBuilder, $this->hydrator);
     }
 }

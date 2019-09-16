@@ -30,6 +30,6 @@
 		"mistic100/randomcolor": "^1.0",
 		"snowair/phalcon-debugbar": "dev-phalcon-3",
         "paypal/merchant-sdk-php": "^3.11",
-        "dompdf/dompdf": "^0.8.0"
+        "dompdf/dompdf": "0.8.3"
 	}
 }

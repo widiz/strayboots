@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -101,8 +101,8 @@ class MessageBuilder
             return $address;
         }
         $fullName = $this->getFullName($variables);
-        if ($fullName != null) {
-            return "'$fullName' <$address>";
+        if (null != $fullName) {
+            return sprintf('"%s" <%s>', $fullName, $address);
         }
 
         return $address;
@@ -117,10 +117,10 @@ class MessageBuilder
     {
         $compiledAddress = $this->parseAddress($address, $variables);
 
-        if (isset($this->message[$headerName])) {
-            array_push($this->message[$headerName], $compiledAddress);
-        } elseif ($headerName == 'h:reply-to') {
+        if ('h:reply-to' === $headerName) {
             $this->message[$headerName] = $compiledAddress;
+        } elseif (isset($this->message[$headerName])) {
+            array_push($this->message[$headerName], $compiledAddress);
         } else {
             $this->message[$headerName] = [$compiledAddress];
         }
@@ -229,7 +229,7 @@ class MessageBuilder
      */
     public function setSubject($subject = '')
     {
-        if ($subject == null || $subject == '') {
+        if (null == $subject || '' == $subject) {
             $subject = ' ';
         }
         $this->message['subject'] = $subject;
@@ -248,7 +248,16 @@ class MessageBuilder
         if (!preg_match('/^h:/i', $headerName)) {
             $headerName = 'h:'.$headerName;
         }
-        $this->message[$headerName] = [$headerData];
+
+        if (array_key_exists($headerName, $this->message)) {
+            if (is_array($this->message[$headerName])) {
+                $this->message[$headerName][] = $headerData;
+            } else {
+                $this->message[$headerName] = [$this->message[$headerName], $headerData];
+            }
+        } else {
+            $this->message[$headerName] = $headerData;
+        }
 
         return $this->message[$headerName];
     }
@@ -260,7 +269,7 @@ class MessageBuilder
      */
     public function setTextBody($textBody)
     {
-        if ($textBody == null || $textBody == '') {
+        if (null == $textBody || '' == $textBody) {
             $textBody = ' ';
         }
         $this->message['text'] = $textBody;
@@ -275,7 +284,7 @@ class MessageBuilder
      */
     public function setHtmlBody($htmlBody)
     {
-        if ($htmlBody == null || $htmlBody == '') {
+        if (null == $htmlBody || '' == $htmlBody) {
             $htmlBody = ' ';
         }
         $this->message['html'] = $htmlBody;
@@ -319,7 +328,7 @@ class MessageBuilder
      */
     public function addInlineImage($inlineImagePath, $inlineImageName = null)
     {
-        if (strpos($inlineImagePath, '@') !== 0) {
+        if (0 !== strpos($inlineImagePath, '@')) {
             throw new InvalidParameter(ExceptionMessages::INVALID_PARAMETER_INLINE);
         }
 
@@ -435,7 +444,7 @@ class MessageBuilder
     {
         if (filter_var($enabled, FILTER_VALIDATE_BOOLEAN)) {
             $enabled = 'yes';
-        } elseif ($enabled == 'html') {
+        } elseif ('html' == $enabled) {
             $enabled = 'html';
         } else {
             $enabled = 'no';

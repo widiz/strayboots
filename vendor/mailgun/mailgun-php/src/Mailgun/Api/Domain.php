@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -10,16 +10,17 @@
 namespace Mailgun\Api;
 
 use Mailgun\Assert;
-use Mailgun\Resource\Api\Domain\ConnectionResponse;
-use Mailgun\Resource\Api\Domain\CreateCredentialResponse;
-use Mailgun\Resource\Api\Domain\CreateResponse;
-use Mailgun\Resource\Api\Domain\CredentialResponse;
-use Mailgun\Resource\Api\Domain\DeleteCredentialResponse;
-use Mailgun\Resource\Api\Domain\DeleteResponse;
-use Mailgun\Resource\Api\Domain\IndexResponse;
-use Mailgun\Resource\Api\Domain\ShowResponse;
-use Mailgun\Resource\Api\Domain\UpdateConnectionResponse;
-use Mailgun\Resource\Api\Domain\UpdateCredentialResponse;
+use Mailgun\Model\Domain\ConnectionResponse;
+use Mailgun\Model\Domain\CreateCredentialResponse;
+use Mailgun\Model\Domain\CreateResponse;
+use Mailgun\Model\Domain\CredentialResponse;
+use Mailgun\Model\Domain\DeleteCredentialResponse;
+use Mailgun\Model\Domain\DeleteResponse;
+use Mailgun\Model\Domain\IndexResponse;
+use Mailgun\Model\Domain\ShowResponse;
+use Mailgun\Model\Domain\UpdateConnectionResponse;
+use Mailgun\Model\Domain\UpdateCredentialResponse;
+use Mailgun\Model\Domain\VerifyResponse;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -49,7 +50,7 @@ class Domain extends HttpApi
 
         $response = $this->httpGet('/v3/domains', $params);
 
-        return $this->safeDeserialize($response, IndexResponse::class);
+        return $this->hydrateResponse($response, IndexResponse::class);
     }
 
     /**
@@ -65,13 +66,15 @@ class Domain extends HttpApi
 
         $response = $this->httpGet(sprintf('/v3/domains/%s', $domain));
 
-        return $this->safeDeserialize($response, ShowResponse::class);
+        return $this->hydrateResponse($response, ShowResponse::class);
     }
 
     /**
      * Creates a new domain for the account.
      * See below for spam filtering parameter information.
      * {@link https://documentation.mailgun.com/user_manual.html#um-spam-filter}.
+     *
+     * @see https://documentation.mailgun.com/en/latest/api-domains.html#domains
      *
      * @param string $domain     Name of the domain.
      * @param string $smtpPass   Password for SMTP authentication.
@@ -80,24 +83,25 @@ class Domain extends HttpApi
      *
      * @return CreateResponse|array|ResponseInterface
      */
-    public function create($domain, $smtpPass, $spamAction, $wildcard)
+    public function create($domain, $smtpPass = null, $spamAction = null, $wildcard = null)
     {
         Assert::stringNotEmpty($domain);
-        Assert::stringNotEmpty($smtpPass);
-        // TODO(sean.johnson): Extended spam filter input validation.
-        Assert::stringNotEmpty($spamAction);
-        Assert::boolean($wildcard);
 
-        $params = [
-            'name' => $domain,
-            'smtp_password' => $smtpPass,
-            'spam_action' => $spamAction,
-            'wildcard' => $wildcard,
-        ];
+        $params['name'] = $domain;
+
+        // If at least smtpPass available, check for the fields spamAction wildcard
+        if (!empty($smtpPass)) {
+            // TODO(sean.johnson): Extended spam filter input validation.
+            Assert::stringNotEmpty($spamAction);
+            Assert::boolean($wildcard);
+
+            $params['smtp_password'] = $smtpPass;
+            $params['spam_action'] = $spamAction;
+        }
 
         $response = $this->httpPost('/v3/domains', $params);
 
-        return $this->safeDeserialize($response, CreateResponse::class);
+        return $this->hydrateResponse($response, CreateResponse::class);
     }
 
     /**
@@ -114,7 +118,7 @@ class Domain extends HttpApi
 
         $response = $this->httpDelete(sprintf('/v3/domains/%s', $domain));
 
-        return $this->safeDeserialize($response, DeleteResponse::class);
+        return $this->hydrateResponse($response, DeleteResponse::class);
     }
 
     /**
@@ -139,7 +143,7 @@ class Domain extends HttpApi
 
         $response = $this->httpGet(sprintf('/v3/domains/%s/credentials', $domain), $params);
 
-        return $this->safeDeserialize($response, CredentialResponse::class);
+        return $this->hydrateResponse($response, CredentialResponse::class);
     }
 
     /**
@@ -165,7 +169,7 @@ class Domain extends HttpApi
 
         $response = $this->httpPost(sprintf('/v3/domains/%s/credentials', $domain), $params);
 
-        return $this->safeDeserialize($response, CreateCredentialResponse::class);
+        return $this->hydrateResponse($response, CreateCredentialResponse::class);
     }
 
     /**
@@ -190,7 +194,7 @@ class Domain extends HttpApi
 
         $response = $this->httpPut(sprintf('/v3/domains/%s/credentials/%s', $domain, $login), $params);
 
-        return $this->safeDeserialize($response, UpdateCredentialResponse::class);
+        return $this->hydrateResponse($response, UpdateCredentialResponse::class);
     }
 
     /**
@@ -214,7 +218,7 @@ class Domain extends HttpApi
             )
         );
 
-        return $this->safeDeserialize($response, DeleteCredentialResponse::class);
+        return $this->hydrateResponse($response, DeleteCredentialResponse::class);
     }
 
     /**
@@ -222,7 +226,7 @@ class Domain extends HttpApi
      *
      * @param string $domain Name of the domain.
      *
-     * @return ConnectionResponse|array|ResponseInterface
+     * @return ConnectionResponse|ResponseInterface
      */
     public function connection($domain)
     {
@@ -230,7 +234,7 @@ class Domain extends HttpApi
 
         $response = $this->httpGet(sprintf('/v3/domains/%s/connection', $domain));
 
-        return $this->safeDeserialize($response, ConnectionResponse::class);
+        return $this->hydrateResponse($response, ConnectionResponse::class);
     }
 
     /**
@@ -261,6 +265,22 @@ class Domain extends HttpApi
 
         $response = $this->httpPut(sprintf('/v3/domains/%s/connection', $domain), $params);
 
-        return $this->safeDeserialize($response, UpdateConnectionResponse::class);
+        return $this->hydrateResponse($response, UpdateConnectionResponse::class);
+    }
+
+    /**
+     * Returns a single domain.
+     *
+     * @param string $domain Name of the domain.
+     *
+     * @return VerifyResponse|array|ResponseInterface
+     */
+    public function verify($domain)
+    {
+        Assert::stringNotEmpty($domain);
+
+        $response = $this->httpPut(sprintf('/v3/domains/%s/verify', $domain));
+
+        return $this->hydrateResponse($response, VerifyResponse::class);
     }
 }

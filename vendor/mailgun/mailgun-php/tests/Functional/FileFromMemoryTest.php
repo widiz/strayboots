@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -21,7 +21,7 @@ class FileFromMemoryTest extends \PHPUnit_Framework_TestCase
         $fileValidator = function ($files) {
             // Get only the attachments so the properties can be converted to a format we like
             $attachments = array_filter($files, function ($f) {
-                return strpos($f['name'], 'attachment') !== false;
+                return false !== strpos($f['name'], 'attachment');
             });
 
             // Convert resources to strings
@@ -33,9 +33,9 @@ class FileFromMemoryTest extends \PHPUnit_Framework_TestCase
                 ];
             }, $attachments);
 
-            $this->assertContains(['name' => 'attachment[0]', 'contents' => 'File content', 'filename' => 'file1.txt'], $attachments);
-            $this->assertContains(['name' => 'attachment[1]', 'contents' => 'File content 2', 'filename' => 'file2.txt'], $attachments);
-            $this->assertContains(['name' => 'attachment[2]', 'contents' => 'Contents of a text file', 'filename' => 'text_file.txt'], $attachments);
+            $this->assertContains(['name' => 'attachment', 'contents' => 'File content', 'filename' => 'file1.txt'], $attachments);
+            $this->assertContains(['name' => 'attachment', 'contents' => 'File content 2', 'filename' => 'file2.txt'], $attachments);
+            $this->assertContains(['name' => 'attachment', 'contents' => 'Contents of a text file', 'filename' => 'text_file.txt'], $attachments);
         };
 
         $attachments = [
@@ -44,7 +44,7 @@ class FileFromMemoryTest extends \PHPUnit_Framework_TestCase
             ['filePath' => './tests/TestAssets/text_file.txt', 'remoteName' => 'text_file.txt'],
         ];
 
-        $mailgun = MockedMailgun::create($this, 'POST', 'domain/messages', [], $fileValidator);
+        $mailgun = MockedMailgun::createMock($this, 'POST', 'domain/messages', [], $fileValidator);
 
         $mailgun->sendMessage('domain', [
             'from' => 'bob@example.com',

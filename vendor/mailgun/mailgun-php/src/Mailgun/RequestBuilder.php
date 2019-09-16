@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -64,8 +64,9 @@ class RequestBuilder
 
         $multipartStream = $builder->build();
         $boundary = $builder->getBoundary();
+        $builder->reset();
 
-        $headers['Content-Type'] = 'multipart/form-data; boundary='.$boundary;
+        $headers['Content-Type'] = 'multipart/form-data; boundary="'.$boundary.'"';
 
         return $this->getRequestFactory()->createRequest($method, $uri, $headers, $multipartStream);
     }
@@ -75,7 +76,7 @@ class RequestBuilder
      */
     private function getRequestFactory()
     {
-        if ($this->requestFactory === null) {
+        if (null === $this->requestFactory) {
             $this->requestFactory = MessageFactoryDiscovery::find();
         }
 
@@ -99,7 +100,7 @@ class RequestBuilder
      */
     private function getMultipartStreamBuilder()
     {
-        if ($this->multipartStreamBuilder === null) {
+        if (null === $this->multipartStreamBuilder) {
             $this->multipartStreamBuilder = new MultipartStreamBuilder();
         }
 

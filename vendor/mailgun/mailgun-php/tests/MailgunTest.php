@@ -1,7 +1,7 @@
-<?PHP
+<?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -48,5 +48,15 @@ class MailgunTest extends \Mailgun\Tests\MailgunTestCase
         $client = new Mailgun('key-3ax6xnjp29jd6fds4gc373sgvjxteol0');
         $postData = [];
         assert(!$client->verifyWebhookSignature($postData));
+    }
+
+    public function testGetAttachmentOk()
+    {
+        $attachmentUrl = 'http://example.com';
+        $client = new Mailgun('key-3ax6xnjp29jd6fds4gc373sgvjxteol0');
+        $response = $client->getAttachment($attachmentUrl);
+
+        $this->assertInstanceOf('stdClass', $response);
+        $this->assertEquals($response->http_response_code, 200);
     }
 }

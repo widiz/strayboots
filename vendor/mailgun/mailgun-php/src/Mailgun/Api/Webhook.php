@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -9,18 +9,66 @@
 
 namespace Mailgun\Api;
 
+use Http\Client\HttpClient;
 use Mailgun\Assert;
-use Mailgun\Resource\Api\Webhook\CreateResponse;
-use Mailgun\Resource\Api\Webhook\DeleteResponse;
-use Mailgun\Resource\Api\Webhook\IndexResponse;
-use Mailgun\Resource\Api\Webhook\ShowResponse;
-use Mailgun\Resource\Api\Webhook\UpdateResponse;
+use Mailgun\Hydrator\Hydrator;
+use Mailgun\Model\Webhook\CreateResponse;
+use Mailgun\Model\Webhook\DeleteResponse;
+use Mailgun\Model\Webhook\IndexResponse;
+use Mailgun\Model\Webhook\ShowResponse;
+use Mailgun\Model\Webhook\UpdateResponse;
+use Mailgun\RequestBuilder;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class Webhook extends HttpApi
 {
+    /**
+     * @var string
+     */
+    private $apiKey;
+
+    /**
+     * @param HttpClient     $httpClient
+     * @param RequestBuilder $requestBuilder
+     * @param Hydrator       $hydrator
+     * @param string         $apiKey
+     */
+    public function __construct(HttpClient $httpClient, RequestBuilder $requestBuilder, Hydrator $hydrator, $apiKey)
+    {
+        parent::__construct($httpClient, $requestBuilder, $hydrator);
+        $this->apiKey = $apiKey;
+    }
+
+    /**
+     * This function verifies the webhook signature with your API key to to see if it is authentic.
+     *
+     * If this function returns FALSE, you must not process the request.
+     * You should reject the request with status code 403 Forbidden.
+     *
+     * @param int    $timestamp
+     * @param string $token
+     * @param string $signature
+     *
+     * @return bool
+     */
+    public function verifyWebhookSignature($timestamp, $token, $signature)
+    {
+        if (empty($timestamp) || empty($token) || empty($signature)) {
+            return false;
+        }
+
+        $hmac = hash_hmac('sha256', $timestamp.$token, $this->apiKey);
+
+        if (function_exists('hash_equals')) {
+            // hash_equals is constant time, but will not be introduced until PHP 5.6
+            return hash_equals($hmac, $signature);
+        } else {
+            return $hmac === $signature;
+        }
+    }
+
     /**
      * @param string $domain
      *
@@ -31,7 +79,7 @@ class Webhook extends HttpApi
         Assert::notEmpty($domain);
         $response = $this->httpGet(sprintf('/v3/domains/%s/webhooks', $domain));
 
-        return $this->safeDeserialize($response, IndexResponse::class);
+        return $this->hydrateResponse($response, IndexResponse::class);
     }
 
     /**
@@ -46,7 +94,7 @@ class Webhook extends HttpApi
         Assert::notEmpty($webhook);
         $response = $this->httpGet(sprintf('/v3/domains/%s/webhooks/%s', $domain, $webhook));
 
-        return $this->safeDeserialize($response, ShowResponse::class);
+        return $this->hydrateResponse($response, ShowResponse::class);
     }
 
     /**
@@ -69,7 +117,7 @@ class Webhook extends HttpApi
 
         $response = $this->httpPost(sprintf('/v3/domains/%s/webhooks', $domain), $params);
 
-        return $this->safeDeserialize($response, CreateResponse::class);
+        return $this->hydrateResponse($response, CreateResponse::class);
     }
 
     /**
@@ -91,7 +139,7 @@ class Webhook extends HttpApi
 
         $response = $this->httpPut(sprintf('/v3/domains/%s/webhooks/%s', $domain, $id), $params);
 
-        return $this->safeDeserialize($response, UpdateResponse::class);
+        return $this->hydrateResponse($response, UpdateResponse::class);
     }
 
     /**
@@ -107,6 +155,6 @@ class Webhook extends HttpApi
 
         $response = $this->httpDelete(sprintf('/v3/domains/%s/webhooks/%s', $domain, $id));
 
-        return $this->safeDeserialize($response, DeleteResponse::class);
+        return $this->hydrateResponse($response, DeleteResponse::class);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
@@ -11,10 +11,12 @@ namespace Mailgun\Api;
 
 use Http\Client\Exception as HttplugException;
 use Http\Client\HttpClient;
-use Mailgun\Deserializer\ResponseDeserializer;
+use Mailgun\Exception\UnknownErrorException;
+use Mailgun\Hydrator\Hydrator;
+use Mailgun\Hydrator\NoopHydrator;
+use Mailgun\Exception\HttpClientException;
 use Mailgun\Exception\HttpServerException;
 use Mailgun\RequestBuilder;
-use Mailgun\Resource\Api\ErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -30,9 +32,9 @@ abstract class HttpApi
     private $httpClient;
 
     /**
-     * @var ResponseDeserializer
+     * @var Hydrator
      */
-    protected $deserializer;
+    protected $hydrator;
 
     /**
      * @var RequestBuilder
@@ -40,42 +42,72 @@ abstract class HttpApi
     protected $requestBuilder;
 
     /**
-     * @param HttpClient           $httpClient
-     * @param RequestBuilder       $requestBuilder
-     * @param ResponseDeserializer $deserializer
+     * @param HttpClient     $httpClient
+     * @param RequestBuilder $requestBuilder
+     * @param Hydrator       $hydrator
      */
-    public function __construct(HttpClient $httpClient, RequestBuilder $requestBuilder, ResponseDeserializer $deserializer)
+    public function __construct(HttpClient $httpClient, RequestBuilder $requestBuilder, Hydrator $hydrator)
     {
         $this->httpClient = $httpClient;
         $this->requestBuilder = $requestBuilder;
-        $this->deserializer = $deserializer;
+        if (!$hydrator instanceof NoopHydrator) {
+            $this->hydrator = $hydrator;
+        }
     }
 
     /**
-     * Attempts to safely deserialize the response into the given class.
-     * If the HTTP return code != 200, deserializes into SimpleResponse::class
-     * to contain the error message and any other information provided.
+     * @param ResponseInterface $response
+     * @param string            $class
+     *
+     * @return mixed|ResponseInterface
+     *
+     * @throws \Exception
+     */
+    protected function hydrateResponse(ResponseInterface $response, $class)
+    {
+        if (!$this->hydrator) {
+            return $response;
+        }
+
+        if (200 !== $response->getStatusCode() && 201 !== $response->getStatusCode()) {
+            $this->handleErrors($response);
+        }
+
+        return $this->hydrator->hydrate($response, $class);
+    }
+
+    /**
+     * Throw the correct exception for this error.
      *
      * @param ResponseInterface $response
-     * @param string            $className
      *
-     * @return object $class
+     * @throws \Exception
      */
-    protected function safeDeserialize(ResponseInterface $response, $className)
+    protected function handleErrors(ResponseInterface $response)
     {
-        if ($response->getStatusCode() !== 200) {
-            return $this->deserializer->deserialize($response, ErrorResponse::class);
-        } else {
-            return $this->deserializer->deserialize($response, $className);
+        $statusCode = $response->getStatusCode();
+        switch ($statusCode) {
+            case 400:
+                throw HttpClientException::badRequest($response);
+            case 401:
+                throw HttpClientException::unauthorized($response);
+            case 402:
+                throw HttpClientException::requestFailed($response);
+            case 404:
+                throw HttpClientException::notFound($response);
+            case 500 <= $statusCode:
+                throw HttpServerException::serverError($statusCode);
+            default:
+                throw new UnknownErrorException();
         }
     }
 
     /**
      * Send a GET request with query parameters.
      *
-     * @param string $path           Request path.
-     * @param array  $parameters     GET parameters.
-     * @param array  $requestHeaders Request Headers.
+     * @param string $path           Request path
+     * @param array  $parameters     GET parameters
+     * @param array  $requestHeaders Request Headers
      *
      * @return ResponseInterface
      */
@@ -97,25 +129,25 @@ abstract class HttpApi
     }
 
     /**
-     * Send a POST request with JSON-encoded parameters.
+     * Send a POST request with parameters.
      *
-     * @param string $path           Request path.
-     * @param array  $parameters     POST parameters to be JSON encoded.
-     * @param array  $requestHeaders Request headers.
+     * @param string $path           Request path
+     * @param array  $parameters     POST parameters
+     * @param array  $requestHeaders Request headers
      *
      * @return ResponseInterface
      */
     protected function httpPost($path, array $parameters = [], array $requestHeaders = [])
     {
-        return $this->httpPostRaw($path, $this->createJsonBody($parameters), $requestHeaders);
+        return $this->httpPostRaw($path, $this->createRequestBody($parameters), $requestHeaders);
     }
 
     /**
      * Send a POST request with raw data.
      *
-     * @param string       $path           Request path.
-     * @param array|string $body           Request body.
-     * @param array        $requestHeaders Request headers.
+     * @param string       $path           Request path
+     * @param array|string $body           Request body
+     * @param array        $requestHeaders Request headers
      *
      * @return ResponseInterface
      */
@@ -133,11 +165,11 @@ abstract class HttpApi
     }
 
     /**
-     * Send a PUT request with JSON-encoded parameters.
+     * Send a PUT request.
      *
-     * @param string $path           Request path.
-     * @param array  $parameters     POST parameters to be JSON encoded.
-     * @param array  $requestHeaders Request headers.
+     * @param string $path           Request path
+     * @param array  $parameters     PUT parameters
+     * @param array  $requestHeaders Request headers
      *
      * @return ResponseInterface
      */
@@ -145,7 +177,7 @@ abstract class HttpApi
     {
         try {
             $response = $this->httpClient->sendRequest(
-                $this->requestBuilder->create('PUT', $path, $requestHeaders, $this->createJsonBody($parameters))
+                $this->requestBuilder->create('PUT', $path, $requestHeaders, $this->createRequestBody($parameters))
             );
         } catch (HttplugException\NetworkException $e) {
             throw HttpServerException::networkError($e);
@@ -155,11 +187,11 @@ abstract class HttpApi
     }
 
     /**
-     * Send a DELETE request with JSON-encoded parameters.
+     * Send a DELETE request.
      *
-     * @param string $path           Request path.
-     * @param array  $parameters     POST parameters to be JSON encoded.
-     * @param array  $requestHeaders Request headers.
+     * @param string $path           Request path
+     * @param array  $parameters     DELETE parameters
+     * @param array  $requestHeaders Request headers
      *
      * @return ResponseInterface
      */
@@ -167,7 +199,7 @@ abstract class HttpApi
     {
         try {
             $response = $this->httpClient->sendRequest(
-                $this->requestBuilder->create('DELETE', $path, $requestHeaders, $this->createJsonBody($parameters))
+                $this->requestBuilder->create('DELETE', $path, $requestHeaders, $this->createRequestBody($parameters))
             );
         } catch (HttplugException\NetworkException $e) {
             throw HttpServerException::networkError($e);
@@ -177,14 +209,27 @@ abstract class HttpApi
     }
 
     /**
-     * Create a JSON encoded version of an array of parameters.
+     * Prepare a set of key-value-pairs to be encoded as multipart/form-data.
      *
      * @param array $parameters Request parameters
      *
-     * @return null|string
+     * @return array
      */
-    protected function createJsonBody(array $parameters)
+    protected function createRequestBody(array $parameters)
     {
-        return (count($parameters) === 0) ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0);
+        $resources = [];
+        foreach ($parameters as $key => $values) {
+            if (!is_array($values)) {
+                $values = [$values];
+            }
+            foreach ($values as $value) {
+                $resources[] = [
+                    'name' => $key,
+                    'content' => $value,
+                ];
+            }
+        }
+
+        return $resources;
     }
 }

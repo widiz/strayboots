@@ -1,13 +1,15 @@
 <?php
 
 /*
- * Copyright (C) 2013-2016 Mailgun
+ * Copyright (C) 2013 Mailgun
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
 
 namespace Mailgun\Tests\Api;
+
+use Mailgun\Mailgun;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -36,7 +38,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected $testDomain;
 
-    public function __construct()
+    protected function setUp()
     {
         $this->apiPrivKey = getenv('MAILGUN_PRIV_KEY');
         $this->apiPubKey = getenv('MAILGUN_PUB_KEY');
@@ -45,31 +47,37 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     abstract protected function getApiClass();
 
-    protected function getApiMock()
+    protected function getApiMock($httpClient = null, $requestClient = null, $hydrator = null)
     {
-        $httpClient = $this->getMockBuilder('Http\Client\HttpClient')
-            ->setMethods(['sendRequest'])
-            ->getMock();
-        $httpClient
-            ->expects($this->any())
-            ->method('sendRequest');
+        if (null === $httpClient) {
+            $httpClient = $this->getMockBuilder('Http\Client\HttpClient')
+                ->setMethods(['sendRequest'])
+                ->getMock();
+            $httpClient
+                ->expects($this->any())
+                ->method('sendRequest');
+        }
 
-        $requestClient = $this->getMockBuilder('Mailgun\RequestBuilder')
-            ->setMethods(['create'])
-            ->getMock();
+        if (null === $requestClient) {
+            $requestClient = $this->getMockBuilder('Mailgun\RequestBuilder')
+                ->setMethods(['create'])
+                ->getMock();
+        }
 
-        $deserializer = $this->getMockBuilder('Mailgun\Deserializer\ResponseDeserializer')
-            ->setMethods(['deserialize'])
-            ->getMock();
+        if (null === $hydrator) {
+            $hydrator = $this->getMockBuilder('Mailgun\Hydrator\Hydrator')
+                ->setMethods(['hydrate'])
+                ->getMock();
+        }
 
         return $this->getMockBuilder($this->getApiClass())
-            ->setMethods(['httpGet', 'httpPost', 'httpPostRaw', 'httpDelete', 'httPut'])
-            ->setConstructorArgs([$httpClient, $requestClient, $deserializer])
+            ->setMethods(['httpGet', 'httpPost', 'httpPostRaw', 'httpDelete', 'httpPut'])
+            ->setConstructorArgs([$httpClient, $requestClient, $hydrator])
             ->getMock();
     }
 
     protected function getMailgunClient()
     {
-        return new \Mailgun\Mailgun($this->apiPrivKey);
+        return Mailgun::create($this->apiPrivKey);
     }
 }
