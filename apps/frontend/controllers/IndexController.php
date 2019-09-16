@@ -569,7 +569,7 @@ EOF
 
   public function unsubscribeAction() 
   {
-    $m = $this->request->get('m');
+    $m = str_replace(' ', '+', $this->request->get('m'));
     $email = $this->crypt->decryptBase64($m);
     $this->view->msg = 'Something went wrong';
     if (!$email) {
@@ -586,7 +586,7 @@ EOF
     }
 
     $unsubscribingList = new \UnsubscribingList();
-    $unsubscribingList->email = $email;
+    $unsubscribingList->email = strtolower($email);
     
     if ($unsubscribingList->save() !== false) {
       $this->view->msg = 'You unsubscribed from the mailing list';

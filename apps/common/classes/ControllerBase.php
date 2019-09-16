@@ -237,20 +237,20 @@ class ControllerBase extends Phalcon\Mvc\Controller
 		}, $to);
 
 		$unsubscribingList = empty($emailsTo) ? [] : array_map('array_pop', $this->db->fetchAll('SELECT email FROM unsubscribing_list WHERE email IN (' . implode(',', $emailsTo) . ')'));
-		
+
 		foreach ($to as $e) {
 			if (in_array($e, $unsubscribingList))
 				continue;
 			try {
 				$unsubscribeText = '<hr><p>You can unsubscribe from the mailing list by clicking on the <a href="' . $this->config->fullUri . '/index/unsubscribe?m=' . rawurlencode($this->crypt->encryptBase64($e)) . '">link</a>.</p>';
-				$html = str_replace('%unsubscribe%', $unsubscribeText, $html);
+				$h = str_replace('%unsubscribe%', $unsubscribeText, $html);
 				
 				$success = $this->mailer->sendMessage($this->config->mailgun->domain, [
 					'from'		=> $this->config->mailgun->from, 
 					'to'		=> $e,
 					'subject'	=> $subject,
 					'text'		=> $text,
-					'html'		=> $html
+					'html'		=> $h
 				] + $options, [
 					'attachment' => $attachments
 				] + $attachmentsOpts) && $success;

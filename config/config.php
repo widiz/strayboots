@@ -1,6 +1,6 @@
 <?php
 $configFn = 'production';
-switch (defined('SBENV') ? SBENV : $_SERVER['SERVER_NAME']) {
+switch (defined('SBENV') ? SBENV : ($_SERVER['SERVER_NAME'] ?? '')) {
 	case 'staging.strayboots.com':
 	case 'staging':
 		$configFn = 'staging';
