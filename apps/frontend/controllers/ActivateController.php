@@ -48,7 +48,7 @@ class ActivateController extends ControllerBase
 						$lname = 'Player #' . $this->player->id . ' ' . (empty($lname) ? $this->player->email : ($lname . ' ' . $this->player->email));
 						$msg = "A leader activated Team {$num} ({$this->team->name}) using the code: {$this->team->activation_leader}\r\n{$lname}\r\nTime: {$now}\r\nOrder: {$order->name}\r\nRoute: {$route}\r\nSummary: " . $sLink;
 						$msgHtml = "A leader activated Team {$num} ({$this->team->name}) using the code: {$this->team->activation_leader}<br>" . htmlspecialchars($lname) . "<br>Time: {$now}<br>Order: " . htmlspecialchars($order->name) . "<br>Route: {$route}<br>Summary: <a href=\"{$sLink}\">{$sLink}</a>";
-						$this->sendMail('support@strayboots.com,ido@strayboots.com,ariel@safronov.co.il', "Leader Activation - {$order->name} / {$this->hunt->name} / {$order->Client->company}", $msg, $msgHtml);
+						$this->sendMail('support@strayboots.com,ido@strayboots.com,ariel@safronov.co.il,danielle@strayboots.com,ashley@strayboots.com', "Leader Activation - {$order->name} / {$this->hunt->name} / {$order->Client->company}", $msg, $msgHtml);
 					}
 
 					return $this->response->redirect('play');
