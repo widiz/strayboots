@@ -181,6 +181,7 @@ EOF
             'appLoc' => [
               (int)$thisTeam->id,
               'orderHunt' => (int)$thisOrderHunt->id,
+              'orderId' => (int)$thisOrderHunt->order_id,
               'timeLeft' => max(-1, strtotime($thisOrderHunt->finish) - time())
             ]
           ];
@@ -201,6 +202,7 @@ EOF
           'appLoc' => [
             (int)$thisTeam->id,
             'orderHunt' => (int)$thisOrderHunt->id,
+            'orderId' => (int)$thisOrderHunt->order_id,
             'timeLeft' => max(-1, strtotime($thisOrderHunt->finish) - time())
           ]
         ];
@@ -219,6 +221,7 @@ EOF
           'appLoc' => [
             (int)$thisTeam->id,
             'orderHunt' => (int)$thisOrderHunt->id,
+            'orderId' => (int)$thisOrderHunt->order_id,
             'timeLeft' => max(-1, strtotime($thisOrderHunt->finish) - time())
           ]
         ];
@@ -969,6 +972,7 @@ EOF
         'appLoc' => [
           (int)$thisTeam->id, is_null($question) ? (empty($responseMsg) ? 99999 : '88888_0_0') : $question['currentPos'], $showHint, empty($responseMsg),
           'orderHunt' => (int)$thisOrderHunt->id,
+          'orderId' => (int)$thisOrderHunt->order_id,
           'timeLeft' => isset($this->view->end_msg) && empty($responseMsg) ? -1 : $timeToEnd
         ]
       ];
@@ -1015,6 +1019,7 @@ EOF
       'appLoc' => [
         (int)$this->team->id,
         'orderHunt' => (int)$this->orderHunt->id,
+        'orderId' => (int)$thisOrderHunt->order_id,
         'timeLeft' => max(-1, strtotime($this->orderHunt->finish) - time())
       ]
     ];
