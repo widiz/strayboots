@@ -297,7 +297,7 @@ $(function(){
     var checkBonusQ = function(){
       if (state != 0)
         return;
-      var timeLeft = Math.min(intervals[0] /* max 1 hour */, window.appLoc.timeLeft) - Math.ceil(((new Date()).getTime() - _loadTime) / 1e3);
+      var timeLeft = window.appLoc.timeLeft - Math.ceil(((new Date()).getTime() - _loadTime) / 1e3);
       if (!(timeLeft > 0))
         return;
       var timePassed = intervals[0] - timeLeft - 1200 /*20min offset*/;
