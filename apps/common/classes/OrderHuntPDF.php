@@ -24,7 +24,8 @@ class OrderHuntPDF extends OrderHuntMailBase {
 		$dompdf->setPaper('A4', 'portrait');
 		/*$dompdf->set_option('defaultFont', 'Helvetica');
 		$dompdf->set_option('fontHeightRatio', 1.1);*/
-		$dompdf->set_option('defaultFont', 'FreeSans');
+		// $dompdf->set_option('defaultFont', 'FreeSans');
+		$dompdf->set_option('defaultFont', 'Helvetica');
 		$dompdf->set_option('fontHeightRatio', 0.78);
 
 		// set document information
@@ -259,125 +260,125 @@ EOF;
 		overflow: hidden;
 	}
 	.ft0 {
-		font: 36px 'FreeSans';
+		font: 36px 'Helvetica';
 		color: #ffffff;
 		line-height: 41px;
 	}
 	.ft1 {
-		font: 20px 'FreeSans';
+		font: 20px 'Helvetica';
 		color: #ffffff;
 		line-height: 23px;
 	}
 	.ft2 {
-		font: bold 14px 'FreeSans';
+		font: bold 14px 'Helvetica';
 		color: #f39c1e;
 		line-height: 16px;
 	}
 	.ft3 {
-		font: 1px 'FreeSans';
+		font: 1px 'Helvetica';
 		line-height: 12px;
 	}
 	.ft4 {
-		font: 1px 'FreeSans';
+		font: 1px 'Helvetica';
 		line-height: 13px;
 	}
 	.ft5 {
-		font: 14px 'FreeSans';
+		font: 14px 'Helvetica';
 		line-height: 16px;
 		color: #000
 	}
 	.ft6 {
-		font: 1px 'FreeSans';
+		font: 1px 'Helvetica';
 		line-height: 1px;
 	}
 	.ft7 {
-		font: 13px 'FreeSans';
+		font: 13px 'Helvetica';
 		line-height: 16px;
 		color: #000
 	}
 	.ft8 {
-		font: 13px 'FreeSans';
+		font: 13px 'Helvetica';
 		color: #f39c1e;
 		line-height: 16px;
 	}
 	.ft9 {
-		font: 14px 'FreeSans';
+		font: 14px 'Helvetica';
 		line-height: 18px;
 	}
 	.ft10 {
-		font: bold 15px 'FreeSans';
+		font: bold 15px 'Helvetica';
 		color: #f39c1e;
 		line-height: 18px;
 	}
 	.ft11 {
-		font: bold 16px 'FreeSans';
+		font: bold 16px 'Helvetica';
 		color: #f39c1e;
 		line-height: 20px;
 		text-decoration: none;
 	}
 	.ft12 {
-		font: bold 16px 'FreeSans';
+		font: bold 16px 'Helvetica';
 		line-height: 22px;
 	}
 	.ft13 {
-		font: 1px 'FreeSans';
+		font: 1px 'Helvetica';
 		line-height: 6px;
 	}
 	.ft14 {
-		font: bold 19px 'FreeSans';
+		font: bold 19px 'Helvetica';
 		line-height: 22px;
 	}
 	.ft15 {
-		font: bold 13px 'FreeSans';
+		font: bold 13px 'Helvetica';
 		line-height: 16px;
 	}
 	.ft16 {
-		font: 20px 'FreeSans';
+		font: 20px 'Helvetica';
 		color: #f39c1e;
 		line-height: 23px;
 	}
 	.ft17 {
-		font: bold 14px 'FreeSans';
+		font: bold 14px 'Helvetica';
 		color: #f39c1e;
 		line-height: 16px;
 	}
 	.ft18 {
-		font: bold 11px 'FreeSans';
+		font: bold 11px 'Helvetica';
 		color: #ffffff;
 		line-height: 14px;
 	}
 	.ft19 {
-		font: 11px 'FreeSans';
+		font: 11px 'Helvetica';
 		color: #d9d8d3;
 		line-height: 14px;
 	}
 	.ft20 {
-		font: 11px 'FreeSans';
+		font: 11px 'Helvetica';
 		color: #d9d8d3;
 		line-height: 13px;
 	}
 	.ft21 {
-		font: bold 8px 'FreeSans';
+		font: bold 8px 'Helvetica';
 		color: #ffffff;
 		line-height: 5px;
 	}
 	.ft22 {
-		font: 11px 'FreeSans';
+		font: 11px 'Helvetica';
 		color: #d9d8d3;
 		line-height: 15px;
 	}
 	.ft23 {
-		font: bold 11px 'FreeSans';
+		font: bold 11px 'Helvetica';
 		color: #ffffff;
 		line-height: 15px;
 	}
 	.ft24 {
-		font: bold 11px 'FreeSans';
+		font: bold 11px 'Helvetica';
 		color: #ffffff;
 		line-height: 16px;
 	}
 	.ft25 {
-		font: 11px 'FreeSans';
+		font: 11px 'Helvetica';
 		color: #d9d8d3;
 		line-height: 17px;
 	}
@@ -620,16 +621,16 @@ EOF;
 	.t0 {
 		width: 100%;
 		margin: 18px 0;
-		font: bold 14px 'FreeSans';
+		font: bold 14px 'Helvetica';
 		color: #f39c1e;
 	}
 	.t1 {
 		width: 100%;
-		font: 11px 'FreeSans';
+		font: 11px 'Helvetica';
 	}
 	.t2 {
 		width: 100%;
-		font: bold 13px 'FreeSans';
+		font: bold 13px 'Helvetica';
 	}
 	.t2 td:nth-child(2) {
 		border-left: 2px solid #f4f4f4;

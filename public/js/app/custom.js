@@ -300,7 +300,7 @@ $(function(){
       var timeLeft = window.appLoc.timeLeft - Math.ceil(((new Date()).getTime() - _loadTime) / 1e3);
       if (!(timeLeft > 0))
         return;
-      var timePassed = intervals[0] - timeLeft - 1200 /*20min offset*/;
+      var timePassed = intervals[0] - timeLeft - Math.max(600, 1200 - intervals[1]) /*20min offset*/;
       if (!(timePassed > 0))
         return;
       //if (!(timePassed > intervals[1])) return;
