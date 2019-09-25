@@ -262,125 +262,125 @@ EOF;
 	.ft0 {
 		font: 36px 'Helvetica';
 		color: #ffffff;
-		line-height: 41px;
+		line-height: 51px;
 	}
 	.ft1 {
 		font: 20px 'Helvetica';
 		color: #ffffff;
-		line-height: 23px;
+		line-height: 33px;
 	}
 	.ft2 {
 		font: bold 14px 'Helvetica';
 		color: #f39c1e;
-		line-height: 16px;
+		line-height: 26px;
 	}
 	.ft3 {
 		font: 1px 'Helvetica';
-		line-height: 12px;
+		line-height: 22px;
 	}
 	.ft4 {
 		font: 1px 'Helvetica';
-		line-height: 13px;
+		line-height: 23px;
 	}
 	.ft5 {
 		font: 14px 'Helvetica';
-		line-height: 16px;
+		line-height: 26px;
 		color: #000
 	}
 	.ft6 {
 		font: 1px 'Helvetica';
-		line-height: 1px;
+		line-height: 10px;
 	}
 	.ft7 {
 		font: 13px 'Helvetica';
-		line-height: 16px;
+		line-height: 26px;
 		color: #000
 	}
 	.ft8 {
 		font: 13px 'Helvetica';
 		color: #f39c1e;
-		line-height: 16px;
+		line-height: 26px;
 	}
 	.ft9 {
 		font: 14px 'Helvetica';
-		line-height: 18px;
+		line-height: 28px;
 	}
 	.ft10 {
 		font: bold 15px 'Helvetica';
 		color: #f39c1e;
-		line-height: 18px;
+		line-height: 28px;
 	}
 	.ft11 {
 		font: bold 16px 'Helvetica';
 		color: #f39c1e;
-		line-height: 20px;
+		line-height: 30px;
 		text-decoration: none;
 	}
 	.ft12 {
 		font: bold 16px 'Helvetica';
-		line-height: 22px;
+		line-height: 32px;
 	}
 	.ft13 {
 		font: 1px 'Helvetica';
-		line-height: 6px;
+		line-height: 0px;
 	}
 	.ft14 {
 		font: bold 19px 'Helvetica';
-		line-height: 22px;
+		line-height: 32px;
 	}
 	.ft15 {
 		font: bold 13px 'Helvetica';
-		line-height: 16px;
+		line-height: 26px;
 	}
 	.ft16 {
 		font: 20px 'Helvetica';
 		color: #f39c1e;
-		line-height: 23px;
+		line-height: 33px;
 	}
 	.ft17 {
 		font: bold 14px 'Helvetica';
 		color: #f39c1e;
-		line-height: 16px;
+		line-height: 26px;
 	}
 	.ft18 {
 		font: bold 11px 'Helvetica';
 		color: #ffffff;
-		line-height: 14px;
+		line-height: 24px;
 	}
 	.ft19 {
 		font: 11px 'Helvetica';
 		color: #d9d8d3;
-		line-height: 14px;
+		line-height: 24px;
 	}
 	.ft20 {
 		font: 11px 'Helvetica';
 		color: #d9d8d3;
-		line-height: 13px;
+		line-height: 23px;
 	}
 	.ft21 {
 		font: bold 8px 'Helvetica';
 		color: #ffffff;
-		line-height: 5px;
+		line-height: 15px;
 	}
 	.ft22 {
 		font: 11px 'Helvetica';
 		color: #d9d8d3;
-		line-height: 15px;
+		line-height: 25px;
 	}
 	.ft23 {
 		font: bold 11px 'Helvetica';
 		color: #ffffff;
-		line-height: 15px;
+		line-height: 25px;
 	}
 	.ft24 {
 		font: bold 11px 'Helvetica';
 		color: #ffffff;
-		line-height: 16px;
+		line-height: 26px;
 	}
 	.ft25 {
 		font: 11px 'Helvetica';
 		color: #d9d8d3;
-		line-height: 17px;
+		line-height: 27px;
 	}
 	.p0 {
 		text-align: left;
@@ -842,7 +842,6 @@ EOF;
 		}
 		$html .= '</body>' .
 				'</html>';
-
 		$dompdf->loadHtml($html);
 		$dompdf->render();
 
