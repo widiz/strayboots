@@ -46,7 +46,8 @@ class PreeventTask extends TaskBase
 					} catch(Exception $e) { }
 					continue;
 				}
-				$interval = max(600, ceil((min(5400 /* max 1.5 hour */, $huntTime - 1200) /*20min offset*/) / (count($bq) + 1)));
+				$bqNum = count($bq);
+				$interval = max(600, ceil((min(5400 /* max 1.5 hour */, $huntTime - 1200) /*20min offset*/) / ($bqNum + 1)));
 				if (!($interval > 1)) {
 					try {
 						$this->logger->critical('Preevent error2: failed to calculate intervals for ' . $ohId);
@@ -58,7 +59,7 @@ class PreeventTask extends TaskBase
 						$this->logger->critical('Firebase error: failed to set bonusq ' . $fbr);
 					} catch(Exception $e) { }
 				} else {
-					$interval = [$huntTime, $interval];
+					$interval = [$huntTime, $interval, $bqNum];
 					if (($fbr = $this->firebase->set(FB_PREFIX . 'hqbonusinterval/' . $ohId, $interval, [], 3)) != json_encode($interval, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) {
 						try {
 							$this->logger->critical('Firebase error: failed to set bonus intervals ' . $fbr);

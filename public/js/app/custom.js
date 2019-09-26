@@ -304,7 +304,9 @@ $(function(){
       if (!(timePassed > 0))
         return;
       //if (!(timePassed > intervals[1])) return;
-      var bNum = Math.floor(timePassed / intervals[1]) - 1;
+      var bNum = Math.ceil(timePassed / intervals[1]) - 1;
+      if (typeof intervals[2] === 'number' && bNum >= intervals[2])
+        return;
       timePassed = timePassed % intervals[1];
       timeLeft = bonusQTime + bonusQAlertTimer - timePassed;
       //console.log(bNum, timePassed, timeLeft);
@@ -362,7 +364,7 @@ $(function(){
 
     fbdb.ref(window.FB_PREFIX + "hqbonusinterval/" + window.appLoc.orderHunt).once("value", function(snapshot){
       intervals = snapshot.val();
-      if (typeof intervals == 'object' && intervals !== null && intervals.length == 2) {
+      if (typeof intervals == 'object' && intervals !== null && intervals.length > 1) {
         if ($('#bq-timer.qbox').length) {
           setTimeout(function(){
             setInterval(checkBonusQ, 1e3);
