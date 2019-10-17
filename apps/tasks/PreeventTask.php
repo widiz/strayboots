@@ -47,7 +47,7 @@ class PreeventTask extends TaskBase
 					continue;
 				}
 				$bqNum = count($bq);
-				$interval = max(600, ceil((min(5400 /* max 1.5 hour */, $huntTime - 1200) /*20min offset*/) / ($bqNum + 1)));
+				$interval = min(1200/*max margin*/, max(600, ceil((min(5400 /* max 1.5 hour */, $huntTime - 1200) /*20min offset*/) / ($bqNum + 1))));
 				if (!($interval > 1)) {
 					try {
 						$this->logger->critical('Preevent error2: failed to calculate intervals for ' . $ohId);

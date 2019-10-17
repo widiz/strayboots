@@ -271,7 +271,7 @@ $hasEvents = !empty($customEvents);
 					<td><?= $bq['email'] . (is_null($bq['first_name']) ? '' :  (' ' . htmlspecialchars(trim($bq['first_name'] . ' ' . $bq['last_name'])))) ?></td>
 					<td><?= nl2br(htmlspecialchars($bq['answer'])) ?></td>
 					<td><?= $bq['score'] ?></td>
-					<td><?= $bq['answer_time'] ?></td>
+					<td><?= date($timeFormat, strtotime($bq['answer_time'])) ?></td>
 				</tr>
 <? endforeach ?>
 			</tbody>
