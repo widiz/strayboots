@@ -12,7 +12,7 @@ if (SBENV === 'europe') {
 				<?if ($orderId == 2651) :?>
 					<h2><?= $t->_(defined('OVERRIDE_LOGIN_EMAIL') ? 'Insert your email to get your FREE activation code' : 'Activate Your Game') ?></h2>
 				<? else :?>
-					<h2><?= $t->_(defined('OVERRIDE_LOGIN_EMAIL') ? 'Insert your email to get your FREE activation code' : 'Activate Your Hunt') ?></h2>
+					<h2><?= $t->_(defined('OVERRIDE_LOGIN_EMAIL') ? 'Insert your email to get your FREE activation code' : (defined('SUB_TITLE_OVERRIDE') ? SUB_TITLE_OVERRIDE : 'Activate Your Hunt')) ?></h2>
 				<? endif ?>
 				<div class="col-sm-12">
 					<div id="activation-wrapper" class="clearfix">

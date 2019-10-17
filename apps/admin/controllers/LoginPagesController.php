@@ -30,7 +30,7 @@ class LoginPagesController extends \ControllerBase
 			throw new \Exception(403, 403);
 
 		$builder = $this->modelsManager->createBuilder()
-							->columns(['lp.id', 'lp.slug', 'lp.title', 'lp.order_hunt_id', 'o.name as order_name', 'h.name as hunt_name'])
+							->columns(['lp.id', 'lp.slug', 'lp.title', 'lp.sub_title', 'lp.order_hunt_id', 'o.name as order_name', 'h.name as hunt_name'])
 							->from(['lp' => 'LoginPages'])
 							->leftJoin('OrderHunts', 'oh.id = lp.order_hunt_id', 'oh')
 							->leftJoin('Hunts', 'h.id = oh.hunt_id', 'h')
@@ -78,6 +78,7 @@ class LoginPagesController extends \ControllerBase
 			$this->tag->setDefault('id', $loginPage->id);
 			$this->tag->setDefault('slug', $loginPage->slug);
 			$this->tag->setDefault('title', $loginPage->title);
+			$this->tag->setDefault('sub_title', $loginPage->sub_title);
 			$this->tag->setDefault('welcome_title', $loginPage->welcome_title);
 			$this->tag->setDefault('email_login', $loginPage->email_login);
 			$this->tag->setDefault('order_hunt_id', $loginPage->order_hunt_id);
@@ -122,6 +123,7 @@ class LoginPagesController extends \ControllerBase
 		$loginPage = new LoginPages();
 		$loginPage->slug = strip_tags($this->request->getPost('slug', 'trim'));
 		$loginPage->title = trim($this->request->getPost('title', 'string'));
+		$loginPage->sub_title = trim($this->request->getPost('sub_title', 'string'));
 		$loginPage->welcome_title = trim($this->request->getPost('welcome_title', 'string'));
 		$loginPage->order_hunt_id = $this->request->getPost('order_hunt_id', 'int');
 		$loginPage->email_login = $this->request->getPost('email_login', 'email');
@@ -173,6 +175,7 @@ class LoginPagesController extends \ControllerBase
 
 		$loginPage->slug = strip_tags($this->request->getPost('slug', 'trim'));
 		$loginPage->title = trim($this->request->getPost('title', 'string'));
+		$loginPage->sub_title = trim($this->request->getPost('sub_title', 'string'));
 		$loginPage->welcome_title = trim($this->request->getPost('welcome_title', 'string'));
 		$loginPage->order_hunt_id = $this->request->getPost('order_hunt_id', 'int');
 		$loginPage->email_login = $this->request->getPost('email_login', 'email');
