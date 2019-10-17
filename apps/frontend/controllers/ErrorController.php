@@ -26,6 +26,8 @@ class ErrorController extends ControllerBase
 				define('OVERRIDE_STANDARDLOGIN', 1);
 				if (!empty($loginPage->title))
 					define('TITLE_OVERRIDE', $loginPage->title);
+				if (!empty($loginPage->sub_title))
+					define('SUB_TITLE_OVERRIDE', $loginPage->sub_title);
 				if (!empty($loginPage->welcome_title))
 					define('OVERRIDE_WELCOME_TITLE', $loginPage->welcome_title);
 				if (!empty($loginPage->email_login))

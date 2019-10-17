@@ -34,6 +34,12 @@ class LoginPages extends \Phalcon\Mvc\Model
 	 *
 	 * @var string
 	 */
+	public $sub_title;
+
+	/**
+	 *
+	 * @var string
+	 */
 	public $welcome_title;
 
 	/**
@@ -69,6 +75,11 @@ class LoginPages extends \Phalcon\Mvc\Model
 			'min' => 0,
 			'max' => 200,
 			'messageMaximum' => 'Title is too long'
+		]));
+		$validator->add('sub_title', new StringLength([
+			'min' => 0,
+			'max' => 200,
+			'messageMaximum' => 'Sub Title is too long'
 		]));
 		$validator->add('welcome_title', new StringLength([
 			'min' => 0,

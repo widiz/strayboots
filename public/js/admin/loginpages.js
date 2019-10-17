@@ -26,6 +26,11 @@ $(function(){
 				render: txtRender
 			},
 			{
+				data: 'sub_title',
+				width: 'auto',
+				render: txtRender
+			},
+			{
 				data: 'order_hunt_id',
 				render: function(data, type, row){
 					return '<a href="/admin/order_hunts/edit/' + data + '">#' + numRender.display(data) + ' ' + txtRender.display(row.order_name + ' / ' + row.hunt_name) + '</a>';
