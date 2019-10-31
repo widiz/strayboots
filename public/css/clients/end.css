@@ -767,3 +767,11 @@ footer.newfooter .cr{
 .blueimp-gallery-controls > .indicator {
 	display: none;
 }
+.del-chat-img {
+	position: absolute;
+	top: 0;
+	right: 40%;
+}
+.del-chat-img > a {
+	z-index: 1;
+}

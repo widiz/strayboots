@@ -977,4 +977,11 @@ EOF;
 		]);
 	}
 
+	public function delImageAction()
+	{
+		$image = $this->request->getPost('img');
+		return $this->jsonResponse([
+			'success' => file_exists($_SERVER['DOCUMENT_ROOT'] . $image) ? unlink($_SERVER['DOCUMENT_ROOT'] . $image) : false
+		]);
+	}
 }

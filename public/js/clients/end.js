@@ -71,4 +71,22 @@ $(function(){
 		}
 	});
 
+	$(".del-chat-img").click(function() {
+		var image = $(this).data('url');
+		$.ajax({
+			type: "POST",
+			url: '/admin/order_hunts/delImage',
+			data: {
+				'img': image,
+			},
+			success: function(data) {
+				if (typeof data === 'object' && data && data.success) {
+					location.reload();
+				}
+			},
+			error: function(error){
+
+			}
+		});
+	});
 });
