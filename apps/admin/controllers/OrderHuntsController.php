@@ -982,14 +982,7 @@ EOF;
 		$imagePath = $this->request->getPost('img');
 		$imageWithoutExt = preg_replace('/\.(jpg|png|gif)$/', '', $imagePath);
 		$ext = pathinfo($imagePath, PATHINFO_EXTENSION);
-		// echo "<pre>";
-		// var_dump($imagePath);
-		// var_dump($imageWithoutExt);
-		// var_dump($ext);
-		// var_dump($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.thumbnail.' . $ext);
-		// var_dump($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.wm.' . $ext);
-		// var_dump(file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath));
-		// die;
+		
 		unlink($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.thumbnail.' . $ext);
 		unlink($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.wm.' . $ext);
 		return $this->jsonResponse([
