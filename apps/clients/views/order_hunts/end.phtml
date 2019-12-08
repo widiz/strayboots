@@ -370,7 +370,7 @@ if ($hasFiles): ?>
 					<? if (($uid = (int)$this->session->get('userID')) && \Users::findFirstById($uid)): ?>
 						<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
 					<? endif ?>
-					<a href="<?= $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
+					<a href="<?= ($orderHunt->order_id == 2869) ? $url : $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
 						<div class="team-name">
 							<span><?= isset($teamNames[$f[1]]) ? $teamNames[$f[1]][0] : '' ?></span>
 							<small><?= date($timeFormat, $f[2]) ?></small>
@@ -411,7 +411,7 @@ $hasTeam = isset($f[3]) && isset($playersInfo[$f[3]]);
 					<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
 				<? endif ?>
 				<div class="img-gallery">
-					<a href="<?= $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
+					<a href="<?= ($orderHunt->order_id == 2869) ? $url : $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
 
 						<div class="team-name">
 <? if ($hasTeam): ?>
