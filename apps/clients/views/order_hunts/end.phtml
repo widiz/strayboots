@@ -407,10 +407,10 @@ $watermark = str_replace('thumbnail', 'wm', $thumbnail);
 $hasTeam = isset($f[3]) && isset($playersInfo[$f[3]]);
 ?>
 			<div class="imgbox col-md-2 col-xs-4" data-team="<?= $hasTeam ? $playersInfo[$f[3]][0] : 0 ?>">
+				<? if (($uid = (int)$this->session->get('userID')) && \Users::findFirstById($uid)): ?>
+					<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
+				<? endif ?>
 				<div class="img-gallery">
-					<? if (($uid = (int)$this->session->get('userID')) && \Users::findFirstById($uid)): ?>
-						<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
-					<? endif ?>
 					<a href="<?= $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
 
 						<div class="team-name">

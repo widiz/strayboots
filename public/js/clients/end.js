@@ -60,7 +60,7 @@ $(function(){
 
 	var $gallery = $('#blueimp-gallery');
 	$('#team-filter .play').click(function(){
-		var $a = $images.filter(':visible').first().find('a');
+		var $a = $images.filter(':visible').first().find('.img-gallery a');
 		if ($a.length > 0) {
 			$gallery.unbind('slidecomplete.kk').one('slidecomplete.kk', function(event){
 				setTimeout(function(){
