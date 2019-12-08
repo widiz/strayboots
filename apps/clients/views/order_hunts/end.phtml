@@ -366,10 +366,10 @@ if ($hasFiles): ?>
 		$watermark = str_replace('thumbnail', 'wm', $thumbnail);
 ?>
 			<div class="imgbox col-md-2 col-xs-6" data-team="<?= $f[1] ?>">
+				<? if (($uid = (int)$this->session->get('userID')) && \Users::findFirstById($uid)): ?>
+					<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
+				<? endif ?>
 				<div class="img-gallery">
-					<? if (($uid = (int)$this->session->get('userID')) && \Users::findFirstById($uid)): ?>
-						<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
-					<? endif ?>
 					<a href="<?= ($orderHunt->order_id == 2869) ? $url : $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">
 						<div class="team-name">
 							<span><?= isset($teamNames[$f[1]]) ? $teamNames[$f[1]][0] : '' ?></span>
