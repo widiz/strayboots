@@ -80,9 +80,11 @@
 						<a href="<?= $this->url->get('map') ?>"<?= $controllerName == 'map' ? ' class="active"' : '' ?>><i class="icn map"></i></a>
 					</div>
 <? endif ?>
+<? if (!$chatDisabled): ?>
 					<div  class="col-sm-<?= $colSize ?> f-chat">
 						<a href="<?= $this->url->get('chat') ?>"<?= $controllerName == 'chat' ? ' class="active"' : '' ?>><i class="icn chat"><div class="beeper"></div></i></a>
 					</div>
+<? endif ?>
 					<? /*<a href="<?= $this->url->get('index/logout') ?>"><i class="fa fa-times"></i></a> */ ?>
 				</div>
 			</div>

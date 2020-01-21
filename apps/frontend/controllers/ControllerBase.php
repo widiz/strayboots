@@ -120,6 +120,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
         $this->view->mapDisabled = $orderHunt->isMapDisabled();
         $this->view->facebookDisabled = $orderHunt->isFacebookDisabled();
         $this->view->isMultiHunt = $orderHunt->isMultiHunt();
+        $this->view->chatDisabled = $orderHunt->isChatDisabled();
       }
     } else {
       $this->view->mapDisabled = $this->view->facebookDisabled = $this->view->leaderboardDisabled = $this->view->loggedIn = $this->view->isMultiHunt = false;

@@ -154,6 +154,7 @@ class OrderHuntsController extends \ControllerBase
 			$this->tag->setDefault('disable_skip', $orderHunt->isSkippingButtonDisabled());
 			$this->tag->setDefault('disable_hint', $orderHunt->isHintDisabled());
 			$this->tag->setDefault('disable_emails', $orderHunt->isEmailsDisabled());
+			$this->tag->setDefault('disable_chat', $orderHunt->isChatDisabled());
 		}
 		$this->addEdit();
 	}
@@ -230,6 +231,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setSkippingButtonDisabled($this->request->getPost('disable_skip'));
 		$orderHunt->setHintDisabled($this->request->getPost('disable_hint'));
 		$orderHunt->setEmailsDisabled($this->request->getPost('disable_emails'));
+		$orderHunt->setChatDisabled($this->request->getPost('disable_chat'));
 
 		$hunt = $orderHunt->Hunt;
 
@@ -381,6 +383,7 @@ class OrderHuntsController extends \ControllerBase
 		$orderHunt->setSkippingButtonDisabled($this->request->getPost('disable_skip'));
 		$orderHunt->setHintDisabled($this->request->getPost('disable_hint'));
 		$orderHunt->setEmailsDisabled($this->request->getPost('disable_emails'));
+		$orderHunt->setChatDisabled($this->request->getPost('disable_chat'));
 
 		$hunt = $orderHunt->Hunt;
 		$isOk = true;

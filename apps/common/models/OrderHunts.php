@@ -725,6 +725,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 2048);
 	}
 
+	public function isChatDisabled()
+	{
+		return (bool)($this->flags & 4096);
+	}
+
 	public function setCustomLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
@@ -783,6 +788,11 @@ class OrderHunts extends \Phalcon\Mvc\Model
 	public function setEmailsDisabled($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 2048;
+	}
+
+	public function setChatDisabled($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 4096;
 	}
 
 	/**
