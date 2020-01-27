@@ -14,6 +14,7 @@ class IndexController extends ControllerBase
 
   public function indexAction()
   {
+    // var_dump(rand(100000, 1000000));die;
     $saudi = defined('SAUDI_ARABIA_HUNT');
     if ($this->player instanceof Players) {
       if (filter_input(INPUT_POST, 'logout', FILTER_VALIDATE_BOOLEAN)) {
@@ -25,10 +26,14 @@ class IndexController extends ControllerBase
       return true;
     } else if ($this->request->isPost()) {
       $isAjax = (bool)$this->request->getQuery('ajaxlogin');
-      $email = mb_strtolower($this->request->getPost('email', 'email'));
-      $first_name = $this->request->getPost('first_name', 'trim');
-      $last_name = $this->request->getPost('last_name', 'trim');
       $activation = $this->request->getPost('activation', 'trim');
+      $email = mb_strtolower($this->request->getPost('email', 'email'));
+      if (ORDER_HUNT_OVERRIDE_REMOVE_EMAIL) {
+        $email = explode('-', $activation)[0] . rand(100000000, 10000000000) . '@sb.com';
+      }
+      $first_name = $this->request->getPost('first_name', 'trim');
+      
+      $last_name = $this->request->getPost('last_name', 'trim');
       $id = (int)$this->request->getPost('id', 'int');
       $lpId = (int)$this->request->getPost('lp', 'int');
       $validEmail = filter_var($email, FILTER_VALIDATE_EMAIL);

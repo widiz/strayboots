@@ -156,9 +156,18 @@ class LoginPages extends \Phalcon\Mvc\Model
 		return (bool)($this->flags & 1);
 	}
 
+	public function isRemoveEmail()
+	{
+		return (bool)($this->flags & 2);
+	}
+
 	public function setActivationCodeLogin($value)
 	{
 		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 1;
 	}
 
+	public function setRemoveEmail($value)
+	{
+		$this->flags ^= (($value ? -1 : 0) ^ $this->flags) & 2;
+	}
 }

@@ -83,6 +83,7 @@ class LoginPagesController extends \ControllerBase
 			$this->tag->setDefault('email_login', $loginPage->email_login);
 			$this->tag->setDefault('order_hunt_id', $loginPage->order_hunt_id);
 			$this->tag->setDefault('activation_code_login', $loginPage->isActivationCodeLogin());
+			$this->tag->setDefault('remove_email', $loginPage->isRemoveEmail());
 
 		}
 
@@ -131,6 +132,7 @@ class LoginPagesController extends \ControllerBase
 			$loginPage->email_login = null;
 
 		$loginPage->setActivationCodeLogin($this->request->getPost('activation_code_login'));
+		$loginPage->setRemoveEmail($this->request->getPost('remove_email'));
 
 		if (!$loginPage->save()) {
 			foreach ($loginPage->getMessages() as $message) {
@@ -183,6 +185,7 @@ class LoginPagesController extends \ControllerBase
 			$loginPage->email_login = null;
 
 		$loginPage->setActivationCodeLogin($this->request->getPost('activation_code_login'));
+		$loginPage->setRemoveEmail($this->request->getPost('remove_email'));
 
 		if (!$loginPage->save()) {
 

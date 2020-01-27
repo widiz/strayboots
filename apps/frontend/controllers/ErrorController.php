@@ -23,6 +23,7 @@ class ErrorController extends ControllerBase
 			if ($orderHunt && !$orderHunt->isCanceled()) {
 				define('ORDER_HUNT_OVERRIDE', $loginPage->order_hunt_id);
 				define('ORDER_HUNT_OVERRIDE_USE_ACTIVATION_CODE', $loginPage->isActivationCodeLogin());
+				define('ORDER_HUNT_OVERRIDE_REMOVE_EMAIL', $loginPage->isRemoveEmail());
 				define('OVERRIDE_STANDARDLOGIN', 1);
 				if (!empty($loginPage->title))
 					define('TITLE_OVERRIDE', $loginPage->title);
