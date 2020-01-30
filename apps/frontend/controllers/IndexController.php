@@ -28,7 +28,7 @@ class IndexController extends ControllerBase
       $isAjax = (bool)$this->request->getQuery('ajaxlogin');
       $activation = $this->request->getPost('activation', 'trim');
       $email = mb_strtolower($this->request->getPost('email', 'email'));
-      if (ORDER_HUNT_OVERRIDE_REMOVE_EMAIL) {
+      if (defined('ORDER_HUNT_OVERRIDE_REMOVE_EMAIL') && ORDER_HUNT_OVERRIDE_REMOVE_EMAIL) {
         $email = explode('-', $activation)[0] . rand(100000000, 10000000000) . '@sb.com';
       }
       $first_name = $this->request->getPost('first_name', 'trim');

@@ -35,7 +35,7 @@ if (SBENV === 'europe') {
 								<?= $this->tag->hiddenField(['last_name', 'id' => "lastNameField"]) ?>
 								<?= $this->tag->hiddenField(['network', 'id' => "networkField"]) ?>
 								<?= $this->tag->hiddenField(['network_id', 'id' => "networkIdField"]) ?>
-<? if (ORDER_HUNT_OVERRIDE_REMOVE_EMAIL): ?>
+<? if (defined('ORDER_HUNT_OVERRIDE_REMOVE_EMAIL') && ORDER_HUNT_OVERRIDE_REMOVE_EMAIL): ?>
 								<?= $this->tag->emailField(['email', 'required' => 'required', 'class' => 'answer hidden', 'id' => 'emailField', 'placeholder' => $t->_('Email')]) ?>
 <? else: ?>
 								<?= $this->tag->emailField(['email', 'required' => 'required', 'class' => 'answer', 'id' => 'emailField', 'placeholder' => $t->_('Email')]) ?>
