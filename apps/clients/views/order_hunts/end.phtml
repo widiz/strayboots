@@ -367,7 +367,8 @@ if ($hasFiles): ?>
 ?>
 			<div class="imgbox col-md-2 col-xs-6" data-team="<?= $f[1] ?>">
 				<? if (($uid = (int)$this->session->get('userID')) && \Users::findFirstById($uid)): ?>
-					<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Delete</a></div>
+					<div class="del-chat-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-danger">Delete</a></div>
+					<div class="rotate-img" data-url="<?= $url ?>"><a href="javascript:;" class="btn btn-warning">Rotate</a></div>
 				<? endif ?>
 				<div class="img-gallery">
 					<a href="<?= ($orderHunt->order_id == 2869) ? $url : $watermark ?>" id="x<?= md5($url) ?>" data-gallery="">

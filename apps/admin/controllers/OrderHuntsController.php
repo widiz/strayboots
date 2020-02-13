@@ -997,4 +997,62 @@ EOF;
 			'success' => file_exists($_SERVER['DOCUMENT_ROOT'] . $imagePath) ? unlink($_SERVER['DOCUMENT_ROOT'] . $imagePath) : false
 		]);
 	}
+
+	public function rotateImageAction()
+	{
+		$imagePath = $this->request->getPost('img');
+		$imageWithoutExt = preg_replace('/\.(jpg|png|gif)$/', '', $imagePath);
+		$ext = pathinfo($imagePath, PATHINFO_EXTENSION);
+
+		$result = false;
+		
+		if (file_exists($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.thumbnail.' . $ext)) {
+			unlink($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.thumbnail.' . $ext);
+		}
+		if (file_exists($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.wm.' . $ext)) {
+			unlink($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt . '.wm.' . $ext);
+		}
+
+		switch ($ext) {
+			case 'jpg':
+			case 'jpeg':
+				$result = $this->rotateJpegAndSaveImage($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt, $ext);
+				break;
+			case 'png':
+				$result = $this->rotatePngAndSaveImage($_SERVER['DOCUMENT_ROOT'] . $imageWithoutExt, $ext);
+				break;
+		}
+
+		if ($result) {
+			unlink($_SERVER['DOCUMENT_ROOT'] . $imagePath);
+		}
+
+		return $this->jsonResponse([
+			'success' => $result
+		]);
+	}
+
+	protected function rotateJpegAndSaveImage($img, $ext)
+	{
+		$source = imagecreatefromjpeg($img . '.' . $ext);
+		$rotate = imagerotate($source, -90, 0);
+		$result = imagejpeg($rotate, $img . '1.' . $ext);
+
+		imagedestroy($source);
+		imagedestroy($rotate);
+
+		return $result;
+	}
+
+	protected function rotatePngAndSaveImage($img, $ext)
+	{
+		$source = imagecreatefrompng($img . '.' . $ext);
+		$rotate = imagerotate($source, -90, 0);
+		$result = imagepng($rotate, $img . '1.' . $ext);
+
+		imagedestroy($source);
+		imagedestroy($rotate);
+
+		return $result;
+	}
 }

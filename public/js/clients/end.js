@@ -92,4 +92,25 @@ $(function(){
 			});
 		}
 	});
+	$(".rotate-img").click(function() {
+		var image = $(this).data('url');
+		var r = confirm("Are you sure?");
+		if (r == true) {
+			$.ajax({
+				type: "POST",
+				url: '/admin/order_hunts/rotateImage',
+				data: {
+					'img': image,
+				},
+				success: function(data) {
+					if (typeof data === 'object' && data && data.success) {
+						window.location.reload(true);
+					}
+				},
+				error: function(error){
+
+				}
+			});
+		}
+	});
 });

@@ -770,8 +770,18 @@ footer.newfooter .cr{
 .del-chat-img {
 	position: absolute;
 	top: 0;
-	right: 40%;
+	right: 20%;
 }
 .del-chat-img > a {
+	z-index: 1;
+	color: #fff;
+}
+
+.rotate-img {
+	position: absolute;
+	top: 0;
+	right: 60%;
+}
+.rotate-img > a {
 	z-index: 1;
 }
