@@ -686,6 +686,7 @@ class HuntsController extends \ControllerBase
 				//$_route->setTransaction($transaction);
 				if (!$_route->delete()) {
 					$_route->active = 0;
+					$_route->deleted = 1;
 					if ($_route->save())
 						$this->flash->error('Route #' . ($r + 1) . ': Can\'t delete route; Deactivating instead');
 					else

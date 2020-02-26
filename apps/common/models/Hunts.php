@@ -213,7 +213,7 @@ class Hunts extends \Phalcon\Mvc\Model
 	}
 
 	public function getRoutes($all = false){
-		$routes = Routes::find('hunt_id=' . (int)$this->id . ($all ? '' : ' AND active=1'))->toArray();
+		$routes = Routes::find('hunt_id=' . (int)$this->id . ($all ? ' AND deleted=0' : ' AND active=1'))->toArray();
 		$rids = [];
 		foreach ($routes as $route)
 			$rids[] = $route['id'];

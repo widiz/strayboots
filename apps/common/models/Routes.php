@@ -24,6 +24,12 @@ class Routes extends \Phalcon\Mvc\Model
 	public $active;
 
 	/**
+	 *
+	 * @var integer
+	 */
+	public $deleted;
+
+	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()
@@ -61,6 +67,11 @@ class Routes extends \Phalcon\Mvc\Model
 		$validator->add('active', new Phalcon\Validation\Validator\InclusionIn([
 			'domain' => [0, 1],
 			'message' => 'Active is invalid'
+		]));
+
+		$validator->add('deleted', new Phalcon\Validation\Validator\InclusionIn([
+			'domain' => [0, 1],
+			'message' => 'Delete is invalid'
 		]));
 
 		return $this->validate($validator);
