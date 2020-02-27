@@ -792,4 +792,32 @@ class HuntsController extends \ControllerBase
 		exit;
 	}
 
+	public function addNotesAction()
+	{
+		if ($this->request->isPost()) {
+			$notes = trim(strip_tags($this->request->getPost('notes')));
+			$routeId = (int)$this->request->getPost('route-id');
+			$route = Routes::findFirstById($routeId);
+			if (!$route) {
+				return $this->jsonResponse([
+					'success' => false,
+					'msg' => 'Route was not found'
+				]);
+			}
+
+			$route->notes = $notes;
+			if (!$route->save()) {
+				return $this->jsonResponse([
+					'success' => false,
+					'msg' => 'Something went wrong'
+				]);
+			}
+
+			$this->flash->success('Route updated successfully');
+			return $this->jsonResponse([
+				'success' => true,
+			]);
+		}
+	}
+
 }

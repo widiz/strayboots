@@ -30,6 +30,12 @@ class Routes extends \Phalcon\Mvc\Model
 	public $deleted;
 
 	/**
+	 *
+	 * @var text
+	 */
+	public $notes;
+
+	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()

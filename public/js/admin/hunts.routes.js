@@ -69,7 +69,7 @@ $(function(){
 	});
 
 	try {
-		var currentRoutes = JSON.parse($routesField.val());
+		currentRoutes = JSON.parse($routesField.val());
 		for (i = 0; i < currentRoutes.length; i++)
 			addRoute(currentRoutes[i]);
 	} catch(e) {}
@@ -89,6 +89,43 @@ $(function(){
 			}
 		});
 		return valid;
+	});
+
+	$('.add-notes').click(function(){
+		var routeId = $(this).closest('.ibox').data('id');
+		for (i = 0; i < currentRoutes.length; i++) {
+			if (parseInt(currentRoutes[i].id) === routeId) {
+				$('#form-notes textarea').val(currentRoutes[i].notes);
+				break;
+			}
+		}
+			
+		$("#form-notes input[type='hidden']").val(routeId);
+		$("#add-notes").on('hidden.bs.modal', function () {
+		   	$('#form-notes textarea').val('');
+		}).modal('show');
+		return false;
+	});
+
+	$('#form-notes').submit(function(){
+		$.ajax({
+    		type: "POST",
+			url: "/admin/hunts/addNotes/",
+			data: $('#form-notes').serialize(),
+			success: function(data){
+				if (typeof data == 'object' && data.success === true) {							
+					location.reload();
+				}
+				else {
+					alert(data.msg);
+					$("#add-notes").modal('hide');
+				}
+			},
+			error: function(){
+				alert('An error occurred; please refresh and try again');
+			}
+		});
+		return false;
 	});
 
 	$('.map-preview').click(function(){
@@ -158,6 +195,7 @@ $(function(){
 				'<div class="ibox-title">' +
 					'<h5><a href="javascript:;" class="collapse-link">Route #<span>' + ($routes.children().length + 1) + '</span></a></h5>' +
 					'<div class="ibox-tools">' +
+						'<a href="javascript:;" class="btn btn-success btn-sm add-notes" style="margin:-6px 15px 0 0">Notes</a>' +
 						'<a href="javascript:;" class="btn btn-primary btn-sm map-preview" style="margin:-6px 15px 0 0">Map Preview</a>' +
 						'<label class="checkbox-inline" for="inlineCheckbox' + generalCounter + '"><input type="checkbox" value="1" id="inlineCheckbox' + generalCounter + '"' + (route.active ? ' checked' : '') + '> Active </label>' +
 						'<a href="#" class="collapse-link">' +
