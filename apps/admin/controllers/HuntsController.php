@@ -804,8 +804,13 @@ class HuntsController extends \ControllerBase
 					'msg' => 'Route was not found'
 				]);
 			}
-
-			$route->notes = $notes;
+			$myNotes = ($route->notes != '' && $route->notes != null) ? json_decode($route->notes) : [];
+			
+			$myNotes[] = [
+				'dateTime' => date('d/m/Y H:i'),
+				'note' => $notes
+			];
+			$route->notes = json_encode($myNotes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 			if (!$route->save()) {
 				return $this->jsonResponse([
 					'success' => false,

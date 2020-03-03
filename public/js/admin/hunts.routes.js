@@ -95,13 +95,21 @@ $(function(){
 		var routeId = $(this).closest('.ibox').data('id');
 		for (i = 0; i < currentRoutes.length; i++) {
 			if (parseInt(currentRoutes[i].id) === routeId) {
-				$('#form-notes textarea').val(currentRoutes[i].notes);
+				if (currentRoutes[i].notes != '' && currentRoutes[i].notes != null) {
+					var oldNotes = JSON.parse(currentRoutes[i].notes);
+					for (y = 0; y < oldNotes.length; y++) {
+						$('#form-notes .old-notes').append('<b>Date: ' + oldNotes[y].dateTime+ '</b><br>');
+						$('#form-notes .old-notes').append(oldNotes[y].note).text();
+						$('#form-notes .old-notes').append('<hr>');
+					}
+				}
 				break;
 			}
 		}
 			
 		$("#form-notes input[type='hidden']").val(routeId);
 		$("#add-notes").on('hidden.bs.modal', function () {
+		   	$('#form-notes .old-notes').text('');
 		   	$('#form-notes textarea').val('');
 		}).modal('show');
 		return false;
@@ -184,6 +192,11 @@ $(function(){
 	}
 
 	function addRoute(route, open) {
+		var colorNotesBtm = 'btn-success';
+		if (route.notes != '' && route.notes != null) {
+			colorNotesBtm = 'btn-danger';
+		}
+
 		open = !!open;
 		var list = '';
 		for (var j = 0; j < route.points.length; j++) {
@@ -195,7 +208,7 @@ $(function(){
 				'<div class="ibox-title">' +
 					'<h5><a href="javascript:;" class="collapse-link">Route #<span>' + ($routes.children().length + 1) + '</span></a></h5>' +
 					'<div class="ibox-tools">' +
-						'<a href="javascript:;" class="btn btn-success btn-sm add-notes" style="margin:-6px 15px 0 0">Notes</a>' +
+						'<a href="javascript:;" class="btn '+colorNotesBtm+' btn-sm add-notes" style="margin:-6px 15px 0 0">Notes</a>' +
 						'<a href="javascript:;" class="btn btn-primary btn-sm map-preview" style="margin:-6px 15px 0 0">Map Preview</a>' +
 						'<label class="checkbox-inline" for="inlineCheckbox' + generalCounter + '"><input type="checkbox" value="1" id="inlineCheckbox' + generalCounter + '"' + (route.active ? ' checked' : '') + '> Active </label>' +
 						'<a href="#" class="collapse-link">' +

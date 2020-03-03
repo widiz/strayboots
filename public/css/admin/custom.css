@@ -349,6 +349,12 @@ tr.details + tr {
 	float: left;
 	margin: 25px 25px 25px 0;
 }
+#form-notes .old-notes {
+	max-height: 400px; 
+	overflow: auto; 
+	overflow-wrap: break-word; 
+	white-space: pre-wrap;
+}
 @media all and (max-height: 640px) {
 	.errorpage img {
 		width: auto;
