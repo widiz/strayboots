@@ -104,7 +104,9 @@ EOF
 			}
 		}
 		if (count($points) > 1) {
-			$points = [end($points)];
+			if ($doBreak) {
+				$points = [end($points)];
+			}
 		}
 		
 		if (empty($questions)) {
