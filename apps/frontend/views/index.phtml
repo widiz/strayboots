@@ -40,7 +40,7 @@
 <? if (isset($ncr) && $ncr): ?>	<script>window.ncrHunt=!0</script><? endif ?>
 
 </head>
-<body class="body-element controller-<?= $controllerName ?>">
+<body class="body-element controller-<?= $controllerName ?>" oncopy="return false" oncut="return false" onpaste="return false">
 	<div class="main-section">
 <?= $this->partial('partials/header') ?>
 <?= $this->getContent() ?>
