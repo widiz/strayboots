@@ -88,7 +88,11 @@
 		</div>
 	<? endif ?>
 	<div id="team-score">
-		<div><?= $t->_('Team Score') ?></div>
+		<? if ($orderHunt->order_id == 3037) :?>
+			<div><?= $t->_('Score') ?></div>
+		<? else :?>
+			<div><?= $t->_('Team Score') ?></div>
+		<? endif ?>
 		<span><?= $teamStatus['score'] ?></span>
 	</div>
 <? endif ?>

@@ -325,6 +325,11 @@ EOF
           }
           $this->view->attachment = is_null($responseMsg['attachment']) ? false : json_decode($responseMsg['attachment'], true);
           $responseMsg = $responseMsg['funfact'];
+          if ($this->orderHunt->order_id == 3037) {
+            if ($responseMsg) {
+              $responseMsg = 'Fun Fact: ' . $responseMsg;
+            }
+          }
           if (!empty($answer) || $answer === '0')
             $this->view->correct_answer = $this->view->t->_('The correct answer was:') . '<br>' . $answer . '<br><br>';
         } else {
@@ -337,6 +342,11 @@ EOF
           }
           $this->view->attachment = is_null($responseMsg['attachment']) ? false : json_decode($responseMsg['attachment'], true);
           $responseMsg = $responseMsg['funfact'] . (empty($responseMsg['response_correct']) ? '' : ("\r\n\r\n" . $responseMsg['response_correct']));
+          if ($this->orderHunt->order_id == 3037) {
+            if ($responseMsg) {
+              $responseMsg = 'Fun Fact: ' . $responseMsg;
+            }
+          }
           /*$this->view->audio = [
             ['/files/cheers.mp3', 'audio/mpeg'],
             ['/files/cheers.wma', 'audio/wma'],
@@ -544,12 +554,12 @@ EOF
         if (is_null($thisOrderHunt->timeout_msg)) {
           if ($isB2C) {
             $this->view->leaderBoardPaypal = true;
-            $this->view->end_msg = '<h2>This hunt has ended!</h2>Hope you had fun, and be sure to spread the word about Strayboots!';
+            $this->view->end_msg = '<h2>This game has ended!</h2>Hope you had fun, and be sure to spread the word about Strayboots!';
           } else {
-            $this->view->end_msg = '<h2>This hunt has ended!</h2>Meet your group at your end location to hear the official results!<br><br>Hope you had fun - be sure to spread the word about Strayboots!';
+            $this->view->end_msg = '<h2>This game has ended!</h2>Meet your group at your end location to hear the official results!<br><br>Hope you had fun - be sure to spread the word about Strayboots!';
           }
         } else {
-          $this->view->end_msg = '<h2>This hunt has ended!</h2>' . nl2br(htmlspecialchars($thisOrderHunt->timeout_msg));
+          $this->view->end_msg = '<h2>This game has ended!</h2>' . nl2br(htmlspecialchars($thisOrderHunt->timeout_msg));
         }
       } else {
         $this->view->showHint = $showHint = !defined('hideHints') && $redis->exists(SB_PREFIX . 'hint:' . $thisOrderHunt->id . ':' . $thisTeam->id . ':' . $question['id']);

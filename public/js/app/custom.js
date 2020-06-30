@@ -84,7 +84,9 @@ $(function(){
             }
           } else if (seconds < 1200) {
             show20SecWarn = false;
-            blackbox("You've got 20 minutes left for your scavenger hunt.<br>Let's get things rolling!"._());
+            if (window.appLoc.orderId != 3037) {
+              blackbox("You've got 20 minutes left for your scavenger hunt.<br>Let's get things rolling!"._());
+            }
             setCookie('twentysecwarn' + window.appLoc.orderHunt, 1, 1);
           }
         }
