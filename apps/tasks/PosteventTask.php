@@ -141,6 +141,9 @@ class PosteventTask extends TaskBase
 		echo 'done' . PHP_EOL;
 		$sm = [$this, 'sendMail'];
 		foreach ($results as $orderHunt) {
+			if ($orderHunt->isEmailsDisabled()) {
+				continue;
+			}
 			echo 'Processing order hunt #' . $orderHunt->id;
 			$pe = new NewOrderHuntPostEvent($orderHunt, true, false);
 			echo '.';
