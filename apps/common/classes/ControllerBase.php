@@ -258,7 +258,7 @@ class ControllerBase extends Phalcon\Mvc\Controller
 				$success =  false;
 			}
 		}
-		return /*$success*/ true;
+		return $success /*true*/;
 	}
 
 	/**

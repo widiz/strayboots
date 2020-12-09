@@ -199,7 +199,7 @@ $(function(){
 							$.post("/admin/order_hunts/mail/" + id, {
 								email: testing ? $email.val() : ''
 							}, function(data){
-								if (typeof data == 'object' && typeof data.success === true)
+								if (typeof data == 'object' && data.success === true)
 									toastr.success(null, "Email sent");
 								else
 									toastr.error(null, 'Unknown error occurred; please try again later');
