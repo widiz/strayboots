@@ -60,7 +60,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
 <? if ((isset($question) || isset($end_msg)) && !$facebookDisabled): ?>
 					<div id="shareblock">
-						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+						<? if ($orderHuntId == 3171) :?>
+							<a href="http://facebook.com/DiscoverSantaFe.us/reviews" target="_blank" class="btn btn-primary"><?= $t->_('Review us on Facebook') ?></a>
+						<? else :?>
+							<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+						<? endif ?>
 					</div>
 <? endif ?>
 				</div>
@@ -120,7 +124,11 @@ endif ?>
 <? endif ?>
 <? if (isset($answerAction) && !$facebookDisabled && (isset($question) || (isset($end_msg) && !isset($response_msg)))): ?>
 					<div id="shareblock">
-						<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+						<? if ($orderHuntId == 3171) :?>
+							<a href="http://facebook.com/DiscoverSantaFe.us/reviews" target="_blank" class="btn btn-primary"><?= $t->_('Review us on Facebook') ?></a>
+						<? else :?>
+							<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+						<? endif ?>
 					</div>
 <? endif ?>
 				</div>
