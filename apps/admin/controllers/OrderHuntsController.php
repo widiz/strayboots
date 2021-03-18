@@ -412,8 +412,8 @@ class OrderHuntsController extends \ControllerBase
 		}
 
 		try {
-			if ($orderHunt->hunt_id != $oldHuntId || $oldIsCustomLogin != $orderHunt->isCustomLogin() || $oldIsCustomLogin)
-				$orderHunt->resetTeams();
+			// if ($orderHunt->hunt_id != $oldHuntId || $oldIsCustomLogin != $orderHunt->isCustomLogin() || $oldIsCustomLogin)
+			// 	$orderHunt->resetTeams();
 			if (($teamsToAdd = $orderHunt->max_teams - $orderHunt->Teams->count()) > 0)
 				$orderHunt->addTeams($teamsToAdd);
 
