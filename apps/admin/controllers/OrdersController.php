@@ -117,7 +117,11 @@ class OrdersController extends \ControllerBase
 
 	public static function mailPDF(Clients $client)
 	{
+		// Client Access:
 
+		// You can access our clients area here {$config->fullUri}/clients
+		// Login with your email ({$client->email}) and the following password: {$client->password}
+		// Make sure you add some swag to your hunt here: https://www.straybootsgear.com/
 		$di = \Phalcon\Di::getDefault();
 		$config = $di->get('config');
 
@@ -126,16 +130,10 @@ Hi {$client->first_name}!
 
 I hope you and your team are getting excited for your hunt...we’re definitely getting excited for you! Next steps are super simple – I’ve attached everything you’ll need to get started, along with some helpful notes below. With both of those things and a phone per team, you’re good to go!
 
-Client Access:
-
-You can access our clients area here {$config->fullUri}/clients
-Login with your email ({$client->email}) and the following password: {$client->password}
-
 Getting Started:
 
 First and foremost, DO NOT play through the app. You’ll be playing through your phone’s web browser.
 Each Captain will get an Instruction Sheet with a unique activation code. You can either email the Instruction Sheets out, or hand them out right before the hunt starts. When you’re ready to start playing, have each Captain go to $config->fullUri on their phone and enter their unique code. Now they’re ready to start!
-Make sure you add some swag to your hunt here: https://www.straybootsgear.com/
 
 Good to Know:
 
@@ -162,17 +160,10 @@ Hi {$client->first_name}!<br>
 <br>
 I hope you and your team are getting excited for your hunt...we’re definitely getting excited for you! Next steps are super simple – I’ve attached everything you’ll need to get started, along with some helpful notes below. With both of those things and a phone per team, you’re good to go!<br>
 <br>
-<b>Client Access:</b><br>
-<ul>
-<li>You can access our clients area here <a href="{$config->fullUri}/clients">{$config->fullUri}/clients</a></li>
-<li>Login with your email ({$client->email}) and the following password: {$client->password}</li>
-</ul>
-<br>
 <b>Getting Started:</b><br>
 <ul>
 <li>First and foremost, DO NOT play through the app. You’ll be playing through your phone’s web browser.</li>
 <li>Each Captain will get an Instruction Sheet with a unique activation code. You can either email the Instruction Sheets out, or hand them out right before the hunt starts. When you’re ready to start playing, have each Captain go to <a href="{$config->fullUri}/">{$config->fullUri}</a> on their phone and enter their unique code. Now they’re ready to start!</li>
-<li>Make sure you add some swag to your hunt here: <a href="https://www.straybootsgear.com">https://www.straybootsgear.com/</a></li>
 </ul>
 <br>
 <b>Good to Know:</b><br>
