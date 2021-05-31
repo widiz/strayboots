@@ -63,7 +63,11 @@ document.addEventListener("DOMContentLoaded", function(){
 						<? if ($orderHuntId == 4080) :?>
 							<a href="http://facebook.com/DiscoverSantaFe.us/reviews" target="_blank" class="btn btn-primary"><?= $t->_('Review us on Facebook') ?></a>
 						<? else :?>
-							<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+							<? if ($orderHuntId == 4121) :?>
+								<a href="https://www.facebook.com/LBI-Vibe-Challenge-106914531600975" target="_blank" class="btn btn-primary"><?= $t->_('Share with Facebook') ?></a>
+							<? else :?>
+								<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+							<? endif ?>
 						<? endif ?>
 					</div>
 <? endif ?>
@@ -127,7 +131,11 @@ endif ?>
 						<? if ($orderHuntId == 4080) :?>
 							<a href="http://facebook.com/DiscoverSantaFe.us/reviews" target="_blank" class="btn btn-primary"><?= $t->_('Review us on Facebook') ?></a>
 						<? else :?>
-							<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+							<? if ($orderHuntId == 4121) :?>
+								<a href="https://www.facebook.com/LBI-Vibe-Challenge-106914531600975" target="_blank" class="btn btn-primary"><?= $t->_('Share with Facebook') ?></a>
+							<? else :?>
+								<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+							<? endif ?>
 						<? endif ?>
 					</div>
 <? endif ?>
