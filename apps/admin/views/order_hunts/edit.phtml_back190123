@@ -1,0 +1,214 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+	<h1>
+		Order hunts / <span style="font-size:80%"><?= $this->tag->linkTo(['order_hunts/' . $order->id, 'Order #' . $order->id . ' ' . htmlspecialchars($order->name) . ' <small>' . htmlspecialchars($client->first_name . ' ' . $client->last_name) . '</small>']) ?></span>
+	</h1>
+	<h2>
+		Edit order hunt
+	</h2>
+</div>
+
+<?= $this->getContent() ?>
+
+<?php
+	echo $this->tag->form([
+		'order_hunts/save',
+		'autocomplete' => 'off',
+		'class' => 'form-horizontal'
+	]);
+?>
+
+<?= $this->tag->hiddenField('order_id') ?>
+
+<div class="form-group">
+	<label for="fieldHuntId" class="col-sm-2 control-label">Hunt</label>
+	<div class="col-sm-10">
+		<?= $this->tag->select([
+			'hunt_id',
+			(new \Phalcon\Mvc\Model\Query\Builder())
+				->columns(['h.id', "CONCAT(h.name,' (',c.name,')') AS name"])
+				->from(['h' => 'Hunts'])
+				->leftJoin('Cities', 'c.id = h.city_id', 'c')
+				->where('h.type_id = 2' . ($hunt->type_id != 2 ? ' OR h.id = ' . $hunt->id : ''))
+				->getQuery()
+				->execute(),
+			'id'			=> 'fieldHuntId',
+			'class'			=> 'form-control select2-auto',
+			'using'			=> ['id', 'name'],
+			'useEmpty'		=> true,
+			'emptyText'		=> '',
+			'emptyValue'	=> ''
+		]); ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldMaxPlayers" class="col-sm-2 control-label">Max Players</label>
+	<div class="col-sm-10">
+		<?= $this->tag->numericField(['max_players', 'type' => 'number', 'min' => 1, 'max' => 65000, 'class' => 'form-control', 'id' => 'fieldMaxPlayers']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldMaxTeams" class="col-sm-2 control-label">Max Teams</label>
+	<div class="col-sm-10">
+		<?= $this->tag->numericField(['max_teams', 'type' => 'number', 'min' => 1, 'max' => 65000, 'class' => 'form-control', 'id' => 'fieldMaxTeams']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldStart" class="col-sm-2 control-label">Start</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['start', 'size' => 30, 'class' => 'form-control datetimepicker', 'id' => 'fieldStart']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldFinish" class="col-sm-2 control-label">Finish</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['finish', 'size' => 30, 'class' => 'form-control datetimepicker', 'id' => 'fieldFinish']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldExpire" class="col-sm-2 control-label">Expire</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['expire', 'size' => 30, 'class' => 'form-control datetimepicker', 'id' => 'fieldExpire']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldMaxTeams" class="col-sm-2 control-label">PDF Start</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textArea(['pdf_start', 'cols' => 30, 'rows' => 3, 'maxlength' => 150, 'class' => 'form-control', 'id' => 'fieldPdfStart']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldMaxTeams" class="col-sm-2 control-label">PDF Finish</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textArea(['pdf_finish', 'cols' => 30, 'rows' => 3, 'maxlength' => 150, 'class' => 'form-control', 'id' => 'fieldPdfFinish']) ?>
+	</div>
+</div>
+
+<hr style="border-top: 2px solid #999;">
+
+<div class="form-group">
+	<label for="teamText" class="col-sm-2 control-label">Name Your Team</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['team_text', 'class' => 'form-control', 'id' => 'teamText']) ?>
+		<p>Default Text: "Name Your Team"</p>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldRedirect" class="col-sm-2 control-label">Logout redirect URL</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['redirect', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldRedirect', 'placeholder' => 'http://...']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="surveyId" class="col-sm-2 control-label">Survey Token</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['survey_id', 'class' => 'form-control', 'id' => 'surveyId']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldRedirect" class="col-sm-2 control-label">Youtube video id</label>
+	<div class="col-sm-10">
+		<?= $this->tag->textField(['video', 'size' => 30, 'class' => 'form-control', 'id' => 'fieldVideo', 'placeholder' => 'xX-0axzd-0x']) ?>
+	</div>
+</div>
+
+<hr style="border-top: 2px solid #999;">
+
+<div class="form-group">
+	<label for="fieldCustomLogin" class="col-sm-2 control-label">Custom login</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['custom_login', 'value' => 1, 'id' => 'fieldCustomLogin']) ?>
+	</div>
+	<label  style="display:none;" for="fieldSurveyDisabled" class="col-sm-2 control-label">Survey Disabled</label>
+	<div  style="display:none;" class="col-sm-2 checkbox-inline">
+		<input type="checkbox" id="fieldSurveyDisabled" name="survey_disabled" value="1" checked="checked" />
+
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldDurationFinish" class="col-sm-2 control-label">Duration finish</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['duration_finish', 'value' => 1, 'id' => 'fieldDurationFinish']) ?>
+	</div>
+	<label for="fieldLeaderBoardDisabled" class="col-sm-2 control-label">LeaderBoard Disabled</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['leaderboard_disabled', 'value' => 1, 'id' => 'fieldLeaderBoardDisabled']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldMultiHunt" class="col-sm-2 control-label">Multi Hunt</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['multi_hunt', 'value' => 1, 'id' => 'fieldMultiHunt']) ?>
+	</div>
+	<label for="fieldMapDisabled" class="col-sm-2 control-label">Map Disabled</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['map_disabled', 'value' => 1, 'id' => 'fieldMapDisabled']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldB2CEnabled" class="col-sm-2 control-label">B2C Enabled</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['b2c_enabled', 'value' => 1, 'id' => 'fieldB2CEnabled']) ?>
+	</div>
+	<label for="fieldFacebookDisabled" class="col-sm-2 control-label">Facebook Disabled</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['facebook_disabled', 'value' => 1, 'id' => 'fieldFacebookDisabled']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="fieldCanceled" class="col-sm-2 control-label">Canceled</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['canceled', 'value' => 1, 'id' => 'fieldCanceled']) ?>
+	</div>
+	<label for="diasbleHint" class="col-sm-2 control-label">Disable hint</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['disable_hint', 'value' => 1, 'id' => 'diasbleHint']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="diasbleEmails" class="col-sm-2 control-label">Disable post-event emails</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['disable_emails', 'value' => 1, 'id' => 'diasbleEmails']) ?>
+	</div>
+	<label for="disableSkippingButton" class="col-sm-2 control-label">Disable skipping button</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['disable_skip', 'value' => 1, 'id' => 'disableSkippingButton']) ?>
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="disableChat" class="col-sm-2 control-label">Disable chat</label>
+	<div class="col-sm-2 checkbox-inline">
+		<?= $this->tag->checkField(['disable_chat', 'value' => 1, 'id' => 'disableChat']) ?>
+	</div>
+</div>
+
+<?= $this->tag->hiddenField('id') ?>
+
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<?= $this->tag->submitButton(['Save', 'class' => 'btn btn-default']) ?>
+	</div>
+</div>
+
+<?= $this->tag->endForm() ?>

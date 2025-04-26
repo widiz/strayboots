@@ -91,7 +91,7 @@ class TaskBase extends \Phalcon\Cli\Task
 	 */
 	protected function bitly($url, $config)
 	{
-		$get = 'https://api-ssl.bitly.com/v3/shorten?login=' . $config->login . '&apiKey=' . $config->APIKey . '&longUrl=' . urlencode($url);
+		$get = 'https://api-ssl.bitly.com/v4/shorten?login=' . $config->login . '&apiKey=' . $config->APIKey . '&longUrl=' . urlencode($url);
 		if (is_object($response = json_decode(file_get_contents($get))))
 			return $response->status_code == 200 ? $response->data->url : $url;
 		return $url;

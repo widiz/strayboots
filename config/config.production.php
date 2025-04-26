@@ -53,7 +53,8 @@ return new \Phalcon\Config([
 		'storageBucket'	=> "project-309384948789582914.appspot.com"
 	],
 	'googleapis'	=> [
-		'maps'	=> 'AIzaSyBrR_FkVuGSjxFEbcLIVc_OIZg6VDhnpzM'
+		//'maps'	=> 'AIzaSyBrR_FkVuGSjxFEbcLIVc_OIZg6VDhnpzM'
+		'maps'	=> 'AIzaSyADdCo3rM2-BlWRRXqWB-9BNrQM0uRYELc'
 	],
 	'paypal'	=> [
 		'account' => 'billing@strayboots.com',

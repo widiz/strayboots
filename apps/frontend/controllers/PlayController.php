@@ -509,7 +509,7 @@ EOF
       } else {
 
         //$this->view->responseLink = ['Leaderboard', $this->url->get('leaderboard')];
-        $this->view->end_msg = '<h2>' . $this->view->t->_('Great job!') . '</h2>' . (is_null($thisOrderHunt->end_msg) ? $this->view->t->_('You\'ve completed your scavenger hunt!<br>Meet your group at your end location and be sure to spread the word about Strayboots!<br>(Check your email for the final Leaderboard and photos)') : nl2br(htmlspecialchars($thisOrderHunt->end_msg)));
+        $this->view->end_msg = '<h2 style="margin-top:-20px; margin-bottom:20px;">' . $this->view->t->_('Great job!') . '</h2>' . (is_null($thisOrderHunt->end_msg) ? $this->view->t->_('You\'ve completed your game!<br><br>We hope you had fun today. Meet your group at your end location to hear the final results.<br><span style="color:#ccc;">(Check your email later for the leaderboard and photos).</span>') : nl2br(htmlspecialchars($thisOrderHunt->end_msg)));
 
       }
 

@@ -134,9 +134,10 @@
 	<div class="col-sm-2 checkbox-inline">
 		<?= $this->tag->checkField(['custom_login', 'value' => 1, 'id' => 'fieldCustomLogin']) ?>
 	</div>
-	<label for="fieldSurveyDisabled" class="col-sm-2 control-label">Survey Disabled</label>
-	<div class="col-sm-2 checkbox-inline">
-		<?= $this->tag->checkField(['survey_disabled', 'value' => 1, 'id' => 'fieldSurveyDisabled']) ?>
+	<label  style="display:none;" for="fieldSurveyDisabled" class="col-sm-2 control-label">Survey Disabled</label>
+	<div  style="display:none;" class="col-sm-2 checkbox-inline">
+		<input type="checkbox" id="fieldSurveyDisabled" name="survey_disabled" value="1" checked="checked" />
+ 
 	</div>
 </div>
 
@@ -162,14 +163,21 @@
 	</div>
 </div>
 
+
 <div class="form-group">
 	<label for="fieldB2CEnabled" class="col-sm-2 control-label">B2C Enabled</label>
 	<div class="col-sm-2 checkbox-inline">
 		<?= $this->tag->checkField(['b2c_enabled', 'value' => 1, 'id' => 'fieldB2CEnabled']) ?>
 	</div>
-	<label for="fieldFacebookDisabled" class="col-sm-2 control-label">Facebook Disabled</label>
+
+		<label for="disableChat" class="col-sm-2 control-label">Disable chat</label>
 	<div class="col-sm-2 checkbox-inline">
-		<?= $this->tag->checkField(['facebook_disabled', 'value' => 1, 'id' => 'fieldFacebookDisabled']) ?>
+		<?= $this->tag->checkField(['disable_chat', 'value' => 1, 'id' => 'disableChat']) ?>
+	</div>
+	
+	<label style="display:none;" for="fieldFacebookDisabled" class="col-sm-2 control-label">Facebook Disabled</label>
+	<div style="display:none;" class="col-sm-2 checkbox-inline">
+		<input type="checkbox" id="fieldFacebookDisabled" name="facebook_disabled" value="1" checked="checked" />
 	</div>
 </div>
 
@@ -195,12 +203,6 @@
 	</div>
 </div>
 
-<div class="form-group">
-	<label for="disableChat" class="col-sm-2 control-label">Disable chat</label>
-	<div class="col-sm-2 checkbox-inline">
-		<?= $this->tag->checkField(['disable_chat', 'value' => 1, 'id' => 'disableChat']) ?>
-	</div>
-</div>
 
 <?= $this->tag->hiddenField('id') ?>
 

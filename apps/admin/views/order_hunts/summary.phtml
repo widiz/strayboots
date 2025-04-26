@@ -118,6 +118,7 @@ $hasEvents = !empty($customEvents);
 			</thead>
 			<tbody>
 <? foreach ($leaderboard as $team): $teamMaxTime = $team['times'][empty($team['times'][1]) ? 0 : 1]; ?>
+	
 				<tr<?= isset($teamNames[$team['id']]) ? " style=\"background-color:{$teamNames[$team['id']][1]}\"" : '' ?>>
 					<td><?= ($team['position'] < 10 ? "&nbsp;{$team['position']}&nbsp;" : $team['position']) ?></td>
 					<td><?= $team['name'] ?></td>

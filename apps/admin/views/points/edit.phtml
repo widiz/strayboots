@@ -86,12 +86,14 @@
 		<?= $this->tag->textField(["address", "size" => 30, "class" => "form-control", "id" => "fieldAddress"]) ?>
 	</div>
 	<div class="col-sm-offset-2 col-sm-10">
-		<div id="points-map"></div>
+		<div id="points-map" style="height: 300px !important; display:inline-block !important;"></div>
+		<p><b>To update latitude and longitude to current data, Please enter to this page again after changing the address and save.</b></p>
 	</div>
 	<label class="col-sm-offset-2 col-sm-10 map">
 		Latitude: <?= $this->tag->numericField(["latitude", "step" => "any", "size" => 30, "readonly" => "readonly", "id" => "fieldLatitude"]) ?>&nbsp; 
 		Longitude: <?= $this->tag->numericField(["longitude", "step" => "any", "size" => 30, "readonly" => "readonly", "id" => "fieldLongitude"]) ?>
 	</label>
+	<div class="note"></div>
 </div>
 
 <div class="form-group">

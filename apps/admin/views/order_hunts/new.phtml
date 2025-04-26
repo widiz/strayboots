@@ -128,9 +128,9 @@
 	<div class="col-sm-2 checkbox-inline">
 		<?= $this->tag->checkField(['custom_login', 'value' => 1, 'id' => 'fieldCustomLogin']) ?>
 	</div>
-	<label for="fieldSurveyDisabled" class="col-sm-2 control-label">Survey Disabled</label>
-	<div class="col-sm-2 checkbox-inline">
-		<?= $this->tag->checkField(['survey_disabled', 'value' => 1, 'id' => 'fieldSurveyDisabled']) ?>
+	<label style="display:none;"  for="fieldSurveyDisabled" class="col-sm-2 control-label" >Survey Disabled</label>
+	<div class="col-sm-2 checkbox-inline"  style="display:none;">
+			<input type="checkbox" id="fieldSurveyDisabled" name="survey_disabled" value="1" checked="checked" />
 	</div>
 </div>
 

@@ -114,7 +114,7 @@ class OrderHuntPDF extends OrderHuntMailBase {
 				padding-left: 0;
 				padding-right: 36px;
 			}
-			.p4 {
+			.p4 {.
 				padding-left: 24px;
 			}
 			.p5 {
@@ -174,7 +174,7 @@ EOF;
 		padding: 0;
 		border: 0;
 		width: 100%;
-		height: 649px;
+		height: 750px;
 		overflow: hidden;
 		margin: 0
 	}
@@ -417,6 +417,7 @@ EOF;
 	}
 	.nwc {
 		text-align: center;
+		vertical-align: middle;
 		white-space: nowrap;
 	}
 	.p10 {
@@ -546,15 +547,26 @@ EOF;
 		padding: 0;
 		margin: 0;
 		width: 188px;
-		vertical-align: bottom;
-		background: #eabf83;
+		vertical-align: top;
+		background: #f9f8f8;
+		
 	}
 	.td14 {
 		padding: 0;
 		margin: 0;
 		width: 195px;
-		vertical-align: bottom;
+		vertical-align: top;
+		background: #f9f8f8;
+	}
+
+	.td13_b {
+		background: #eabf83;
+		width: 188px;
+	}
+
+	.td14_b {
 		background: #dcdbdb;
+		width: 188px;
 	}
 	.t0 p {
 		padding: 0 20px 0 34px;
@@ -730,33 +742,17 @@ EOF;
 					<td class="tr5 td8{$playerh}"><p class="p3 ft9">{$translateArray['can.use']}:</p></td>
 					<td class="tr5 td12"><p class="p3 ft6">&nbsp;</p></td>
 				</tr>
-				<tr>
-					<td class="tr6 td4"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr6 td5"><p class="p6 ft9">&nbsp;</p></td>
-					<td class="tr6 td6"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr6 td7{$leaderh}"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr6 td10{$leaderh}"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr6 td11{$playerh}"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr6 td12"><p class="p3 ft6">&nbsp;</p></td>
-				</tr>
+		
 				<tr>
 					<td class="tr7 td4"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr7 td5"><p class="p3 ft6">&nbsp;</p></td>
+					<td class="tr7 td5"><p class="nwc ft12"><nobr><img src="{$assetsDir}qr.png" width="100"></nobr></p></td>
 					<td class="tr7 td6"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr7 td13{$leaderh}"><p class="nwc ft12"><nobr>{$team->activation_leader}</nobr></p></td>
+					<td class="tr7 td13{$leaderh}"><p class="nwc ft12 td13_b"><nobr>{$team->activation_leader}</nobr></p></td>
 					<td class="tr7 td10{$leaderh}"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr7 td14{$playerh}"><p class="nwc ft12"><nobr>{$team->activation_player}</nobr></p></td>
+					<td class="tr7 td14{$playerh}"><p class="nwc ft12 td14_b"><nobr>{$team->activation_player}</nobr></p></td>
 					<td class="tr7 td12"><p class="p3 ft6">&nbsp;</p></td>
 				</tr>
-				<tr>
-					<td class="tr8 td4"><p class="p3 ft13">&nbsp;</p></td>
-					<td class="tr8 td5"><p class="p3 ft13">&nbsp;</p></td>
-					<td class="tr8 td6"><p class="p3 ft13">&nbsp;</p></td>
-					<td class="tr8 td13{$leaderh}"><p class="p3 ft13">&nbsp;</p></td>
-					<td class="tr8 td10{$leaderh}"><p class="p3 ft13">&nbsp;</p></td>
-					<td class="tr8 td14{$playerh}"><p class="p3 ft13">&nbsp;</p></td>
-					<td class="tr8 td12"><p class="p3 ft13">&nbsp;</p></td>
-				</tr>
+			
 				<tr>
 					<td class="tr9 td4"><p class="p3 ft6">&nbsp;</p></td>
 					<td class="tr9 td5"><p class="p3 ft6">&nbsp;</p></td>

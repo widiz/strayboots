@@ -269,14 +269,14 @@ class OrderHuntsController extends \ControllerBase
 					$bonus->order_hunt_id = $orderHunt->id;
 					$bonus->type = BonusQuestions::TypeTeam;
 					$bonus->question = 'What country was the fortune cookie invented?';
-					$bonus->answers = 'USA';
+					$bonus->answers = "USA\r\nUnited States";
 					$bonus->score = 15;
 					$bonus->save();
 
 					$bonus = new BonusQuestions();
 					$bonus->order_hunt_id = $orderHunt->id;
 					$bonus->type = BonusQuestions::TypeTeam;
-					$bonus->question = 'What name did Theodore Geisel pen his books under?';
+					$bonus->question = 'What name did Theodor Geisel pen his books under?';
 					$bonus->answers = 'Dr. Seuss';
 					$bonus->score = 15;
 					$bonus->save();

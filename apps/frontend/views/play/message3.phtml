@@ -1,0 +1,181 @@
+
+		<div class="content-wrapper section-wrapper pmessagebox" id="playground">
+			<div class="container">
+<? if (isset($end_msg) && !isset($response_msg)): ?>
+<? if ($multiHunt && $lastMulti): ?>
+				<h1><?= $t->_('This game has ended!') ?></h1>
+				<div class="question" style="text-align:center">
+					<? $this->partial('partials/multihunt_end') ?>
+<? else: ?>
+				<div class="question" style="text-align:center; font-size:18px;">
+					<?= $end_msg; ?>
+<? endif ?>
+
+<? if (isset($leaderBoardPaypal) && $leaderBoardPaypal): ?>
+	<br><br>
+<form action="https://www.paypal.com/cgi-bin/webscr" target="_blank" method="post" class="d-block text-center">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="JKPL4S7W75HMU">
+	<input type="hidden" name="return" value="<?= $fullUri ?>/tours-thanks">
+	<input type="hidden" name="cancel_return" value="<?= $fullUri ?>/tours-thanks">
+	<table style="width:100%;border:0">
+	<tr><td><input type="hidden" name="on0" value="Tell Us About Your Experience and Pay What You Want">Tell Us About Your Experience and Pay What You Want</td></tr><tr><td><select name="os0" style="color:#000">
+		<option value="You Blew My Mind!">You Blew My Mind! </option>
+		<option value="It Was Awesome">It Was Awesome </option>
+		<option value="Really Fun">Really Fun </option>
+		<option value="Just ok">Just ok </option>
+		<option value="Not Fun">Not Fun </option>
+	</select></td></tr>
+	</table><br>
+	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="min-width:220px;max-width:100%;height:auto">
+	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+<? endif ?>
+				</div>
+<? if ($strategy): ?>
+				<?= isset($questions) ? $this->partial('play/strategy_list') : '' ?>
+<? else: ?>
+				<div class="options">
+					<!-- <?// if (!($leaderboardDisabled || (isset($leaderBoardPaypal) && $leaderBoardPaypal))): ?>
+					<a href="/clients/order_hunts/end/?h=<?//= rawurlencode($this->crypt->encryptBase64($orderHuntId)) ?>" class="btn btn-success" id="final-leaderboard"><?//= $t->_('Leaderboard') ?></a><br> -->
+					<!-- <?// endif;
+
+					/*if (isset($isSurveyAnswered) && !$isSurveyAnswered): ?>
+						<a href="/play/survey" class="btn btn-warning"><?= $t->_('Take a quick survey') ?></a>
+					<? endif*/ ?> -->
+<? if ($multiHunt && $isLeader && !$lastMulti): ?>
+					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-warning"><?= $t->_('Choose another hunt') ?></a>
+<? endif ?>
+					<script type="text/javascript">window.shareInfoEnd={title:'<?= $t->_('We just successfully finished our Strayboots scavenger hunt!') ?>',image:'<? if (isset($image)) echo $image; ?>',description:'<?= $t->_('That was so much fun!!! #teambuilding #scavengerhunt @strayboots') ?>',url:'https://www.strayboots.com/',caption:'Strayboots Scavenger Hunt'}</script>
+
+<? if ((isset($question) || isset($end_msg)) && !$facebookDisabled): ?>
+					<div style="display:none;">
+					<div id="shareblock">
+						<? if ($orderHuntId == 4080) :?>
+							<a href="http://facebook.com/DiscoverSantaFe.us/reviews" target="_blank" class="btn btn-primary"><?= $t->_('Review us on Facebook') ?></a>
+						<? else :?>
+							<? if ($orderHuntId == 4121) :?>
+								<a href="https://www.facebook.com/LBI-Vibe-Challenge-106914531600975" target="_blank" class="btn btn-primary"><?= $t->_('Share with Facebook') ?></a>
+							<? else :?>
+								<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+							<? endif ?>
+						<? endif ?>
+					</div>
+					</div>
+<? endif ?>
+
+
+
+
+	<div>
+					<div id="igblock">
+						<div style="color: #FFF; font-size: 18px; margin-bottom:20px;">We are uploading the top events to our <b>Instagram</b>. If you can hit us with a follow, that would be great!</div>
+								<a href="https://www.instagram.com/strayboots/" target="_blank" class="btn btn-primary small share instagramb"><div class=" fa fa-instagram"></div><?= $t->_('Check it out!') ?></a>
+
+
+								<style type="text/css">
+
+
+
+
+									.instagramb, .instagramb a, .instagramb a:hover, .instagramb a:active  {
+										border: 0px;
+  background: #f09433; 
+background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+
+  }
+  .fa-instagram:before {
+
+	padding-right: 10px;
+}
+								</style>
+						
+					</div>
+					</div>
+
+
+
+
+
+
+
+
+				</div>
+<? endif ?>
+<? else: ?>
+
+<? if (isset($response_msg_title)): ?>
+				<h2><?= $t->_(isset($customNCR) ? 'Great Job!' : $response_msg_title) ?></h2>
+<? endif ?>
+				<div class="question">
+<? if (isset($answerAction)): ?>
+<? if ($answerAction != Answers::Skipped): ?>
+<? if (isset($image)): ?>
+					<script type="text/javascript">window.shareInfo={title:'<?= $t->_('We just scored %points% points on our Strayboots scavenger hunt!', ['points' => $points > 0 ? $points : '']) ?>',image:'<?= $image ?>',description:'<?= $t->_('Check this out!!! #teambuilding #scavengerhunt @strayboots') ?>',url:'https://www.strayboots.com',caption:'Strayboots Scavenger Hunt'}</script>
+<? endif ?>
+<? if (isset($customNCR)): ?>
+					<b class="wyg">You got it correct.</b><br>
+<? else: ?>
+<? if ($answerAction == Answers::AnsweredWithHint): ?>
+					<b class="wyg"><?= isset($noScore) ? '' : $t->_('You got %points% points, nice work', ['points' => $points]) ?></b><br>
+<? else: ?>
+					<b class="wyg"><?= isset($noScore) ? '' : $t->_('You got %points% points, keep it going!', ['points' => $points]) ?></b><br>		
+<? endif ?>
+<? endif ?>
+<? endif ?>
+<? endif ?>
+<? if (isset($attachment) && is_array($attachment) && isset($attachment['type'])):
+if ($attachment['type'] == Questions::ATTACHMENT_PHOTO && isset($attachment['photo']) && !empty($attachment['photo'])) {
+?><div class="a-img"><img src="<?= $attachment['photo'] ?>" alt=""></div><?
+} else if ($attachment['type'] == Questions::ATTACHMENT_YOUTUBE && isset($attachment['video']) && !empty($attachment['video'])) {
+?><div class="vimeo"><iframe src="https://www.youtube.com/embed/<?= $attachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><?
+} else if ($attachment['type'] == Questions::ATTACHMENT_VIMEO && isset($attachment['video']) && !empty($attachment['video'])) {
+?><div class="vimeo"><iframe src="//player.vimeo.com/video/<?= $attachment['video'] ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><?
+}
+endif ?>
+<? if (isset($correct_answer)): ?>
+					<div style="text-align:center"><?= $correct_answer ?></div>
+<? endif ?>
+				<?= $response_msg ?>
+				</div>
+				<div class="options">
+<? if ($isLeader): ?>
+<? if (isset($responseLink)): ?>
+					<a href="<?= $responseLink[1] ?>" class="btn btn-success"><?= $responseLink[0] ?></a>
+<? elseif (isset($end_msg) && $multiHunt && $lastMulti): ?>
+					<a href="<?= $this->url->get('index/chooseHunt') ?>" class="btn btn-success"><?= $t->_('Continue') ?></a>
+<? else: ?>
+					<a href="javascript:;" class="btn continue btn-success" disabled><?= $t->_('Continue') ?></a>
+					<?= $this->tag->form([
+						'play',
+						'autocomplete' => "off",
+						'id' => "ack-form"
+					]); ?>
+					<input type="hidden" name="action" value="funfact">
+					<?= $this->tag->endForm() ?>
+<? endif ?>
+<? endif ?>
+<? if (isset($answerAction) && !$facebookDisabled && (isset($question) || (isset($end_msg) && !isset($response_msg)))): ?>
+					<div style="display: none;"><div id="shareblock">
+						<? if ($orderHuntId == 4080) :?>
+							<a href="http://facebook.com/DiscoverSantaFe.us/reviews" target="_blank" class="btn btn-primary"><?= $t->_('Review us on Facebook') ?></a>
+						<? else :?>
+							<? if ($orderHuntId == 4121) :?>
+								<a href="https://www.facebook.com/LBI-Vibe-Challenge-106914531600975" target="_blank" class="btn btn-primary"><?= $t->_('Share with Facebook') ?></a>
+							<? else :?>
+								<a href="javascript:;" class="btn btn-primary small share facebook"><?= $t->_('Share with Facebook') ?></a>
+							<? endif ?>
+						<? endif ?>
+					</div>
+					</div>
+<? endif ?>
+				</div>
+<? endif ?>
+			</div>
+		</div>
+		<div id="loading-indicator"></div>
+
+
