@@ -1,0 +1,98 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2>Add User</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="<?= $this->url->get('index') ?>">Home</a>
+			</li>
+			<li>
+				<a href="<?= $this->url->get('admin_users') ?>">Users</a>
+			</li>
+			<li class="active">
+				<strong>Add User</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2">
+		<div class="title-action">
+			<a href="<?= $this->url->get('admin_users') ?>" class="btn btn-default">Back to List</a>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Add User</h5>
+				</div>
+				<div class="ibox-content">
+					<form method="post" class="form-horizontal" action="<?= $this->url->get('admin_users/create') ?>">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">User Type</label>
+							<div class="col-sm-10">
+								<select name="type" id="userType" class="form-control">
+									<option value="admin">Admin</option>
+									<option value="client">Client</option>
+									<option value="user">Regular User</option>
+								</select>
+							</div>
+						</div>
+						
+						<!-- All name fields - The controller will handle which ones to use -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">First Name</label>
+							<div class="col-sm-10">
+								<input type="text" name="first_name" class="form-control" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Last Name</label>
+							<div class="col-sm-10">
+								<input type="text" name="last_name" class="form-control" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Name (Admin only)</label>
+							<div class="col-sm-10">
+								<input type="text" name="name" class="form-control">
+								<span class="help-block">Optional for admin users. If provided, it will override First/Last name.</span>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Email</label>
+							<div class="col-sm-10">
+								<input type="email" name="email" class="form-control" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Password</label>
+							<div class="col-sm-10">
+								<input type="password" name="password" class="form-control" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Active</label>
+							<div class="col-sm-10">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="active" value="1" checked>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								<a href="<?= $this->url->get('admin_users') ?>" class="btn btn-white">Cancel</a>
+								<button class="btn btn-primary" type="submit">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

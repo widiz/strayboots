@@ -58,18 +58,6 @@ class Users extends \Phalcon\Mvc\Model
 	 */
 	public $created;
 
-	/**
-	 *
-	 * @var string
-	 */
-	public $type;
-
-	/**
-	 *
-	 * @var string
-	 */
-	public $name;
-
 	public function initialize()
 	{
 		$this->skipAttributes(['created']);
@@ -92,30 +80,19 @@ class Users extends \Phalcon\Mvc\Model
 		$validator->add('email', new Uniqueness([
 			'message'	=> 'Email already exists'
 		]));
-		
-		// Always require first_name and last_name for all users
 		$validator->add('first_name', new PresenceOf([
 			'message' => 'First name is required'
 		]));
 		$validator->add('last_name', new PresenceOf([
 			'message' => 'Last name is required'
 		]));
-		
 		$validator->add('password', new PresenceOf([
 			'message' => 'Password is required'
 		]));
-		
 		if (isset($this->active) && !is_null($this->active)) {
 			$validator->add('active', new InclusionIn([
 				'domain' => [0, 1],
 				'message' => 'Active is invalid'
-			]));
-		}
-		
-		if (isset($this->type) && !is_null($this->type)) {
-			$validator->add('type', new InclusionIn([
-				'domain' => ['admin', 'client', 'user'],
-				'message' => 'Type is invalid'
 			]));
 		}
 
@@ -126,12 +103,6 @@ class Users extends \Phalcon\Mvc\Model
 	{
 		if (!isset($this->phone) || empty($this->phone))
 			$this->phone = new RawValue('default');
-			
-		if (!isset($this->created))
-			$this->created = date('Y-m-d H:i:s');
-			
-		if (!isset($this->type))
-			$this->type = 'user';
 	}
 
 	/**
@@ -153,19 +124,18 @@ class Users extends \Phalcon\Mvc\Model
 	}
 
 	public static function setUserLogin(Users &$user, $remember = false) {
-    $di = Di::getDefault();
-    $di->get('session')->set('userID', (int)$user->id);
-    if ($remember) {
-        $verifier = md5($user->id . '.strayboots%users$salt#$%^34564' . $user->email);
-        // Redis part commented out temporarily
-        $lifetime = 86400 * 7; // 7 days cookie
-        // $di->get('redis')->set(SB_PREFIX . 'uverifier:' . $verifier, (int)$user->id, $lifetime);
-        $lifetime += time();
-        $secure = false;
-        $di->get('cookies')->set('uid', $user->id, $lifetime, '/', $secure)
-                            ->set('uverifier', $verifier, $lifetime, '/', $secure);
-    }
-}
+		$di = Di::getDefault();
+		$di->get('session')->set('userID', (int)$user->id);
+		if ($remember) {
+			$verifier = md5($user->id . '.strayboots%users$salt#$%^34564' . $user->email);
+			$lifetime = 86400 * 7; // 7 days cookie
+			$di->get('redis')->set(SB_PREFIX . 'uverifier:' . $verifier, (int)$user->id, $lifetime);
+			$lifetime += time();
+			$secure = false;//$di->get('request')->isSecureRequest();
+			$di->get('cookies')->set('uid', $user->id, $lifetime, '/', $secure)
+								->set('uverifier', $verifier, $lifetime, '/', $secure);
+		}
+	}
 
 	public static function logout() {
 		$di = Di::getDefault();

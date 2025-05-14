@@ -1,0 +1,119 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2>PHP Error Log</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="<?= $this->url->get('index') ?>">Home</a>
+			</li>
+			<li>
+				<a href="<?= $this->url->get('logs') ?>">Logs</a>
+			</li>
+			<li class="active">
+				<strong>PHP Error Log</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2">
+		<div class="title-action">
+			<a href="<?= $this->url->get('logs') ?>" class="btn btn-default">Back to Logs</a>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>PHP Error Log</h5>
+					<div class="ibox-tools">
+						<a href="<?= $this->url->get('logs/clear/php') ?>" class="btn btn-xs btn-danger clear-log">
+							<i class="fa fa-trash"></i> Clear Log
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<input type="text" class="form-control" id="log-search" placeholder="Search in log...">
+							</div>
+						</div>
+					</div>
+					
+					<div class="log-container">
+						<pre class="log-content" style="max-height: 600px; overflow: auto; background-color: #f5f5f5; border: 1px solid #e3e3e3; padding: 10px;"><?php 
+if (empty($errorLog)) {
+	echo "No errors found in the PHP error log.";
+} else {
+	echo htmlspecialchars(implode("\n", $errorLog));
+}
+?></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		// Simple search functionality
+		$('#log-search').on('keyup', function() {
+			var searchTerm = $(this).val().toLowerCase();
+			var logContent = $('.log-content').html();
+			var lines = logContent.split("\n");
+			var filteredLines = [];
+			
+			if (searchTerm === '') {
+				// Reset to original content
+				$('.log-content').html(logContent);
+			} else {
+				// Filter lines
+				for (var i = 0; i < lines.length; i++) {
+					if (lines[i].toLowerCase().indexOf(searchTerm) !== -1) {
+						// Highlight matching text
+						var highlighted = lines[i].replace(
+							new RegExp(searchTerm, 'gi'), 
+							function(match) {
+								return '<span class="highlight" style="background-color: yellow;">' + match + '</span>';
+							}
+						);
+						filteredLines.push(highlighted);
+					}
+				}
+				
+				// Display filtered lines
+				if (filteredLines.length > 0) {
+					$('.log-content').html(filteredLines.join("\n"));
+				} else {
+					$('.log-content').html("No matching entries found.");
+				}
+			}
+		});
+		
+		// Confirm clear log
+		$('.clear-log').on('click', function(e) {
+			e.preventDefault();
+			var url = $(this).attr('href');
+			
+			bootbox.confirm({
+				title: "Clear PHP Error Log",
+				message: "Are you sure you want to clear the PHP error log?",
+				buttons: {
+					cancel: {
+						label: '<i class="fa fa-times"></i> Cancel'
+					},
+					confirm: {
+						label: '<i class="fa fa-check"></i> Confirm'
+					}
+				},
+				callback: function (result) {
+					if (result) {
+						window.location.href = url;
+					}
+				}
+			});
+		});
+	});
+</script> 

@@ -1,0 +1,9 @@
+[2025-04-27 07:34:13] Starting system_logs table test
+[2025-04-27 07:34:13] DI container retrieved
+[2025-04-27 07:34:13] Database connection retrieved
+[2025-04-27 07:34:13] Database connection test successful
+[2025-04-27 07:34:13] system_logs table exists Yes
+[2025-04-27 07:34:13] Attempting direct SQL insert with params {"type":"test","message":"Test log entry from direct test script","user_id":null,"ip_address":"127.0.0.1","created":"2025-04-27 07:34:13"}
+[2025-04-27 07:34:13] Direct SQL insert result Success
+[2025-04-27 07:34:13] Record successfully inserted and retrieved {"id":"6","0":"6","type":"test","1":"test","message":"Test log entry from direct test script","2":"Test log entry from direct test script","user_id":null,"3":null,"ip_address":"127.0.0.1","4":"127.0.0.1","created":"2025-04-27 07:34:13","5":"2025-04-27 07:34:13"}
+[2025-04-27 07:34:13] Test completed

@@ -1,0 +1,121 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2>All Users</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="<?= $this->url->get('index') ?>">Home</a>
+			</li>
+			<li class="active">
+				<strong>All Users</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2">
+		<div class="title-action">
+			<a href="<?= $this->url->get('admin_users/create') ?>" class="btn btn-primary">Add New User</a>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>All Users</h5>
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Type</th>
+									<th>Status</th>
+									<th>Created</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+                                <?php foreach ($users as $user): ?>
+                                <tr>
+                                    <td><?= $user->id ?></td>
+                                    <td>
+                                        <?php if ($user->type == 'admin' && !empty($user->name)): ?>
+                                            <?= $user->name ?>
+                                        <?php else: ?>
+                                            <?= $user->first_name ?> <?= $user->last_name ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $user->email ?></td>
+                                    <td>
+                                        <?php if ($user->type == 'admin'): ?>
+                                            <span class="label label-primary">Admin</span>
+                                        <?php elseif ($user->type == 'client'): ?>
+                                            <span class="label label-info">Client</span>
+                                        <?php else: ?>
+                                            <span class="label label-default">User</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($user->active): ?>
+                                            <span class="label label-primary">Active</span>
+                                        <?php else: ?>
+                                            <span class="label label-danger">Inactive</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $user->created ?></td>
+                                    <td>
+                                        <a href="<?= $this->url->get('admin_users/edit/' . $user->id) ?>" class="btn btn-xs btn-primary">Edit</a>
+                                        <?php if ($user->id != $this->session->get('userID')): ?>
+                                            <a href="<?= $this->url->get('admin_users/delete/' . $user->id) ?>" class="btn btn-xs btn-danger delete-user">Delete</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		// Confirm delete
+		$('.delete-user').on('click', function(e) {
+			e.preventDefault();
+			var url = $(this).attr('href');
+			
+			// Check if bootbox is available
+			if (typeof bootbox !== 'undefined') {
+				bootbox.confirm({
+					title: "Delete User",
+					message: "Are you sure you want to delete this user?",
+					buttons: {
+						cancel: {
+							label: '<i class="fa fa-times"></i> Cancel'
+						},
+						confirm: {
+							label: '<i class="fa fa-check"></i> Confirm'
+						}
+					},
+					callback: function (result) {
+						if (result) {
+							window.location.href = url;
+						}
+					}
+				});
+			} else {
+				// Fallback to regular confirm dialog
+				if (confirm("Are you sure you want to delete this user?")) {
+					window.location.href = url;
+				}
+			}
+		});
+	});
+</script> 

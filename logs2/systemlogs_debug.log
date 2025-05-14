@@ -1,0 +1,36 @@
+[2025-04-27 07:34:17] SystemLogs::log called with type=access, message=Failed login attempt for email 'admin@strayboots.com', userId=null
+[2025-04-27 07:34:17] DI container retrieved
+[2025-04-27 07:34:17] IP address retrieved 213.137.70.175
+[2025-04-27 07:34:17] Database connection retrieved
+[2025-04-27 07:34:17] Database connection test successful
+[2025-04-27 07:34:17] system_logs table exists Yes
+[2025-04-27 07:34:17] Attempting direct SQL insert
+[2025-04-27 07:34:17] SQL parameters {"type":"access","message":"Failed login attempt for email 'admin@strayboots.com'","user_id":null,"ip_address":"213.137.70.175","created":"2025-04-27 07:34:17"}
+[2025-04-27 07:34:17] Direct SQL insert result Success
+[2025-04-27 07:39:27] SystemLogs::log called with type=access, message=Failed login attempt for email 'test@test.com', userId=null
+[2025-04-27 07:39:27] DI container retrieved
+[2025-04-27 07:39:27] IP address retrieved 213.137.70.175
+[2025-04-27 07:39:27] Database connection retrieved
+[2025-04-27 07:39:27] Database connection test successful
+[2025-04-27 07:39:27] system_logs table exists Yes
+[2025-04-27 07:39:27] Attempting direct SQL insert
+[2025-04-27 07:39:27] SQL parameters {"type":"access","message":"Failed login attempt for email 'test@test.com'","user_id":null,"ip_address":"213.137.70.175","created":"2025-04-27 07:39:27"}
+[2025-04-27 07:39:27] Direct SQL insert result Success
+[2025-04-27 07:39:31] SystemLogs::log called with type=access, message=Failed login attempt for email 'test@test.com', userId=null
+[2025-04-27 07:39:31] DI container retrieved
+[2025-04-27 07:39:31] IP address retrieved 213.137.70.175
+[2025-04-27 07:39:31] Database connection retrieved
+[2025-04-27 07:39:31] Database connection test successful
+[2025-04-27 07:39:31] system_logs table exists Yes
+[2025-04-27 07:39:31] Attempting direct SQL insert
+[2025-04-27 07:39:31] SQL parameters {"type":"access","message":"Failed login attempt for email 'test@test.com'","user_id":null,"ip_address":"213.137.70.175","created":"2025-04-27 07:39:31"}
+[2025-04-27 07:39:31] Direct SQL insert result Success
+[2025-04-27 07:39:35] SystemLogs::log called with type=access, message=Failed login attempt for email 'test@test.com', userId=null
+[2025-04-27 07:39:35] DI container retrieved
+[2025-04-27 07:39:35] IP address retrieved 213.137.70.175
+[2025-04-27 07:39:35] Database connection retrieved
+[2025-04-27 07:39:35] Database connection test successful
+[2025-04-27 07:39:35] system_logs table exists Yes
+[2025-04-27 07:39:35] Attempting direct SQL insert
+[2025-04-27 07:39:35] SQL parameters {"type":"access","message":"Failed login attempt for email 'test@test.com'","user_id":null,"ip_address":"213.137.70.175","created":"2025-04-27 07:39:35"}
+[2025-04-27 07:39:35] Direct SQL insert result Success

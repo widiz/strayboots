@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Database configuration
-$host = 'localhost';
+$host = 'mysql.go.strayboots.com';
 $dbname = 'newplay';
 $username = 'newplay';
 $password = 'YFI1W9m$CYi4sd.h';
@@ -146,4 +146,3 @@ try {
 }
 ?>
 
-some simple git test

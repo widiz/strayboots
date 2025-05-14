@@ -1,0 +1,48 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2>Create Admin Log Entry</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="<?= $this->url->get('index') ?>">Home</a>
+			</li>
+			<li>
+				<a href="<?= $this->url->get('logs') ?>">Logs</a>
+			</li>
+			<li class="active">
+				<strong>Create</strong>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Create New Admin Log Entry</h5>
+				</div>
+				<div class="ibox-content">
+					<form method="post" class="form-horizontal" action="<?= $this->url->get('logs/create') ?>">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Log Message</label>
+							<div class="col-sm-10">
+								<textarea name="message" class="form-control" rows="5" required></textarea>
+								<span class="help-block m-b-none">Enter a message describing the admin action</span>
+							</div>
+						</div>
+						
+						<div class="hr-line-dashed"></div>
+						
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								<a href="<?= $this->url->get('logs') ?>" class="btn btn-white">Cancel</a>
+								<button class="btn btn-primary" type="submit">Create Log</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

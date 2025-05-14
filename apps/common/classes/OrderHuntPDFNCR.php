@@ -56,7 +56,7 @@ class OrderHuntPDFNCR extends OrderHuntMailBase {
 			'finish'	=> $translate->_('Finish'),
 			'goto'		=> $translate->_('On your mobile browser, go to'),
 
-			'leadertxt'		=> $translate->_('Team leader (1 per team)'),
+			'leadertxt'		=> $translate->_('TEAM LEADER (1 per team)'),
 			'othermembers'	=> $translate->_('Other team members'),
 			'insert.code'	=> $translate->_('insert your Activation Code'),
 			'can.use'		=> $translate->_('can use the member code to follow along'),
@@ -761,7 +761,7 @@ EOF;
 					<td class="tr7 td4"><p class="p3 ft6">&nbsp;</p></td>
 					<td class="tr7 td5"><p class="p3 ft6">&nbsp;</p></td>
 					<td class="tr7 td6"><p class="p3 ft6">&nbsp;</p></td>
-					<td class="tr7 td13{$leaderh}"><p class="nwc ft12"><nobr>{$team->activation_leader}</nobr></p></td>
+					<td class="tr7 td13{$leaderh}"><p class="nwc ft12"><nobr>{$team->activation_leader}</nobr></p><p class="nwc ft144">Keep with Team Leader at all times!</p></td>
 					<td class="tr7 td10{$leaderh}"><p class="p3 ft6">&nbsp;</p></td>
 					<td class="tr7 td14{$playerh}"><p class="nwc ft12"><nobr>{$team->activation_player}</nobr></p></td>
 					<td class="tr7 td12"><p class="p3 ft6">&nbsp;</p></td>

@@ -1,0 +1,764 @@
+[2025-04-27 07:34:17] [213.137.70.175] Login action started
+[2025-04-27 07:34:17] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:34:17] [213.137.70.175] Security token check failed
+[2025-04-27 07:34:17] [213.137.70.175] Attempting to log failed login via SystemLogs::access
+[2025-04-27 07:34:17] [213.137.70.175] SystemLogs::access result for failed login Success
+[2025-04-27 07:34:17] [213.137.70.175] Login failed, redirecting to login page
+[2025-04-27 07:34:22] [213.137.70.175] Login action started
+[2025-04-27 07:34:22] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:34:22] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:34:22] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: 
+[2025-04-27 07:34:22] [213.137.70.175] Redirecting to index
+[2025-04-27 07:34:41] [213.137.70.175] Logout action started
+[2025-04-27 07:34:41] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:34:41] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:34:43] [213.137.70.175] Login action started
+[2025-04-27 07:34:43] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:34:43] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:34:43] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: 
+[2025-04-27 07:34:43] [213.137.70.175] Redirecting to index
+[2025-04-27 07:37:45] [213.137.70.175] Logout action started
+[2025-04-27 07:37:45] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:37:45] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:37:47] [213.137.70.175] Login action started
+[2025-04-27 07:37:47] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:37:47] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:37:48] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: 
+[2025-04-27 07:37:48] [213.137.70.175] Redirecting to index
+[2025-04-27 07:39:24] [213.137.70.175] Logout action started
+[2025-04-27 07:39:24] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:39:24] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:39:27] [213.137.70.175] Login action started
+[2025-04-27 07:39:27] [213.137.70.175] Login attempt for email test@test.com
+[2025-04-27 07:39:27] [213.137.70.175] User lookup result User found (ID: 3)
+[2025-04-27 07:39:27] [213.137.70.175] Login verification failed
+[2025-04-27 07:39:27] [213.137.70.175] Attempting to log failed login via SystemLogs::access
+[2025-04-27 07:39:27] [213.137.70.175] SystemLogs::access result for failed login Success
+[2025-04-27 07:39:27] [213.137.70.175] Login failed, redirecting to login page
+[2025-04-27 07:39:31] [213.137.70.175] Login action started
+[2025-04-27 07:39:31] [213.137.70.175] Login attempt for email test@test.com
+[2025-04-27 07:39:31] [213.137.70.175] User lookup result User found (ID: 3)
+[2025-04-27 07:39:31] [213.137.70.175] Login verification failed
+[2025-04-27 07:39:31] [213.137.70.175] Attempting to log failed login via SystemLogs::access
+[2025-04-27 07:39:31] [213.137.70.175] SystemLogs::access result for failed login Success
+[2025-04-27 07:39:31] [213.137.70.175] Login failed, redirecting to login page
+[2025-04-27 07:39:35] [213.137.70.175] Login action started
+[2025-04-27 07:39:35] [213.137.70.175] Login attempt for email test@test.com
+[2025-04-27 07:39:35] [213.137.70.175] User lookup result User found (ID: 3)
+[2025-04-27 07:39:35] [213.137.70.175] Login verification failed
+[2025-04-27 07:39:35] [213.137.70.175] Attempting to log failed login via SystemLogs::access
+[2025-04-27 07:39:35] [213.137.70.175] SystemLogs::access result for failed login Success
+[2025-04-27 07:39:35] [213.137.70.175] Login failed, redirecting to login page
+[2025-04-27 07:39:37] [213.137.70.175] Login action started
+[2025-04-27 07:39:37] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:39:37] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:39:37] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: 
+[2025-04-27 07:39:37] [213.137.70.175] Redirecting to index
+[2025-04-27 07:39:59] [213.137.70.175] Logout action started
+[2025-04-27 07:39:59] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:39:59] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:40:04] [213.137.70.175] Login action started
+[2025-04-27 07:40:04] [213.137.70.175] Login attempt for email test@test.com
+[2025-04-27 07:40:04] [213.137.70.175] User lookup result User found (ID: 3)
+[2025-04-27 07:40:04] [213.137.70.175] Login successful for user test@test.com (ID: 3), type: 
+[2025-04-27 07:40:04] [213.137.70.175] Redirecting to index
+[2025-04-27 07:47:54] [213.137.70.175] Logout action started
+[2025-04-27 07:47:54] [213.137.70.175] User found for logout Yes (ID: 3)
+[2025-04-27 07:47:54] [213.137.70.175] User is in admin panel, logging admin logout
+[2025-04-27 07:47:54] [213.137.70.175] Database connection retrieved for logout
+[2025-04-27 07:47:54] [213.137.70.175] Direct SQL logout logging result Success
+[2025-04-27 07:47:54] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:47:57] [213.137.70.175] Login action started
+[2025-04-27 07:47:57] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:47:57] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:47:57] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-27 07:47:57] [213.137.70.175] User is in admin panel, logging admin login
+[2025-04-27 07:47:57] [213.137.70.175] Database connection retrieved successfully
+[2025-04-27 07:47:57] [213.137.70.175] Direct SQL logging result Success
+[2025-04-27 07:47:57] [213.137.70.175] Redirecting to index
+[2025-04-27 07:48:07] [213.137.70.175] Logout action started
+[2025-04-27 07:48:07] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:48:07] [213.137.70.175] User is in admin panel, logging admin logout
+[2025-04-27 07:48:07] [213.137.70.175] Database connection retrieved for logout
+[2025-04-27 07:48:07] [213.137.70.175] Direct SQL logout logging result Success
+[2025-04-27 07:48:07] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:48:10] [213.137.70.175] Login action started
+[2025-04-27 07:48:10] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:48:10] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:48:10] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-27 07:48:10] [213.137.70.175] User is in admin panel, logging admin login
+[2025-04-27 07:48:10] [213.137.70.175] Database connection retrieved successfully
+[2025-04-27 07:48:10] [213.137.70.175] Direct SQL logging result Success
+[2025-04-27 07:48:10] [213.137.70.175] Redirecting to index
+[2025-04-27 07:48:15] [213.137.70.175] Logout action started
+[2025-04-27 07:48:15] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:48:15] [213.137.70.175] User is in admin panel, logging admin logout
+[2025-04-27 07:48:15] [213.137.70.175] Database connection retrieved for logout
+[2025-04-27 07:48:15] [213.137.70.175] Direct SQL logout logging result Success
+[2025-04-27 07:48:15] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:48:21] [213.137.70.175] Login action started
+[2025-04-27 07:48:21] [213.137.70.175] Login attempt for email test@test.com
+[2025-04-27 07:48:21] [213.137.70.175] User lookup result User found (ID: 3)
+[2025-04-27 07:48:21] [213.137.70.175] Login successful for user test@test.com (ID: 3), type: N/A
+[2025-04-27 07:48:21] [213.137.70.175] User is in admin panel, logging admin login
+[2025-04-27 07:48:21] [213.137.70.175] Database connection retrieved successfully
+[2025-04-27 07:48:21] [213.137.70.175] Direct SQL logging result Success
+[2025-04-27 07:48:21] [213.137.70.175] Redirecting to index
+[2025-04-27 07:54:46] [213.137.70.175] Logout action started
+[2025-04-27 07:54:46] [213.137.70.175] User found for logout Yes (ID: 3)
+[2025-04-27 07:54:46] [213.137.70.175] Database connection retrieved for logout
+[2025-04-27 07:54:46] [213.137.70.175] Direct SQL logout logging result Success
+[2025-04-27 07:54:46] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:54:51] [213.137.70.175] Login action started
+[2025-04-27 07:54:51] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:54:51] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:54:51] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: 
+[2025-04-27 07:54:51] [213.137.70.175] Database connection retrieved successfully
+[2025-04-27 07:54:51] [213.137.70.175] Direct SQL logging result Success
+[2025-04-27 07:54:51] [213.137.70.175] Redirecting to index
+[2025-04-27 07:58:11] [213.137.70.175] Logout action started
+[2025-04-27 07:58:11] [213.137.70.175] User found for logout Yes (ID: 1)
+[2025-04-27 07:58:11] [213.137.70.175] User is in admin panel, logging admin logout
+[2025-04-27 07:58:11] [213.137.70.175] Database connection retrieved for logout
+[2025-04-27 07:58:11] [213.137.70.175] Direct SQL logout logging result Success
+[2025-04-27 07:58:11] [213.137.70.175] User logged out, redirecting to login page
+[2025-04-27 07:58:13] [213.137.70.175] Login action started
+[2025-04-27 07:58:13] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-04-27 07:58:13] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-04-27 07:58:13] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-27 07:58:13] [213.137.70.175] User is in admin panel, logging admin login
+[2025-04-27 07:58:13] [213.137.70.175] Database connection retrieved successfully
+[2025-04-27 07:58:13] [213.137.70.175] Direct SQL logging result Success
+[2025-04-27 07:58:13] [213.137.70.175] Redirecting to index
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] Login action started
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] Login attempt for email admin@strayboots.com
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] User lookup result User found (ID: 1)
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] User is in admin panel, logging admin login
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] Database connection retrieved successfully
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] Direct SQL logging result Success
+[2025-04-27 10:12:47] [2601:48:4400:a4f0:6c09:806e:6826:6e4e] Redirecting to /admin/hunts
+[2025-04-27 15:18:16] [31.154.49.39] Login action started
+[2025-04-27 15:18:16] [31.154.49.39] Login attempt for email admin@strayboots.com
+[2025-04-27 15:18:16] [31.154.49.39] User lookup result User found (ID: 1)
+[2025-04-27 15:18:16] [31.154.49.39] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-27 15:18:16] [31.154.49.39] User is in admin panel, logging admin login
+[2025-04-27 15:18:16] [31.154.49.39] Database connection retrieved successfully
+[2025-04-27 15:18:16] [31.154.49.39] Direct SQL logging result Success
+[2025-04-27 15:18:16] [31.154.49.39] Redirecting to /admin
+[2025-04-27 22:58:00] [98.109.48.57] Login action started
+[2025-04-27 22:58:00] [98.109.48.57] Login attempt for email admin@strayboots.com
+[2025-04-27 22:58:00] [98.109.48.57] User lookup result User found (ID: 1)
+[2025-04-27 22:58:00] [98.109.48.57] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-27 22:58:00] [98.109.48.57] User is in admin panel, logging admin login
+[2025-04-27 22:58:00] [98.109.48.57] Database connection retrieved successfully
+[2025-04-27 22:58:00] [98.109.48.57] Direct SQL logging result Success
+[2025-04-27 22:58:00] [98.109.48.57] Redirecting to /admin/hunts/routes/1380
+[2025-04-28 09:18:07] [73.150.217.198] Login action started
+[2025-04-28 09:18:07] [73.150.217.198] Login attempt for email admin@strayboots.com
+[2025-04-28 09:18:07] [73.150.217.198] User lookup result User found (ID: 1)
+[2025-04-28 09:18:07] [73.150.217.198] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-28 09:18:07] [73.150.217.198] User is in admin panel, logging admin login
+[2025-04-28 09:18:07] [73.150.217.198] Database connection retrieved successfully
+[2025-04-28 09:18:07] [73.150.217.198] Direct SQL logging result Success
+[2025-04-28 09:18:07] [73.150.217.198] Redirecting to /admin/hunts
+[2025-04-28 13:05:53] [2601:48:4400:a4f0:2c61:898b:d88:27c2] Login action started
+[2025-04-28 13:05:53] [2601:48:4400:a4f0:2c61:898b:d88:27c2] Login attempt for email admin@strayboots.com
+[2025-04-28 13:05:54] [2601:48:4400:a4f0:2c61:898b:d88:27c2] User lookup result User found (ID: 1)
+[2025-04-28 13:05:54] [2601:48:4400:a4f0:2c61:898b:d88:27c2] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-28 13:05:54] [2601:48:4400:a4f0:2c61:898b:d88:27c2] User is in admin panel, logging admin login
+[2025-04-28 13:05:54] [2601:48:4400:a4f0:2c61:898b:d88:27c2] Database connection retrieved successfully
+[2025-04-28 13:05:54] [2601:48:4400:a4f0:2c61:898b:d88:27c2] Direct SQL logging result Success
+[2025-04-28 13:05:54] [2601:48:4400:a4f0:2c61:898b:d88:27c2] Redirecting to /admin/index
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] Login action started
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] Login attempt for email admin@strayboots.com
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] User lookup result User found (ID: 1)
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] User is in admin panel, logging admin login
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] Database connection retrieved successfully
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] Direct SQL logging result Success
+[2025-04-28 13:40:04] [2601:48:4400:a4f0:10e9:ed5b:8110:6f9] Redirecting to /admin/hunts
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] Login action started
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] Login attempt for email admin@strayboots.com
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] User lookup result User found (ID: 1)
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] User is in admin panel, logging admin login
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] Database connection retrieved successfully
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] Direct SQL logging result Success
+[2025-04-29 08:58:41] [2601:48:4400:a4f0:fa03:f9e3:870:ce7e] Redirecting to /admin/hunts
+[2025-04-29 10:30:33] [73.150.217.198] Login action started
+[2025-04-29 10:30:33] [73.150.217.198] Login attempt for email admin@strayboots.com
+[2025-04-29 10:30:33] [73.150.217.198] User lookup result User found (ID: 1)
+[2025-04-29 10:30:33] [73.150.217.198] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-29 10:30:33] [73.150.217.198] User is in admin panel, logging admin login
+[2025-04-29 10:30:33] [73.150.217.198] Database connection retrieved successfully
+[2025-04-29 10:30:33] [73.150.217.198] Direct SQL logging result Success
+[2025-04-29 10:30:33] [73.150.217.198] Redirecting to /admin/orders
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] Login action started
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] Login attempt for email admin@strayboots.com
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] User lookup result User found (ID: 1)
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] User is in admin panel, logging admin login
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] Database connection retrieved successfully
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] Direct SQL logging result Success
+[2025-04-30 06:47:36] [2601:48:4400:a4f0:7929:c5a3:f552:f6af] Redirecting to /admin/hunts
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] Login action started
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] Login attempt for email admin@strayboots.com
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] User lookup result User found (ID: 1)
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] User is in admin panel, logging admin login
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] Database connection retrieved successfully
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] Direct SQL logging result Success
+[2025-04-30 07:59:59] [2a0d:6fc7:205:2361:571:b0a7:5712:b74] Redirecting to /admin/index
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 12:04:37] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to /admin/hunts
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 14:29:35] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to /admin/hunts
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 14:30:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to /admin/hunts
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 14:31:33] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to /admin/hunts
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 15:25:28] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to /admin/hunts
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 15:35:04] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to /admin/hunts
+[2025-04-30 15:55:20] [73.150.217.198] Login action started
+[2025-04-30 15:55:20] [73.150.217.198] Login attempt for email admin@strayboots.com
+[2025-04-30 15:55:20] [73.150.217.198] User lookup result User found (ID: 1)
+[2025-04-30 15:55:20] [73.150.217.198] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 15:55:20] [73.150.217.198] User is in admin panel, logging admin login
+[2025-04-30 15:55:20] [73.150.217.198] Database connection retrieved successfully
+[2025-04-30 15:55:20] [73.150.217.198] Direct SQL logging result Success
+[2025-04-30 15:55:20] [73.150.217.198] Redirecting to /admin/orders
+[2025-04-30 16:17:15] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Logout action started
+[2025-04-30 16:17:15] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User found for logout Yes (ID: 1)
+[2025-04-30 16:17:15] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin logout
+[2025-04-30 16:17:15] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved for logout
+[2025-04-30 16:17:15] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logout logging result Success
+[2025-04-30 16:17:15] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User logged out, redirecting to login page
+[2025-04-30 16:17:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 16:17:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 16:17:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 16:17:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 16:17:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 16:17:18] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 16:17:19] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 16:17:19] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to index
+[2025-04-30 16:18:45] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Logout action started
+[2025-04-30 16:18:45] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User found for logout Yes (ID: 1)
+[2025-04-30 16:18:45] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin logout
+[2025-04-30 16:18:45] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved for logout
+[2025-04-30 16:18:45] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logout logging result Success
+[2025-04-30 16:18:45] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User logged out, redirecting to login page
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 16:18:49] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to index
+[2025-04-30 16:21:10] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Logout action started
+[2025-04-30 16:21:10] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User found for logout Yes (ID: 1)
+[2025-04-30 16:21:10] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin logout
+[2025-04-30 16:21:10] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved for logout
+[2025-04-30 16:21:10] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logout logging result Success
+[2025-04-30 16:21:10] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User logged out, redirecting to login page
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login action started
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login attempt for email admin@strayboots.com
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User lookup result User found (ID: 1)
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] User is in admin panel, logging admin login
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Database connection retrieved successfully
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Direct SQL logging result Success
+[2025-04-30 16:21:13] [2601:48:4400:a4f0:b6b9:b70d:14cc:876d] Redirecting to index
+[2025-05-01 15:33:12] [31.154.49.39] Login action started
+[2025-05-01 15:33:12] [31.154.49.39] Login attempt for email admin@strayboots.com
+[2025-05-01 15:33:12] [31.154.49.39] User lookup result User found (ID: 1)
+[2025-05-01 15:33:12] [31.154.49.39] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-01 15:33:12] [31.154.49.39] User is in admin panel, logging admin login
+[2025-05-01 15:33:12] [31.154.49.39] Database connection retrieved successfully
+[2025-05-01 15:33:12] [31.154.49.39] Direct SQL logging result Success
+[2025-05-01 15:33:12] [31.154.49.39] Redirecting to /admin/index
+[2025-05-02 09:28:50] [213.137.70.175] Login action started
+[2025-05-02 09:28:50] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-05-02 09:28:50] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-05-02 09:28:50] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-02 09:28:50] [213.137.70.175] User is in admin panel, logging admin login
+[2025-05-02 09:28:50] [213.137.70.175] Database connection retrieved successfully
+[2025-05-02 09:28:50] [213.137.70.175] Direct SQL logging result Success
+[2025-05-02 09:28:50] [213.137.70.175] Redirecting to index
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] Login action started
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] Login attempt for email admin@strayboots.com
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] User lookup result User found (ID: 1)
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] User is in admin panel, logging admin login
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] Database connection retrieved successfully
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] Direct SQL logging result Success
+[2025-05-02 10:24:31] [2601:48:4400:a4f0:a9f3:b0de:ac24:af2a] Redirecting to /admin
+[2025-05-02 17:34:58] [31.154.49.39] Login action started
+[2025-05-02 17:34:58] [31.154.49.39] Login attempt for email admin@strayboots.com
+[2025-05-02 17:34:58] [31.154.49.39] User lookup result User found (ID: 1)
+[2025-05-02 17:34:58] [31.154.49.39] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-02 17:34:58] [31.154.49.39] User is in admin panel, logging admin login
+[2025-05-02 17:34:58] [31.154.49.39] Database connection retrieved successfully
+[2025-05-02 17:34:58] [31.154.49.39] Direct SQL logging result Success
+[2025-05-02 17:34:58] [31.154.49.39] Redirecting to /admin
+[2025-05-04 22:48:35] [54.237.231.118] Login action started
+[2025-05-04 22:48:35] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:36] [54.237.231.118] Login action started
+[2025-05-04 22:48:36] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:37] [54.237.231.118] Login action started
+[2025-05-04 22:48:37] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:38] [54.237.231.118] Login action started
+[2025-05-04 22:48:38] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:39] [54.237.231.118] Login action started
+[2025-05-04 22:48:39] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:40] [54.237.231.118] Login action started
+[2025-05-04 22:48:40] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-04 22:48:41] [54.237.231.118] Login action started
+[2025-05-04 22:48:41] [54.237.231.118] Not a POST request, redirecting to login page
+[2025-05-05 06:19:54] [73.150.217.198] Login action started
+[2025-05-05 06:19:54] [73.150.217.198] Login attempt for email admin@strayboots.com
+[2025-05-05 06:19:54] [73.150.217.198] User lookup result User found (ID: 1)
+[2025-05-05 06:19:54] [73.150.217.198] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-05 06:19:54] [73.150.217.198] User is in admin panel, logging admin login
+[2025-05-05 06:19:54] [73.150.217.198] Database connection retrieved successfully
+[2025-05-05 06:19:54] [73.150.217.198] Direct SQL logging result Success
+[2025-05-05 06:19:54] [73.150.217.198] Redirecting to /admin/clients
+[2025-05-05 09:05:05] [98.109.48.57] Login action started
+[2025-05-05 09:05:05] [98.109.48.57] Login attempt for email admin@strayboots.com
+[2025-05-05 09:05:05] [98.109.48.57] User lookup result User found (ID: 1)
+[2025-05-05 09:05:05] [98.109.48.57] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-05 09:05:05] [98.109.48.57] User is in admin panel, logging admin login
+[2025-05-05 09:05:05] [98.109.48.57] Database connection retrieved successfully
+[2025-05-05 09:05:06] [98.109.48.57] Direct SQL logging result Success
+[2025-05-05 09:05:06] [98.109.48.57] Redirecting to /admin/index
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] Login action started
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] Login attempt for email admin@strayboots.com
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] User lookup result User found (ID: 1)
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] User is in admin panel, logging admin login
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] Database connection retrieved successfully
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] Direct SQL logging result Success
+[2025-05-05 10:25:13] [2601:48:4400:a4f0:6788:f709:9039:6cef] Redirecting to /admin/hunts
+[2025-05-05 11:59:52] [31.154.49.39] Login action started
+[2025-05-05 11:59:52] [31.154.49.39] Login attempt for email admin@strayboots.com
+[2025-05-05 11:59:52] [31.154.49.39] User lookup result User found (ID: 1)
+[2025-05-05 11:59:52] [31.154.49.39] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-05 11:59:52] [31.154.49.39] User is in admin panel, logging admin login
+[2025-05-05 11:59:52] [31.154.49.39] Database connection retrieved successfully
+[2025-05-05 11:59:52] [31.154.49.39] Direct SQL logging result Success
+[2025-05-05 11:59:52] [31.154.49.39] Redirecting to /admin
+[2025-05-05 13:02:40] [213.137.70.175] Login action started
+[2025-05-05 13:02:40] [213.137.70.175] Login attempt for email admin@strayboots.com
+[2025-05-05 13:02:40] [213.137.70.175] User lookup result User found (ID: 1)
+[2025-05-05 13:02:40] [213.137.70.175] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-05 13:02:40] [213.137.70.175] User is in admin panel, logging admin login
+[2025-05-05 13:02:40] [213.137.70.175] Database connection retrieved successfully
+[2025-05-05 13:02:40] [213.137.70.175] Direct SQL logging result Success
+[2025-05-05 13:02:40] [213.137.70.175] Redirecting to /admin/logs
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] Login action started
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] Login attempt for email admin@strayboots.com
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] User lookup result User found (ID: 1)
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] User is in admin panel, logging admin login
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] Database connection retrieved successfully
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] Direct SQL logging result Success
+[2025-05-05 14:50:00] [2601:48:4400:a4f0:70d4:4f51:7f4b:3117] Redirecting to /admin/index
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] Login action started
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] Login attempt for email admin@strayboots.com
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] User lookup result User found (ID: 1)
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] User is in admin panel, logging admin login
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] Database connection retrieved successfully
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] Direct SQL logging result Success
+[2025-05-06 14:51:19] [2607:fb91:e3a:8285:ad2:a257:b175:f8b7] Redirecting to /admin/hunts
+[2025-05-06 23:54:27] [31.154.49.39] Login action started
+[2025-05-06 23:54:27] [31.154.49.39] Login attempt for email admin@strayboots.com
+[2025-05-06 23:54:27] [31.154.49.39] User lookup result User found (ID: 1)
+[2025-05-06 23:54:27] [31.154.49.39] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-06 23:54:27] [31.154.49.39] User is in admin panel, logging admin login
+[2025-05-06 23:54:27] [31.154.49.39] Database connection retrieved successfully
+[2025-05-06 23:54:27] [31.154.49.39] Direct SQL logging result Success
+[2025-05-06 23:54:27] [31.154.49.39] Redirecting to /admin/index
+[2025-05-07 05:23:03] [147.234.69.88] Login action started
+[2025-05-07 05:23:03] [147.234.69.88] Login attempt for email admin@strayboots.com
+[2025-05-07 05:23:03] [147.234.69.88] User lookup result User found (ID: 1)
+[2025-05-07 05:23:03] [147.234.69.88] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 05:23:03] [147.234.69.88] User is in admin panel, logging admin login
+[2025-05-07 05:23:03] [147.234.69.88] Database connection retrieved successfully
+[2025-05-07 05:23:03] [147.234.69.88] Direct SQL logging result Success
+[2025-05-07 05:23:03] [147.234.69.88] Redirecting to /admin/
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 10:57:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 13:37:47] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 13:57:56] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 14:08:17] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 14:57:04] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 14:57:04] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 14:57:04] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 14:57:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 14:57:05] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 14:57:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 14:57:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 14:57:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 15:15:03] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 15:18:10] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 15:25:05] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 15:26:18] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 15:43:51] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 16:01:35] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 16:08:54] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-07 17:28:27] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-08 09:11:40] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] Login action started
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] Login attempt for email admin@strayboots.com
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] User lookup result User found (ID: 1)
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] User is in admin panel, logging admin login
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] Database connection retrieved successfully
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] Direct SQL logging result Success
+[2025-05-08 09:18:11] [2a0d:6fc7:602:435e:b4e3:2a76:5128:6c9] Redirecting to /admin/index
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-08 09:57:43] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] Login action started
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] Login attempt for email admin@strayboots.com
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] User lookup result User found (ID: 1)
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] User is in admin panel, logging admin login
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] Database connection retrieved successfully
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] Direct SQL logging result Success
+[2025-05-08 10:35:20] [2601:48:4400:a4f0:318c:2167:132:da9c] Redirecting to /admin/hunts
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] Login action started
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] Login attempt for email admin@strayboots.com
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] User lookup result User found (ID: 1)
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] User is in admin panel, logging admin login
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] Database connection retrieved successfully
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] Direct SQL logging result Success
+[2025-05-08 21:30:56] [2601:48:4400:a4f0:ea4b:c5a8:2f8c:457] Redirecting to /admin/hunts
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Login action started
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Login attempt for email admin@strayboots.com
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] User lookup result User found (ID: 1)
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] User is in admin panel, logging admin login
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Database connection retrieved successfully
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Direct SQL logging result Success
+[2025-05-09 08:46:29] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Redirecting to /admin/hunts
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Login action started
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Login attempt for email admin@strayboots.com
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] User lookup result User found (ID: 1)
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] User is in admin panel, logging admin login
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Database connection retrieved successfully
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Direct SQL logging result Success
+[2025-05-09 10:24:26] [2601:48:4400:a4f0:7137:69ea:af98:a3d2] Redirecting to /admin/hunts
+[2025-05-09 13:04:43] [195.82.146.175] Login action started
+[2025-05-09 13:04:43] [195.82.146.175] Not a POST request, redirecting to login page
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] Login action started
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] Login attempt for email admin@strayboots.com
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] User lookup result User found (ID: 1)
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] User is in admin panel, logging admin login
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] Database connection retrieved successfully
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] Direct SQL logging result Success
+[2025-05-09 13:10:57] [2607:fb91:bdac:1002:ad2:a257:67d1:96ad] Redirecting to /admin/hunts
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] Login action started
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] Login attempt for email admin@strayboots.com
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] User lookup result User found (ID: 1)
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] User is in admin panel, logging admin login
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] Database connection retrieved successfully
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] Direct SQL logging result Success
+[2025-05-09 15:46:30] [2601:48:4400:a4f0:e25a:61ac:11f7:2140] Redirecting to /admin/hunts
+[2025-05-11 21:18:25] [98.109.48.57] Login action started
+[2025-05-11 21:18:25] [98.109.48.57] Login attempt for email admin@strayboots.com
+[2025-05-11 21:18:25] [98.109.48.57] User lookup result User found (ID: 1)
+[2025-05-11 21:18:25] [98.109.48.57] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-11 21:18:25] [98.109.48.57] User is in admin panel, logging admin login
+[2025-05-11 21:18:25] [98.109.48.57] Database connection retrieved successfully
+[2025-05-11 21:18:25] [98.109.48.57] Direct SQL logging result Success
+[2025-05-11 21:18:25] [98.109.48.57] Redirecting to /admin/index
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] Login action started
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] Login attempt for email admin@strayboots.com
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] User lookup result User found (ID: 1)
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] User is in admin panel, logging admin login
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] Database connection retrieved successfully
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] Direct SQL logging result Success
+[2025-05-12 08:28:33] [2601:48:4400:a4f0:b27e:1b34:9394:b6cc] Redirecting to /admin/hunts
+[2025-05-12 10:17:45] [73.150.217.198] Login action started
+[2025-05-12 10:17:45] [73.150.217.198] Login attempt for email admin@strayboots.com
+[2025-05-12 10:17:45] [73.150.217.198] User lookup result User found (ID: 1)
+[2025-05-12 10:17:45] [73.150.217.198] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-12 10:17:45] [73.150.217.198] User is in admin panel, logging admin login
+[2025-05-12 10:17:45] [73.150.217.198] Database connection retrieved successfully
+[2025-05-12 10:17:45] [73.150.217.198] Direct SQL logging result Success
+[2025-05-12 10:17:45] [73.150.217.198] Redirecting to /admin/orders
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] Login action started
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] Login attempt for email admin@strayboots.com
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] User lookup result User found (ID: 1)
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] User is in admin panel, logging admin login
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] Database connection retrieved successfully
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] Direct SQL logging result Success
+[2025-05-12 13:40:53] [2601:48:4400:a4f0:25f7:49bf:ab08:b47e] Redirecting to /admin/index
+[2025-05-12 16:11:15] [31.154.49.39] Login action started
+[2025-05-12 16:11:15] [31.154.49.39] Login attempt for email admin@strayboots.com
+[2025-05-12 16:11:15] [31.154.49.39] User lookup result User found (ID: 1)
+[2025-05-12 16:11:15] [31.154.49.39] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-12 16:11:15] [31.154.49.39] User is in admin panel, logging admin login
+[2025-05-12 16:11:15] [31.154.49.39] Database connection retrieved successfully
+[2025-05-12 16:11:15] [31.154.49.39] Direct SQL logging result Success
+[2025-05-12 16:11:15] [31.154.49.39] Redirecting to /admin
+[2025-05-13 12:57:07] [73.150.217.198] Login action started
+[2025-05-13 12:57:07] [73.150.217.198] Login attempt for email admin@strayboots.com
+[2025-05-13 12:57:07] [73.150.217.198] User lookup result User found (ID: 1)
+[2025-05-13 12:57:07] [73.150.217.198] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-13 12:57:07] [73.150.217.198] User is in admin panel, logging admin login
+[2025-05-13 12:57:07] [73.150.217.198] Database connection retrieved successfully
+[2025-05-13 12:57:07] [73.150.217.198] Direct SQL logging result Success
+[2025-05-13 12:57:07] [73.150.217.198] Redirecting to /admin/orders
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] Login action started
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] Login attempt for email admin@strayboots.com
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] User lookup result User found (ID: 1)
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] Login successful for user admin@strayboots.com (ID: 1), type: N/A
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] User is in admin panel, logging admin login
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] Database connection retrieved successfully
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] Direct SQL logging result Success
+[2025-05-13 14:52:36] [2601:48:4400:a4f0:da54:fe19:ecf7:5e32] Redirecting to /admin/hunts

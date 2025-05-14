@@ -59,6 +59,15 @@
 					<li<? if ($controllerName == 'support')echo ' class="active"' ?>>
 						<a href="<?= $this->url->get('support') ?>"><i class="fa fa-life-ring"></i> <span class="nav-label">Support</span></a>
 					</li>
+					<li<? if (in_array($controllerName, ['admin_users', 'statistics', 'logs']))echo ' class="active"' ?>>
+						<a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">Admin Tools</span> <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li<? if ($controllerName == 'admin_users')echo ' class="active"' ?>><a href="<?= $this->url->get('admin_users') ?>">Admin Users</a></li>
+							<li<? if ($controllerName == 'statistics')echo ' class="active"' ?>><a href="<?= $this->url->get('statistics') ?>">Statistics</a></li>
+							<li<? if ($controllerName == 'logs')echo ' class="active"' ?>><a href="<?= $this->url->get('logs') ?>">Logs</a></li>
+						</ul>
+					</li>
+				
 				</ul>
 
 			</div>

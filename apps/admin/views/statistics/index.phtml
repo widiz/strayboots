@@ -1,0 +1,206 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2>System Statistics</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="<?= $this->url->get('index') ?>">Home</a>
+			</li>
+			<li class="active">
+				<strong>Statistics</strong>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Users</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins"><?= $stats['users']['total'] ?></h1>
+					<div class="stat-percent font-bold text-success">
+						<?= $stats['users']['active'] ?>
+						<i class="fa fa-user"></i>
+					</div>
+					<small>Active users</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Clients</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins"><?= $stats['clients']['total'] ?></h1>
+					<div class="stat-percent font-bold text-info">
+						<?= $stats['clients']['active'] ?>
+						<i class="fa fa-users"></i>
+					</div>
+					<small>Active clients</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Orders</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins"><?= $stats['orders']['total'] ?></h1>
+					<div class="stat-percent font-bold text-navy">
+						<?= $stats['orders']['recent'] ?>
+						<i class="fa fa-shopping-cart"></i>
+					</div>
+					<small>Last 30 days</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Hunts</h5>
+				</div>
+				<div class="ibox-content">
+					<h1 class="no-margins"><?= $stats['hunts']['total'] ?></h1>
+					<div class="stat-percent font-bold text-danger">
+						<?= $stats['hunts']['recent'] ?>
+						<i class="fa fa-gamepad"></i>
+					</div>
+					<small>Last 30 days</small>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Monthly Statistics</h5>
+				</div>
+				<div class="ibox-content">
+					<div>
+						<canvas id="monthlyChart" height="140"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>System Overview</h5>
+				</div>
+				<div class="ibox-content">
+					<table class="table table-bordered">
+						<tr>
+							<th>Points</th>
+							<td><?= $stats['points']['total'] ?></td>
+						</tr>
+						<tr>
+							<th>Questions</th>
+							<td><?= $stats['questions']['total'] ?></td>
+						</tr>
+						<tr>
+							<th>PHP Version</th>
+							<td><?= PHP_VERSION ?></td>
+						</tr>
+						<tr>
+							<th>Server</th>
+							<td><?= $_SERVER['SERVER_SOFTWARE'] ?></td>
+						</tr>
+						<tr>
+							<th>Memory Usage</th>
+							<td><?= round(memory_get_usage() / 1024 / 1024, 2) ?> MB</td>
+						</tr>
+						<tr>
+							<th>Database</th>
+							<td>MySQL</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-6">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Recent Activity</h5>
+				</div>
+				<div class="ibox-content">
+					<div class="feed-activity-list">
+						<div class="feed-element">
+							<div>
+								<small class="pull-right text-navy"><?= date('M d, H:i', strtotime('-1 hour')) ?></small>
+								<strong>System</strong>
+								<div>Statistics page viewed</div>
+								<small class="text-muted"><?= date('M d, H:i', strtotime('-1 hour')) ?></small>
+							</div>
+						</div>
+						<div class="feed-element">
+							<div>
+								<small class="pull-right"><?= date('M d, H:i', strtotime('-2 hour')) ?></small>
+								<strong>System</strong>
+								<div>Daily backup completed</div>
+								<small class="text-muted"><?= date('M d, H:i', strtotime('-2 hour')) ?></small>
+							</div>
+						</div>
+						<div class="feed-element">
+							<div>
+								<small class="pull-right"><?= date('M d, H:i', strtotime('-1 day')) ?></small>
+								<strong>System</strong>
+								<div>Cache cleared</div>
+								<small class="text-muted"><?= date('M d, H:i', strtotime('-1 day')) ?></small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		// Create chart data
+		var months = <?= json_encode($monthlyStats['months']) ?>;
+		var orders = <?= json_encode($monthlyStats['orders']) ?>;
+		var hunts = <?= json_encode($monthlyStats['hunts']) ?>;
+		
+		// Initialize chart
+		var ctx = document.getElementById("monthlyChart").getContext("2d");
+		var monthlyChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: months,
+				datasets: [
+					{
+						label: "Orders",
+						backgroundColor: "rgba(26,179,148,0.5)",
+						borderColor: "rgba(26,179,148,0.7)",
+						pointBackgroundColor: "rgba(26,179,148,1)",
+						pointBorderColor: "#fff",
+						data: orders
+					},
+					{
+						label: "Hunts",
+						backgroundColor: "rgba(220,220,220,0.5)",
+						borderColor: "rgba(220,220,220,1)",
+						pointBackgroundColor: "rgba(220,220,220,1)",
+						pointBorderColor: "#fff",
+						data: hunts
+					}
+				]
+			},
+			options: {
+				responsive: true
+			}
+		});
+	});
+</script> 
